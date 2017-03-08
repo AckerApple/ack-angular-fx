@@ -38,7 +38,7 @@ function animateConfig(config) {
     config.igniter = config.igniter == null ? exports.animateDefaults.igniter : config.igniter;
     config.whileStyle = config.whileStyle == null ? exports.animateDefaults.whileStyle : config.whileStyle;
     if (config.stagger) {
-        console.log('ng2-animate does not support stagger as of this release');
+        console.log('ack-angular-fx does not support stagger as of this release');
     }
     var timing = [
         typeof (config.duration) === 'number' ? config.duration + "ms" : config.duration,

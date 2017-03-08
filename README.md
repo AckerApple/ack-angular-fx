@@ -25,6 +25,7 @@ Angular2 animations made easier, inspired by [Animate.css](https://daneden.githu
   - [animateDefaults](#animatedefaults)
 - [Built-in Animations Attributes](#built-in-animations-attributes)
 - [Supported Animations](#supported-animations)
+- [Credits](#credits)
 
 # Install 
 
@@ -314,6 +315,6 @@ import { animateDefaults } from 'ack-angular-fx';
 
 see online demo https://ackerapple.github.io/ack-angular-fx
 
-# License
+# Credits
 
-MIT
+A special thank you goes out to [yuyang041060120](https://github.com/yuyang041060120/) for creating [ng2-animate](https://github.com/yuyang041060120/ng2-animate) and for taking too long to respond to my [pull request](https://github.com/yuyang041060120/ng2-animate/pull/4), which has led to the birth of ack-angular-fx.
