@@ -9,9 +9,9 @@ module.exports = {
   },
   devtool: 'source-map',
   output: {
-    path: '/example/dist/',
-    filename: 'bundle.js',
-    publicPath: '/ng2-animate/example/dist/'
+    path: 'example/dist/',
+    filename: 'bundle.js'
+    //,publicPath: 'example/dist/'
   },
   resolve: {
     extensions: ['.ts', '.js']

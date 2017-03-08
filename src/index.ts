@@ -40,7 +40,7 @@ export function animateConfig(config){
   config.whileStyle = config.whileStyle==null ? animateDefaults.whileStyle : config.whileStyle
 
   if(config.stagger){
-    console.log('ng2-animate does not support stagger as of this release')
+    console.log('ack-angular-fx does not support stagger as of this release')
   }
 
   let timing: string = [
