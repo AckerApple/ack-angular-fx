@@ -11,9 +11,7 @@ const declarations = [AppComponent]
 upgradeComponents(declarations)
 
 @NgModule({
-    imports: [BrowserModule, FormsModule],
-    declarations: declarations,
-    bootstrap: [AppComponent]
-})
-export class AppModule {
-}
+  imports: [BrowserModule, FormsModule],
+  declarations: declarations,
+  bootstrap: [AppComponent]
+}) export class AppModule {}

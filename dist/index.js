@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
+require("web-animations-js");
 var core_1 = require("@angular/core");
 var fade_1 = require("./animations/fade");
 var bounce_1 = require("./animations/bounce");

@@ -8,7 +8,7 @@ Angular2 animations made easier, inspired by [Animate.css](https://daneden.githu
 - [Install](#install)
 - [Examples](#examples)
   - [Global Usage](#global-usage)
-  - [ngFor](#ngfor)
+  - [Component Usage](#component-usage)
   - [whileStyle Example](#whilestyle-example)
 - [Params](#params)
   - [duration](#duration)
@@ -25,6 +25,7 @@ Angular2 animations made easier, inspired by [Animate.css](https://daneden.githu
   - [animateDefaults](#animatedefaults)
 - [Built-in Animations Attributes](#built-in-animations-attributes)
 - [Supported Animations](#supported-animations)
+- [web-animations-js](#web-animations-js)
 - [Credits](#credits)
 
 # Install 
@@ -50,14 +51,47 @@ It is highly recommended you visit the example code for best overall view:
 ## Global Usage
 Make life simple, if you just want to use the default animation definitions provided by ack-angular-fx
 
+app.js
 ```
 import * as ackFx from 'ack-angular-fx';
+import { Component, NgModule } from '@angular/core';
 
-ackFx.upgradeComponents([ AppComponent, SomeOtherComponent ])
+@Component({
+  selector: 'app',
+  template: require('./app.html'),
+}) export class AppComponent {}
+
+const declarations = [ AppComponent, SomeOtherComponent ]
+
+ackFx.upgradeComponents(declarations)
+
+@NgModule({
+  imports: [],
+  declarations: declarations,
+  bootstrap: [AppComponent]
+}) export class AppModule {}
 ```
 > You can now use animation attributes such as [@200]="'slideInLeft'" in all your components
 
-## ngFor
+app.html
+```html
+<p [@100]="'fadeInUp'" *ngIf="show">fadeInUp 100</p>
+<p [@200]="'fadeInUp'" *ngIf="show">fadeInUp 200</p>
+<p [@300]="'fadeInUp'" *ngIf="show">fadeInUp 300</p>
+<p [@400]="'fadeInUp'" *ngIf="show">fadeInUp 400</p>
+<p [@500]="'fadeInUp'" *ngIf="show">fadeInUp 500</p>
+<p [@600]="'fadeInUp'" *ngIf="show">fadeInUp 600</p>
+<p [@700]="'fadeInUp'" *ngIf="show">fadeInUp 700</p>
+<p [@800]="'fadeInUp'" *ngIf="show">fadeInUp 800</p>
+<p [@900]="'fadeInUp'" *ngIf="show">fadeInUp 900</p>
+<p [@1000]="'fadeInUp'" *ngIf="show">fadeInUp 1000</p>
+<p [@1500]="'fadeInUp'" *ngIf="show">fadeInUp 1500</p>
+<p [@2000]="'fadeInUp'" *ngIf="show">fadeInUp 2000</p>
+<button (click)="show = !show">toggle</button>
+```
+
+
+## Component Usage
 Items will have animation as they come in and when they leave
 
 app.js
@@ -65,12 +99,12 @@ app.js
 import { animateConfig, animateFactory } from 'ack-angular-fx';
 
 @Component({
-    selector: 'app',
-    template: require('./app.html'),
-    animations: [
-        animateFactory(1000, 200, 'ease-in'),
-        animateConfig({duration:200, delay:0, easing:'linear', name:'animateFast'})
-    ]
+  selector: 'app',
+  template: require('./app.html'),
+  animations: [
+    animateFactory(1000, 200, 'ease-in'),
+    animateConfig({duration:200, delay:0, easing:'linear', name:'animateFast'})
+  ]
 })
 export class AppComponent{
     show: boolean = true;
@@ -89,7 +123,6 @@ app.html
 <p [@animate]="'fadeIn'" *ngIf="show">fadeIn</p>
 <p [@animateFast]="'fadeIn'" *ngIf="show">fadeIn fast</p>
 <button (click)="show = !show">toggle</button>
-
 
 <button (click)="onAdd()">add</button>
 <ul>
@@ -319,6 +352,10 @@ import { animateDefaults } from 'ack-angular-fx';
   - zoomInUp
 
 see online demo https://ackerapple.github.io/ack-angular-fx
+
+# web-animations-js
+
+[web-animations-js](https://www.npmjs.com/package/web-animations-js) has been included to make life easier in terms of browser compatibility
 
 # Credits
 

@@ -7,9 +7,13 @@ module.exports = {
     vendor: './example/src/vendor',
     polyfills: './example/src/polyfills'
   },
+  devServer:{
+    contentBase: "./example/dist/"
+    //,hot:true
+  },
   devtool: 'source-map',
   output: {
-    path: 'example/dist/',
+    path: process.argv.indexOf('--watch')>0? require('path').join(__dirname,'example','dist') : 'example/dist/',
     filename: 'bundle.js'
     //,publicPath: 'example/dist/'
   },
