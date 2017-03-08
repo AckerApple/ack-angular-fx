@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { delayArray, upgradeComponent, upgradeComponents } from '../../../src';
+import { delayArray } from '../../../src';
 
 @Component({
   selector: 'app',
@@ -125,5 +125,3 @@ export class AppComponent {
     setTimeout(()=>this.swapShow=this.swapShow==0?3:this.swapShow-1, 100)
   }
 }
-
-upgradeComponents([AppComponent])

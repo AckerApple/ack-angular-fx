@@ -42,6 +42,11 @@ import * as ackFx from 'ack-angular-fx';
 
 [Example Page](https://ackerapple.github.io/ack-angular-fx)
 
+It is highly recommended you visit the example code for best overall view:
+
+- [app.module.ts](https://github.com/AckerApple/ack-angular-fx/blob/master/example/src/app/app.module.ts)
+- [app.html](https://github.com/AckerApple/ack-angular-fx/blob/master/example/src/app/app.html)
+
 ## Global Usage
 Make life simple, if you just want to use the default animation definitions provided by ack-angular-fx
 
