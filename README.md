@@ -6,6 +6,8 @@ Angular2 animations made easier, inspired by [Animate.css](https://daneden.githu
 
 ### Table of Contents
 - [Install](#install)
+  - [Requirements](#requirements)
+  - [Include in Project](#include-in-project)
 - [Examples](#examples)
   - [Global Usage](#global-usage)
   - [Component Usage](#component-usage)
@@ -28,13 +30,41 @@ Angular2 animations made easier, inspired by [Animate.css](https://daneden.githu
 - [web-animations-js](#web-animations-js)
 - [Credits](#credits)
 
-# Install 
+# Install
+
+## Requirements
+Since your are using Angular, the following are expected to already be installed:
+
+- reflect-metadata
+- @angular/core
+
+Two ways to install:
+
+- Use ack-webpack to install jsDependencies
+- Manually install jsDependencies
+
+### Use ack-webpack to install jsDependencies
+
+> NOTE : ack-webpack auto adds a script entry to your package.json file to make CLI commands easier
+
+Step 1
+```
+npm install ack-webpack --save-dev
+```
+
+Step 2
+```
+npm run ack-webpack -- install
+```
+
+### Manually Install jsDependencies
 
 ```bash
 npm install ack-angular-fx --save-dev
+npm install web-animations-js --save-dev
 ```
 
-Include in Project
+## Include in Project
 ```
 import * as ackFx from 'ack-angular-fx';
 ```

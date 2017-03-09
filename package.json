@@ -1,6 +1,6 @@
 {
   "name": "ack-angular-fx",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Angular2 animations made easier",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -38,6 +38,9 @@
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1",
     "zone.js": "^0.7.7"
+  },
+  "jsDependencies": {
+    "web-animations-js": "^2.2.2"
   },
   "bugs": {
     "url": "https://github.com/ackerapple/ack-angular-fx/issues"
