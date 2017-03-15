@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-import "web-animations-js";
 import { AnimationEntryMetadata } from '@angular/core';
 export declare const animateDefaults: {
     duration: number;

@@ -21,6 +21,7 @@ Angular2 animations made easier, inspired by [Animate.css](https://daneden.githu
   - [igniter](#igniter)
   - [whileStyle](#whilestyle)
 - [Customize Defaults](#customize-defaults)
+- [AoT Support](#aot-support)
 - [API](#api)
   - [animateFactory](#animatefactory)
   - [animateConfig](#animateconfig)
@@ -304,8 +305,41 @@ animateDefaults.igniter  = '*'
 animateDefaults.whileStyle.position = 'absolute'
 ```
 
+# AoT Support
+Ahead of Time Support when JiT is too slow
+
+### PreFx
+Currently, only the following import is supported for AoT compiling
+
+```
+import fxArray from "ack-angular-fx/prefx"
+````
+
+### PreFx Example
+Code below allows usage of [@100] through [@2500] and all of the 
+
+```
+import fxArray from "ack-angular-fx/prefx"
+import { Component } from "@angular/core"
+
+@Component({
+  selector: 'app',
+  template: '<div [@500]="'fadeInUp'" *ngIf="a==1">hello world</div>',
+  animations: fxArray
+}) export class AppComponent{
+  public a = 0
+  constructor(){
+    setInterval(()=>this.a=this.a==0?1:0, 1000)
+  }
+}
+```
+
+
 # API
 What resources are available for consuming
+
+> Using AoT compiling?
+>> None of the following API functionality is supported during AoT compiling
 
 ## animateFactory
 Input is an array of arguments that returns an Angular2 animation stack

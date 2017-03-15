@@ -1,15 +1,17 @@
 {
   "name": "ack-angular-fx",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Angular2 animations made easier",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "dev": "webpack-dev-server --config ./webpack.config.js --progress --profile --colors --watch --open",
     "example": "webpack --config ./webpack.config.js --progress --profile --colors --display-error-details --display-cached",
-    "tsc": "tsc --rootDir src --outDir dist --declaration",
-    "prebuild": "rimraf dist",
+    "build:fx": "ts-node scripts/build-static-fx-array",
+    "tsc": "tsc --rootDir src --outDir dist --declaration --project src",
+    "tsc:prefx": "tsc --rootDir scripts/prefx --outDir . --declaration --project scripts/prefx",
     "build": "npm run tsc",
+    "ts-node": "ts-node",
     "prepublish": "npm run example && npm run build"
   },
   "repository": {

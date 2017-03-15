@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import "web-animations-js"
+//import "web-animations-js"
 
 import { trigger, AnimationEntryMetadata } from '@angular/core';
 
