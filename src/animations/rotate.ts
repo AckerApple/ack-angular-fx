@@ -7,14 +7,13 @@ import {
   AnimationMetadata
 } from '@angular/core';
 
-export const rotate = (timing: string, options): AnimationMetadata[] => {
-  options = options || {}
-  options.igniter = options.igniter || '*'
+import { defaultOptions, stylize, combo } from "./helper"
 
-  function stylize(styleDef){
-    return style( {...styleDef, ...options.whileStyle} )
-  }
+export function rotate(timing: string, options): AnimationMetadata[]{
+  return rotateOptions(combo(timing, options))
+}
 
+export function rotateOptions(options): AnimationMetadata[]{
   return [
     state('rotateOut', style({
       display: 'none'
@@ -31,64 +30,64 @@ export const rotate = (timing: string, options): AnimationMetadata[] => {
     state('rotateOutUpRight', style({
       display: 'none'
     })),
-    transition(`${options.igniter} => rotateIn`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, -200deg)', offset: 0}),
-        stylize({opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
+    transition(options.options.igniter+' => rotateIn', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, -200deg)', offset: 0}, options.options),
+        stylize({opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`rotateIn => void, ${options.igniter} => rotateOut`, [
-      animate(timing, keyframes([
-        stylize({opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
-        stylize({opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 200deg)', offset: 1})
+    transition('rotateIn => void, '+options.options.igniter+' => rotateOut', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}, options.options),
+        stylize({opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 200deg)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`${options.igniter} => rotateInDownLeft`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0}),
-        stylize({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
+    transition(options.options.igniter+' => rotateInDownLeft', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0}, options.options),
+        stylize({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`rotateInDownLeft => void, ${options.igniter} => rotateOutDownLeft`, [
-      animate(timing, keyframes([
-        stylize({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
-        stylize({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1})
+    transition('rotateInDownLeft => void, '+options.options.igniter+' => rotateOutDownLeft', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}, options.options),
+        stylize({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`${options.igniter} => rotateInDownRight`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0}),
-        stylize({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
+    transition(options.options.igniter+' => rotateInDownRight', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0}, options.options),
+        stylize({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`rotateInDownRight => void, ${options.igniter} => rotateOutDownRight`, [
-      animate(timing, keyframes([
-        stylize({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
-        stylize({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1})
+    transition('rotateInDownRight => void, '+options.options.igniter+' => rotateOutDownRight', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}, options.options),
+        stylize({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`${options.igniter} => rotateInUpLeft`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0}),
-        stylize({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
+    transition(options.options.igniter+' => rotateInUpLeft', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0}, options.options),
+        stylize({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`rotateInUpLeft => void, ${options.igniter} => rotateOutUpLeft`, [
-      animate(timing, keyframes([
-        stylize({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
-        stylize({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1})
+    transition('rotateInUpLeft => void, '+options.options.igniter+' => rotateOutUpLeft', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}, options.options),
+        stylize({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`${options.igniter} => rotateInUpRight`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0}),
-        stylize({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
+    transition(options.options.igniter+' => rotateInUpRight', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0}, options.options),
+        stylize({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`rotateInUpRight => void, ${options.igniter} => rotateOutUpRight`, [
-      animate(timing, keyframes([
-        stylize({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
-        stylize({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1})
+    transition('rotateInUpRight => void, '+options.options.igniter+' => rotateOutUpRight', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}, options.options),
+        stylize({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1}, options.options)
       ]))
     ])
   ]

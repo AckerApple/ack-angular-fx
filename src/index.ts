@@ -19,7 +19,7 @@ export const animateDefaults = {
   whileStyle : {}
 }
 
-export function animateFactory(duration: string|number, delay: string|number, easing: string, stagger: number, name: string){
+export function animateFactory(duration: string|number, delay: string|number, easing: string, stagger: number, name: string): AnimationEntryMetadata{
    const config = {
     duration:duration, 
     delay:delay, 
@@ -27,37 +27,70 @@ export function animateFactory(duration: string|number, delay: string|number, ea
     stagger:stagger, 
     name:name
    }
-   return animateConfig(config);
+   return animateConfig(name,config);
 };
 
-export function animateConfig(config){
-  config = config || {}
-  config.duration = config.duration==null ? animateDefaults.duration : config.duration
-  config.delay = config.delay==null ? animateDefaults.delay : config.delay
-  config.easing = config.easing=null ? animateDefaults.easing : config.easing
-  config.stagger = config.stagger=null ? animateDefaults.stagger : config.stagger
-  config.name = config.name==null ? animateDefaults.name : config.name
-  config.igniter = config.igniter==null ? animateDefaults.igniter : config.igniter
-  config.whileStyle = config.whileStyle==null ? animateDefaults.whileStyle : config.whileStyle
-
-  if(config.stagger){
-    console.log('ack-angular-fx does not support stagger as of this release')
+export function defaultConfig(config){
+  return {
+    ...animateDefaults,
+    ...config
   }
+}
 
-  let timing: string = [
-    typeof(config.duration) === 'number' ? `${config.duration}ms` : config.duration,
-    typeof(config.delay) === 'number' ? `${config.delay}ms` : config.delay,
+export function checkStagger(config){
+  return (!config.stagger || console.log('ack-angular-fx does not support stagger as of this release')) && config
+}
+
+export function animateConfig(name,config): AnimationEntryMetadata{
+  return animateFixedConfig(name, defaultConfig(config))
+  //return animateFixedConfig( checkStagger( defaultConfig(config) ) )
+}
+
+export function animateFixedConfig(name,config):AnimationEntryMetadata{
+  return createTriggerBy(name, config, getConfigTiming(config))
+}
+
+export function getConfigTiming(config){
+  return [
+    //typeof(config.duration) === 'number' ? config.duration+'ms' : config.duration,
+    config.duration+'ms',
+    //typeof(config.delay) === 'number' ? config.delay+'ms' : config.delay,
+    config.delay+'ms',
     config.easing
-  ].join(' ');
+  ].join(' ')
+}
 
-  return trigger(config.name, [
+export function createTriggerBy(name, config, timing):AnimationEntryMetadata{
+  return trigger(name, [
     ...fade(timing, config),
     ...bounce(timing, config),
     ...rotate(timing, config),
     ...slide(timing, config),
     ...zoom(timing, config)
-  ]);
-};
+  ])
+}
+
+export function upgradeComponent(component){
+  const annots = Reflect.getMetadata("annotations", component)
+  annots[0].animations = annots[0].animations || []
+  annots[0].animations.push.apply(annots[0].animations, getFxArray())
+}
+
+export function selectFx(...args){
+  const array = [animateConfig(absSwap.name, absSwap)]
+  args.forEach(v=>{
+    const a = processEachDelay(v)
+    return array.push(...a) //[...array, ...a][a[0],a[1]]
+  })
+  return array
+}
+
+export const absSwap = {
+  easing:'linear', name:'absoluteSwap', igniter:'void',
+  whileStyle:{
+    position: 'absolute', width:'100%', 'overflow':'hidden'
+  }
+}
 
 export const delayArray = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
 /*export const easeArray = [
@@ -67,66 +100,57 @@ export const delayArray = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
   {name:'EaseInOut', value:'ease-in-out'}
 ]*/
 
-export function upgradeComponent(component, animations?){
-  animations = animations || getFxArray()
-  const annots = Reflect.getMetadata("annotations", component)
-  annots[0].animations = annots[0].animations || []
-  annots[0].animations.push.apply(annots[0].animations, fxArray)
-}
-
-const fxArray = []
 export function getFxArray(){
-  if(fxArray.length)return fxArray
-
-  const absSwap = {
-    easing:'linear', name:'absoluteSwap', igniter:'void',
-    whileStyle:{
-      position: 'absolute', width:'100%', 'overflow':'hidden'
-    }
-  }
-
-  fxArray.push(animateConfig(absSwap))
-
-  let absSwapClone = {name:null, duration:null, whileStyle:null}
-  for(let x=delayArray.length-1; x >= 0; --x){
-    let n = delayArray[x]
-
-    fxArray.push(
-      animateConfig({duration:n, name:n.toString()})
-    )
-
-    absSwapClone = {...{name:null, duration:null, whileStyle:null}, ...absSwap}
-    absSwapClone.name = absSwapClone.name+n
-    absSwapClone.duration = n
-    fxArray.push(
-      animateConfig( absSwapClone )
-    )
-    
-    /* Experimental ease references
-
-      for(let eIndex=easeArray.length-1; eIndex >= 0; --eIndex){
-        let ease = easeArray[eIndex]
-
-        fxArray.push(
-          animateConfig({duration:n, name:n+ease.name, ease:ease.value})
-        )
-
-        absSwapClone = Object.assign({name:null, duration:null, whileStyle:null}, absSwap)
-        absSwapClone.name = absSwapClone.name+n+ease.name
-        absSwapClone.duration = n
-        absSwapClone.ease = ease.value
-        fxArray.push(
-          animateConfig( absSwapClone )
-        )
-      }
-    */
-  }
-
-  return fxArray
+  return [
+    animateConfig(absSwap.name, absSwap),
+    //...delayArray.map(processEachDelay)
+    ...processEachDelay('100'),
+    ...processEachDelay('200'),
+    ...processEachDelay('300'),
+    ...processEachDelay('400'),
+    ...processEachDelay('500'),
+    ...processEachDelay('600'),
+    ...processEachDelay('700'),
+    ...processEachDelay('800'),
+    ...processEachDelay('900'),
+    ...processEachDelay('1000'),
+    ...processEachDelay('1500'),
+    ...processEachDelay('2000')
+  ]
 }
 
-export function upgradeComponents(array, animations?){
+export let absSwapClone = {name:null, duration:null, whileStyle:null}
+export function processEachDelay(n){
+  return [
+    animateConfig(n,{duration:n, name:n})
+    ,animateConfig('absoluteSwap'+n,{
+      name:null, duration:null, whileStyle:null,
+      ...absSwap,
+      ...{name:'absoluteSwap'+n, duration:n}
+    })
+  ]
+}
+  /* Experimental ease references
+
+    for(let eIndex=easeArray.length-1; eIndex >= 0; --eIndex){
+      let ease = easeArray[eIndex]
+
+      fxArray.push(
+        animateConfig({duration:n, name:n+ease.name, ease:ease.value})
+      )
+
+      absSwapClone = Object.assign({name:null, duration:null, whileStyle:null}, absSwap)
+      absSwapClone.name = absSwapClone.name+n+ease.name
+      absSwapClone.duration = n
+      absSwapClone.ease = ease.value
+      fxArray.push(
+        animateConfig( absSwapClone )
+      )
+    }
+  */
+
+export function upgradeComponents(array){
   for(let x=array.length-1; x >= 0; --x){
-    upgradeComponent( array[x], animations )
+    upgradeComponent( array[x] )
   }
 }

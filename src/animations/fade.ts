@@ -7,14 +7,13 @@ import {
   AnimationMetadata
 } from '@angular/core';
 
-export const fade = (timing: string, options): AnimationMetadata[] => {
-  options = options || {}
-  options.igniter = options.igniter || '*'
+import { defaultOptions, stylize, combo } from "./helper"
 
-  function stylize(styleDef){
-    return style( {...styleDef, ...options.whileStyle} )
-  }
+export function fade(timing: string, options): AnimationMetadata[]{
+  return fadeOptions(combo(timing, options))
+}
 
+export function fadeOptions(options){
   return [
     state('fadeOut', style({
       display: 'none'
@@ -31,65 +30,65 @@ export const fade = (timing: string, options): AnimationMetadata[] => {
     state('fadeOutUp', style({
       display: 'none'
     })),
-    transition(`${options.igniter} => fadeIn`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, offset: 0}),
-        stylize({opacity: 1, offset: 1})
+    transition(options.options.igniter+' => fadeIn', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, offset: 0}, options.options),
+        stylize({opacity: 1, offset: 1}, options.options)
       ]))
     ]),
-    transition(`fadeIn => void, ${options.igniter} => fadeOut`, [
-      animate(timing, keyframes([
-        stylize({opacity: 1, offset: 0}),
-        stylize({opacity: 0, offset: 1})
+    transition(('fadeIn => void, '+options.options.igniter+' => fadeOut'), [
+      animate(options.timing, keyframes([
+        stylize({opacity: 1, offset: 0}, options.options),
+        stylize({opacity: 0, offset: 1}, options.options)
       ]))
     ]),
-    transition(`${options.igniter} => fadeInDown`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 0}),
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1})
+    transition(options.options.igniter+' => fadeInDown', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 0}, options.options),
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`fadeInDown => void, ${options.igniter} => fadeOutDown`, [
-      animate(timing, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
-        stylize({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 1})
+    transition('fadeInDown => void, '+options.options.igniter+' => fadeOutDown', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, options.options),
+        stylize({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`${options.igniter} => fadeInLeft`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 0}),
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1})
+    transition(options.options.igniter+' => fadeInLeft', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 0}, options.options),
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`fadeInLeft => void, ${options.igniter} => fadeOutRight`, [
-      animate(timing, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
-        stylize({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 1})
+    transition('fadeInLeft => void, '+options.options.igniter+' => fadeOutRight', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, options.options),
+        stylize({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`${options.igniter} => fadeInRight`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 0}),
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1})
+    transition(options.options.igniter+' => fadeInRight', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 0}, options.options),
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`fadeInRight => void, ${options.igniter} => fadeOutLeft`, [
-      animate(timing, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
-        stylize({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1})
+    transition('fadeInRight => void, '+options.options.igniter+' => fadeOutLeft', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, options.options),
+        stylize({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`${options.igniter} => fadeInUp`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0}),
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1})
+    transition(options.options.igniter+' => fadeInUp', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0}, options.options),
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`fadeInUp => void, ${options.igniter} => fadeOutUp`, [
-      animate(timing, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
-        stylize({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1})
+    transition('fadeInUp => void, '+options.options.igniter+' => fadeOutUp', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, options.options),
+        stylize({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1}, options.options)
       ]))
     ])
-  ];
+  ]
 }

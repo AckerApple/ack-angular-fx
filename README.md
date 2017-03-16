@@ -22,6 +22,10 @@ Angular2 animations made easier, inspired by [Animate.css](https://daneden.githu
   - [whileStyle](#whilestyle)
 - [Customize Defaults](#customize-defaults)
 - [AoT Support](#aot-support)
+  - [Example Enable All Animations](#example-enable-all-animations)
+  - [Example Enable Limited Animations](#example-enable-limited-animations)
+  - [PreFx Example](#prefx-example)
+  - [Dynamic AoT Support](#dynamic-aot-support)
 - [API](#api)
   - [animateFactory](#animatefactory)
   - [animateConfig](#animateconfig)
@@ -308,18 +312,38 @@ animateDefaults.whileStyle.position = 'absolute'
 # AoT Support
 Ahead of Time Support when JiT is too slow
 
-### PreFx
-Currently, only the following import is supported for AoT compiling
+Currently, only compiling an animation ts file into your project is supported. Luckily, ack-angular-fx comes with a command line compiler. This limitation appears to be an @angular/compiler-cli issue as I cannot get dynamic animations to work, for AoT, for the life of me.
 
+### Example Enable All Animations
+Add the following to your package.json scripts
 ```
-import fxArray from "ack-angular-fx/prefx"
+"scripts":{
+  "build:prefx": "ack-angular-fx --out ./src/prefx.ts"
+}
+```
+Now, run the following in a command prompt terminal
+```
+npm run build:prefx
+```
+
+### Example Enable Limited Animations
+Add the following to your package.json scripts
+```
+"scripts":{
+  "build:prefx": "ack-angular-fx --select 100,200,300,400,500 --out ./src/prefx.ts"
+}
 ````
+Now, run the following in a command prompt terminal
+```
+npm run build:prefx
+```
 
 ### PreFx Example
-Code below allows usage of [@100] through [@2500] and all of the 
+Code below allows usage of [@100] through [@2500] and all of the absoluteSwap animations
 
+The following works AFTER you have built a prefx file
 ```
-import fxArray from "ack-angular-fx/prefx"
+import fxArray from "./prefx"
 import { Component } from "@angular/core"
 
 @Component({
@@ -334,12 +358,25 @@ import { Component } from "@angular/core"
 }
 ```
 
+### Dynamic AoT Support
+In the future, we hope to have a more dynamic natured way of building animations on the fly
+
+We have tried:
+
+- Adhereing to AoT compiling recommendations
+  - Functions only return logical operations
+  - Just about everything is exposed via export
+  - Removed all ${} for ''+'' string concats
+- Using @ngtools/webpack
+  - Can't get past errors
+- **Ended up offering cli animation bundler**
+
 
 # API
 What resources are available for consuming
 
 > Using AoT compiling?
->> None of the following API functionality is supported during AoT compiling
+>> Currently, none of the following API functionality is supported during AoT compiling
 
 ## animateFactory
 Input is an array of arguments that returns an Angular2 animation stack

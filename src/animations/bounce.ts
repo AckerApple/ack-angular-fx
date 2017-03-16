@@ -7,14 +7,13 @@ import {
   AnimationMetadata
 } from '@angular/core';
 
-export const bounce = (timing: string, options): AnimationMetadata[] => {
-  options = options || {}
-  options.igniter = options.igniter || '*'
+import { defaultOptions, stylize, combo } from "./helper"
 
-  function stylize(styleDef){
-    return style( {...styleDef, ...options.whileStyle} )
-  }
+export function bounce(timing: string, options): AnimationMetadata[]{
+  return bounceOptions(combo(timing, options))
+}
 
+export function bounceOptions(options): AnimationMetadata[]{
   return [
     state('bounceOut', style({
       display: 'none'
@@ -31,83 +30,83 @@ export const bounce = (timing: string, options): AnimationMetadata[] => {
     state('bounceOutUp', style({
       display: 'none'
     })),
-    transition(`${options.igniter} => bounceIn`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transform: 'scale3d(.3, .3, .3)', offset: 0}),
-        stylize({transform: 'scale3d(1.1, 1.1, 1.1)', offset: 0.2}),
-        stylize({transform: 'scale3d(.9, .9, .9)', offset: 0.4}),
-        stylize({transform: 'scale3d(1.03, 1.03, 1.03)', offset: 0.6}),
-        stylize({transform: 'scale3d(.97, .97, .97)', offset: 0.8}),
-        stylize({opacity: 1, transform: 'scale3d(1, 1, 1)', offset: 1})
+    transition(options.options.igniter+' => bounceIn', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transform: 'scale3d(.3, .3, .3)', offset: 0}, options.options),
+        stylize({transform: 'scale3d(1.1, 1.1, 1.1)', offset: 0.2}, options.options),
+        stylize({transform: 'scale3d(.9, .9, .9)', offset: 0.4}, options.options),
+        stylize({transform: 'scale3d(1.03, 1.03, 1.03)', offset: 0.6}, options.options),
+        stylize({transform: 'scale3d(.97, .97, .97)', offset: 0.8}, options.options),
+        stylize({opacity: 1, transform: 'scale3d(1, 1, 1)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`bounceIn => void, ${options.igniter} => bounceOut`, [
-      animate(timing, keyframes([
-        stylize({transform: 'scale3d(.9, .9, .9)', offset: 0.2}),
-        stylize({opacity: 1, transform: 'scale3d(1.1, 1.1, 1.1)', offset: 0.5}),
-        stylize({opacity: 0, transform: 'scale3d(.3, .3, .3)', offset: 1}),
+    transition('bounceIn => void, '+options.options.igniter+' => bounceOut', [
+      animate(options.timing, keyframes([
+        stylize({transform: 'scale3d(.9, .9, .9)', offset: 0.2}, options.options),
+        stylize({opacity: 1, transform: 'scale3d(1.1, 1.1, 1.1)', offset: 0.5}, options.options),
+        stylize({opacity: 0, transform: 'scale3d(.3, .3, .3)', offset: 1}, options.options),
       ]))
     ]),
-    transition(`${options.igniter} => bounceInDown`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(0, -1000px, 0)', offset: 0}),
-        stylize({opacity: 1, transform: 'translate3d(0, 20px, 0)', offset: 0.6}),
-        stylize({transform: 'translate3d(0, -10px, 0)', offset: 0.75}),
-        stylize({transform: 'translate3d(0, 5px, 0)', offset: 0.9}),
-        stylize({transform: 'translate3d(0, 0, 0)', offset: 1})
+    transition(options.options.igniter+' => bounceInDown', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transform: 'translate3d(0, -1000px, 0)', offset: 0}, options.options),
+        stylize({opacity: 1, transform: 'translate3d(0, 20px, 0)', offset: 0.6}, options.options),
+        stylize({transform: 'translate3d(0, -10px, 0)', offset: 0.75}, options.options),
+        stylize({transform: 'translate3d(0, 5px, 0)', offset: 0.9}, options.options),
+        stylize({transform: 'translate3d(0, 0, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`bounceInDown => void, ${options.igniter} => bounceOutDown`, [
-      animate(timing, keyframes([
-        stylize({transform: 'translate3d(0, 10px, 0)', offset: 0.2}),
-        stylize({opacity: 1, transform: 'translate3d(0, -20px, 0)', offset: 0.5}),
-        stylize({opacity: 0, transform: 'translate3d(0, 1000px, 0)', offset: 1})
+    transition('bounceInDown => void, '+options.options.igniter+' => bounceOutDown', [
+      animate(options.timing, keyframes([
+        stylize({transform: 'translate3d(0, 10px, 0)', offset: 0.2}, options.options),
+        stylize({opacity: 1, transform: 'translate3d(0, -20px, 0)', offset: 0.5}, options.options),
+        stylize({opacity: 0, transform: 'translate3d(0, 1000px, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`${options.igniter} => bounceInLeft`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(-1000px, 0, 0)', offset: 0}),
-        stylize({opacity: 1, transform: 'translate3d(20px, 0, 0)', offset: 0.6}),
-        stylize({transform: 'translate3d(-10px, 0, 0)', offset: 0.75}),
-        stylize({transform: 'translate3d(5px, 0, 0)', offset: 0.9}),
-        stylize({transform: 'translate3d(0, 0, 0)', offset: 1})
+    transition(options.options.igniter+' => bounceInLeft', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transform: 'translate3d(-1000px, 0, 0)', offset: 0}, options.options),
+        stylize({opacity: 1, transform: 'translate3d(20px, 0, 0)', offset: 0.6}, options.options),
+        stylize({transform: 'translate3d(-10px, 0, 0)', offset: 0.75}, options.options),
+        stylize({transform: 'translate3d(5px, 0, 0)', offset: 0.9}, options.options),
+        stylize({transform: 'translate3d(0, 0, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`bounceInLeft => void, ${options.igniter} => bounceOutRight`, [
-      animate(timing, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(-20px, 0, 0)', offset: 0.2}),
-        stylize({opacity: 0, transform: 'translate3d(1000px, 0, 0)', offset: 1})
+    transition('bounceInLeft => void, '+options.options.igniter+' => bounceOutRight', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 1, transform: 'translate3d(-20px, 0, 0)', offset: 0.2}, options.options),
+        stylize({opacity: 0, transform: 'translate3d(1000px, 0, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`${options.igniter} => bounceInRight`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(1000px, 0, 0)', offset: 0}),
-        stylize({opacity: 1, transform: 'translate3d(-20px, 0, 0)', offset: 0.6}),
-        stylize({transform: 'translate3d(10px, 0, 0)', offset: 0.75}),
-        stylize({transform: 'translate3d(-5px, 0, 0)', offset: 0.9}),
-        stylize({transform: 'translate3d(0, 0, 0)', offset: 1})
+    transition(options.options.igniter+' => bounceInRight', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transform: 'translate3d(1000px, 0, 0)', offset: 0}, options.options),
+        stylize({opacity: 1, transform: 'translate3d(-20px, 0, 0)', offset: 0.6}, options.options),
+        stylize({transform: 'translate3d(10px, 0, 0)', offset: 0.75}, options.options),
+        stylize({transform: 'translate3d(-5px, 0, 0)', offset: 0.9}, options.options),
+        stylize({transform: 'translate3d(0, 0, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`bounceInRight => void, ${options.igniter} => bounceOutLeft`, [
-      animate(timing, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(20px, 0, 0)', offset: 0.2}),
-        stylize({opacity: 0, transform: 'translate3d(-1000px, 0, 0)', offset: 1})
+    transition('bounceInRight => void, '+options.options.igniter+' => bounceOutLeft', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 1, transform: 'translate3d(20px, 0, 0)', offset: 0.2}, options.options),
+        stylize({opacity: 0, transform: 'translate3d(-1000px, 0, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`${options.igniter} => bounceInUp`, [
-      animate(timing, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(0, 1000px, 0)', offset: 0}),
-        stylize({opacity: 1, transform: 'translate3d(0, -20px, 0)', offset: 0.6}),
-        stylize({transform: 'translate3d(0, 10px, 0)', offset: 0.75}),
-        stylize({transform: 'translate3d(0, -5px, 0)', offset: 0.9}),
-        stylize({transform: 'translate3d(0, 0, 0)', offset: 1})
+    transition(options.options.igniter+' => bounceInUp', [
+      animate(options.timing, keyframes([
+        stylize({opacity: 0, transform: 'translate3d(0, 1000px, 0)', offset: 0}, options.options),
+        stylize({opacity: 1, transform: 'translate3d(0, -20px, 0)', offset: 0.6}, options.options),
+        stylize({transform: 'translate3d(0, 10px, 0)', offset: 0.75}, options.options),
+        stylize({transform: 'translate3d(0, -5px, 0)', offset: 0.9}, options.options),
+        stylize({transform: 'translate3d(0, 0, 0)', offset: 1}, options.options)
       ]))
     ]),
-    transition(`bounceInUp => void, ${options.igniter} => bounceOutUp`, [
-      animate(timing, keyframes([
-        stylize({transform: 'translate3d(0, -10px, 0)', offset: 0.2}),
-        stylize({opacity: 1, transform: 'translate3d(0, 20px, 0)', offset: 0.5}),
-        stylize({opacity: 0, transform: 'translate3d(0, -1000px, 0)', offset: 1})
+    transition('bounceInUp => void, '+options.options.igniter+' => bounceOutUp', [
+      animate(options.timing, keyframes([
+        stylize({transform: 'translate3d(0, -10px, 0)', offset: 0.2}, options.options),
+        stylize({opacity: 1, transform: 'translate3d(0, 20px, 0)', offset: 0.5}, options.options),
+        stylize({opacity: 0, transform: 'translate3d(0, -1000px, 0)', offset: 1}, options.options)
       ]))
     ]
   )

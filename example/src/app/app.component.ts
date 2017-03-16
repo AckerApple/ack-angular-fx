@@ -1,13 +1,25 @@
 import { Component } from '@angular/core';
+import * as appHtml from './app-html'
+
+//import { getFxArray,delayArray,animateConfig } from '../../../src';
 
 import { delayArray } from '../../../src';
+import { fxArray } from './prefx';
+
+//upgradeComponents(declarations)
+
+//export const animations = getFxArray()
+//const x = 'absoluteSwap'
 
 @Component({
   selector: 'app',
-  template: require('./app.html'),
-  styles: [require('./app.css')]
-})
-export class AppComponent {
+  template: appHtml.string//require('./app.html'),
+  //template: 'hello world'//require('./app.html'),
+  //styles: [require('./app.css')]
+  //,animations:animations
+  //,animations:getFxArray()
+  ,animations:fxArray
+}) export class AppComponent {
   panelAnimation: string = 'slideInLeft'
   panelAnimType: string = 'slideIn'
   swapShow: number = 0;
@@ -76,6 +88,19 @@ export class AppComponent {
     'zoomOutUp',
   ];
 
+  public show100
+  public show200
+  public show300
+  public show400
+  public show500
+  public show600
+  public show700
+  public show800
+  public show900
+  public show1000
+  public show1500
+  public show2000
+
   constructor() {
     this.inAnimations = this.inAnimations.map(item => {
       return {
@@ -91,6 +116,12 @@ export class AppComponent {
         bg: Math.floor(Math.random() * 16777215).toString(16)
       }
     });
+  }
+
+  ngAfterViewInit(){
+    if(window['scriptLoadTime']){
+      console.log('Script Load Time', Date.now()-window['scriptLoadTime'])
+    }
   }
 
   toggleAllShorts(){
