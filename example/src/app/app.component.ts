@@ -11,6 +11,7 @@ import { fxArray } from './prefx';
 //export const animations = getFxArray()
 //const x = 'absoluteSwap'
 
+
 @Component({
   selector: 'app',
   template: appHtml.string//require('./app.html'),

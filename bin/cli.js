@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const builder = require('./builder')
 require('ts-node').register({ /* options */ })
 const index = require("../src/index")

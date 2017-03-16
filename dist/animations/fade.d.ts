@@ -1,2 +1,3 @@
-import { AnimationMetadata } from '@angular/core';
-export declare const fade: (timing: string, options: any) => AnimationMetadata[];
+import { AnimationStateDeclarationMetadata, AnimationStateTransitionMetadata } from '@angular/core';
+export declare function fade(timing: string, options: any): (AnimationStateDeclarationMetadata | AnimationStateTransitionMetadata)[];
+export declare function fadeOptions(options: any): (AnimationStateDeclarationMetadata | AnimationStateTransitionMetadata)[];

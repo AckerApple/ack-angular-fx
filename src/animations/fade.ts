@@ -4,12 +4,14 @@ import {
   transition,
   animate,
   keyframes,
-  AnimationMetadata
+  AnimationEntryMetadata,
+  AnimationStateDeclarationMetadata,
+  AnimationStateTransitionMetadata
 } from '@angular/core';
 
 import { defaultOptions, stylize, combo } from "./helper"
 
-export function fade(timing: string, options): AnimationMetadata[]{
+export function fade(timing: string, options){
   return fadeOptions(combo(timing, options))
 }
 

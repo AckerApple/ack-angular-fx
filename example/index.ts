@@ -1,10 +1,10 @@
-import { platformBrowserDynamic }      from '@angular/platform-browser-dynamic';
+import { platformBrowserDynamic }      from '@angular/platform-browser-dynamic'
+import { AppModule } from './src/app/app.module'
+import { enableProdMode } from "@angular/core"
+import { supportDocument } from '../web-animations.min'
 
-//import { AppModuleNgFactory } from './aot/src/app/app.module.ngfactory';
-import { AppModule } from './src/app/app.module';
-import { enableProdMode } from "@angular/core";
+supportDocument(document)
 
 enableProdMode()
 
-platformBrowserDynamic().bootstrapModule(AppModule);
-//platformBrowserDynamic().bootstrapModuleFactory( AppModuleNgFactory );
+platformBrowserDynamic().bootstrapModule(AppModule)

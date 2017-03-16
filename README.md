@@ -8,6 +8,7 @@ Angular2 animations made easier, inspired by [Animate.css](https://daneden.githu
 - [Install](#install)
   - [Requirements](#requirements)
   - [Include in Project](#include-in-project)
+- [Browser Compatibility](#browser-compatibility)
 - [Examples](#examples)
   - [Global Usage](#global-usage)
   - [Component Usage](#component-usage)
@@ -71,6 +72,23 @@ npm install ack-angular-fx web-animations-js --save-dev
 ## Include in Project
 ```
 import * as ackFx from 'ack-angular-fx';
+```
+# Browser Compatibility
+Out of the box, ack-angular-fx is only fully compatibile with a hand-full of browsers
+
+To enable full support, add just about any animation polyfill
+
+## Built-in Polyfill Example
+An animation polyfill is already available to you in ack-angular-fx
+
+```
+import { platformBrowserDynamic }      from '@angular/platform-browser-dynamic';
+import { AppModule } from './src/app/app.module';
+import { supportDocument } from '../web-animations.min';
+
+supportDocument(document)
+
+platformBrowserDynamic().bootstrapModule(AppModule);
 ```
 
 # Examples

@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 //import "web-animations-js"
+//import { setDocument } from "web-animations-js"
 
 import { trigger, AnimationEntryMetadata } from '@angular/core';
 
@@ -8,6 +9,13 @@ import { bounce } from './animations/bounce';
 import { rotate } from './animations/rotate';
 import { slide } from './animations/slide';
 import { zoom } from './animations/zoom';
+
+
+/*import { setDocument } from "./web-animations.min"
+
+export function browserSupport(){
+  return setDocument(document)
+}*/
 
 export const animateDefaults = {
   duration   : 500,
@@ -19,7 +27,7 @@ export const animateDefaults = {
   whileStyle : {}
 }
 
-export function animateFactory(duration: string|number, delay: string|number, easing: string, stagger: number, name: string): AnimationEntryMetadata{
+export function animateFactory(duration: string|number, delay: string|number, easing: string, stagger: number, name: string){
    const config = {
     duration:duration, 
     delay:delay, 
@@ -41,12 +49,12 @@ export function checkStagger(config){
   return (!config.stagger || console.log('ack-angular-fx does not support stagger as of this release')) && config
 }
 
-export function animateConfig(name,config): AnimationEntryMetadata{
+export function animateConfig(name,config){
   return animateFixedConfig(name, defaultConfig(config))
   //return animateFixedConfig( checkStagger( defaultConfig(config) ) )
 }
 
-export function animateFixedConfig(name,config):AnimationEntryMetadata{
+export function animateFixedConfig(name,config){
   return createTriggerBy(name, config, getConfigTiming(config))
 }
 
@@ -60,7 +68,7 @@ export function getConfigTiming(config){
   ].join(' ')
 }
 
-export function createTriggerBy(name, config, timing):AnimationEntryMetadata{
+export function createTriggerBy(name, config, timing){
   return trigger(name, [
     ...fade(timing, config),
     ...bounce(timing, config),

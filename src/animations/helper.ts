@@ -1,4 +1,9 @@
-import { style } from '@angular/core';
+import {
+  style,
+  AnimationStyleMetadata,
+  AnimationEntryMetadata,
+  AnimationStateDeclarationMetadata
+} from '@angular/core';
 
 export function stylize(styleDef, options){
   return style( {...styleDef, ...options.whileStyle} )

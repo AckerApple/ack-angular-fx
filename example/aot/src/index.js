@@ -10,12 +10,18 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 //import "web-animations-js"
+//import { setDocument } from "web-animations-js"
 var core_1 = require("@angular/core");
 var fade_1 = require("./animations/fade");
 var bounce_1 = require("./animations/bounce");
 var rotate_1 = require("./animations/rotate");
 var slide_1 = require("./animations/slide");
 var zoom_1 = require("./animations/zoom");
+/*import { setDocument } from "./web-animations.min"
+
+export function browserSupport(){
+  return setDocument(document)
+}*/
 exports.animateDefaults = {
     duration: 500,
     delay: 0,
