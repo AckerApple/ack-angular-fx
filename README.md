@@ -84,7 +84,7 @@ An animation polyfill is already available to you in ack-angular-fx
 ```
 import { platformBrowserDynamic }      from '@angular/platform-browser-dynamic';
 import { AppModule } from './src/app/app.module';
-import { supportDocument } from '../web-animations.min';
+import { supportDocument } from 'ack-angular-fx/web-animations.min';
 
 supportDocument(document)
 
