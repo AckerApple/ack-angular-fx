@@ -4,7 +4,7 @@ const path = require("path")
 //const output = 'export const array = ' + JSON.stringify(index.getFxArray(), null, 2)
 
 let output=`import { trigger,style,state,transition,animate,keyframes,AnimationEntryMetadata } from '@angular/core'
-export const fxArray = [`
+export class fxArray{`
 
 let fxArray = index.getFxArray()
 const triggers = []
@@ -14,7 +14,8 @@ for(let trigIndex=fxArray.length-1; trigIndex >= 0; --trigIndex){
   let name = fx.name
   //let trig = trigger(name, states)
   //animations.push( trig )
-  triggers.push(`\ntrigger('${name}', ${states})`)
+  triggers.push(`\npublic static _${name} = trigger('${name}', ${states})`)
+  //triggers.push(`\ntrigger('${name}', ${states})`)
   /*
   if(array[trigIndex].name == 'absoluteSwap500'){
     console.log('array[trigIndex].name',array[trigIndex].name)
@@ -23,11 +24,12 @@ for(let trigIndex=fxArray.length-1; trigIndex >= 0; --trigIndex){
     console.log('trig', trig)
   }*/
 }
-output += triggers.join()
+//output += triggers.join()
+output += triggers.join('\n\n')
 //const outFilePath = path.join(__dirname, 'prefx.ts')
 const outFilePath = path.join(__dirname, 'prefx', 'prefx.ts')
 
-fs.writeFileSync(outFilePath, output+']')
+fs.writeFileSync(outFilePath, output+'}')
 
 //returns string
 function pushStateDefs(defs){

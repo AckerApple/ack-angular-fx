@@ -12,7 +12,7 @@ export const fade = (timing: string, options): AnimationMetadata[] => {
   options.igniter = options.igniter || '*'
 
   function stylize(styleDef){
-    return style( Object.assign(styleDef, options.whileStyle) )
+    return style( {...styleDef, ...options.whileStyle} )
   }
 
   return [

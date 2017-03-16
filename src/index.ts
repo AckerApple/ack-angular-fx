@@ -95,7 +95,7 @@ export function getFxArray(){
       animateConfig({duration:n, name:n.toString()})
     )
 
-    absSwapClone = Object.assign({name:null, duration:null, whileStyle:null}, absSwap)
+    absSwapClone = {...{name:null, duration:null, whileStyle:null}, ...absSwap}
     absSwapClone.name = absSwapClone.name+n
     absSwapClone.duration = n
     fxArray.push(
