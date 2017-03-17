@@ -16,7 +16,7 @@ export declare function animateConfig(name: any, config: any): AnimationEntryMet
 export declare function animateFixedConfig(name: any, config: any): AnimationEntryMetadata;
 export declare function getConfigTiming(config: any): string;
 export declare function createTriggerBy(name: any, config: any, timing: any): AnimationEntryMetadata;
-export declare function upgradeComponent(component: any, animations: any): void;
+export declare function upgradeComponent(component: any, animations?: any): void;
 export declare function selectFx(...args: any[]): AnimationEntryMetadata[];
 export declare const absSwap: {
     easing: string;
@@ -36,4 +36,4 @@ export declare let absSwapClone: {
     whileStyle: any;
 };
 export declare function processEachDelay(n: any): AnimationEntryMetadata[];
-export declare function upgradeComponents(array: any, animations: any): void;
+export declare function upgradeComponents(array: any, animations?: any): void;
