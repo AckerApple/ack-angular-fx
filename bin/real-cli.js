@@ -15,10 +15,9 @@ if(outIndex){
 
 const selectIndex = process.argv.indexOf('--select')
 let selects = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
-if(selectIndex){
+if(selectIndex>=0){
   selects = process.argv[selectIndex+1].split(',')
 }
-
 let fxArray = index.selectFx(...selects)
 
 output = builder.fxArrayToImportSyntax(fxArray)

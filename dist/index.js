@@ -74,10 +74,10 @@ function createTriggerBy(name, config, timing) {
     return core_1.trigger(name, fade_1.fade(timing, config).concat(bounce_1.bounce(timing, config), rotate_1.rotate(timing, config), slide_1.slide(timing, config), zoom_1.zoom(timing, config)));
 }
 exports.createTriggerBy = createTriggerBy;
-function upgradeComponent(component) {
+function upgradeComponent(component, animations) {
     var annots = Reflect.getMetadata("annotations", component);
     annots[0].animations = annots[0].animations || [];
-    annots[0].animations.push.apply(annots[0].animations, getFxArray());
+    annots[0].animations.push.apply(annots[0].animations, animations || getFxArray());
 }
 exports.upgradeComponent = upgradeComponent;
 function selectFx() {
@@ -138,9 +138,9 @@ exports.processEachDelay = processEachDelay;
     )
   }
 */
-function upgradeComponents(array) {
+function upgradeComponents(array, animations) {
     for (var x = array.length - 1; x >= 0; --x) {
-        upgradeComponent(array[x]);
+        upgradeComponent(array[x], animations);
     }
 }
 exports.upgradeComponents = upgradeComponents;

@@ -376,6 +376,22 @@ import { Component } from "@angular/core"
 }
 ```
 
+AoT animations for all components
+```
+import { NgModule } from "@angular/core"
+import * as ackFx from "ack-angular-fx"
+import AppComponent from "./app.component"
+
+const declarations = [ AppComponent ]
+
+ackFx.upgradeComponents(declarations)
+
+@NgModule({
+  declarations: declarations
+  bootstrap: [AppComponent]
+}) export class AppModule {}
+```
+
 ### Dynamic AoT Support
 In the future, we hope to have a more dynamic natured way of building animations on the fly
 

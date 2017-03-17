@@ -78,10 +78,10 @@ export function createTriggerBy(name, config, timing){
   ])
 }
 
-export function upgradeComponent(component){
+export function upgradeComponent(component, animations?){
   const annots = Reflect.getMetadata("annotations", component)
   annots[0].animations = annots[0].animations || []
-  annots[0].animations.push.apply(annots[0].animations, getFxArray())
+  annots[0].animations.push.apply(annots[0].animations, animations||getFxArray())
 }
 
 export function selectFx(...args){
@@ -157,8 +157,8 @@ export function processEachDelay(n){
     }
   */
 
-export function upgradeComponents(array){
+export function upgradeComponents(array, animations?){
   for(let x=array.length-1; x >= 0; --x){
-    upgradeComponent( array[x] )
+    upgradeComponent(array[x], animations)
   }
 }
