@@ -88,11 +88,11 @@ function createTriggerBy(name, config, timing) {
 }
 exports.createTriggerBy = createTriggerBy;
 function pushEffectsByConfig(array, timing, config) {
-    return (config.effects.indexOf('fade') >= 0 && array.push.apply(array, fade_1.fade(timing, config)) ||
-        config.effects.indexOf('bounce') >= 0 && array.push.apply(array, bounce_1.bounce(timing, config)) ||
-        config.effects.indexOf('rotate') >= 0 && array.push.apply(array, rotate_1.rotate(timing, config)) ||
-        config.effects.indexOf('slide') >= 0 && array.push.apply(array, slide_1.slide(timing, config)) ||
-        config.effects.indexOf('zoom') >= 0 && array.push.apply(array, zoom_1.zoom(timing, config))) && array;
+    return ((config.effects.indexOf('fade') >= 0 && array.push.apply(array, fade_1.fade(timing, config)) && 0) ||
+        (config.effects.indexOf('bounce') >= 0 && array.push.apply(array, bounce_1.bounce(timing, config)) && 0) ||
+        (config.effects.indexOf('rotate') >= 0 && array.push.apply(array, rotate_1.rotate(timing, config)) && 0) ||
+        (config.effects.indexOf('slide') >= 0 && array.push.apply(array, slide_1.slide(timing, config)) && 0) ||
+        (config.effects.indexOf('zoom') >= 0 && array.push.apply(array, zoom_1.zoom(timing, config)) && 0)) || array;
 }
 exports.pushEffectsByConfig = pushEffectsByConfig;
 function upgradeComponent(component, animations) {

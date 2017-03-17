@@ -89,12 +89,12 @@ export function createTriggerBy(name, config, timing){
 
 export function pushEffectsByConfig(array, timing, config){
   return (
-    config.effects.indexOf('fade')>=0 && array.push(...fade(timing, config)) ||
-    config.effects.indexOf('bounce')>=0 && array.push(...bounce(timing, config)) ||
-    config.effects.indexOf('rotate')>=0 && array.push(...rotate(timing, config)) ||
-    config.effects.indexOf('slide')>=0 && array.push(...slide(timing, config)) ||
-    config.effects.indexOf('zoom')>=0 && array.push(...zoom(timing, config))
-  ) && array
+    (config.effects.indexOf('fade')>=0 && array.push(...fade(timing, config)) && 0) ||
+    (config.effects.indexOf('bounce')>=0 && array.push(...bounce(timing, config)) && 0) ||
+    (config.effects.indexOf('rotate')>=0 && array.push(...rotate(timing, config)) && 0) ||
+    (config.effects.indexOf('slide')>=0 && array.push(...slide(timing, config)) && 0) ||
+    (config.effects.indexOf('zoom')>=0 && array.push(...zoom(timing, config)) && 0)
+  ) || array
 }
 
 export function upgradeComponent(component, animations?){

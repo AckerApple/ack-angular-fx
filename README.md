@@ -342,15 +342,26 @@ Ahead of Time Support when JiT is too slow
 Currently, only compiling an animation ts file into your project is supported. Luckily, ack-angular-fx comes with a command line compiler. This limitation appears to be an @angular/compiler-cli issue as I cannot get dynamic animations to work, for AoT, for the life of me.
 
 ### Example Enable All Animations
-Add the following to your package.json scripts
+Step 1 : Add the following to your package.json scripts
 ```
 "scripts":{
   "build:prefx": "ack-angular-fx --out ./src/prefx.ts"
 }
 ```
-Now, run the following in a command prompt terminal
+Step 2 : Now, run the following in a command prompt terminal
 ```
 npm run build:prefx
+```
+Step 3 : Import your compiled .ts file and apply to component(s)
+```
+import fxArray from "./prefx"
+import { Component } from "@angular/core"
+
+@Component({
+  selector: 'app',
+  template: '<div [@500]="'fadeInUp'" *ngIf="a==1">hello world</div>',
+  animations: fxArray
+})
 ```
 
 ### Example Enable Limited Animations

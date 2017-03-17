@@ -1,6 +1,6 @@
 {
   "name": "ack-angular-fx",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "Angular2 animations made easier",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -17,7 +17,6 @@
     "tsc:prefx": "tsc --rootDir scripts/prefx --outDir . --declaration --project scripts/prefx",
     "build": "tsc --rootDir src --outDir dist --declaration --project src",
     "ts-node": "ts-node",
-    "prepublish": "npm run build:example && npm run build",
     "compile:example:aot": "ngc -p ./example/tsconfig.aot.json"
   },
   "repository": {
