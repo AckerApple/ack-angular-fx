@@ -285,6 +285,15 @@ the easing function of the animation
   - [tester @ matthewlein.com](https://matthewlein.com/ceaser/)
   - [maps @ easings.net](http://easings.net/)
 
+### effects
+Array list of effects to have in an animation definition
+
+- fade
+- slide
+- bounce
+- zoom
+- rotate
+
 ### stagger
 NOT YET SUPPORTED. Placeholder for future release of Angular2 with stagger support
 
@@ -345,10 +354,12 @@ npm run build:prefx
 ```
 
 ### Example Enable Limited Animations
+Reduce file size by selecting a limited number of animation-definitions and effects
+
 Add the following to your package.json scripts
 ```
 "scripts":{
-  "build:prefx": "ack-angular-fx --select 100,200,300,400,500 --out ./src/prefx.ts"
+  "build:prefx": "ack-angular-fx --select animateSwap,400,500 --out --effects fade,slide ./src/prefx.ts"
 }
 ````
 Now, run the following in a command prompt terminal
@@ -374,22 +385,6 @@ import { Component } from "@angular/core"
     setInterval(()=>this.a=this.a==0?1:0, 1000)
   }
 }
-```
-
-AoT animations for all components
-```
-import { NgModule } from "@angular/core"
-import * as ackFx from "ack-angular-fx"
-import AppComponent from "./app.component"
-
-const declarations = [ AppComponent ]
-
-ackFx.upgradeComponents(declarations)
-
-@NgModule({
-  declarations: declarations
-  bootstrap: [AppComponent]
-}) export class AppModule {}
 ```
 
 ### Dynamic AoT Support

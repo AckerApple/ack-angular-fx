@@ -1,3 +1,5 @@
+// Much of the repetition and "ugliness" of this file is from trying to accomediate AoT
+
 import 'reflect-metadata';
 //import "web-animations-js"
 //import { setDocument } from "web-animations-js"
@@ -17,6 +19,21 @@ export function browserSupport(){
   return setDocument(document)
 }*/
 
+export const effects:Array<string> = ['fade','bounce','rotate','slide','zoom']
+export const delayArray:Array<number> = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
+export const menu = {
+  absoluteSwap:{duration:500},
+  absoluteSwap100:{duration:100},absoluteSwap200:{duration:200},
+  absoluteSwap300:{duration:300},absoluteSwap400:{duration:400},
+  absoluteSwap500:{duration:500},absoluteSwap600:{duration:600},
+  absoluteSwap700:{duration:700},absoluteSwap800:{duration:800},
+  absoluteSwap900:{duration:900},absoluteSwap1000:{duration:1000},
+  absoluteSwap2000:{duration:2000},absoluteSwap2500:{duration:2500},
+  "100":{duration:100},"200":{duration:200},"300":{duration:300},
+  "400":{duration:400},"500":{duration:500},"600":{duration:600},
+  "700":{duration:700},"800":{duration:800},"900":{duration:900},
+  "1000":{duration:1000},"1500":{duration:1500},"2000":{duration:2000}
+}
 export const animateDefaults = {
   duration   : 500,
   delay      : 0,
@@ -24,19 +41,19 @@ export const animateDefaults = {
   stagger    : 0,
   name       : 'animate',
   igniter    : '*',
-  whileStyle : {}
+  whileStyle : {},
+  effects    : effects
 }
 
 export function animateFactory(duration: string|number, delay: string|number, easing: string, stagger: number, name: string){
-   const config = {
+   return animateConfig(name,{
     duration:duration, 
     delay:delay, 
     easing:easing, 
     stagger:stagger, 
     name:name
-   }
-   return animateConfig(name,config);
-};
+   })
+}
 
 export function defaultConfig(config){
   return {
@@ -60,22 +77,24 @@ export function animateFixedConfig(name,config){
 
 export function getConfigTiming(config){
   return [
-    //typeof(config.duration) === 'number' ? config.duration+'ms' : config.duration,
     config.duration+'ms',
-    //typeof(config.delay) === 'number' ? config.delay+'ms' : config.delay,
     config.delay+'ms',
     config.easing
   ].join(' ')
 }
 
 export function createTriggerBy(name, config, timing){
-  return trigger(name, [
-    ...fade(timing, config),
-    ...bounce(timing, config),
-    ...rotate(timing, config),
-    ...slide(timing, config),
-    ...zoom(timing, config)
-  ])
+  return trigger(name, pushEffectsByConfig([],timing,config))
+}
+
+export function pushEffectsByConfig(array, timing, config){
+  return (
+    config.effects.indexOf('fade')>=0 && array.push(...fade(timing, config)) ||
+    config.effects.indexOf('bounce')>=0 && array.push(...bounce(timing, config)) ||
+    config.effects.indexOf('rotate')>=0 && array.push(...rotate(timing, config)) ||
+    config.effects.indexOf('slide')>=0 && array.push(...slide(timing, config)) ||
+    config.effects.indexOf('zoom')>=0 && array.push(...zoom(timing, config))
+  ) && array
 }
 
 export function upgradeComponent(component, animations?){
@@ -84,11 +103,10 @@ export function upgradeComponent(component, animations?){
   annots[0].animations.push.apply(annots[0].animations, animations||getFxArray())
 }
 
-export function selectFx(...args){
-  const array = [animateConfig(absSwap.name, absSwap)]
+export function selectFx(args, effectList){
+  const array = []
   args.forEach(v=>{
-    const a = processEachDelay(v)
-    return array.push(...a) //[...array, ...a][a[0],a[1]]
+    return array.push( processSelect(v, menu[v], effectList) )
   })
   return array
 }
@@ -100,62 +118,46 @@ export const absSwap = {
   }
 }
 
-export const delayArray = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
 /*export const easeArray = [
   {name:'Ease', value:'ease'},
   {name:'EaseIn', value:'ease-in'},
   {name:'EaseOut', value:'ease-out'},
   {name:'EaseInOut', value:'ease-in-out'}
 ]*/
-
 export function getFxArray(){
   return [
-    animateConfig(absSwap.name, absSwap),
-    //...delayArray.map(processEachDelay)
-    ...processEachDelay('100'),
-    ...processEachDelay('200'),
-    ...processEachDelay('300'),
-    ...processEachDelay('400'),
-    ...processEachDelay('500'),
-    ...processEachDelay('600'),
-    ...processEachDelay('700'),
-    ...processEachDelay('800'),
-    ...processEachDelay('900'),
-    ...processEachDelay('1000'),
-    ...processEachDelay('1500'),
-    ...processEachDelay('2000')
+    processSelect("absoluteSwap100", menu["absoluteSwap100"] ),
+    processSelect("absoluteSwap200", menu["absoluteSwap200"] ),
+    processSelect("absoluteSwap300", menu["absoluteSwap300"] ),
+    processSelect("absoluteSwap400", menu["absoluteSwap400"] ),
+    processSelect("absoluteSwap500", menu["absoluteSwap500"] ),
+    processSelect("absoluteSwap600", menu["absoluteSwap600"] ),
+    processSelect("absoluteSwap700", menu["absoluteSwap700"] ),
+    processSelect("absoluteSwap800", menu["absoluteSwap800"] ),
+    processSelect("absoluteSwap900", menu["absoluteSwap900"] ),
+    processSelect("absoluteSwap1000", menu["absoluteSwap1000"] ),
+    processSelect("absoluteSwap1500", menu["absoluteSwap1500"] ),
+    processSelect("absoluteSwap2000", menu["absoluteSwap2000"] ),
+    processSelect("100", menu["100"] ),
+    processSelect("200", menu["200"] ),
+    processSelect("300", menu["300"] ),
+    processSelect("400", menu["400"] ),
+    processSelect("500", menu["500"] ),
+    processSelect("600", menu["600"] ),
+    processSelect("700", menu["700"] ),
+    processSelect("800", menu["800"] ),
+    processSelect("900", menu["900"] ),
+    processSelect("1000", menu["1000"] ),
+    processSelect("1500", menu["1500"] ),
+    processSelect("2000", menu["2000"] )
   ]
 }
 
 export let absSwapClone = {name:null, duration:null, whileStyle:null}
-export function processEachDelay(n){
-  return [
-    animateConfig(n,{duration:n, name:n})
-    ,animateConfig('absoluteSwap'+n,{
-      name:null, duration:null, whileStyle:null,
-      ...absSwap,
-      ...{name:'absoluteSwap'+n, duration:n}
-    })
-  ]
+
+export function processSelect(name, config, effectArray?:Array<string>){
+  return animateConfig(name, {duration:config.duration, name:name, effects:effectArray||effects})
 }
-  /* Experimental ease references
-
-    for(let eIndex=easeArray.length-1; eIndex >= 0; --eIndex){
-      let ease = easeArray[eIndex]
-
-      fxArray.push(
-        animateConfig({duration:n, name:n+ease.name, ease:ease.value})
-      )
-
-      absSwapClone = Object.assign({name:null, duration:null, whileStyle:null}, absSwap)
-      absSwapClone.name = absSwapClone.name+n+ease.name
-      absSwapClone.duration = n
-      absSwapClone.ease = ease.value
-      fxArray.push(
-        animateConfig( absSwapClone )
-      )
-    }
-  */
 
 export function upgradeComponents(array, animations?){
   for(let x=array.length-1; x >= 0; --x){

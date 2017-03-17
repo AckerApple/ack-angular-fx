@@ -13,6 +13,7 @@
     "build:example:jit": "webpack --config ./webpack.config.js --progress --profile --colors --display-error-details --display-cached",
     "build:example": "webpack --config ./webpack.aot.config.js --progress --profile --colors --display-error-details --display-cached",
     "build:example:prefx": "node ./bin/real-cli.js --select 100,200,300,400,500,600,700,800,900,1000,1500,2000 --out example/src/app/prefx.ts",
+    "test:prefx": "node ./bin/real-cli.js --select absoluteSwap,100 --effects slide --out test/results/prefx.ts",
     "tsc:prefx": "tsc --rootDir scripts/prefx --outDir . --declaration --project scripts/prefx",
     "build": "tsc --rootDir src --outDir dist --declaration --project src",
     "ts-node": "ts-node",
@@ -38,7 +39,6 @@
     "@types/node": "^7.0.5",
     "raw-loader": "^0.5.1",
     "reflect-metadata": "^0.1.10",
-    "rimraf": "^2.6.1",
     "rxjs": "5.2.0",
     "ts-loader": "^2.0.1",
     "typescript": "^2.2.1",
@@ -55,6 +55,7 @@
   },
   "homepage": "https://github.com/ackerapple/ack-angular-fx#readme",
   "dependencies": {
+    "mkdirp": "^0.5.1",
     "ts-node": "^2.1.0"
   }
 }
