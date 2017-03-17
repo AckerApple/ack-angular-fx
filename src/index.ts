@@ -21,19 +21,6 @@ export function browserSupport(){
 
 export const effects:Array<string> = ['fade','bounce','rotate','slide','zoom']
 export const delayArray:Array<number> = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
-export const menu = {
-  absoluteSwap:{duration:500},
-  absoluteSwap100:{duration:100},absoluteSwap200:{duration:200},
-  absoluteSwap300:{duration:300},absoluteSwap400:{duration:400},
-  absoluteSwap500:{duration:500},absoluteSwap600:{duration:600},
-  absoluteSwap700:{duration:700},absoluteSwap800:{duration:800},
-  absoluteSwap900:{duration:900},absoluteSwap1000:{duration:1000},
-  absoluteSwap2000:{duration:2000},absoluteSwap2500:{duration:2500},
-  "100":{duration:100},"200":{duration:200},"300":{duration:300},
-  "400":{duration:400},"500":{duration:500},"600":{duration:600},
-  "700":{duration:700},"800":{duration:800},"900":{duration:900},
-  "1000":{duration:1000},"1500":{duration:1500},"2000":{duration:2000}
-}
 export const animateDefaults = {
   duration   : 500,
   delay      : 0,
@@ -43,6 +30,25 @@ export const animateDefaults = {
   igniter    : '*',
   whileStyle : {},
   effects    : effects
+}
+export const absSwap = {
+  easing:'linear', name:'absoluteSwap', igniter:'void',
+  whileStyle:{
+    position: 'absolute', width:'100%', 'overflow':'hidden'
+  }
+}
+export const menu = {
+  absoluteSwap:{duration:500, ...absSwap},
+  absoluteSwap100:{duration:100, ...absSwap},absoluteSwap200:{duration:200, ...absSwap},
+  absoluteSwap300:{duration:300, ...absSwap},absoluteSwap400:{duration:400, ...absSwap},
+  absoluteSwap500:{duration:500, ...absSwap},absoluteSwap600:{duration:600, ...absSwap},
+  absoluteSwap700:{duration:700, ...absSwap},absoluteSwap800:{duration:800, ...absSwap},
+  absoluteSwap900:{duration:900, ...absSwap},absoluteSwap1000:{duration:1000, ...absSwap},
+  absoluteSwap2000:{duration:2000, ...absSwap},absoluteSwap2500:{duration:2500, ...absSwap},
+  "100":{duration:100},"200":{duration:200},"300":{duration:300},
+  "400":{duration:400},"500":{duration:500},"600":{duration:600},
+  "700":{duration:700},"800":{duration:800},"900":{duration:900},
+  "1000":{duration:1000},"1500":{duration:1500},"2000":{duration:2000}
 }
 
 export function animateFactory(duration: string|number, delay: string|number, easing: string, stagger: number, name: string){
@@ -111,13 +117,6 @@ export function selectFx(args, effectList){
   return array
 }
 
-export const absSwap = {
-  easing:'linear', name:'absoluteSwap', igniter:'void',
-  whileStyle:{
-    position: 'absolute', width:'100%', 'overflow':'hidden'
-  }
-}
-
 /*export const easeArray = [
   {name:'Ease', value:'ease'},
   {name:'EaseIn', value:'ease-in'},
@@ -156,7 +155,7 @@ export function getFxArray(){
 export let absSwapClone = {name:null, duration:null, whileStyle:null}
 
 export function processSelect(name, config, effectArray?:Array<string>){
-  return animateConfig(name, {duration:config.duration, name:name, effects:effectArray||effects})
+  return animateConfig(name, config)
 }
 
 export function upgradeComponents(array, animations?){

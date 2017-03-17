@@ -25,19 +25,6 @@ export function browserSupport(){
 }*/
 exports.effects = ['fade', 'bounce', 'rotate', 'slide', 'zoom'];
 exports.delayArray = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1500, 2000];
-exports.menu = {
-    absoluteSwap: { duration: 500 },
-    absoluteSwap100: { duration: 100 }, absoluteSwap200: { duration: 200 },
-    absoluteSwap300: { duration: 300 }, absoluteSwap400: { duration: 400 },
-    absoluteSwap500: { duration: 500 }, absoluteSwap600: { duration: 600 },
-    absoluteSwap700: { duration: 700 }, absoluteSwap800: { duration: 800 },
-    absoluteSwap900: { duration: 900 }, absoluteSwap1000: { duration: 1000 },
-    absoluteSwap2000: { duration: 2000 }, absoluteSwap2500: { duration: 2500 },
-    "100": { duration: 100 }, "200": { duration: 200 }, "300": { duration: 300 },
-    "400": { duration: 400 }, "500": { duration: 500 }, "600": { duration: 600 },
-    "700": { duration: 700 }, "800": { duration: 800 }, "900": { duration: 900 },
-    "1000": { duration: 1000 }, "1500": { duration: 1500 }, "2000": { duration: 2000 }
-};
 exports.animateDefaults = {
     duration: 500,
     delay: 0,
@@ -47,6 +34,25 @@ exports.animateDefaults = {
     igniter: '*',
     whileStyle: {},
     effects: exports.effects
+};
+exports.absSwap = {
+    easing: 'linear', name: 'absoluteSwap', igniter: 'void',
+    whileStyle: {
+        position: 'absolute', width: '100%', 'overflow': 'hidden'
+    }
+};
+exports.menu = {
+    absoluteSwap: __assign({ duration: 500 }, exports.absSwap),
+    absoluteSwap100: __assign({ duration: 100 }, exports.absSwap), absoluteSwap200: __assign({ duration: 200 }, exports.absSwap),
+    absoluteSwap300: __assign({ duration: 300 }, exports.absSwap), absoluteSwap400: __assign({ duration: 400 }, exports.absSwap),
+    absoluteSwap500: __assign({ duration: 500 }, exports.absSwap), absoluteSwap600: __assign({ duration: 600 }, exports.absSwap),
+    absoluteSwap700: __assign({ duration: 700 }, exports.absSwap), absoluteSwap800: __assign({ duration: 800 }, exports.absSwap),
+    absoluteSwap900: __assign({ duration: 900 }, exports.absSwap), absoluteSwap1000: __assign({ duration: 1000 }, exports.absSwap),
+    absoluteSwap2000: __assign({ duration: 2000 }, exports.absSwap), absoluteSwap2500: __assign({ duration: 2500 }, exports.absSwap),
+    "100": { duration: 100 }, "200": { duration: 200 }, "300": { duration: 300 },
+    "400": { duration: 400 }, "500": { duration: 500 }, "600": { duration: 600 },
+    "700": { duration: 700 }, "800": { duration: 800 }, "900": { duration: 900 },
+    "1000": { duration: 1000 }, "1500": { duration: 1500 }, "2000": { duration: 2000 }
 };
 function animateFactory(duration, delay, easing, stagger, name) {
     return animateConfig(name, {
@@ -109,12 +115,6 @@ function selectFx(args, effectList) {
     return array;
 }
 exports.selectFx = selectFx;
-exports.absSwap = {
-    easing: 'linear', name: 'absoluteSwap', igniter: 'void',
-    whileStyle: {
-        position: 'absolute', width: '100%', 'overflow': 'hidden'
-    }
-};
 /*export const easeArray = [
   {name:'Ease', value:'ease'},
   {name:'EaseIn', value:'ease-in'},
@@ -152,7 +152,7 @@ function getFxArray() {
 exports.getFxArray = getFxArray;
 exports.absSwapClone = { name: null, duration: null, whileStyle: null };
 function processSelect(name, config, effectArray) {
-    return animateConfig(name, { duration: config.duration, name: name, effects: effectArray || exports.effects });
+    return animateConfig(name, config);
 }
 exports.processSelect = processSelect;
 function upgradeComponents(array, animations) {
