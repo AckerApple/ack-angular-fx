@@ -34,6 +34,8 @@ Angular2 animations made easier, inspired by [Animate.css](https://daneden.githu
 - [Built-in Animations Attributes](#built-in-animations-attributes)
 - [Supported Animations](#supported-animations)
 - [web-animations-js](#web-animations-js)
+- [Work on This Project](#work-on-this-project)
+  - [Building Example](#building example)
 - [Credits](#credits)
 
 # Install
@@ -54,12 +56,12 @@ Two ways to install:
 > NOTE : ack-webpack auto adds a script entry to your package.json file to make CLI commands easier
 
 Step 1
-```
+```bash
 npm install ack-webpack --save-dev
 ```
 
 Step 2
-```
+```bash
 npm run ack-webpack -- install
 ```
 
@@ -70,7 +72,7 @@ npm install ack-angular-fx web-animations-js --save-dev
 ```
 
 ## Include in Project
-```
+```javascript
 import * as ackFx from 'ack-angular-fx';
 ```
 # Browser Compatibility
@@ -81,7 +83,7 @@ To enable full support, add just about any animation polyfill
 ## Built-in Polyfill Example
 An animation polyfill is already available to you in ack-angular-fx
 
-```
+```javascript
 import { platformBrowserDynamic }      from '@angular/platform-browser-dynamic';
 import { AppModule } from './src/app/app.module';
 import { supportDocument } from 'ack-angular-fx/web-animations.min';
@@ -104,7 +106,7 @@ It is highly recommended you visit the example code for best overall view:
 Make life simple, if you just want to use the default animation definitions provided by ack-angular-fx
 
 app.js
-```
+```javascript
 import * as ackFx from 'ack-angular-fx';
 import { Component, NgModule } from '@angular/core';
 
@@ -148,7 +150,7 @@ Items will have animation as they come in and when they leave
 
 app.js
 ```javascript
-import { animateConfig, animateFactory } from 'ack-angular-fx';
+import { animateConfig, animateFactory } from 'ack-angular-fx'
 
 @Component({
   selector: 'app',
@@ -157,16 +159,15 @@ import { animateConfig, animateFactory } from 'ack-angular-fx';
     animateFactory(1000, 200, 'ease-in'),
     animateConfig({duration:200, delay:0, easing:'linear', name:'animateFast'})
   ]
-})
-export class AppComponent{
-    show: boolean = true;
-    list: string[] = ['xxx', 'yyy'];
-    onAdd() {
-        this.list.push('zzz');
-    }
-    onRemove(i) {
-        this.list.splice(i, 1);
-    }
+}) export class AppComponent{
+  show: boolean = true
+  list: string[] = ['xxx', 'yyy']
+  onAdd() {
+    this.list.push('zzz')
+  }
+  onRemove(i) {
+    this.list.splice(i, 1)
+  }
 }
 ```
 
@@ -189,7 +190,7 @@ app.html
 
 ```html
 <p [@animate]="state">Hello World</p>
-<button (click)="state = 'fadeOutDown'">hide</button>
+<button (click)="state='fadeOutDown'">hide</button>
 ```
 
 ## whileStyle Example
@@ -325,7 +326,7 @@ A style definition that will be applied during defined animation process
 
 # Customize Defaults
 
-```
+```javascript
 import { animateDefaults } from 'ack-angular-fx';
 
 animateDefaults.duration = 500
@@ -342,18 +343,21 @@ Ahead of Time Support when JiT is too slow
 Currently, only compiling an animation ts file into your project is supported. Luckily, ack-angular-fx comes with a command line compiler. This limitation appears to be an @angular/compiler-cli issue as I cannot get dynamic animations to work, for AoT, for the life of me.
 
 ### Example Enable All Animations
+
 Step 1 : Add the following to your package.json scripts
-```
+```javascript
 "scripts":{
   "build:prefx": "ack-angular-fx --out ./src/prefx.ts"
 }
 ```
+
 Step 2 : Now, run the following in a command prompt terminal
-```
+```bash
 npm run build:prefx
 ```
+
 Step 3 : Import your compiled .ts file and apply to component(s)
-```
+```javascript
 import fxArray from "./prefx"
 import { Component } from "@angular/core"
 
@@ -368,13 +372,14 @@ import { Component } from "@angular/core"
 Reduce file size by selecting a limited number of animation-definitions and effects
 
 Add the following to your package.json scripts
-```
+```javascript
 "scripts":{
   "build:prefx": "ack-angular-fx --select animateSwap,400,500 --out --effects fade,slide ./src/prefx.ts"
 }
 ````
+
 Now, run the following in a command prompt terminal
-```
+```bash
 npm run build:prefx
 ```
 
@@ -382,7 +387,7 @@ npm run build:prefx
 Code below allows usage of [@100] through [@2500] and all of the absoluteSwap animations
 
 The following works AFTER you have built a prefx file
-```
+```javascript
 import fxArray from "./prefx"
 import { Component } from "@angular/core"
 
@@ -421,7 +426,7 @@ What resources are available for consuming
 ## animateFactory
 Input is an array of arguments that returns an Angular2 animation stack
 
-```
+```javascript
 import { animateFactory } from 'ack-angular-fx';
 animateFactory(duration: string|number, delay: string|number, easing: string, stagger: number, name: string)
 ```
@@ -431,7 +436,7 @@ animateFactory(duration: string|number, delay: string|number, easing: string, st
 ## animateConfig
 Input is an object of attributes that returns an Angular2 animation stack
 
-```
+```javascript
 import { animateConfig } from 'ack-angular-fx';
 animateConfig(config: object)
 ```
@@ -441,7 +446,7 @@ animateConfig(config: object)
 ## animateDefaults
 Established and change animation defaults
 
-```
+```javascript
 import { animateDefaults } from 'ack-angular-fx';
 ```
 
@@ -497,6 +502,40 @@ see online demo https://ackerapple.github.io/ack-angular-fx
 
 [web-animations-js](https://www.npmjs.com/package/web-animations-js) has been included to make life easier in terms of browser compatibility
 
+# Work on This Project
+Everything in this topic is run in an command prompt terminal
+
+Clone this project
+```bash
+git clone https://github.com/AckerApple/ack-angular-fx
+```
+
+## Building Example
+
+Dev Fast Project Watching
+```bash
+npm run watch:example:jit
+```
+
+Dev AoT Project Watching. Longer compile times, ensures production compatibility
+```bash
+npm run watch:example
+```
+
+When changing core animations, the example prefx must be compiled
+```bash
+npm run compile:example:prefx
+```
+
+## Publishing
+
+```bash
+npm run build
+```
+
+
 # Credits
 
 A special thank you goes out to [yuyang041060120](https://github.com/yuyang041060120/) for creating [ng2-animate](https://github.com/yuyang041060120/ng2-animate) and for taking too long to respond to my [pull request](https://github.com/yuyang041060120/ng2-animate/pull/4), which has led to the birth of ack-angular-fx.
+
+[Table of Contents](#table-of-contents)

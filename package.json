@@ -1,6 +1,6 @@
 {
   "name": "ack-angular-fx",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Angular2 animations made easier",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -12,11 +12,12 @@
     "watch:example:jit": "webpack-dev-server --config ./webpack.config.js --progress --profile --colors --watch --open",
     "build:example:jit": "webpack --config ./webpack.config.js --progress --profile --colors --display-error-details --display-cached",
     "build:example": "webpack --config ./webpack.aot.config.js --progress --profile --colors --display-error-details --display-cached",
-    "build:example:prefx": "node ./bin/real-cli.js --select 100,200,300,400,500,600,700,800,900,1000,1500,2000 --out example/src/app/prefx.ts",
     "test:prefx": "node ./bin/real-cli.js --select absoluteSwap,100 --effects slide --out test/results/prefx.ts",
     "tsc:prefx": "tsc --rootDir scripts/prefx --outDir . --declaration --project scripts/prefx",
-    "build": "tsc --rootDir src --outDir dist --declaration --project src",
+    "build:dist": "tsc --rootDir src --outDir dist --declaration --project src",
+    "build":"npm run compile:example:prefx && npm run compile:example:aot && npm run build:example && npm run build",
     "ts-node": "ts-node",
+    "compile:example:prefx": "node ./bin/real-cli.js --select absoluteSwap,100,200,300,400,500,600,700,800,900,1000,1500,2000 --out example/src/app/prefx.ts",
     "compile:example:aot": "ngc -p ./example/tsconfig.aot.json"
   },
   "repository": {
