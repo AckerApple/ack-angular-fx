@@ -35,7 +35,7 @@ Angular2 animations made easier, inspired by [Animate.css](https://daneden.githu
 - [Supported Animations](#supported-animations)
 - [web-animations-js](#web-animations-js)
 - [Work on This Project](#work-on-this-project)
-  - [Building Example](#building example)
+  - [Building Example](#building-example)
 - [Credits](#credits)
 
 # Install
@@ -374,13 +374,13 @@ Reduce file size by selecting a limited number of animation-definitions and effe
 Add the following to your package.json scripts
 ```javascript
 "scripts":{
-  "build:prefx": "ack-angular-fx --select animateSwap,400,500 --out --effects fade,slide ./src/prefx.ts"
+  "compile:prefx": "ack-angular-fx --select animateSwap,400,500 --effects fade,slide --out ./src/prefx.ts"
 }
 ````
 
 Now, run the following in a command prompt terminal
 ```bash
-npm run build:prefx
+npm run compile:prefx
 ```
 
 ### PreFx Example

@@ -1,7 +1,7 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
-## [1.0.10] - 2017-03-20
+## [1.0.11] - 2017-03-20
 ### Added
 - Better docs
 

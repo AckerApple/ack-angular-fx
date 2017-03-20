@@ -1,6 +1,6 @@
 {
   "name": "ack-angular-fx",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Angular2 animations made easier",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
