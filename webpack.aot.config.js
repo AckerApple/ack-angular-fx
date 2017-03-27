@@ -13,7 +13,7 @@ module.exports = {
   },
   devtool: 'source-map',
   output: {
-    path: process.argv.indexOf('--watch')>0? require('path').join(__dirname,'example','dist') : 'example/dist/',
+    path: require('path').join(__dirname,'example','dist'),
     filename: 'bundle.js'
     //,publicPath: 'example/dist/'
   },

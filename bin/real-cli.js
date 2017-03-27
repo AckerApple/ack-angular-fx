@@ -31,6 +31,6 @@ let fxArray = index.selectFx(selects, effectArray)
 
 output = builder.fxArrayToImportSyntax(fxArray)
 
-console.log('\x1b[36m[ack-angular-fx]\x1b[0m:', 'wrote file :',outPath)
+console.log('\x1b[36m[ack-angular-fx]\x1b[0m:', 'wrote file :', outPath.substring(process.cwd().length, outPath.length))
 require('mkdirp').sync(path.join(outPath,'../'))
 fs.writeFileSync(outPath, output)

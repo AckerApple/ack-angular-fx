@@ -3,9 +3,9 @@ const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 
 module.exports = {
   entry: {
-    main: './example/index',
-    vendor: './example/src/vendor',
-    polyfills: './example/src/polyfills'
+    main: './example/index'
+    ,vendor: './example/src/vendor'
+    ,polyfills: './example/src/polyfills'
   },
   devServer:{
     contentBase: "./example/dist/"
@@ -39,10 +39,10 @@ module.exports = {
         warnings: false
       },
       comments: false
-    }),
+    })/*,
     new CommonsChunkPlugin({
       names: ['vendor', 'polyfills'],
       filename: '[name].js'
-    })
+    })*/
   ]
 };

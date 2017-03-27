@@ -1,3 +1,6 @@
+import 'zone.js'
+import 'reflect-metadata'
+
 import { platformBrowserDynamic }      from '@angular/platform-browser-dynamic'
 import { AppModuleNgFactory } from './aot/src/app/app.module.ngfactory'
 import { enableProdMode } from "@angular/core"

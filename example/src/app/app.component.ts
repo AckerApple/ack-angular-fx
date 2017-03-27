@@ -1,24 +1,11 @@
 import { Component } from '@angular/core';
 import * as appHtml from './app-html'
-
-//import { getFxArray,delayArray,animateConfig } from '../../../src';
-
 import { delayArray } from '../../../src';
 import { fxArray } from './prefx';
 
-//upgradeComponents(declarations)
-
-//export const animations = getFxArray()
-//const x = 'absoluteSwap'
-
-
 @Component({
   selector: 'app',
-  template: appHtml.string//require('./app.html'),
-  //template: 'hello world'//require('./app.html'),
-  //styles: [require('./app.css')]
-  //,animations:animations
-  //,animations:getFxArray()
+  template: appHtml.string
   ,animations:fxArray
 }) export class AppComponent {
   panelAnimation: string = 'slideInLeft'

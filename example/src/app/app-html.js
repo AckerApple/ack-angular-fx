@@ -1,4 +1,6 @@
-export const string = '<div class="container">'+
+export const string =
+'<div class="container">'+
+'  <h1>ack-angular-fx</h1>'+
 '  <div style="display:flex;flex-wrap:wrap;align-items: center">'+
 '    <h2>Short-hand Animations</h2>'+
 '    <div style="text-align:right;padding:1em;font-size:0.75em;line-height:0;">'+

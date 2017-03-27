@@ -1,10 +1,9 @@
 // Much of the repetition and "ugliness" of this file is from trying to accomediate AoT
 
-import 'reflect-metadata';
 //import "web-animations-js"
 //import { setDocument } from "web-animations-js"
 
-import { trigger, AnimationEntryMetadata } from '@angular/core';
+import { trigger } from '@angular/animations';
 
 import { fade } from './animations/fade';
 import { bounce } from './animations/bounce';
@@ -104,7 +103,7 @@ export function pushEffectsByConfig(array, timing, config){
 }
 
 export function upgradeComponent(component, animations?){
-  const annots = Reflect.getMetadata("annotations", component)
+  const annots = window['Reflect'].getMetadata("annotations", component)
   annots[0].animations = annots[0].animations || []
   annots[0].animations.push.apply(annots[0].animations, animations||getFxArray())
 }
