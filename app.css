@@ -6,7 +6,7 @@ body {font-family:Helvetica}
   max-width: 960px;
 }
 
-h2 {
+h1,h2 {
   color: #f35626;
   background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
   -webkit-background-clip: text;
