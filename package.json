@@ -14,7 +14,7 @@
     "build:example": "webpack --config ./webpack.aot.config.js --progress --profile --colors --display-error-details --display-cached",
     "test:prefx": "node ./bin/real-cli.js --select absoluteSwap,100 --effects slide --out test/results/prefx.ts",
     "tsc:prefx": "tsc --rootDir scripts/prefx --outDir . --declaration --project scripts/prefx",
-    "build:dist": "tsc --rootDir src --outDir dist --declaration --project src",
+    "build:dist": "ngc --rootDir src --outDir dist --declaration --project src",
     "build": "npm run compile:example:prefx && npm run compile:example:aot && npm run build:example",
     "ts-node": "ts-node",
     "compile:example:prefx": "node ./bin/real-cli.js --select absoluteSwap,100,200,300,400,500,600,700,800,900,1000,1500,2000 --out example/src/app/prefx.ts",

@@ -15,11 +15,20 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "declaration": true,
+    "rootDir": ".",
+    "outDir": "../dist"
   },
   "exclude": [
     "node_modules",
     "example",
     "src/specs"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "genDir": "../aot",
+    "skipMetadataEmit" : false,
+    "skipTemplateCodegen" : true,
+    "entryModule": "app.module#AppModule"
+  }
 }

@@ -3,7 +3,7 @@
 //import "web-animations-js"
 //import { setDocument } from "web-animations-js"
 
-import { trigger } from '@angular/animations';
+import { trigger, AnimationTriggerMetadata } from '@angular/animations';
 
 import { fade } from './animations/fade';
 import { bounce } from './animations/bounce';
@@ -104,6 +104,7 @@ export function pushEffectsByConfig(array, timing, config){
 
 export function upgradeComponent(component, animations?){
   const annots = window['Reflect'].getMetadata("annotations", component)
+  if(!annots)return
   annots[0].animations = annots[0].animations || []
   annots[0].animations.push.apply(annots[0].animations, animations||getFxArray())
 }

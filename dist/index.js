@@ -9,10 +9,9 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-require("reflect-metadata");
 //import "web-animations-js"
 //import { setDocument } from "web-animations-js"
-var core_1 = require("@angular/core");
+var animations_1 = require("@angular/animations");
 var fade_1 = require("./animations/fade");
 var bounce_1 = require("./animations/bounce");
 var rotate_1 = require("./animations/rotate");
@@ -90,7 +89,7 @@ function getConfigTiming(config) {
 }
 exports.getConfigTiming = getConfigTiming;
 function createTriggerBy(name, config, timing) {
-    return core_1.trigger(name, pushEffectsByConfig([], timing, config));
+    return animations_1.trigger(name, pushEffectsByConfig([], timing, config));
 }
 exports.createTriggerBy = createTriggerBy;
 function pushEffectsByConfig(array, timing, config) {
@@ -102,7 +101,9 @@ function pushEffectsByConfig(array, timing, config) {
 }
 exports.pushEffectsByConfig = pushEffectsByConfig;
 function upgradeComponent(component, animations) {
-    var annots = Reflect.getMetadata("annotations", component);
+    var annots = window['Reflect'].getMetadata("annotations", component);
+    if (!annots)
+        return;
     annots[0].animations = annots[0].animations || [];
     annots[0].animations.push.apply(annots[0].animations, animations || getFxArray());
 }

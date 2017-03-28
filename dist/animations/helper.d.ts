@@ -1,4 +1,4 @@
-import { AnimationStyleMetadata } from '@angular/core';
+import { AnimationStyleMetadata } from '@angular/animations';
 export declare function stylize(styleDef: any, options: any): AnimationStyleMetadata;
 export declare function defaultOptions(options?: {}): {
     igniter: string;

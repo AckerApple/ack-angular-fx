@@ -1,4 +1,4 @@
-import { keyframes, AnimationMetadata, state, style, transition, animate } from '@angular/animations';
+import { keyframes, AnimationStyleMetadata, AnimationStateMetadata, AnimationTransitionMetadata, AnimationMetadata, state, style, transition, animate } from '@angular/animations';
 
 import { defaultOptions, stylize, combo } from "./helper"
 

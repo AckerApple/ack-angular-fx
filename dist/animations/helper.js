@@ -8,9 +8,10 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
+//import { style } from '@angular/core';
+var animations_1 = require("@angular/animations");
 function stylize(styleDef, options) {
-    return core_1.style(__assign({}, styleDef, options.whileStyle));
+    return animations_1.style(__assign({}, styleDef, options.whileStyle));
 }
 exports.stylize = stylize;
 function defaultOptions(options) {

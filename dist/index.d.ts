@@ -1,5 +1,4 @@
-import 'reflect-metadata';
-import { AnimationEntryMetadata } from '@angular/core';
+import { AnimationTriggerMetadata } from '@angular/animations';
 export declare const effects: Array<string>;
 export declare const delayArray: Array<number>;
 export declare const animateDefaults: {
@@ -203,21 +202,21 @@ export declare const menu: {
         duration: number;
     };
 };
-export declare function animateFactory(duration: string | number, delay: string | number, easing: string, stagger: number, name: string): AnimationEntryMetadata;
+export declare function animateFactory(duration: string | number, delay: string | number, easing: string, stagger: number, name: string): AnimationTriggerMetadata;
 export declare function defaultConfig(config: any): any;
 export declare function checkStagger(config: any): any;
-export declare function animateConfig(name: any, config: any): AnimationEntryMetadata;
-export declare function animateFixedConfig(name: any, config: any): AnimationEntryMetadata;
+export declare function animateConfig(name: any, config: any): AnimationTriggerMetadata;
+export declare function animateFixedConfig(name: any, config: any): AnimationTriggerMetadata;
 export declare function getConfigTiming(config: any): string;
-export declare function createTriggerBy(name: any, config: any, timing: any): AnimationEntryMetadata;
+export declare function createTriggerBy(name: any, config: any, timing: any): AnimationTriggerMetadata;
 export declare function pushEffectsByConfig(array: any, timing: any, config: any): any;
 export declare function upgradeComponent(component: any, animations?: any): void;
 export declare function selectFx(args: any, effectList: any): any[];
-export declare function getFxArray(): AnimationEntryMetadata[];
+export declare function getFxArray(): AnimationTriggerMetadata[];
 export declare let absSwapClone: {
     name: any;
     duration: any;
     whileStyle: any;
 };
-export declare function processSelect(name: any, config: any, effectArray?: Array<string>): AnimationEntryMetadata;
+export declare function processSelect(name: any, config: any, effectArray?: Array<string>): AnimationTriggerMetadata;
 export declare function upgradeComponents(array: any, animations?: any): void;
