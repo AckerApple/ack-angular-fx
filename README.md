@@ -109,6 +109,8 @@ app.js
 ```javascript
 import * as ackFx from 'ack-angular-fx';
 import { Component, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app',
@@ -120,7 +122,10 @@ const declarations = [ AppComponent, SomeOtherComponent ]
 ackFx.upgradeComponents(declarations)
 
 @NgModule({
-  imports: [],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule
+  ],
   declarations: declarations,
   bootstrap: [AppComponent]
 }) export class AppModule {}

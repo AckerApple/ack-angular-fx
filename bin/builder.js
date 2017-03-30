@@ -1,5 +1,5 @@
 exports.fxArrayToImportSyntax = function fxArrayToImportSyntax(fxArray){
-  return 'import { trigger,style,state,transition,animate,keyframes } from \'@angular/animations\'\n'+
+  return 'import { AnimationTriggerMetadata,trigger,style,state,transition,animate,keyframes } from \'@angular/animations\'\n'+
   'export const fxArray = ['+
   fxArrayToSyntaxArray(fxArray).join() + ']'
 }
