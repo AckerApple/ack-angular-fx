@@ -379,7 +379,7 @@ Reduce file size by selecting a limited number of animation-definitions and effe
 Add the following to your package.json scripts
 ```javascript
 "scripts":{
-  "compile:prefx": "ack-angular-fx --select animateSwap,400,500 --effects fade,slide --out ./src/prefx.ts"
+  "compile:prefx": "ack-angular-fx --select animateSwap,400,500 --effects fade,slide --igniter void --out ./src/prefx.ts"
 }
 ````
 

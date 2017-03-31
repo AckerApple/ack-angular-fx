@@ -22,12 +22,18 @@ if(selectIndex>=0){
   selects = process.argv[selectIndex+1].split(',')
 }
 
+let igniter = '*'
+const igniterIndex = process.argv.indexOf('--igniter')
+if(igniterIndex>=0){
+  igniter = process.argv[igniterIndex+1]
+}
+
 let effectArray = index.effects
 const effectsIndex = process.argv.indexOf('--effects')
 if(effectsIndex>=0){
   effectArray = process.argv[effectsIndex+1].split(',')
 }
-let fxArray = index.selectFx(selects, effectArray)
+let fxArray = index.selectFx(selects, effectArray, {igniter:igniter})
 
 output = builder.fxArrayToImportSyntax(fxArray)
 

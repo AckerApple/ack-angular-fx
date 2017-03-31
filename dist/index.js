@@ -108,10 +108,14 @@ function upgradeComponent(component, animations) {
     annots[0].animations.push.apply(annots[0].animations, animations || getFxArray());
 }
 exports.upgradeComponent = upgradeComponent;
-function selectFx(args, effectList) {
+function selectFx(args, effectList, config) {
+    if (config === void 0) { config = { igniter: 'start' }; }
     var array = [];
     args.forEach(function (v) {
-        return array.push(processSelect(v, exports.menu[v], effectList));
+        var newConfig = Object.assign({}, exports.menu[v]);
+        Object.assign(newConfig, config);
+        var newSelect = processSelect(v, newConfig, effectList);
+        array.push(newSelect);
     });
     return array;
 }
@@ -153,6 +157,7 @@ function getFxArray() {
 exports.getFxArray = getFxArray;
 exports.absSwapClone = { name: null, duration: null, whileStyle: null };
 function processSelect(name, config, effectArray) {
+    config.igniter = config.igniter || 'acker';
     return animateConfig(name, config);
 }
 exports.processSelect = processSelect;

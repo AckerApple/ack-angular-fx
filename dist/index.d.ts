@@ -211,7 +211,9 @@ export declare function getConfigTiming(config: any): string;
 export declare function createTriggerBy(name: any, config: any, timing: any): AnimationTriggerMetadata;
 export declare function pushEffectsByConfig(array: any, timing: any, config: any): any;
 export declare function upgradeComponent(component: any, animations?: any): void;
-export declare function selectFx(args: any, effectList: any): any[];
+export declare function selectFx(args: any, effectList: any, config?: {
+    igniter: string;
+}): any[];
 export declare function getFxArray(): AnimationTriggerMetadata[];
 export declare let absSwapClone: {
     name: any;

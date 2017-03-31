@@ -108,11 +108,13 @@ export function upgradeComponent(component, animations?){
   annots[0].animations = annots[0].animations || []
   annots[0].animations.push.apply(annots[0].animations, animations||getFxArray())
 }
-
-export function selectFx(args, effectList){
+export function selectFx(args, effectList, config={igniter:'start'}){
   const array = []
   args.forEach(v=>{
-    return array.push( processSelect(v, menu[v], effectList) )
+    const newConfig = Object.assign({}, menu[v])
+    Object.assign(newConfig, config)
+    const newSelect = processSelect(v, newConfig, effectList)
+    array.push( newSelect )
   })
   return array
 }
@@ -155,6 +157,7 @@ export function getFxArray(){
 export let absSwapClone = {name:null, duration:null, whileStyle:null}
 
 export function processSelect(name, config, effectArray?:Array<string>){
+  config.igniter = config.igniter || 'acker'
   return animateConfig(name, config)
 }
 
