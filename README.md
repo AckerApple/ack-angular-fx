@@ -78,7 +78,7 @@ import * as ackFx from 'ack-angular-fx';
 # Browser Compatibility
 Out of the box, ack-angular-fx is only fully compatibile with a hand-full of browsers
 
-To enable full support, add just about any animation polyfill
+To enable full support, add just about any animation polyfill. An animation polyfill is available within ack-anagular, read the next example below...
 
 ## Built-in Polyfill Example
 An animation polyfill is already available to you in ack-angular-fx
