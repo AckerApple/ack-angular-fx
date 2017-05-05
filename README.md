@@ -67,9 +67,10 @@ npm run ack-webpack -- install ack-angular-fx
 > The above command will utilize a jsDependencies key of your package.json. It also installs sub-jsDependencies of dependent packages
 
 ### Manually Install jsDependencies
+INSTEAD, of the two step process seen above, run the following
 
 ```bash
-npm install ack-angular-fx web-animations-js --save-dev
+npm install ack-angular-fx web-animations-js @angular/animations --save-dev
 ```
 
 ## Include in Project
