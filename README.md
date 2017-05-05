@@ -64,7 +64,7 @@ Step 2
 ```bash
 npm run ack-webpack -- install ack-angular-fx
 ```
-> The above command will utilize a jsDependencies key of your package.json. It also installs sub-jsDependencies of dependent packages
+> The above command will utilize a jsDependencies key of your package.json file. It also installs sub-jsDependencies of dependent packages
 
 ### Manually Install jsDependencies
 INSTEAD, of the two step process seen above, run the following
@@ -86,7 +86,7 @@ To enable full support, add just about any animation polyfill. An animation poly
 An animation polyfill is already available to you in ack-angular-fx
 
 ```javascript
-import { platformBrowserDynamic }      from '@angular/platform-browser-dynamic';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './src/app/app.module';
 import { supportDocument } from 'ack-angular-fx/web-animations.min';
 
@@ -99,13 +99,10 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 [Example Page](https://ackerapple.github.io/ack-angular-fx)
 
-It is highly recommended you visit the example code for best overall view:
-
-- [app.module.ts](https://github.com/AckerApple/ack-angular-fx/blob/master/example/src/app/app.module.ts)
-- [app.html](https://github.com/AckerApple/ack-angular-fx/blob/master/example/src/app/app.html)
-
 ## Global Usage
 Make life simple, if you just want to use the default animation definitions provided by ack-angular-fx
+
+> NOTE: not seen as to be compatible with AoT compiling. See [Aot Support](#aot-support)
 
 app.js
 ```javascript
@@ -121,6 +118,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const declarations = [ AppComponent, SomeOtherComponent ]
 
+//heads-up, not seen as to be compatible with AoT compiling
 ackFx.upgradeComponents(declarations)
 
 @NgModule({
@@ -148,12 +146,15 @@ app.html
 <p [@1000]="'fadeInUp'" *ngIf="show">fadeInUp 1000</p>
 <p [@1500]="'fadeInUp'" *ngIf="show">fadeInUp 1500</p>
 <p [@2000]="'fadeInUp'" *ngIf="show">fadeInUp 2000</p>
+
 <button (click)="show = !show">toggle</button>
 ```
 
 
 ## Component Usage
-Items will have animation as they come in and when they leave
+Animation configuration definitions. Elements will be animated as they enter and as they exit
+
+> NOTE: When using AoT compiling, the following example, will typically import a fxArray from a prefx file and that array will be your component's only animation defintion
 
 app.js
 ```javascript
@@ -201,7 +202,7 @@ app.html
 ```
 
 ## whileStyle Example
-Lets always animate block elements with an absolute position
+Lets *always* animate block elements with an absolute position
 
 > This example also demonstrates the `igniter` option
 
@@ -365,7 +366,7 @@ npm run build:prefx
 
 Step 3 : Import your compiled .ts file and apply to component(s)
 ```javascript
-import fxArray from "./prefx"
+import { fxArray } from "./prefx"
 import { Component } from "@angular/core"
 
 @Component({
@@ -395,7 +396,7 @@ Code below allows usage of [@100] through [@2500] and all of the absoluteSwap an
 
 The following works AFTER you have built a prefx file
 ```javascript
-import fxArray from "./prefx"
+import { fxArray } from "./prefx"
 import { Component } from "@angular/core"
 
 @Component({
@@ -421,14 +422,14 @@ We have tried:
   - Removed all ${} for ''+'' string concats
 - Using @ngtools/webpack
   - Can't get past errors
-- **Ended up offering cli animation bundler**
+- **Ended up offering cli animation bundler known as the prefx file**
 
 
 # API
 What resources are available for consuming
 
-> Using AoT compiling?
->> Currently, none of the following API functionality is supported during AoT compiling
+> Using AoT compiling? Then please note:
+>> None of the following API functionality, is supported during AoT compiling
 
 ## animateFactory
 Input is an array of arguments that returns an Angular2 animation stack
