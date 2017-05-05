@@ -62,8 +62,9 @@ npm install ack-webpack --save-dev
 
 Step 2
 ```bash
-npm run ack-webpack -- install
+npm run ack-webpack -- install ack-angular-fx
 ```
+> The above command will utilize a jsDependencies key of your package.json. It also installs sub-jsDependencies of dependent packages
 
 ### Manually Install jsDependencies
 
