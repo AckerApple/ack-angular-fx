@@ -1,6 +1,6 @@
 # Description
 
-Angular2 animations made easier, inspired by [Animate.css](https://daneden.github.io/animate.css).
+Angular 4 animations made easier, inspired by [Animate.css](https://daneden.github.io/animate.css).
 
 [Example Page](https://ackerapple.github.io/ack-angular-fx)
 
@@ -13,11 +13,11 @@ Angular2 animations made easier, inspired by [Animate.css](https://daneden.githu
   - [Global Usage](#global-usage)
   - [Component Usage](#component-usage)
   - [whileStyle Example](#whilestyle-example)
+- [Stagger](#Stagger)
 - [Params](#params)
   - [duration](#duration)
   - [delay](#delay)
   - [easing](#easing)
-  - [stagger](#stagger)
   - [name](#name)
   - [igniter](#igniter)
   - [whileStyle](#whilestyle)
@@ -265,6 +265,34 @@ main.html
 </div>
 ```
 
+### Stagger
+Offset multiple animations using Angular 4.2.4 or greater
+
+#### Stagger Items Example
+A parent container staggering child animations whenever "fixedStaggers" variable changes value
+```html
+<div [@childStag]="fixedStaggers">
+  <div (click)="fixedStaggers=!fixedStaggers" *ngFor="let x of [1,2,3,4,5,6,7,8]">
+    <div class="childFx" *ngIf="!fixedStaggers" [@500]="'fadeInLeft'">
+      ngFor loop with *ngIf animations for each
+    </div>
+  </div>
+</div>
+```
+
+#### Stagger Table Rows Example
+A table element staggering row animations whenever "rowStaggers" variable changes value
+```html
+<table style="width:100%" [@childStag]="rowStaggers">
+  <ng-container *ngFor="let x of [1,2,3,4,5,6,7,8]">
+    <tr class="childFx" (click)="rowStaggers=!rowStaggers" *ngIf="!rowStaggers" [@500]="panelAnimType+\'Left\'" style="background-color:#CCC">
+      <td>{{ x }}</td>
+      <td>Item Col {{ x }}</td>
+    </tr>
+  </ng-container>
+</table>
+```
+
 # Params
 The configuration options available to define
 
@@ -302,34 +330,6 @@ Array list of effects to have in an animation definition
 - bounce
 - zoom
 - rotate
-
-### stagger
-Offset multiple animations using Angular 4.2.4 or greater
-
-#### Stagger Items Example
-A parent container staggering child animations whenever "fixedStaggers" variable changes value
-```html
-<div [@childStag]="fixedStaggers">
-  <div (click)="fixedStaggers=!fixedStaggers" *ngFor="let x of [1,2,3,4,5,6,7,8]">
-    <div class="childFx" *ngIf="!fixedStaggers" [@500]="'fadeInLeft'">
-      ngFor loop with *ngIf animations for each
-    </div>
-  </div>
-</div>
-```
-
-#### Stagger Table Rows Example
-A table element staggering row animations whenever "rowStaggers" variable changes value
-```html
-<table style="width:100%" [@childStag]="rowStaggers">
-  <ng-container *ngFor="let x of [1,2,3,4,5,6,7,8]">
-    <tr class="childFx" (click)="rowStaggers=!rowStaggers" *ngIf="!rowStaggers" [@500]="panelAnimType+\'Left\'" style="background-color:#CCC">
-      <td>{{ x }}</td>
-      <td>Item Col {{ x }}</td>
-    </tr>
-  </ng-container>
-</table>
-```
 
 ### name
 the animation trigger/state name registered with Angular
