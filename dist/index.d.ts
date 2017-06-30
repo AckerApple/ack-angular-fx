@@ -204,7 +204,6 @@ export declare const menu: {
 };
 export declare function animateFactory(duration: string | number, delay: string | number, easing: string, stagger: number, name: string): AnimationTriggerMetadata;
 export declare function defaultConfig(config: any): any;
-export declare function checkStagger(config: any): any;
 export declare function animateConfig(name: any, config: any): AnimationTriggerMetadata;
 export declare function animateFixedConfig(name: any, config: any): AnimationTriggerMetadata;
 export declare function getConfigTiming(config: any): string;

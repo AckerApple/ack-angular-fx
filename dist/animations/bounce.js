@@ -1,3 +1,4 @@
+"use strict";
 /*import {
   style,
   state,
@@ -6,7 +7,6 @@
   keyframes,
   AnimationMetadata
 } from '@angular/core';*/
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var animations_1 = require("@angular/animations");
 var helper_1 = require("./helper");

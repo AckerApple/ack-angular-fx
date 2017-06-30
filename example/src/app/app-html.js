@@ -1,8 +1,10 @@
 export const string =
 '<div class="container">'+
 '  <h1>ack-angular-fx</h1>'+
+'  <p>Angular animations made easier</p>'+
+
 '  <div style="display:flex;flex-wrap:wrap;align-items: center">'+
-'    <h2>Short-hand Animations</h2>'+
+'    <h2>ngIf Toggling</h2>'+
 '    <div style="text-align:right;padding:1em;font-size:0.75em;line-height:0;">'+
 '      <a (click)="toggleAllShorts()">toggle all</a>'+
 '      <select [(ngModel)]="panelAnimType">'+
@@ -15,6 +17,7 @@ export const string =
 '      </select>'+
 '    </div>'+
 '  </div>'+
+'  <p>Tap any item below or toggle all using the link above</p>'+
 '  <div class="wrap">'+
 '    <div class="demo-wrap" (click)="show100=!show100">'+
 '      <div class="demo-item" *ngIf="!show100" [@100]="panelAnimType+\'Left\'">[@100]</div>'+
@@ -53,35 +56,60 @@ export const string =
 '      <div class="demo-item" *ngIf="!show2000" [@2000]="panelAnimType+\'Left\'">[@2000]</div>'+
 '    </div>'+
 '  </div>'+
-''+
+
+'  <br />'+
+
 '  <div style="display:flex;flex-wrap:wrap;align-items: center">'+
-'    <h2>Entering and Leaving</h2>'+
+'    <h2>All Supported Animations</h2>'+
 '    <div style="text-align:right;padding:1em;font-size:0.75em;line-height:0;">'+
 '      <a (click)="onToggleInAll()">toggle all</a>'+
 '    </div>'+
 '  </div>'+
-'  <div class="wrap">'+
+'  <div class="wrap" [@childStag]="fxCount">'+
 '    <div class="demo-wrap" *ngFor="let item of inAnimations" (click)="item.show = !item.show">'+
-'      <div class="demo-item" *ngIf="item.show" [@500]="item.key" [ngStyle]="{\'background-color\': \'#\' + item.bg}">'+
+'      <div class="demo-item childFx" *ngIf="item.show" [@500]="item.key" [ngStyle]="{\'background-color\': \'#\' + item.bg}">'+
 '        {{item.key}}'+
 '      </div>'+
 '    </div>'+
 '  </div>'+
-''+
-'  <div style="display:flex;flex-wrap:wrap;align-items: center">'+
-'    <h2>Replace With [hidden]</h2>'+
-'    <div style="text-align:right;padding:1em;font-size:0.75em;line-height:0;">'+
-'      <a (click)="onToggleOutAll()">toggle all</a>'+
-'    </div>'+
-'  </div>'+
-'  <div class="wrap">'+
-'    <div class="demo-wrap" *ngFor="let item of outAnimations" (click)="onToggleOutItem(item)">'+
-'      <div class="demo-item" [@500]="item.state" [ngStyle]="{\'background-color\': \'#\' + item.bg}">'+
-'        {{item.key}}'+
+
+'  <br />'+
+
+'  <h2>Staggering Examples</h2>'+
+'  <div style="padding-left:20px;">'+
+'    <div style="display:flex;flex-wrap:wrap;align-items: center">'+
+'      <h3>Stagger Fixed Items Example</h3>'+
+'      <div style="text-align:right;padding:1em;font-size:0.75em;line-height:0;">'+
+'        <a (click)="fixedStaggers=!fixedStaggers">toggle all</a>'+
 '      </div>'+
 '    </div>'+
+'    <div [@childStag]="fixedStaggers">'+
+'      <div class="wrap">'+
+'        <div class="demo-wrap" (click)="fixedStaggers=!fixedStaggers" *ngFor="let x of [1,2,3,4,5,6,7,8]">'+
+'          <div class="demo-item childFx" *ngIf="!fixedStaggers" [@500]="panelAnimType+\'Left\'">{{ x }}</div>'+
+'        </div>'+
+'      </div>'+
+'    </div>'+
+'    <div style="display:flex;flex-wrap:wrap;align-items: center">'+
+'      <h3>Stagger Table Rows Example</h3>'+
+'      <div style="text-align:right;padding:1em;font-size:0.75em;line-height:0;">'+
+'        <a (click)="rowStaggers=!rowStaggers">toggle all</a>'+
+'      </div>'+
+'    </div>'+
+'    <div [@childStag]="rowStaggers">'+
+'      <table style="width:100%">'+
+'        <ng-container *ngFor="let x of [1,2,3,4,5,6,7,8]">'+
+'          <tr class="childFx" (click)="rowStaggers=!rowStaggers" *ngIf="!rowStaggers" [@500]="panelAnimType+\'Left\'" style="background-color:#CCC">'+
+'            <td>{{ x }}</td>'+
+'            <td>Item Col {{ x }}</td>'+
+'          </tr>'+
+'        </ng-container>'+
+'      </table>'+
+'    </div>'+
 '  </div>'+
-''+
+
+'  <br />'+
+
 '  <div style="display:flex;flex-wrap:wrap;align-items: center">'+
 '    <h2>Swap Animation</h2>'+
 '    <div style="text-align:right;padding:1em;font-size:0.75em;line-height:0;">'+
@@ -98,7 +126,7 @@ export const string =
 '      </select>'+
 '    </div>'+
 '  </div>'+
-'  <div style="position:relative;min-height:175px;background-color:rgb(195, 11, 95);padding:1em;color:white;">'+
+'  <div style="position:relative;min-height:175px;background-color:#CCC;padding:1em;color:white;overflow:hidden;">'+
 '    <div (click)="swapShow=1" *ngIf="!swapShow" [@absoluteSwap]="panelAnimation">'+
 '      [@absoluteSwap]'+
 '      <p>Step 1</p>'+
@@ -121,14 +149,13 @@ export const string =
 '      <div>Elements in swap animation are absolutely positioned during animation and this may require additional consideration before using.</div>'+
 '    </div>'+
 '  </div>'+
-''+
+
 '  <br />'+
+
 '  <div style="text-align:center;">'+
 '    <p>'+
 '      <a href="https://github.com/ackerapple/ack-angular-fx">View on GitHub</a>'+
 '    </p>'+
-''+
-'    <p style="font-size:0.75em;">Animation staggering on this page is provided setTimeout()</p>  '+
 '  </div>'+
-''+
+
 '</div>'

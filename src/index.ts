@@ -44,6 +44,7 @@ export const menu = {
   absoluteSwap700:{duration:700, ...absSwap},absoluteSwap800:{duration:800, ...absSwap},
   absoluteSwap900:{duration:900, ...absSwap},absoluteSwap1000:{duration:1000, ...absSwap},
   absoluteSwap2000:{duration:2000, ...absSwap},absoluteSwap2500:{duration:2500, ...absSwap},
+
   "100":{duration:100},"200":{duration:200},"300":{duration:300},
   "400":{duration:400},"500":{duration:500},"600":{duration:600},
   "700":{duration:700},"800":{duration:800},"900":{duration:900},
@@ -67,9 +68,9 @@ export function defaultConfig(config){
   }
 }
 
-export function checkStagger(config){
+/*export function checkStagger(config){
   return (!config.stagger || console.log('ack-angular-fx does not support stagger as of this release')) && config
-}
+}*/
 
 export function animateConfig(name,config){
   return animateFixedConfig(name, defaultConfig(config))
@@ -157,7 +158,7 @@ export function getFxArray(){
 export let absSwapClone = {name:null, duration:null, whileStyle:null}
 
 export function processSelect(name, config, effectArray?:Array<string>){
-  config.igniter = config.igniter || 'acker'
+  config.igniter = config.igniter || 'void'
   return animateConfig(name, config)
 }
 

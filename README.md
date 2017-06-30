@@ -304,12 +304,32 @@ Array list of effects to have in an animation definition
 - rotate
 
 ### stagger
-NOT YET SUPPORTED. Placeholder for future release of Angular2 with stagger support
+Offset multiple animations using Angular 4.2.4 or greater
 
-- type: number
-- optional, default value is 0
+#### Stagger Items Example
+A parent container staggering child animations whenever "fixedStaggers" variable changes value
+```html
+<div [@childStag]="fixedStaggers">
+  <div (click)="fixedStaggers=!fixedStaggers" *ngFor="let x of [1,2,3,4,5,6,7,8]">
+    <div class="childFx" *ngIf="!fixedStaggers" [@500]="'fadeInLeft'">
+      ngFor loop with *ngIf animations for each
+    </div>
+  </div>
+</div>
+```
 
-Angular2 stagger animation support tracking : [tap here](https://github.com/angular/angular/issues/7478)
+#### Stagger Table Rows Example
+A table element staggering row animations whenever "rowStaggers" variable changes value
+```html
+<table style="width:100%" [@childStag]="rowStaggers">
+  <ng-container *ngFor="let x of [1,2,3,4,5,6,7,8]">
+    <tr class="childFx" (click)="rowStaggers=!rowStaggers" *ngIf="!rowStaggers" [@500]="panelAnimType+\'Left\'" style="background-color:#CCC">
+      <td>{{ x }}</td>
+      <td>Item Col {{ x }}</td>
+    </tr>
+  </ng-container>
+</table>
+```
 
 ### name
 the animation trigger/state name registered with Angular
@@ -436,7 +456,7 @@ Input is an array of arguments that returns an Angular2 animation stack
 
 ```javascript
 import { animateFactory } from 'ack-angular-fx';
-animateFactory(duration: string|number, delay: string|number, easing: string, stagger: number, name: string)
+animateFactory(duration: string|number, delay: string|number, easing: string, name: string)
 ```
 
 > See [Params](#params) for more information about arguments

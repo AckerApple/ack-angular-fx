@@ -1,3 +1,4 @@
+import { transition, query, stagger, state, animateChild, trigger, style, animate } from '@angular/animations';
 import { Component } from '@angular/core';
 import * as appHtml from './app-html'
 import { delayArray } from '../../../src';
@@ -8,8 +9,9 @@ import { fxArray } from './prefx';
   template: appHtml.string
   ,animations:fxArray
 }) export class AppComponent {
-  panelAnimation: string = 'slideInLeft'
-  panelAnimType: string = 'slideIn'
+  fxCount = 0
+  panelAnimation: string = 'fadeInLeft'
+  panelAnimType: string = 'fadeIn'
   swapShow: number = 0;
   show: boolean = true;
   state: string = '';
@@ -76,18 +78,18 @@ import { fxArray } from './prefx';
     'zoomOutUp',
   ];
 
-  public show100
-  public show200
-  public show300
-  public show400
-  public show500
-  public show600
-  public show700
-  public show800
-  public show900
-  public show1000
-  public show1500
-  public show2000
+  show100
+  show200
+  show300
+  show400
+  show500
+  show600
+  show700
+  show800
+  show900
+  show1000
+  show1500
+  show2000
 
   constructor() {
     this.inAnimations = this.inAnimations.map(item => {
@@ -119,16 +121,19 @@ import { fxArray } from './prefx';
   }
 
   onToggleInAll() {
+    ++this.fxCount
     this.inAnimations.forEach((item,i)=>{
-      setTimeout(()=>item.show = !item.show, 200*i)
+      item.show = !item.show
+      //setTimeout(()=>item.show = !item.show, 200*i)
     });
   }
 
-  onToggleOutAll() {
+  /*onToggleOutAll() {
     this.outAnimations.forEach((item,i) => {
-      setTimeout(()=>item.state = item.state ? '' : item.key, 200*i)
+      item.state = item.state ? '' : item.key
+      //setTimeout(()=>item.state = item.state ? '' : item.key, 200*i)
     });
-  }
+  }*/
 
   onToggleOutItem(item) {
     item.state = item.state ? '' : item.key;

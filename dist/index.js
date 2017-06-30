@@ -1,5 +1,5 @@
-// Much of the repetition and "ugliness" of this file is from trying to accomediate AoT
 "use strict";
+// Much of the repetition and "ugliness" of this file is from trying to accomediate AoT
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -67,10 +67,9 @@ function defaultConfig(config) {
     return __assign({}, exports.animateDefaults, config);
 }
 exports.defaultConfig = defaultConfig;
-function checkStagger(config) {
-    return (!config.stagger || console.log('ack-angular-fx does not support stagger as of this release')) && config;
-}
-exports.checkStagger = checkStagger;
+/*export function checkStagger(config){
+  return (!config.stagger || console.log('ack-angular-fx does not support stagger as of this release')) && config
+}*/
 function animateConfig(name, config) {
     return animateFixedConfig(name, defaultConfig(config));
     //return animateFixedConfig( checkStagger( defaultConfig(config) ) )

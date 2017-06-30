@@ -1,6 +1,13 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [1.2.0] - 2017-06-29
+### Breaking Changes
+- Angular 4.2.4 is now required
+### Added
+- query, stagger, animateChild support
+- new childStag trigger to support staggering
+
 ## [1.1.0] - 2017-03-30
 ### Fixed
 - Made more AoT compatible by making AnimationTriggerMetadata available to prefx outputs
