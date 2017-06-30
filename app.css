@@ -1,4 +1,22 @@
-body {font-family:Helvetica}
+html,body, {padding:0;margin:0;height:100%;width:100%;}
+
+body {
+  font-family:Helvetica;text-align:center;
+}
+
+.colorizer{
+  background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+  -webkit-animation: hue 30s infinite linear;
+  height:100%;width:100%;
+  display:inline-table;
+  padding:0;margin:0;
+}
+
+app {
+  display:inline-block;text-align:left;
+  width:100%;max-width:900px;
+  background-color:white;padding:1em;
+}
 
 .container {
   font-family:Helvetica;
@@ -6,8 +24,8 @@ body {font-family:Helvetica}
   max-width: 960px;
 }
 
-h1,h2 {
-  color: #f35626;
+h1,h2,h3,h4 {
+  margin-bottom:0;color: #f35626;
   background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -59,3 +77,5 @@ a:hover {
     -webkit-filter: hue-rotate(-360deg);
   }
 }
+
+p {padding-left:1em;color:#666666;padding-top:0;}
