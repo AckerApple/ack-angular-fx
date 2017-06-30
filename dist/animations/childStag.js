@@ -1,6 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var animations_1 = require("@angular/animations");
+/*
+    trigger('childStag', [
+      transition('* => *', [
+        query('.childFx', [
+          stagger(100, [animateChild()])
+        ], {optional:true, limit:500})
+      ])
+      //,query('*', animateChild())
+    ]),
+*/
 exports.childStags = [
     animations_1.trigger('childStag50', [
         animations_1.transition('* => *', [

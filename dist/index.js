@@ -104,7 +104,8 @@ function upgradeComponent(component, animations) {
     if (!annots)
         return;
     annots[0].animations = annots[0].animations || [];
-    annots[0].animations.push.apply(annots[0].animations, animations || getFxArray());
+    var fxArray = animations || getFxArray();
+    annots[0].animations.push.apply(annots[0].animations, fxArray);
 }
 exports.upgradeComponent = upgradeComponent;
 function selectFx(args, effectList, config) {
@@ -156,7 +157,7 @@ function getFxArray() {
 exports.getFxArray = getFxArray;
 exports.absSwapClone = { name: null, duration: null, whileStyle: null };
 function processSelect(name, config, effectArray) {
-    config.igniter = config.igniter || 'acker';
+    config.igniter = config.igniter || 'void';
     return animateConfig(name, config);
 }
 exports.processSelect = processSelect;
