@@ -23,8 +23,8 @@ Angular 4 animations made easier, inspired by [Animate.css](https://daneden.gith
   - [whileStyle](#whilestyle)
 - [Customize Defaults](#customize-defaults)
 - [AoT Support](#aot-support)
-  - [Example Enable All Animations](#example-enable-all-animations)
-  - [Example Enable Limited Animations](#example-enable-limited-animations)
+  - [Example Compile All Animations to One File](#example-compile-all-animations-to-one-file)
+  - [Example Compile Limited Animations](#example-compile-limited-animations)
   - [PreFx Example](#prefx-example)
   - [Dynamic AoT Support](#dynamic-aot-support)
 - [API](#api)
@@ -268,6 +268,8 @@ main.html
 ### Stagger
 Offset multiple animations using Angular 4.2.4 or greater
 
+Currently, staggering animations using ack-angular-fx, is controlled by a parent stagger definition and child animations subscribing to that via the css class "childFx"
+
 #### Stagger Items Example
 A parent container staggering child animations whenever "fixedStaggers" variable changes value
 ```html
@@ -366,11 +368,13 @@ animateDefaults.whileStyle.position = 'absolute'
 ```
 
 # AoT Support
-Ahead of Time Support when JiT is too slow
+Ahead of Time Support because JiT is too slow
 
-Currently, only compiling an animation ts file into your project is supported. Luckily, ack-angular-fx comes with a command line compiler. This limitation appears to be an @angular/compiler-cli issue as I cannot get dynamic animations to work, for AoT, for the life of me.
+Currently, only compiling animations to a static Typescript file, is supported during AoT compiling (dynimic animations are NOT AoT friendly). Luckily, ack-angular-fx comes with a command line compiler.
 
-### Example Enable All Animations
+> This "limitation" appears to be an @angular/compiler-cli requirement as I cannot get dynamic animations to work, for AoT, for the life of me.
+
+### Example Compile All Animations to One File
 
 Step 1 : Add the following to your package.json scripts
 ```javascript
@@ -396,13 +400,13 @@ import { Component } from "@angular/core"
 })
 ```
 
-### Example Enable Limited Animations
+### Example Compile Limited Animations
 Reduce file size by selecting a limited number of animation-definitions and effects
 
 Add the following to your package.json scripts
 ```javascript
 "scripts":{
-  "compile:prefx": "ack-angular-fx --select animateSwap,400,500 --effects fade,slide --igniter void --out ./src/prefx.ts"
+  "compile:prefx": "ack-angular-fx --select animateSwap,400,500,childStag --effects fade,slide --igniter void --out ./src/prefx.ts"
 }
 ````
 
@@ -483,19 +487,31 @@ import { animateDefaults } from 'ack-angular-fx';
 
 # Built-in Animation Attributes
 
-- [@100]="'slideInLeft'"
-- [@200]="'slideInLeft'"
-- [@300]="'slideInLeft'"
-- [@400]="'slideInLeft'"
-- [@500]="'slideInLeft'"
-- [@600]="'slideInLeft'"
-- [@700]="'slideInLeft'"
-- [@800]="'slideInLeft'"
-- [@900]="'slideInLeft'"
-- [@1000]="'slideInLeft'"
-- [@1500]="'slideInLeft'"
-- [@2000]="'slideInLeft'"
-- [@absoluteSwap]="'slideInLeft'"
+- @100 = "'slideInLeft'"
+- @200 = "'slideInLeft'"
+- @300 = "'slideInLeft'"
+- @400 = "'slideInLeft'"
+- @500 = "'slideInLeft'"
+- @600 = "'slideInLeft'"
+- @700 = "'slideInLeft'"
+- @800 = "'slideInLeft'"
+- @900 = "'slideInLeft'"
+- @1000 = "'slideInLeft'"
+- @1500 = "'slideInLeft'"
+- @2000 = "'slideInLeft'"
+- @absoluteSwap = "'slideInLeft'"
+  - Speed variations available such as @absoluteSwap100, @absoluteSwap200, and so on...
+- @childStag = "changeVar"
+  - Any change in trigger variable invoke child animation stagger
+  - Child elements participating in stagger must have the class "childFx" applied
+  - Default stagger is 100 milsecs
+  - Stagger time variations exist
+    - @childStag50
+    - @childStag100
+    - @childStag200
+    - @childStag300
+    - @childStag400
+    - @childStag500
 
 # Supported Animations
 

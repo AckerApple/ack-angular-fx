@@ -106,8 +106,12 @@ export function pushEffectsByConfig(array, timing, config){
 export function upgradeComponent(component, animations?){
   const annots = window['Reflect'].getMetadata("annotations", component)
   if(!annots)return
+  
   annots[0].animations = annots[0].animations || []
-  annots[0].animations.push.apply(annots[0].animations, animations||getFxArray())
+  
+  const fxArray = animations || getFxArray()
+  
+  annots[0].animations.push.apply(annots[0].animations, fxArray)
 }
 export function selectFx(args, effectList, config={igniter:'start'}){
   const array = []

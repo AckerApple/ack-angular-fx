@@ -16,6 +16,7 @@ function fxArrayToSyntaxArray(fxArray){
     let name = fx.name
 
     if(fx.name=='childStag'){
+      
       triggers.push.apply(triggers, childStags.map(trig=>triggerToString(trig)))
       continue;
     }
