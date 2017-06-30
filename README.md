@@ -13,7 +13,7 @@ Angular 4 animations made easier, inspired by [Animate.css](https://daneden.gith
   - [Global Usage](#global-usage)
   - [Component Usage](#component-usage)
   - [whileStyle Example](#whilestyle-example)
-- [Stagger](#Stagger)
+- [Stagger](#stagger)
 - [Params](#params)
   - [duration](#duration)
   - [delay](#delay)
