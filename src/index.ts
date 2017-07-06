@@ -18,6 +18,10 @@ export function browserSupport(){
   return setDocument(document)
 }*/
 
+export interface fxConfig{
+  igniter?:string
+}
+
 export const effects:Array<string> = ['fade','bounce','rotate','slide','zoom']
 export const delayArray:Array<number> = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
 export const animateDefaults = {
@@ -161,7 +165,7 @@ export function getFxArray(){
 
 export let absSwapClone = {name:null, duration:null, whileStyle:null}
 
-export function processSelect(name, config, effectArray?:Array<string>){
+export function processSelect(name, config:fxConfig={}, effectArray?:Array<string>){
   config.igniter = config.igniter || 'void'
   return animateConfig(name, config)
 }
