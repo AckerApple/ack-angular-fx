@@ -1,6 +1,12 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [1.2.5] - 2017-07-06
+### Fixed
+- user reported issue
+### Changed
+- 500 max to 300 for childStag
+
 ## [1.2.0] - 2017-06-29
 ### Breaking Changes
 - Angular 4.2.4 is now required

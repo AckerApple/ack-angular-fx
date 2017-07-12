@@ -5,7 +5,7 @@ import { trigger, AnimationTriggerMetadata, AnimationMetadata, transition, query
       transition('* => *', [
         query('.childFx', [
           stagger(100, [animateChild()])
-        ], {optional:true, limit:500})
+        ], {optional:true, limit:300})
       ])
       //,query('*', animateChild())
     ]),
@@ -16,42 +16,42 @@ export const childStags = [
     transition('* => *', [
       query('.childFx', [
         stagger(50, [animateChild()])
-      ], {optional:true, limit:500})
+      ], {optional:true, limit:300})
     ])
   ]),
   trigger('childStag', [
     transition('* => *', [
       query('.childFx', [
         stagger(100, [animateChild()])
-      ], {optional:true, limit:500})
+      ], {optional:true, limit:300})
     ])
   ]),
   trigger('childStag200', [
     transition('* => *', [
       query('.childFx', [
         stagger(200, [animateChild()])
-      ], {optional:true, limit:500})
+      ], {optional:true, limit:300})
     ])
   ]),
   trigger('childStag300', [
     transition('* => *', [
       query('.childFx', [
         stagger(300, [animateChild()])
-      ], {optional:true, limit:500})
+      ], {optional:true, limit:300})
     ])
   ]),
   trigger('childStag400', [
     transition('* => *', [
       query('.childFx', [
         stagger(400, [animateChild()])
-      ], {optional:true, limit:500})
+      ], {optional:true, limit:300})
     ])
   ]),
   trigger('childStag500', [
     transition('* => *', [
       query('.childFx', [
         stagger(500, [animateChild()])
-      ], {optional:true, limit:500})
+      ], {optional:true, limit:300})
     ])
   ])
 ]
