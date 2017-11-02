@@ -1,6 +1,6 @@
 export const string =
 '<div class="container">'+
-'  <h1>ack-angular-fx</h1>'+
+'  <h1>ack-angular-fx {{version}}</h1>'+
 '  <p>Angular animations made easier</p>'+
 
 '  <div style="display:flex;flex-wrap:wrap;align-items: center">'+

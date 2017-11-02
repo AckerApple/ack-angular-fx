@@ -1,6 +1,10 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [1.3.0] - 2017-11-02
+### Breaking Changes
+- upgraded to Angular5. Angular5 maybe required to use this package
+
 ## [1.2.5] - 2017-07-06
 ### Fixed
 - user reported issue

@@ -19,7 +19,8 @@ export function browserSupport(){
 }*/
 
 export interface fxConfig{
-  igniter?:string
+  igniter?:string,
+  duration?:number
 }
 
 export const effects:Array<string> = ['fade','bounce','rotate','slide','zoom']

@@ -1,3 +1,5 @@
+*.js.map
+*.css.map
 aot/
 test/results
 prefx.ts

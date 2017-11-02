@@ -1,14 +1,18 @@
 import { transition, query, stagger, state, animateChild, trigger, style, animate } from '@angular/animations';
 import { Component } from '@angular/core';
-import * as appHtml from './app-html'
+import { string } from './app-html'
 import { delayArray } from '../../../src';
 import { fxArray } from './prefx';
+import * as packJson from "../../../package.json"
 
 @Component({
   selector: 'app',
-  template: appHtml.string
+  template: string
   ,animations:fxArray
 }) export class AppComponent {
+  version = packJson['version'] || '0.0.0'
+  fixedStaggers
+  rowStaggers
   fxCount = 0
   panelAnimation: string = 'fadeInLeft'
   panelAnimType: string = 'fadeIn'

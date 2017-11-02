@@ -1,4 +1,7 @@
 import { AnimationTriggerMetadata } from '@angular/animations';
+export interface fxConfig {
+    igniter?: string;
+}
 export declare const effects: Array<string>;
 export declare const delayArray: Array<number>;
 export declare const animateDefaults: {
@@ -219,5 +222,5 @@ export declare let absSwapClone: {
     duration: any;
     whileStyle: any;
 };
-export declare function processSelect(name: any, config: any, effectArray?: Array<string>): AnimationTriggerMetadata;
+export declare function processSelect(name: any, config?: fxConfig, effectArray?: Array<string>): AnimationTriggerMetadata;
 export declare function upgradeComponents(array: any, animations?: any): void;

@@ -71,13 +71,13 @@ function fadeOptions(options) {
                 helper_1.stylize({ opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1 }, options.options)
             ]))
         ]),
-        animations_1.transition(options.options.igniter + ' => fadeInUp', [
+        animations_1.transition(options.options.igniter + ' => fadeInUp, hidden => fadeInUp', [
             animations_1.animate(options.timing, animations_1.keyframes([
                 helper_1.stylize({ opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0 }, options.options),
                 helper_1.stylize({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 }, options.options)
             ]))
         ]),
-        animations_1.transition('fadeInUp => void, ' + options.options.igniter + ' => fadeOutUp', [
+        animations_1.transition('fadeInUp => void, fadeInUp => hidden, ' + options.options.igniter + ' => fadeOutUp', [
             animations_1.animate(options.timing, animations_1.keyframes([
                 helper_1.stylize({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }, options.options),
                 helper_1.stylize({ opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1 }, options.options)

@@ -17,11 +17,6 @@ var bounce_1 = require("./animations/bounce");
 var rotate_1 = require("./animations/rotate");
 var slide_1 = require("./animations/slide");
 var zoom_1 = require("./animations/zoom");
-/*import { setDocument } from "./web-animations.min"
-
-export function browserSupport(){
-  return setDocument(document)
-}*/
 exports.effects = ['fade', 'bounce', 'rotate', 'slide', 'zoom'];
 exports.delayArray = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1500, 2000];
 exports.animateDefaults = {
@@ -157,6 +152,7 @@ function getFxArray() {
 exports.getFxArray = getFxArray;
 exports.absSwapClone = { name: null, duration: null, whileStyle: null };
 function processSelect(name, config, effectArray) {
+    if (config === void 0) { config = {}; }
     config.igniter = config.igniter || 'void';
     return animateConfig(name, config);
 }
