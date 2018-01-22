@@ -1,6 +1,6 @@
 # Description
 
-Angular 4 animations made easier, inspired by [Animate.css](https://daneden.github.io/animate.css).
+Angular animations made easier, inspired by [Animate.css](https://daneden.github.io/animate.css).
 
 [Example Page](https://ackerapple.github.io/ack-angular-fx)
 
