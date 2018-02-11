@@ -1,8 +1,12 @@
 # Description
 
-Angular animations made easier, inspired by [Animate.css](https://daneden.github.io/animate.css).
+Angular animations made easier, inspired by [Animate.css](https://daneden.github.io/animate.css). [Example Page](https://ackerapple.github.io/ack-angular-fx)
 
-[Example Page](https://ackerapple.github.io/ack-angular-fx)
+[![hire me](https://ackerapple.github.io/resume/assets/images/hire-me-badge.svg)](https://ackerapple.github.io/resume/)
+[![npm version](https://badge.fury.io/js/ack-angular-fx.svg)](http://badge.fury.io/js/ack-angular-fx)
+[![npm downloads](https://img.shields.io/npm/dm/ack-angular-fx.svg)](https://npmjs.org/ack-angular-fx)
+[![Dependency Status](https://david-dm.org/ackerapple/ack-angular-fx.svg)](https://david-dm.org/ackerapple/ack-angular-fx)
+
 
 ### Table of Contents
 - [Install](#install)
