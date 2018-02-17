@@ -1,12 +1,153 @@
-import { keyframes, AnimationStyleMetadata, AnimationStateMetadata, AnimationTransitionMetadata, AnimationMetadata, state, style, transition, animate } from '@angular/animations';
+import {
+  animation,
+  keyframes,
+  AnimationTransitionMetadata,
+  AnimationTriggerMetadata,
+  AnimationStyleMetadata,
+  AnimationStateMetadata,
+  AnimationMetadata,
+  state,
+  style,
+  transition,
+  animate,
 
-import { defaultOptions, stylize, combo } from "./helper"
+  query,
+  trigger,
+  group,
+  animateChild
+} from '@angular/animations';
 
-export function fade(timing: string, options){
-  return fadeOptions(combo(timing, options))
+import { getConfigTiming, fxConfig } from "../index"
+import { fxConfigCombo, defaultOptions, stylize, combo } from "./helper"
+
+export function triggers( config:fxConfig ){
+  const timing = getConfigTiming( config )
+  const params = {timing:'200ms 0ms linear'}
+  
+  const fadeIn = trigger('fadeIn', [
+    transition('* <=> *',[
+      group([
+        query(':enter',[
+          animate('{{timing}}',
+            keyframes([
+              stylize({opacity: 0, offset: 0}, config),
+              stylize({opacity: 1, offset: 1}, config)
+            ])
+          )
+        ],{ optional: true, params:params }),
+        query(':leave',[
+          animate('{{timing}}',
+            keyframes([
+              stylize({opacity: 1, offset: 0}, config),
+              stylize({opacity: 0, offset: 1}, config)
+            ])
+          )
+        ],{ optional: true, params:params })
+      ])
+    ])
+  ])
+
+  const fadeInUpGroup = group([
+    query(':enter',[
+      animate('{{timing}}',
+        keyframes([
+          stylize({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0}, config),
+          stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, config)
+        ])
+      )
+    ],{ optional: true, params:params }),
+    query(':leave',[
+      animate('{{timing}}',
+        keyframes([
+          stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, config),
+          stylize({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1}, config)
+        ])
+      )
+    ],{ optional: true, params:params })
+  ])
+
+  const fadeInLeftGroup = group([
+    query(':enter',[
+      animate('{{timing}}',
+        keyframes([
+          stylize({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 0}, config),
+          stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, config)
+        ])
+      )
+    ],{ optional: true, params:params }),
+    query(':leave',[
+      animate('{{timing}}',
+        keyframes([
+          stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, config),
+          stylize({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 1}, config)
+        ])
+      )
+    ],{ optional: true, params:params })
+  ])
+
+  const fadeInRightGroup = group([
+    query(':enter',[
+      animate('{{timing}}',
+        keyframes([
+          stylize({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 0}, config),
+          stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, config)
+        ])
+      )
+    ],{ optional: true, params:params }),
+    query(':leave',[
+      animate('{{timing}}',
+        keyframes([
+          stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, config),
+          stylize({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1}, config)
+        ])
+      )
+    ],{ optional: true, params:params })
+  ])
+
+  const fadeInDownGroup = group([
+    query(':enter',[
+      animate('{{timing}}',
+        keyframes([
+          stylize({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 0}, config),
+          stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, config)
+        ])
+      )
+    ],{ optional: true, params:params }),
+    query(':leave',[
+      animate('{{timing}}',
+        keyframes([
+          stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, config),
+          stylize({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 1}, config)
+        ])
+      )
+    ],{ optional: true, params:params })
+  ])
+
+  const fadeInUp = trigger('fadeInUp', [
+    transition('* <=> *, * => 1, * => true',[ fadeInUpGroup ], {params:params}),
+    transition('void => *, * => 0, * => false',[ fadeInDownGroup ], {params:params})
+  ])
+
+  const fadeInLeft = trigger('fadeInLeft', [
+    transition('* <=> *, * => 1, * => true',[ fadeInLeftGroup ], {params:params}),
+    transition('void => *, * => 0, * => false',[ fadeInRightGroup ], {params:params})
+  ])
+
+  const fadeInRight = trigger('fadeInRight', [
+    transition('* <=> *, * => 1, * => true',[ fadeInRightGroup ], {params:params}),
+    transition('void => *, * => 0, * => false',[ fadeInLeftGroup ], {params:params})
+  ])
+
+  const fadeInDown = trigger('fadeInDown', [
+    transition('* <=> *, * => 1, * => true',[ fadeInDownGroup ], {params:params}),
+    transition('* => 0, * => false',[ fadeInUpGroup ], {params:params})
+  ])
+  
+  return [ fadeIn, fadeInUp, fadeInDown, fadeInLeft, fadeInRight ]
 }
 
-export function fadeOptions(options){
+export function states(config:fxConfig){
+  const timing = getConfigTiming( config )
   return [
     state('fadeOut', style({
       display: 'none'
@@ -23,64 +164,64 @@ export function fadeOptions(options){
     state('fadeOutUp', style({
       display: 'none'
     })),
-    transition(options.options.igniter+' => fadeIn', [
-      animate(options.timing, keyframes([
-        stylize({opacity: 0, offset: 0}, options.options),
-        stylize({opacity: 1, offset: 1}, options.options)
+    transition(config.igniter+' => fadeIn', [
+      animate(timing, keyframes([
+        stylize({opacity: 0, offset: 0}, config),
+        stylize({opacity: 1, offset: 1}, config)
       ]))
     ]),
-    transition(('fadeIn => void, '+options.options.igniter+' => fadeOut'), [
-      animate(options.timing, keyframes([
-        stylize({opacity: 1, offset: 0}, options.options),
-        stylize({opacity: 0, offset: 1}, options.options)
+    transition(('fadeIn => void, '+config.igniter+' => fadeOut'), [
+      animate(timing, keyframes([
+        stylize({opacity: 1, offset: 0}, config),
+        stylize({opacity: 0, offset: 1}, config)
       ]))
     ]),
-    transition(options.options.igniter+' => fadeInDown', [
-      animate(options.timing, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 0}, options.options),
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, options.options)
+    transition(config.igniter+' => fadeInDown', [
+      animate(timing, keyframes([
+        stylize({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 0}, config),
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, config)
       ]))
     ]),
-    transition('fadeInDown => void, '+options.options.igniter+' => fadeOutDown', [
-      animate(options.timing, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, options.options),
-        stylize({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 1}, options.options)
+    transition('fadeInDown => void, '+config.igniter+' => fadeOutDown', [
+      animate(timing, keyframes([
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, config),
+        stylize({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 1}, config)
       ]))
     ]),
-    transition(options.options.igniter+' => fadeInLeft', [
-      animate(options.timing, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 0}, options.options),
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, options.options)
+    transition(config.igniter+' => fadeInLeft', [
+      animate(timing, keyframes([
+        stylize({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 0}, config),
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, config)
       ]))
     ]),
-    transition('fadeInLeft => void, '+options.options.igniter+' => fadeOutRight', [
-      animate(options.timing, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, options.options),
-        stylize({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 1}, options.options)
+    transition('fadeInLeft => void, '+config.igniter+' => fadeOutRight', [
+      animate(timing, keyframes([
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, config),
+        stylize({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 1}, config)
       ]))
     ]),
-    transition(options.options.igniter+' => fadeInRight', [
-      animate(options.timing, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 0}, options.options),
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, options.options)
+    transition(config.igniter+' => fadeInRight', [
+      animate(timing, keyframes([
+        stylize({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 0}, config),
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, config)
       ]))
     ]),
-    transition('fadeInRight => void, '+options.options.igniter+' => fadeOutLeft', [
-      animate(options.timing, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, options.options),
-        stylize({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1}, options.options)
+    transition('fadeInRight => void, '+config.igniter+' => fadeOutLeft', [
+      animate(timing, keyframes([
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, config),
+        stylize({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1}, config)
       ]))
     ]),
-    transition(options.options.igniter+' => fadeInUp', [
-      animate(options.timing, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0}, options.options),
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, options.options)
+    transition(config.igniter+' => fadeInUp', [
+      animate(timing, keyframes([
+        stylize({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0}, config),
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, config)
       ]))
     ]),
-    transition('fadeInUp => void, '+options.options.igniter+' => fadeOutUp', [
-      animate(options.timing, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, options.options),
-        stylize({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1}, options.options)
+    transition('fadeInUp => void, '+config.igniter+' => fadeOutUp', [
+      animate(timing, keyframes([
+        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, config),
+        stylize({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1}, config)
       ]))
     ])
   ]

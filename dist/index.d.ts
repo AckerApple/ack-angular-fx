@@ -1,172 +1,171 @@
-import { AnimationTriggerMetadata } from '@angular/animations';
-export interface fxConfig {
-    igniter?: string;
+export { AckFxModule } from "./AckFx.module";
+import { AnimationTriggerMetadata, AnimationStateMetadata, AnimationTransitionMetadata } from '@angular/animations';
+export interface selectedFxMetaData {
+    triggers: AnimationTriggerMetadata[];
+    states: AnimationTriggerMetadata[];
 }
-export declare const effects: Array<string>;
-export declare const delayArray: Array<number>;
+export interface whileStyle {
+    position: string;
+    width: string;
+    overflow: string;
+}
+export interface fxConfig {
+    name?: string;
+    stagger?: number;
+    igniter?: '*' | string;
+    duration?: number;
+    effects?: string[];
+    delay?: number;
+    easing?: 'linear' | string;
+    whileStyle?: whileStyle;
+}
+export interface effectsTypeObject {
+    fade?: boolean;
+    bounce?: boolean;
+    rotate?: boolean;
+    slide?: boolean;
+    zoom?: boolean;
+}
+export declare const availEffects: string[];
+export declare const delayArray: number[];
 export declare const animateDefaults: {
-    duration: number;
-    delay: number;
-    easing: string;
     stagger: number;
     name: string;
     igniter: string;
     whileStyle: {};
     effects: string[];
 };
-export declare const absSwap: {
-    easing: string;
-    name: string;
-    igniter: string;
-    whileStyle: {
-        position: string;
-        width: string;
-        'overflow': string;
-    };
-};
+export declare const absSwap: fxConfig;
 export declare const menu: {
     absoluteSwap: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     absoluteSwap100: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     absoluteSwap200: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     absoluteSwap300: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     absoluteSwap400: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     absoluteSwap500: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     absoluteSwap600: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     absoluteSwap700: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     absoluteSwap800: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     absoluteSwap900: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     absoluteSwap1000: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     absoluteSwap2000: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     absoluteSwap2500: {
-        easing: string;
-        name: string;
-        igniter: string;
-        whileStyle: {
-            position: string;
-            width: string;
-            'overflow': string;
-        };
+        name?: string;
+        stagger?: number;
+        igniter?: string;
         duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
     };
     "100": {
         duration: number;
@@ -205,22 +204,20 @@ export declare const menu: {
         duration: number;
     };
 };
-export declare function animateFactory(duration: string | number, delay: string | number, easing: string, stagger: number, name: string): AnimationTriggerMetadata;
+export declare function animateFactory(duration: number, delay: number, easing: string, stagger: number, name: string): AnimationTriggerMetadata;
 export declare function defaultConfig(config: any): any;
-export declare function animateConfig(name: any, config: any): AnimationTriggerMetadata;
-export declare function animateFixedConfig(name: any, config: any): AnimationTriggerMetadata;
-export declare function getConfigTiming(config: any): string;
-export declare function createTriggerBy(name: any, config: any, timing: any): AnimationTriggerMetadata;
-export declare function pushEffectsByConfig(array: any, timing: any, config: any): any;
+export declare function animateConfig(name: string, config: fxConfig): AnimationTriggerMetadata;
+export declare function getConfigTiming(config: fxConfig): string;
+export declare function createTriggerBy(name: string, config: fxConfig, timing: string): AnimationTriggerMetadata;
+export declare function effectsArrayToTypes(eArray: string[]): effectsTypeObject;
+export declare function stateEffectsByConfig(timing: string, config: fxConfig): (AnimationStateMetadata | AnimationTransitionMetadata)[];
 export declare function upgradeComponent(component: any, animations?: any): void;
-export declare function selectFx(args: any, effectList: any, config?: {
-    igniter: string;
-}): any[];
+export declare function selectFx(args: string[], effectList: string[], config?: fxConfig): selectedFxMetaData;
+export declare function processSelect(name: string, config: fxConfig, effectArray?: string[]): AnimationTriggerMetadata;
 export declare function getFxArray(): AnimationTriggerMetadata[];
 export declare let absSwapClone: {
     name: any;
     duration: any;
     whileStyle: any;
 };
-export declare function processSelect(name: any, config?: fxConfig, effectArray?: Array<string>): AnimationTriggerMetadata;
 export declare function upgradeComponents(array: any, animations?: any): void;

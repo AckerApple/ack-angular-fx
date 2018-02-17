@@ -1,54 +1,84 @@
-// Much of the repetition and "ugliness" of this file is from trying to accomediate AoT
+import { AckFxModule } from "./AckFx.module"
+export { AckFxModule } from "./AckFx.module"
 
-//import "web-animations-js"
-//import { setDocument } from "web-animations-js"
+import {
+  trigger,
+  AnimationTriggerMetadata,
+  AnimationStateMetadata,
+  AnimationTransitionMetadata
+} from '@angular/animations';
 
-import { trigger, AnimationTriggerMetadata } from '@angular/animations';
-
-import { fade } from './animations/fade';
+import { triggers as absoluteTriggers } from './animations/absolute';
+import { states as fadeStates, triggers as fadeTriggers } from './animations/fade';
 import { bounce } from './animations/bounce';
 import { rotate } from './animations/rotate';
 import { slide } from './animations/slide';
 import { zoom } from './animations/zoom';
 
-
-/*import { setDocument } from "./web-animations.min"
-
-export function browserSupport(){
-  return setDocument(document)
-}*/
-
-export interface fxConfig{
-  igniter?:string,
-  duration?:number
+export interface selectedFxMetaData{
+  triggers : AnimationTriggerMetadata[]
+  states   : AnimationTriggerMetadata[]
 }
 
-export const effects:Array<string> = ['fade','bounce','rotate','slide','zoom']
-export const delayArray:Array<number> = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
+export interface whileStyle{
+  position : string
+  width    : string
+  overflow : string
+}
+
+export interface fxConfig{
+  name?       : string
+  stagger?    : number
+  igniter?    : '*'|string,
+  duration?   : number,
+  effects?    : string[]
+  delay?      : number
+  easing?     : 'linear'|string
+  whileStyle? : whileStyle
+}
+
+export interface effectsTypeObject{
+  fade?   : boolean
+  bounce? : boolean
+  rotate? : boolean
+  slide?  : boolean
+  zoom?   : boolean
+}
+
+export const availEffects:string[] = ['fade','bounce','rotate','slide','zoom']
+export const delayArray:number[] = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
 export const animateDefaults = {
-  duration   : 500,
-  delay      : 0,
-  easing     : 'linear',
+  //duration   : 500,
+  //delay      : 0,
+  //easing     : 'linear',
   stagger    : 0,
   name       : 'animate',
   igniter    : '*',
   whileStyle : {},
-  effects    : effects
+  effects    : availEffects
 }
-export const absSwap = {
+
+export const absSwap:fxConfig = {
   easing:'linear', name:'absoluteSwap', igniter:'void',
   whileStyle:{
     position: 'absolute', width:'100%', 'overflow':'hidden'
   }
 }
+
 export const menu = {
   absoluteSwap:{duration:500, ...absSwap},
-  absoluteSwap100:{duration:100, ...absSwap},absoluteSwap200:{duration:200, ...absSwap},
-  absoluteSwap300:{duration:300, ...absSwap},absoluteSwap400:{duration:400, ...absSwap},
-  absoluteSwap500:{duration:500, ...absSwap},absoluteSwap600:{duration:600, ...absSwap},
-  absoluteSwap700:{duration:700, ...absSwap},absoluteSwap800:{duration:800, ...absSwap},
-  absoluteSwap900:{duration:900, ...absSwap},absoluteSwap1000:{duration:1000, ...absSwap},
-  absoluteSwap2000:{duration:2000, ...absSwap},absoluteSwap2500:{duration:2500, ...absSwap},
+  absoluteSwap100:{duration:100, ...absSwap},
+  absoluteSwap200:{duration:200, ...absSwap},
+  absoluteSwap300:{duration:300, ...absSwap},
+  absoluteSwap400:{duration:400, ...absSwap},
+  absoluteSwap500:{duration:500, ...absSwap},
+  absoluteSwap600:{duration:600, ...absSwap},
+  absoluteSwap700:{duration:700, ...absSwap},
+  absoluteSwap800:{duration:800, ...absSwap},
+  absoluteSwap900:{duration:900, ...absSwap},
+  absoluteSwap1000:{duration:1000, ...absSwap},
+  absoluteSwap2000:{duration:2000, ...absSwap},
+  absoluteSwap2500:{duration:2500, ...absSwap},
 
   "100":{duration:100},"200":{duration:200},"300":{duration:300},
   "400":{duration:400},"500":{duration:500},"600":{duration:600},
@@ -56,13 +86,19 @@ export const menu = {
   "1000":{duration:1000},"1500":{duration:1500},"2000":{duration:2000}
 }
 
-export function animateFactory(duration: string|number, delay: string|number, easing: string, stagger: number, name: string){
+export function animateFactory(
+  duration: number,
+  delay: number,
+  easing: string,
+  stagger: number,
+  name: string
+){
    return animateConfig(name,{
-    duration:duration, 
-    delay:delay, 
-    easing:easing, 
-    stagger:stagger, 
-    name:name
+    duration : duration, 
+    delay    : delay, 
+    easing   : easing, 
+    stagger  : stagger, 
+    name     : name
    })
 }
 
@@ -77,35 +113,72 @@ export function defaultConfig(config){
   return (!config.stagger || console.log('ack-angular-fx does not support stagger as of this release')) && config
 }*/
 
-export function animateConfig(name,config){
-  return animateFixedConfig(name, defaultConfig(config))
-  //return animateFixedConfig( checkStagger( defaultConfig(config) ) )
+export function animateConfig(
+  name:string,
+  config:fxConfig
+) : AnimationTriggerMetadata{
+  const dConfig = defaultConfig(config)
+  const timing = getConfigTiming(dConfig)
+  return createTriggerBy(name, config, timing)
 }
 
-export function animateFixedConfig(name,config){
-  return createTriggerBy(name, config, getConfigTiming(config))
-}
-
-export function getConfigTiming(config){
+export function getConfigTiming(config:fxConfig):string{
   return [
-    config.duration+'ms',
-    config.delay+'ms',
-    config.easing
+    (config.duration || 500) +'ms',
+    (config.delay || 0) + 'ms',
+    (config.easing  || 'linear')
   ].join(' ')
 }
 
-export function createTriggerBy(name, config, timing){
-  return trigger(name, pushEffectsByConfig([],timing,config))
+export function createTriggerBy(
+  name:string,
+  config:fxConfig,
+  timing:string
+) : AnimationTriggerMetadata{
+  return trigger(name, stateEffectsByConfig(timing,config))
 }
 
-export function pushEffectsByConfig(array, timing, config){
-  return (
-    (config.effects.indexOf('fade')>=0 && array.push(...fade(timing, config)) && 0) ||
-    (config.effects.indexOf('bounce')>=0 && array.push(...bounce(timing, config)) && 0) ||
-    (config.effects.indexOf('rotate')>=0 && array.push(...rotate(timing, config)) && 0) ||
-    (config.effects.indexOf('slide')>=0 && array.push(...slide(timing, config)) && 0) ||
-    (config.effects.indexOf('zoom')>=0 && array.push(...zoom(timing, config)) && 0)
-  ) || array
+export function effectsArrayToTypes( eArray:string[] ) : effectsTypeObject {
+  const ob = {}
+
+  for(let x=availEffects.length-1; x >= 0; --x){
+    let fx = availEffects[x]
+    if( eArray.indexOf(fx)>=0 ){
+      ob[fx] = true
+    }
+  }
+
+  return ob
+}
+
+export function stateEffectsByConfig(
+  timing:string,
+  config:fxConfig
+) : (AnimationStateMetadata|AnimationTransitionMetadata)[] {
+  const array = []
+  const fxTypes = effectsArrayToTypes( config.effects || availEffects )
+
+  if( fxTypes.fade ){
+    array.push(...fadeStates(config))
+  }
+
+  if( fxTypes.bounce ){
+    array.push(...bounce(timing, config))
+  }
+
+  if( fxTypes.rotate ){
+    array.push(...rotate(timing, config))
+  }
+
+  if( fxTypes.slide ){
+    array.push(...slide(timing, config))
+  }
+
+  if( fxTypes.zoom ){
+    array.push(...zoom(timing, config))
+  }
+
+  return array
 }
 
 export function upgradeComponent(component, animations?){
@@ -118,15 +191,49 @@ export function upgradeComponent(component, animations?){
   
   annots[0].animations.push.apply(annots[0].animations, fxArray)
 }
-export function selectFx(args, effectList, config={igniter:'start'}){
-  const array = []
-  args.forEach(v=>{
-    const newConfig = Object.assign({}, menu[v])
-    Object.assign(newConfig, config)
-    const newSelect = processSelect(v, newConfig, effectList)
-    array.push( newSelect )
+
+export function selectFx(
+  args:string[],
+  effectList:string[],
+  config = <fxConfig>{igniter:'start'}
+) : selectedFxMetaData {
+  const selectedFx = { states:[], triggers:[] }
+
+  //loop an array like [100,200,"childStag"]
+  args.forEach(fxType=>{
+    const cloneConfig:fxConfig = {...menu[fxType]}
+    const newConfig = {...cloneConfig, ...config}
+    const newSelect = processSelect(fxType, newConfig, effectList)
+    selectedFx.states.push( newSelect )
   })
-  return array
+
+  selectedFx.triggers = processTriggerSelect(config, effectList)
+
+  return selectedFx
+}
+
+/** Goes into specialized fx files and plucks out the stand alone triggers */
+// ---- NOT DONE ----
+function processTriggerSelect(config:fxConfig, effectList){
+  const fxs = []
+  const fxTypes = effectsArrayToTypes( config.effects || availEffects )
+  
+  if( fxTypes.fade ){
+    fxs.push.apply(fxs, fadeTriggers(config))
+  }
+  
+  fxs.push.apply(fxs, absoluteTriggers(config))
+  
+  return fxs
+}
+
+export function processSelect(
+  name:string,
+  config:fxConfig,
+  effectArray?:string[]
+) : AnimationTriggerMetadata{
+  config.igniter = config.igniter || 'void'
+  return animateConfig(name, config)
 }
 
 /*export const easeArray = [
@@ -135,7 +242,7 @@ export function selectFx(args, effectList, config={igniter:'start'}){
   {name:'EaseOut', value:'ease-out'},
   {name:'EaseInOut', value:'ease-in-out'}
 ]*/
-export function getFxArray(){
+export function getFxArray() : AnimationTriggerMetadata[] {
   return [
     processSelect("absoluteSwap100", menu["absoluteSwap100"] ),
     processSelect("absoluteSwap200", menu["absoluteSwap200"] ),
@@ -165,11 +272,6 @@ export function getFxArray(){
 }
 
 export let absSwapClone = {name:null, duration:null, whileStyle:null}
-
-export function processSelect(name, config:fxConfig={}, effectArray?:Array<string>){
-  config.igniter = config.igniter || 'void'
-  return animateConfig(name, config)
-}
 
 export function upgradeComponents(array, animations?){
   for(let x=array.length-1; x >= 0; --x){

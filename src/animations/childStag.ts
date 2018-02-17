@@ -1,4 +1,12 @@
-import { trigger, AnimationTriggerMetadata, AnimationMetadata, transition, query, stagger, animateChild } from '@angular/animations';
+import {
+  trigger,
+  AnimationTriggerMetadata,
+  AnimationMetadata,
+  transition,
+  query,
+  stagger,
+  animateChild
+} from '@angular/animations';
 
 /*
     trigger('childStag', [

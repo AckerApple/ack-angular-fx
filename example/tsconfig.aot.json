@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "aot",
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -13,8 +14,7 @@
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
     "lib": ["es2015", "dom"],
-    "typeRoots": [ "./node_modules/@types" ],
-    "outDir": "aot"
+    "typeRoots": [ "./node_modules/@types" ]
   },
   "include":[
     "../package.json",
@@ -28,8 +28,7 @@
     "src/app/app.module.ts"
   ],
   "angularCompilerOptions": {
-    "genDir": "aot",
-    "skipMetadataEmit" : true,
-    "entryModule": "app.module#AppModule"
+    "skipMetadataEmit" : false,
+    "skipTemplateCodegen" : true
   }
 }

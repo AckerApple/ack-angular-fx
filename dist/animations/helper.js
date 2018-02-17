@@ -10,6 +10,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 //import { style } from '@angular/core';
 var animations_1 = require("@angular/animations");
+var index_1 = require("../index");
 function stylize(styleDef, options) {
     return animations_1.style(__assign({}, styleDef, options.whileStyle));
 }

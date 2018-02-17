@@ -1,6 +1,6 @@
 import { transition, query, stagger, state, animateChild, trigger, style, animate } from '@angular/animations';
 import { Component } from '@angular/core';
-import { string } from './app-html'
+import { string } from './app.template'
 import { delayArray } from '../../../src';
 import { fxArray } from './prefx';
 import * as packJson from "../../../package.json"

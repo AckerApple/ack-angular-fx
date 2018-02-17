@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AckFxModule } from '../../../src/AckFx.module';
 import { BrowserModule } from '@angular/platform-browser';
 
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,10 +14,13 @@ import { AppComponent } from './app.component';
 
 const declarations = [AppComponent]
 
+console.log('AckFxModule',AckFxModule)
+
 @NgModule({
   imports: [
     BrowserModule
     ,BrowserAnimationsModule
+    ,AckFxModule
     //,NoopAnimationsModule
     ,FormsModule
   ],
