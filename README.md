@@ -7,6 +7,7 @@ Angular animations made easier, inspired by [Animate.css](https://daneden.github
 [![npm downloads](https://img.shields.io/npm/dm/ack-angular-fx.svg)](https://npmjs.org/ack-angular-fx)
 [![Dependency Status](https://david-dm.org/ackerapple/ack-angular-fx.svg)](https://david-dm.org/ackerapple/ack-angular-fx)
 
+![animated gif](https://ackerapple.github.io/ack-angular-fx/fireworks.gif "gumball fireworks")
 
 ### Table of Contents
 - [Install](#install)

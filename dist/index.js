@@ -9,10 +9,10 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var AckFx_module_1 = require("./AckFx.module");
-var AckFx_module_2 = require("./AckFx.module");
-exports.AckFxModule = AckFx_module_2.AckFxModule;
+exports.AckFxModule = AckFx_module_1.AckFxModule;
 var animations_1 = require("@angular/animations");
-var absolute_1 = require("./animations/absolute");
+var childStag_1 = require("./animations/childStag");
+var absolutes_1 = require("./animations/absolutes");
 var fade_1 = require("./animations/fade");
 var bounce_1 = require("./animations/bounce");
 var rotate_1 = require("./animations/rotate");
@@ -48,12 +48,21 @@ exports.menu = {
     absoluteSwap800: __assign({ duration: 800 }, exports.absSwap),
     absoluteSwap900: __assign({ duration: 900 }, exports.absSwap),
     absoluteSwap1000: __assign({ duration: 1000 }, exports.absSwap),
+    absoluteSwap1500: __assign({ duration: 1500 }, exports.absSwap),
     absoluteSwap2000: __assign({ duration: 2000 }, exports.absSwap),
     absoluteSwap2500: __assign({ duration: 2500 }, exports.absSwap),
-    "100": { duration: 100 }, "200": { duration: 200 }, "300": { duration: 300 },
-    "400": { duration: 400 }, "500": { duration: 500 }, "600": { duration: 600 },
-    "700": { duration: 700 }, "800": { duration: 800 }, "900": { duration: 900 },
-    "1000": { duration: 1000 }, "1500": { duration: 1500 }, "2000": { duration: 2000 }
+    "100": { duration: 100 },
+    "200": { duration: 200 },
+    "300": { duration: 300 },
+    "400": { duration: 400 },
+    "500": { duration: 500 },
+    "600": { duration: 600 },
+    "700": { duration: 700 },
+    "800": { duration: 800 },
+    "900": { duration: 900 },
+    "1000": { duration: 1000 },
+    "1500": { duration: 1500 },
+    "2000": { duration: 2000 }
 };
 function animateFactory(duration, delay, easing, stagger, name) {
     return animateConfig(name, {
@@ -153,7 +162,19 @@ function processTriggerSelect(config, effectList) {
     if (fxTypes.fade) {
         fxs.push.apply(fxs, fade_1.triggers(config));
     }
-    fxs.push.apply(fxs, absolute_1.triggers(config));
+    if (fxTypes.bounce) {
+        fxs.push.apply(fxs, bounce_1.triggers(config));
+    }
+    if (fxTypes.rotate) {
+        fxs.push.apply(fxs, rotate_1.triggers(config));
+    }
+    if (fxTypes.slide) {
+        fxs.push.apply(fxs, slide_1.triggers(config));
+    }
+    if (fxTypes.zoom) {
+        fxs.push.apply(fxs, zoom_1.triggers(config));
+    }
+    fxs.push.apply(fxs, absolutes_1.triggers(config));
     return fxs;
 }
 function processSelect(name, config, effectArray) {
@@ -168,7 +189,8 @@ exports.processSelect = processSelect;
   {name:'EaseInOut', value:'ease-in-out'}
 ]*/
 function getFxArray() {
-    return [
+    var allFx = [
+        processSelect("absoluteSwap", exports.menu["absoluteSwap400"]),
         processSelect("absoluteSwap100", exports.menu["absoluteSwap100"]),
         processSelect("absoluteSwap200", exports.menu["absoluteSwap200"]),
         processSelect("absoluteSwap300", exports.menu["absoluteSwap300"]),
@@ -194,6 +216,14 @@ function getFxArray() {
         processSelect("1500", exports.menu["1500"]),
         processSelect("2000", exports.menu["2000"])
     ];
+    allFx.push.apply(allFx, childStag_1.childStags);
+    allFx.push.apply(allFx, fade_1.triggers());
+    allFx.push.apply(allFx, bounce_1.triggers());
+    allFx.push.apply(allFx, rotate_1.triggers());
+    allFx.push.apply(allFx, slide_1.triggers());
+    allFx.push.apply(allFx, zoom_1.triggers());
+    allFx.push.apply(allFx, absolutes_1.triggers());
+    return allFx;
 }
 exports.getFxArray = getFxArray;
 exports.absSwapClone = { name: null, duration: null, whileStyle: null };

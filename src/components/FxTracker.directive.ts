@@ -4,8 +4,12 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
   selector:"fx-tracker"
 }) export class FxTracker{
   @Input() value:any
-  history:any[] = []
-  histPos:number = 0
+  
+  @Input() history:any[]
+  @Output() historyChange:EventEmitter<any[]> = new EventEmitter()
+  
+  @Input() index:number
+  @Output() indexChange:EventEmitter<number> = new EventEmitter()
 
   @Input() fxId:0|false|1|true
   @Output() fxIdChange:EventEmitter<0|false|1|true> = new EventEmitter()
@@ -17,15 +21,16 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
   }
 
   produceFxId( value:any ){
-    const histLen = this.history.length
-    const isBack = histLen && this.history[this.histPos-1]==value
-    const isForward = histLen && this.history[this.histPos+1]==value
+    this.history = this.history || []
+    this.index = this.index==null ? 0 : this.index
 
-console.log('history', isBack , this.histPos, this.history, value)
+    const histLen = this.history.length
+    const isBack = histLen && this.history[this.index-1]==value
+    const isForward = histLen && this.history[this.index+1]==value
 
     //back
     if( isBack ){
-      --this.histPos
+      this.indexChange.emit( --this.index )
       this.fxId = this.fxId === 0 ? false : 0
       this.fxIdChange.emit(this.fxId)
       return this.fxId
@@ -35,12 +40,14 @@ console.log('history', isBack , this.histPos, this.history, value)
     this.fxIdChange.emit(this.fxId)
 
     if( isForward ){
-      ++this.histPos
+      this.indexChange.emit( ++this.index )
       return this.fxId
     }
 
     this.history.push( value )
-    this.histPos = this.history.length - 1
+
+    this.index = this.history.length - 1
+    this.indexChange.emit( this.index )
 
     this.history.splice(25, this.history.length)//ensure history no greater than 25. If not this command does nothing
 

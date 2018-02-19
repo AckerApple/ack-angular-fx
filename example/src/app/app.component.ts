@@ -1,9 +1,11 @@
 import { transition, query, stagger, state, animateChild, trigger, style, animate } from '@angular/animations';
 import { Component } from '@angular/core';
 import { string } from './app.template'
-import { delayArray } from '../../../src';
-import { fxArray } from './prefx';
+import { delayArray, getFxArray } from '../../../src';
 import * as packJson from "../../../package.json"
+
+//import { fxArray } from './prefx';
+const fxArray = getFxArray()
 
 @Component({
   selector: 'app',
@@ -11,45 +13,28 @@ import * as packJson from "../../../package.json"
   ,animations:fxArray
 }) export class AppComponent {
   version = packJson['version'] || '0.0.0'
-  fixedStaggers
-  rowStaggers
-  fxCount = 0
+  fixedStaggers:boolean
+  rowStaggers:boolean
+  fxStaggerSpeed:number
+  fxCount:number = 0//arbitrary fx value change to ignite stagger animations
   panelAnimation: string = 'fadeInLeft'
-  panelAnimType: string = 'fadeIn'
-  swapShow: number = 0;
-  show: boolean = true;
-  state: string = '';
+  //panelAnimType: string = 'fadeInLeft'
+  panelAnimForward: string = 'fadeInLeft'
+  panelAnimBack: string = 'fadeInRight'
+  swapShow: number = 0
+  allFx:any = {}
+  show: boolean = true
+  state: string = ''
   delayArray: any[] = delayArray
-  inAnimations: any[] = [
-    'fadeIn',
-    'fadeInDown',
-    'fadeInLeft',
-    'fadeInRight',
-    'fadeInUp',
-
-    'bounceIn',
-    'bounceInDown',
-    'bounceInLeft',
-    'bounceInRight',
-    'bounceInUp',
-
-    'rotateIn',
-    'rotateInDownLeft',
-    'rotateInDownRight',
-    'rotateInUpLeft',
-    'rotateInUpRight',
-
-    'slideInDown',
-    'slideInLeft',
-    'slideInRight',
-    'slideInUp',
-
-    'zoomIn',
-    'zoomInDown',
-    'zoomInLeft',
-    'zoomInRight',
-    'zoomInUp',
-  ];
+  inAnimations: any[]
+  speeds = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
+  fxNameArray: any[] = [
+    'fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp',
+    'bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp',
+    'rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight',
+    'slideInUp','slideInDown','slideInLeft','slideInRight',
+    'zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp'
+  ]
 
   outAnimations: any[] = [
     'fadeOut',
@@ -82,21 +67,22 @@ import * as packJson from "../../../package.json"
     'zoomOutUp',
   ];
 
-  show100
-  show200
-  show300
-  show400
-  show500
-  show600
-  show700
-  show800
-  show900
-  show1000
-  show1500
-  show2000
+  show100:boolean
+  show200:boolean
+  show300:boolean
+  show400:boolean
+  show500:boolean
+  show600:boolean
+  show700:boolean
+  show800:boolean
+  show900:boolean
+  show1000:boolean
+  show1500:boolean
+  show2000:boolean
 
   constructor() {
-    this.inAnimations = this.inAnimations.map(item => {
+    this.inAnimations = this.fxNameArray.map(item => {
+      this.allFx[item] = true
       return {
         key: item,
         show: true,
@@ -124,10 +110,18 @@ import * as packJson from "../../../package.json"
     });
   }
 
+  getOutletPath(outlet){
+    if(!outlet)return
+    console.log('console.log()',outlet)
+    //console.log('console.log()',outlet.activatedRoute.url.value[0].path)
+    return outlet.activatedRoute.url.value[0].path
+  }
+
   onToggleInAll() {
     ++this.fxCount
     this.inAnimations.forEach((item,i)=>{
-      item.show = !item.show
+      this.allFx[item.key] = !this.allFx[item.key]
+      //item.show = !item.show
       //setTimeout(()=>item.show = !item.show, 200*i)
     });
   }
@@ -144,12 +138,12 @@ import * as packJson from "../../../package.json"
   }
 
   nextPanel(){
-    this.panelAnimation=this.panelAnimType+'Left'
+    this.panelAnimation=this.panelAnimForward
     setTimeout(()=>this.swapShow=this.swapShow==3?0:this.swapShow+1, 100)
   }
 
   priorPanel(){
-    this.panelAnimation=this.panelAnimType+'Right'
+    this.panelAnimation=this.panelAnimBack
     setTimeout(()=>this.swapShow=this.swapShow==0?3:this.swapShow-1, 100)
   }
 }

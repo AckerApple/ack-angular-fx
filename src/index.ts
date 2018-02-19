@@ -8,12 +8,13 @@ import {
   AnimationTransitionMetadata
 } from '@angular/animations';
 
-import { triggers as absoluteTriggers } from './animations/absolute';
+import { childStags } from './animations/childStag';
+import { triggers as absoluteTriggers } from './animations/absolutes';
 import { states as fadeStates, triggers as fadeTriggers } from './animations/fade';
-import { bounce } from './animations/bounce';
-import { rotate } from './animations/rotate';
-import { slide } from './animations/slide';
-import { zoom } from './animations/zoom';
+import { bounce, triggers as bounceTriggers } from './animations/bounce';
+import { rotate, triggers as rotateTriggers } from './animations/rotate';
+import { slide, triggers as slideTriggers } from './animations/slide';
+import { zoom, triggers as zoomTriggers } from './animations/zoom';
 
 export interface selectedFxMetaData{
   triggers : AnimationTriggerMetadata[]
@@ -77,13 +78,22 @@ export const menu = {
   absoluteSwap800:{duration:800, ...absSwap},
   absoluteSwap900:{duration:900, ...absSwap},
   absoluteSwap1000:{duration:1000, ...absSwap},
+  absoluteSwap1500:{duration:1500, ...absSwap},
   absoluteSwap2000:{duration:2000, ...absSwap},
   absoluteSwap2500:{duration:2500, ...absSwap},
 
-  "100":{duration:100},"200":{duration:200},"300":{duration:300},
-  "400":{duration:400},"500":{duration:500},"600":{duration:600},
-  "700":{duration:700},"800":{duration:800},"900":{duration:900},
-  "1000":{duration:1000},"1500":{duration:1500},"2000":{duration:2000}
+  "100":{duration:100},
+  "200":{duration:200},
+  "300":{duration:300},
+  "400":{duration:400},
+  "500":{duration:500},
+  "600":{duration:600},
+  "700":{duration:700},
+  "800":{duration:800},
+  "900":{duration:900},
+  "1000":{duration:1000},
+  "1500":{duration:1500},
+  "2000":{duration:2000}
 }
 
 export function animateFactory(
@@ -222,6 +232,22 @@ function processTriggerSelect(config:fxConfig, effectList){
     fxs.push.apply(fxs, fadeTriggers(config))
   }
   
+  if( fxTypes.bounce ){
+    fxs.push.apply(fxs, bounceTriggers(config))
+  }
+  
+  if( fxTypes.rotate ){
+    fxs.push.apply(fxs, rotateTriggers(config))
+  }
+  
+  if( fxTypes.slide ){
+    fxs.push.apply(fxs, slideTriggers(config))
+  }
+  
+  if( fxTypes.zoom ){
+    fxs.push.apply(fxs, zoomTriggers(config))
+  }
+  
   fxs.push.apply(fxs, absoluteTriggers(config))
   
   return fxs
@@ -243,7 +269,8 @@ export function processSelect(
   {name:'EaseInOut', value:'ease-in-out'}
 ]*/
 export function getFxArray() : AnimationTriggerMetadata[] {
-  return [
+  const allFx = [
+    processSelect("absoluteSwap", menu["absoluteSwap400"] ),
     processSelect("absoluteSwap100", menu["absoluteSwap100"] ),
     processSelect("absoluteSwap200", menu["absoluteSwap200"] ),
     processSelect("absoluteSwap300", menu["absoluteSwap300"] ),
@@ -269,6 +296,16 @@ export function getFxArray() : AnimationTriggerMetadata[] {
     processSelect("1500", menu["1500"] ),
     processSelect("2000", menu["2000"] )
   ]
+
+  allFx.push.apply(allFx, childStags)
+  allFx.push.apply(allFx, fadeTriggers())
+  allFx.push.apply(allFx, bounceTriggers())
+  allFx.push.apply(allFx, rotateTriggers())
+  allFx.push.apply(allFx, slideTriggers())
+  allFx.push.apply(allFx, zoomTriggers())
+  allFx.push.apply(allFx, absoluteTriggers())
+
+  return allFx
 }
 
 export let absSwapClone = {name:null, duration:null, whileStyle:null}

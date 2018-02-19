@@ -52,7 +52,12 @@ function stateDefsBy(defs, tabs) {
     var l = line(tabs);
     for (var defIndex = defs.length - 1; defIndex >= 0; --defIndex) {
         var def = defs[defIndex];
-        expr = def.expr || def.name || def.stateChangeExpr; //Angular v4.0.0+ || v2.4.0+
+        if (def.stateChangeExpr) {
+            expr = def.stateChangeExpr.toString();
+        }
+        else {
+            expr = def.expr || def.name;
+        }
         if (def.styles) {
             style = JSON.stringify(def.styles.styles || def.styles.styles[0]); //Angular v4.0.0+ || v2.4.0+
             steps = l + ("  style(" + style + ")"); //style goes inside state

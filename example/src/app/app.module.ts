@@ -1,3 +1,4 @@
+import { declarations as routeDecs, routing } from "./routes"
 import { NgModule } from '@angular/core';
 import { AckFxModule } from '../../../src/AckFx.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,9 +13,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
-const declarations = [AppComponent]
-
-console.log('AckFxModule',AckFxModule)
+const declarations = [ AppComponent, ...routeDecs ]
 
 @NgModule({
   imports: [
@@ -23,6 +22,7 @@ console.log('AckFxModule',AckFxModule)
     ,AckFxModule
     //,NoopAnimationsModule
     ,FormsModule
+    routing
   ],
   declarations: declarations,
   bootstrap: [AppComponent]

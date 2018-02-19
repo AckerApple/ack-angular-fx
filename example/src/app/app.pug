@@ -1,200 +1,246 @@
-.container
+-fxNames = ['fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp']
+-fxNames.push('bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp')
+-fxNames.push('rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight')
+-fxNames.push('slideInUp','slideInDown','slideInLeft','slideInRight')
+-fxNames.push('zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp')
+
+-fxAttrs = {};
+each fx in fxNames
+  -fxAttrs["[@"+fx+"]"] = "{value:panelAnimForward=='"+fx+"' && fxId, params:{time:'2000ms'}}"
+
+-speeds = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
+
+-stagAttrs = {};
+-stagAttrs["[@childStag]"] = "!fxStaggerSpeed && fixedStaggers"
+each speed in speeds
+  -stagAttrs["[@childStag"+speed+"]"] = "fxStaggerSpeed=="+speed+" && fixedStaggers"
+
+-rowAttrs = {};
+-rowAttrs["[@childStag]"] = "!fxStaggerSpeed && rowStaggers"
+each speed in speeds
+  -rowAttrs["[@childStag"+speed+"]"] = "fxStaggerSpeed=="+speed+" && rowStaggers"
+
+mixin panelAnimOptions
+  option(*ngFor="let item of fxNameArray" "[value]"="item") {{ item }}
+
+mixin panelAnimForward
+  select("[(ngModel)]"="panelAnimForward")
+    +panelAnimOptions
+
+mixin panelAnimBack
+  select("[(ngModel)]"="panelAnimBack")
+    +panelAnimOptions
+
+mixin fxStaggerSpeedSelect
+  select("[(ngModel)]"="fxStaggerSpeed")
+    option(*ngFor="let item of speeds" "[value]"="item") {{ item }}
+
+-routeAttrs = {};
+
+each fxName in fxNames
+  -routeAttrs["[@"+fxName+"Kids]"] = "{value:panelAnimForward=='"+fxName+"' && o.activated ? o.activatedRoute.url.value[0].path : null, params:{time:'3000ms', position:'fixed'}}"
+
+div(
+  "[@absoluteInOut]"  = "{value:o.activated ? o.activatedRoute.url.value[0].path : null, params:{time:'3000ms', position:'fixed'}}"
+)&attributes(routeAttrs)
+  router-outlet(#o="outlet")
+
+p
+  a(routerLink="/overview") overview
+  |&nbsp;
+  a(routerLink="/overview2") overview2
+
+.container(style="padding:1em;")
   h1 ack-angular-fx {{ version }}
   p Angular animations made easier
 
-  fx-tracker("[value]"="test" "[(fxId)]"="fxId")
+  h2 All Supported Animations
+  
+  div(style="text-align:center;padding:1em;font-size:0.75em;line-height:0;")
+    a(
+      "(click)"="onToggleInAll()"
+      style="cursor:pointer"
+    ) toggle all
 
-  h3("(click)"="test=!test") test - {{ test }} - {{ fxId }}
-  div("[@absoluteOut]"="{value:test, params:{timing:'3000'}}")
-    div("[@fadeInUp]"="{value:test, params:{timing:'3000'}}")
-      div(*ngIf="test=='a' || test=='b'")
-        |Yes
-        br
-        |Yes
-      div(*ngIf="test=='c' || test=='d'")
-        |No
-        br
-        |No
-        br
-        |No
-        br
-        |No
+  .wrap([@childStag]="fxCount")
+    each fxName in fxNames
+      -attrs = {};
+      //-attrs["*ngIf"] = "allFx."+fxName
+      //-attrs["[@"+fxName+"]"] = "allFx."+fxName+" && fxCount"
+      -attrs["(click)"] = "allFx."+fxName+" = !allFx."+fxName
+      .demo-wrap&attributes(attrs)
+        -bg = Math.floor(Math.random() * 16777215).toString(16)
+        -attrs = {};
+        -attrs["*ngIf"] = "allFx."+fxName
+        -attrs["[@"+fxName+"]"] = "allFx."+fxName
+        -attrs["[ngStyle]"] = "{'background-color': '#"+bg+"'}"
+        .demo-item&attributes(attrs) #{fxName}={{allFx.#{fxName}}}
 
-  //-
-    h3("(click)"="test=!test") test2 - {{ test }} - {{ fxId }}
-    div("[@absoluteOut]"="fxId")
-      div("[@fadeIn]"="fxId")
-        div(*ngIf="test")
-          |Yes
-          br
-          |Yes
-        div(*ngIf="!test")
-          |No
-          br
-          |No
-          br
-          |No
-          br
-          |No
+  br
+
+  fx-tracker(
+    "[value]"     = "test"
+    "[(fxId)]"    = "fxId"
+    "[(index)]"   = "fxHistoryIndex"
+    "[(history)]" = "fxHistory"
+  )
+
+  span(
+    *ngFor = "let item of fxHistory;let index=index"
+    "[ngStyle]" = "{'text-decoration': index==fxHistoryIndex ? 'bold' : null}"
+  )
+    |{{ item }}
+
+  h3("(click)"="test=!test") test - {{ test }} - {{ fxId }} - {{ fxHistoryIndex }}
+  div(
+    "[@fadeInUp]"="{value:test, params:{time:'3000ms'}}"
+    "[@absoluteOut]"="{value:test, params:{time:'3000ms'}}"
+  )
+    div(*ngIf="test===true || test=='a' || test=='b'")
+      |Yes
+      br
+      |Yes
+    div(*ngIf="test===false || test=='c' || test=='d'")
+      |No
+      br
+      |No
+      br
+      |No
+      br
+      |No
 
   h3("(click)"="test='a'") testa - {{ test }} - {{ fxId }}
   h3("(click)"="test='b'") testb - {{ test }} - {{ fxId }}
   h3("(click)"="test='c'") testc - {{ test }} - {{ fxId }}
   h3("(click)"="test='d'") testd - {{ test }} - {{ fxId }}
 
-  div("[@absoluteInOut]"="{value:fxId, params:{timing:'2000ms'}}")
-    div("[@fadeInRight]"="{value:fxId, params:{timing:'2000ms'}}")
-      div(*ngIf="test=='a'")
-        |a
-        br
-        |a
-        br
-        |a
-        br
-        |a
-      div(*ngIf="test=='b'")
-        |b
-        br
-        |b
-        br
-        |b
-        br
-        |b
-      div(*ngIf="test=='c'")
-        |c
-        br
-        |c
-        br
-        |c
-        br
-        |c
-      div(*ngIf="test=='d'")
-        |d
-        br
-        |d
-        br
-        |d
-        br
-        |d
+  div(
+    "[@absoluteInOut]"="{value:fxId, params:{time:'2000ms'}}"
+  )&attributes(fxAttrs)
+    div(*ngIf="test=='a'")
+      |a
+      br
+      |a
+      br
+      |a
+      br
+      |a
+    div(*ngIf="test=='b'")
+      |b
+      br
+      |b
+      br
+      |b
+      br
+      |b
+    div(*ngIf="test=='c'")
+      |c
+      br
+      |c
+      br
+      |c
+      br
+      |c
+    div(*ngIf="test=='d'")
+      |d
+      br
+      |d
+      br
+      |d
+      br
+      |d
 
-  div(style="display:flex;flex-wrap:wrap;align-items: center")
-    h2 ngIf Toggling
-    div(style="text-align:right;padding:1em;font-size:0.75em;line-height:0;")
-      a("(click)"="toggleAllShorts()") toggle all
-      select("[(ngModel)]"="panelAnimType")
-        option([ngValue]="\'bounceIn\'") bounceIn
-        option([ngValue]="\'slideIn\'") slideIn
-        option([ngValue]="\'fadeIn\'") fadeIn
-        option([ngValue]="\'rotateInDown\'") rotateInDown
-        option([ngValue]="\'rotateInUp\'") rotateInUp
-        option([ngValue]="\'zoomIn\'") zoomIn
-  p Tap any item below or toggle all using the link above
+  h2 *ngIf Toggling
+  p Tap any item below or toggle all using the link below
+  div(style="text-align:center;padding:1em;font-size:0.75em;line-height:0;")
+    a(
+      "(click)"="toggleAllShorts()"
+      style="cursor:pointer"
+    ) toggle all
   .wrap
-    .demo-wrap("(click)"="show100=!show100")
-      .demo-item(
-        *ngIf    = "!show100"
-        "[@100]" = "panelAnimType+\'Left\'"
-      ) [@100]
-    .demo-wrap("(click)"="show200=!show200")
-      .demo-item(
-        *ngIf    = "!show200"
-        "[@200]" = "panelAnimType+\'Left\'"
-      ) [@200]
-    .demo-wrap("(click)"="show300=!show300")
-      .demo-item(
-        *ngIf    = "!show300"
-        "[@300]" = "panelAnimType+\'Left\'"
-      ) [@300]
-    .demo-wrap("(click)"="show400=!show400")
-      .demo-item(
-        *ngIf    = "!show400"
-        "[@400]" = "panelAnimType+\'Left\'"
-      ) [@400]
-    .demo-wrap("(click)"="show500=!show500")
-      .demo-item(
-        *ngIf    = "!show500"
-        "[@500]" = "panelAnimType+\'Left\'"
-      ) [@500]
-    .demo-wrap("(click)"="show600=!show600")
-      .demo-item(
-        *ngIf    = "!show600"
-        "[@600]" = "panelAnimType+\'Left\'"
-      ) [@600]
-    .demo-wrap("(click)"="show700=!show700")
-      .demo-item(
-        *ngIf    = "!show700"
-        "[@700]" = "panelAnimType+\'Left\'"
-      ) [@700]
-    .demo-wrap("(click)"="show800=!show800")
-      .demo-item(
-        *ngIf    = "!show800"
-        "[@800]" = "panelAnimType+\'Left\'"
-      ) [@800]
-    .demo-wrap("(click)"="show900=!show900")
-      .demo-item(
-        *ngIf    = "!show900"
-        "[@900]" = "panelAnimType+\'Left\'"
-      ) [@900]
-    .demo-wrap("(click)"="show1000=!show1000")
-      .demo-item(
-        *ngIf     = "!show1000"
-        "[@1000]" = "panelAnimType+\'Left\'"
-      ) [@1000]
-    .demo-wrap("(click)"="show1500=!show1500")
-      .demo-item(
-        *ngIf     = "!show1500"
-        "[@1500]" = "panelAnimType+\'Left\'"
-      ) [@1500]
-    .demo-wrap("(click)"="show2000=!show2000")
-      .demo-item(
-        *ngIf     = "!show2000"
-        "[@2000]" = "panelAnimType+\'Left\'"
-      ) [@2000]
+    each speed in speeds
+      .demo-wrap("(click)"="show"+speed+"=!show"+speed)
+        -attrs = { "*ngIf":"!show"+speed };
+        -attrs.style = "text-align:center;"
+        -attrs["[@"+speed+"]"] = "panelAnimForward"
+        .demo-item&attributes(attrs)
+          |[@#{speed}]=
+          br
+          |{{panelAnimForward}}
+  div(style="background-color:#CCC;padding:.5em;text-align:center")
+    |Change above boxes fx Type:&nbsp;
+    +panelAnimForward
+
+  p DETAILS: The above fx boxes example defines:
+  ul
+    li A duration as a trigger name
+    li An fxType as a transistion value
+    li The fx transistion ignites by *ngIf (aka void &lt;=&gt; *)
 
   br
 
-  div(style="display:flex;flex-wrap:wrap;align-items: center")
-    h2 All Supported Animations
-    div(style="text-align:right;padding:1em;font-size:0.75em;line-height:0;")
-      a("(click)"="onToggleInAll()") toggle all
-  .wrap([@childStag]="fxCount")
-    .demo-wrap(*ngFor="let item of inAnimations" "(click)"="item.show = !item.show")
-      .demo-item.childFx(*ngIf="item.show" "[@500]"="item.key" "[ngStyle]"="{\'background-color\': \'#\' + item.bg}")
-        |{{item.key}}
-  br
-  
   h2 Staggering Examples
-  div(style="padding-left:20px;")
-    div(style="display:flex;flex-wrap:wrap;align-items: center")
-      h3 Stagger Fixed Items Example
-      div(style="text-align:right;padding:1em;font-size:0.75em;line-height:0;")
-        a("(click)"="fixedStaggers=!fixedStaggers") toggle all
-      div([@childStag]="fixedStaggers")
-        .wrap
-          .demo-wrap(
-            *ngFor    = "let x of [1,2,3,4,5,6,7,8]"
-            "(click)" = "fixedStaggers=!fixedStaggers"
-          )
-            .demo-item.childFx(
-              *ngIf    = "!fixedStaggers"
-              "[@500]" = "panelAnimType+\'Left\'"
-            ) {{ x }}
-            div(style="display:flex;flex-wrap:wrap;align-items: center")
 
-      h3 Stagger Table Rows Example
-      div(style="text-align:right;padding:1em;font-size:0.75em;line-height:0;")
-        a("(click)"="rowStaggers=!rowStaggers") toggle all
-      div([@childStag]="rowStaggers")
-        table(style="width:100%")
-          ng-container(*ngFor="let x of [1,2,3,4,5,6,7,8]")
-            tr.childFx(
-              *ngIf     = "!rowStaggers"
-              "(click)" = "rowStaggers=!rowStaggers"
-              "[@500]"  = "panelAnimType+\'Left\'"
-              style     = "background-color:#CCC"
-            )
-              td {{ x }}
-              td Item Col {{ x }}
+  fieldset
+    legend &lt;div [@childStag{{fxStaggerSpeed}}]="{{ fixedStaggers }}"&gt;
+    .wrap&attributes(stagAttrs)
+      .demo-wrap(
+        *ngFor    = "let x of [1,2,3,4,5,6,7,8]"
+        "(click)" = "fixedStaggers=!fixedStaggers"
+      )
+        .demo-item(
+          *ngIf    = "!fixedStaggers"
+          "[@500]" = "panelAnimForward"
+        ) {{ x }}
+        div(style="display:flex;flex-wrap:wrap;align-items: center")
+  
+  div(style="background-color:#CCC;padding:.5em;text-align:center")
+    |Change above boxes stagger speed:&nbsp;
+    +fxStaggerSpeedSelect
+
+  p DETAILS: The above fx boxes example defines:
+  ul
+    li An outer element with an @childStag fx trigger with a boolean value
+    li An inner element fx definition with same boolean value as @childStag
+    li All fx transistions ignite when boolean value changes and @childStag imposes itself onto the child fxs
+    li NOTE: As of 2/19/18, you must put the stagger speed in the trigger name as angular stagger currently does not accept params
+
+  br
+
+  h3 Stagger Table Rows Example
+  div(style="text-align:center;padding:1em;font-size:0.75em;line-height:0;")
+    a(
+      "(click)"="rowStaggers=!rowStaggers"
+      style="cursor:pointer"
+    ) toggle all
+  fieldset
+    legend &lt;div [@childStag{{fxStaggerSpeed}}]="{{ fixedStaggers }}"&gt;
+    div&attributes(rowAttrs)
+      table(style="width:100%")
+        ng-container(*ngFor="let x of [1,2,3,4,5,6,7,8]")
+          tr(
+            *ngIf     = "!rowStaggers"
+            "(click)" = "rowStaggers=!rowStaggers"
+            "[@500]"  = "panelAnimForward"
+            style     = "background-color:#CCC"
+          )
+            td {{ x }}
+            td Item Col {{ x }}
+  
+  div(style="background-color:#CCC;padding:.5em;text-align:center")
+    |Change above row stagger speed:&nbsp;
+    +fxStaggerSpeedSelect
+
+  p DETAILS: The above fx boxes example defines:
+  ul
+    li An outer element with an @childStag fx trigger with a boolean value
+    li An inner element fx definition with same boolean value as @childStag
+    li All fx transistions ignite when boolean value changes and @childStag imposes itself onto the child fxs
+    li NOTE: As of 2/19/18, you must put the stagger speed in the trigger name as angular stagger currently does not accept params
+
+  h1 Deprecated
+  p Code below was used before Angular 5.2.0
+  p Animations below are NOT encouraged to be used
   br
   div(style="display:flex;flex-wrap:wrap;align-items: center")
     h2 Swap Animation
@@ -202,13 +248,11 @@
       button("(click)"="priorPanel()") &nbsp;&nbsp;&nbsp;&laquo;&nbsp;&nbsp;&nbsp;
       |&nbsp;
       button("(click)"="nextPanel()") &nbsp;&nbsp;&nbsp;&raquo;&nbsp;&nbsp;&nbsp;
-      select("[(ngModel)]"="panelAnimType")
-        option([ngValue]="\'bounceIn\'") bounceIn
-        option([ngValue]="\'slideIn\'") slideIn
-        option([ngValue]="\'fadeIn\'") fadeIn
-        option([ngValue]="\'rotateInDown\'") rotateInDown
-        option([ngValue]="\'rotateInUp\'") rotateInUp
-        option([ngValue]="\'zoomIn\'") zoomIn
+      +panelAnimForward
+      +panelAnimBack
+
+  //-div(style="position:relative;min-height:175px;background-color:#CCC;padding:1em;color:white;overflow:hidden;")
+    fadeIn
 
   div(style="position:relative;min-height:175px;background-color:#CCC;padding:1em;color:white;overflow:hidden;")
     div(
@@ -219,6 +263,7 @@
       p Step 1
       div Create a master container with style="position:relative"
       p(style="font-size:0.75em;") TIP : If its not the last element on the page, you may need a min-height style treatment to avoid bounding sibling elements.
+
     div(
       *ngIf             = "swapShow==1"
       "(click)"         = "swapShow=2"

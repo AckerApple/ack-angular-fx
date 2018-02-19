@@ -1,14 +1,139 @@
-/*import {
-  style,
-  state,
-  transition,
-  animate,
+import {
+  trigger,
+  AnimationTriggerMetadata,
   keyframes,
-  AnimationMetadata
-} from '@angular/core';*/
-import { keyframes, AnimationMetadata, state, style, transition, animate } from '@angular/animations';
+  AnimationMetadata,
+  state,
+  style,
+  transition,
+  animate
+} from '@angular/animations'
 
-import { defaultOptions, stylize, combo } from "./helper"
+import {
+  inOutTransitions,
+  childInOutTransitions,
+  fxConfigCombo,
+  defaultOptions,
+  stylize,
+  combo,
+  childInOutTransition,
+  inOutGroupQueryByStyles
+} from "./helper"
+
+import { getConfigTiming, fxConfig } from "../index"
+
+export function triggers() : AnimationTriggerMetadata[] {
+  const inStyles = [
+    style({opacity: 0, transform: 'scale3d(.1, .1, .1)', offset: 0}),
+    style({opacity: 1, transform: 'scale3d(1, 1, 1)', offset: 1})
+  ]
+
+  const outStyles = [
+    style({opacity: 1, transform: 'scale3d(1, 1, 1)', offset: 0}),
+    style({opacity: 0, transform: 'scale3d(.1, .1, .1)', offset: 1})
+  ]
+
+  const inUpStyles = [
+    style({opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, 1000px, 0)', offset: 0}),
+    style({opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(0, -60px, 0)', offset: 0.6}),
+    style({transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1})
+  ]
+
+  const outUpStyles = [
+    style({opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0}),
+    style({transform: 'scale3d(.475, .475, .475) translate3d(0, -60px, 0)', offset: 0.4}),
+    style({opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, -1000px, 0)', offset: 1})
+  ]
+
+  const inDownStyles = [
+    style({opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, -1000px, 0)', offset: 0}),
+    style({opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(0, 60px, 0)', offset: 0.6}),
+    style({transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1})
+  ]
+
+  const outDownStyles = [
+    style({opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0}),
+    style({transform: 'scale3d(.475, .475, .475) translate3d(0, 60px, 0)', offset: 0.4}),
+    style({opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, 1000px, 0)', offset: 1})
+  ]
+
+  const inLeftStyles = [
+    style({opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)', offset: 0}),
+    style({opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(10px, 0, 0)', offset: 0.6}),
+    style({transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1})
+  ]
+
+  const outLeftStyles = [
+    style({opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0}),
+    style({transform: 'scale3d(.475, .475, .475) translate3d(-10px, 0, 0)', offset: 0.6}),
+    style({opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(1000px, 0, 0)', offset: 1})
+  ]
+
+  const inRightStyles = [
+    style({opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(1000px, 0, 0)', offset: 0}),
+    style({opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(-10px, 0, 0)', offset: 0.6}),
+    style({transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1})
+  ]
+
+  const outRightStyles = [
+    style({opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0}),
+    style({transform: 'scale3d(.475, .475, .475) translate3d(10px, 0, 0)', offset: 0.6}),
+    style({opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)', offset: 1})
+  ]
+
+  const fxIn = trigger('zoomIn',
+    inOutTransitions(inStyles,outStyles)
+  )
+
+  const fxInKids = trigger('zoomInKids',
+    childInOutTransition(inStyles,outStyles)
+  )
+
+  const inUp = trigger(
+    'zoomInUp',
+    inOutTransitions(inUpStyles,outUpStyles)
+  )
+
+  const inUpKids = trigger(
+    'zoomInUpKids',
+    childInOutTransitions(inUpStyles,outUpStyles,inDownStyles,outDownStyles)
+  )
+
+  const inDown = trigger(
+    'zoomInDown',
+    inOutTransitions(inDownStyles,outDownStyles)
+  )
+
+  const inDownKids = trigger(
+    'zoomInDownKids',
+    childInOutTransitions(inDownStyles,outDownStyles,inUpStyles,outUpStyles)
+  )
+
+  const inLeft = trigger(
+    'zoomInLeft',
+    inOutTransitions(inLeftStyles,outLeftStyles)
+  )
+
+  const inLeftKids = trigger(
+    'zoomInLeftKids',
+    childInOutTransitions(inLeftStyles,outLeftStyles,inRightStyles,outRightStyles)
+  )
+
+  const inRight = trigger(
+    'zoomInRight',
+    inOutTransitions(inRightStyles,outRightStyles)
+  )
+
+  const inRightKids = trigger(
+    'zoomInRightKids',
+    childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
+  )
+ 
+  return [
+    fxIn, inUp, inDown, inLeft, inRight,
+    fxInKids, inUpKids, inDownKids, inLeftKids, inRightKids
+  ]
+}
 
 export function zoom(timing: string, options): AnimationMetadata[]{
   return zoomOptions(combo(timing, options))

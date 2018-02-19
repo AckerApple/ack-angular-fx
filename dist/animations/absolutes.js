@@ -13,7 +13,7 @@ var index_1 = require("../index");
 var helper_1 = require("./helper");
 function triggers(config) {
     if (config === void 0) { config = {}; }
-    var timing = index_1.getConfigTiming(config);
+    var time = index_1.getConfigTiming(config);
     var abDef = {
         position: 'absolute',
         width: '100%',
@@ -23,37 +23,41 @@ function triggers(config) {
         helper_1.stylize(__assign({ offset: 0 }, abDef), config),
         helper_1.stylize(__assign({ offset: 1 }, abDef), config)
     ];
+    var params = {
+        time: '200ms 0ms linear',
+        position: 'absolute'
+    };
     var absoluteOut = animations_1.trigger('absoluteOut', [
         animations_1.transition('* <=> *', [
             animations_1.group([
                 animations_1.query(':leave', [
-                    animations_1.animate('{{timing}}', animations_1.keyframes(abKeyFrames))
-                ], { optional: true, params: { timing: '200ms 0ms linear' } })
-            ], { params: { timing: '200ms 0ms linear' } })
-        ])
+                    animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
+                ], { optional: true })
+            ])
+        ], { params: params })
     ]);
     var absoluteIn = animations_1.trigger('absoluteIn', [
         animations_1.transition('* <=> *', [
             animations_1.group([
                 animations_1.query(':enter', [
-                    animations_1.animate('{{timing}}', animations_1.keyframes(abKeyFrames))
-                ], { optional: true, params: { timing: '200ms 0ms linear' } })
-            ], { params: { timing: '200ms 0ms linear' } })
-        ])
+                    animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
+                ], { optional: true })
+            ])
+        ], { params: params })
     ]);
     var absoluteInOut = animations_1.trigger('absoluteInOut', [
         animations_1.transition('* <=> *', [
             animations_1.group([
                 animations_1.query(':enter', [
-                    animations_1.animate('{{timing}}', animations_1.keyframes(abKeyFrames))
+                    animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
                 ], { optional: true }),
                 animations_1.query(':leave', [
-                    animations_1.animate('{{timing}}', animations_1.keyframes(abKeyFrames))
+                    animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
                 ], { optional: true })
-            ], { params: { timing: '200ms 0ms linear' } })
-        ])
+            ])
+        ], { params: params })
     ]);
     return [absoluteInOut, absoluteIn, absoluteOut];
 }
 exports.triggers = triggers;
-//# sourceMappingURL=absolute.js.map
+//# sourceMappingURL=absolutes.js.map

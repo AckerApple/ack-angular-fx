@@ -8,9 +8,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//import { style } from '@angular/core';
 var animations_1 = require("@angular/animations");
-var index_1 = require("../index");
 function stylize(styleDef, options) {
     return animations_1.style(__assign({}, styleDef, options.whileStyle));
 }
@@ -24,4 +22,20 @@ function combo(timing, options) {
     return { timing: timing, options: defaultOptions(options) };
 }
 exports.combo = combo;
+function inOutTransitionByStyles(inStyles, outStyles) {
+    var params = { time: '200ms 0ms linear' };
+    return animations_1.transition('* => *', [inOutGroupQueryByStyles(inStyles, outStyles)], { params: params });
+}
+exports.inOutTransitionByStyles = inOutTransitionByStyles;
+function inOutGroupQueryByStyles(inStyles, outStyles) {
+    return animations_1.group([
+        animations_1.query(':enter', [
+            animations_1.animate('{{ time }}', animations_1.keyframes(inStyles))
+        ], { optional: true }),
+        animations_1.query(':leave', [
+            animations_1.animate('{{ time }}', animations_1.keyframes(outStyles))
+        ], { optional: true })
+    ]);
+}
+exports.inOutGroupQueryByStyles = inOutGroupQueryByStyles;
 //# sourceMappingURL=helper.js.map

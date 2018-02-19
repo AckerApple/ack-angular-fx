@@ -147,6 +147,16 @@ export declare const menu: {
         easing?: string;
         whileStyle?: whileStyle;
     };
+    absoluteSwap1500: {
+        name?: string;
+        stagger?: number;
+        igniter?: string;
+        duration: number;
+        effects?: string[];
+        delay?: number;
+        easing?: string;
+        whileStyle?: whileStyle;
+    };
     absoluteSwap2000: {
         name?: string;
         stagger?: number;

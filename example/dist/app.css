@@ -15,7 +15,7 @@ body {
 app {
   display:inline-block;text-align:left;
   width:100%;max-width:900px;
-  background-color:white;padding:1em;
+  background-color:white;
 }
 
 .container {
