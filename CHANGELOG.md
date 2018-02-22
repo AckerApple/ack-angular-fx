@@ -1,9 +1,11 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
-## [1.3.0] - 2017-11-02
+## [2.0.0] - 2018-02-22
+- prefx compiling seems no longer required
 ### Breaking Changes
-- upgraded to Angular5. Angular5 maybe required to use this package
+- upgraded to Angular5. Angular5 is required to use this package
+- old stuff should still work but is becoming deprecated
 
 ## [1.2.5] - 2017-07-06
 ### Fixed
