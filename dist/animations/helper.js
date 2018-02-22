@@ -22,11 +22,11 @@ function combo(timing, options) {
     return { timing: timing, options: defaultOptions(options) };
 }
 exports.combo = combo;
-function inOutTransitionByStyles(inStyles, outStyles) {
+function childInOutTransition(inStyles, outStyles) {
     var params = { time: '200ms 0ms linear' };
-    return animations_1.transition('* => *', [inOutGroupQueryByStyles(inStyles, outStyles)], { params: params });
+    return [animations_1.transition('* <=> *', [inOutGroupQueryByStyles(inStyles, outStyles)], { params: params })];
 }
-exports.inOutTransitionByStyles = inOutTransitionByStyles;
+exports.childInOutTransition = childInOutTransition;
 function inOutGroupQueryByStyles(inStyles, outStyles) {
     return animations_1.group([
         animations_1.query(':enter', [
@@ -38,4 +38,30 @@ function inOutGroupQueryByStyles(inStyles, outStyles) {
     ]);
 }
 exports.inOutGroupQueryByStyles = inOutGroupQueryByStyles;
+function inOutTransitions(inStyles, outStyles) {
+    var params = { time: '200ms 0ms linear' };
+    return [
+        animations_1.transition(function (from, to) { return to && from === 'void' && to !== 'void' ? true : false; }, 
+        //'void => *',
+        [
+            animations_1.animate('{{ time }}', animations_1.keyframes(inStyles))
+        ], { params: params }),
+        animations_1.transition(function (from, to) { return from && from !== 'void' && to === 'void' ? true : false; }, 
+        //'* => void',
+        [
+            animations_1.animate('{{ time }}', animations_1.keyframes(outStyles))
+        ], { params: params })
+    ];
+}
+exports.inOutTransitions = inOutTransitions;
+function childInOutTransitions(inStyles, outStyles, backInStyles, backOutStyles) {
+    var params = { time: '200ms 0ms linear' };
+    var group = inOutGroupQueryByStyles(inStyles, outStyles);
+    var backGroup = inOutGroupQueryByStyles(backInStyles, backOutStyles);
+    return [
+        animations_1.transition(function (from, to) { return to ? true : false; }, [group], { params: params }),
+        animations_1.transition(function (from, to) { return !to ? true : false; }, [backGroup], { params: params })
+    ];
+}
+exports.childInOutTransitions = childInOutTransitions;
 //# sourceMappingURL=helper.js.map

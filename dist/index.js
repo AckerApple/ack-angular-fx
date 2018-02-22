@@ -64,16 +64,23 @@ exports.menu = {
     "1500": { duration: 1500 },
     "2000": { duration: 2000 }
 };
-function animateFactory(duration, delay, easing, stagger, name) {
-    return animateConfig(name, {
-        duration: duration,
-        delay: delay,
-        easing: easing,
-        stagger: stagger,
-        name: name
-    });
+/* Needed sometime in Angular2
+export function animateFactory(
+  duration: number,
+  delay: number,
+  easing: string,
+  stagger: number,
+  name: string
+){
+   return animateConfig(name,{
+    duration : duration,
+    delay    : delay,
+    easing   : easing,
+    stagger  : stagger,
+    name     : name
+   })
 }
-exports.animateFactory = animateFactory;
+*/
 function defaultConfig(config) {
     return __assign({}, exports.animateDefaults, config);
 }
@@ -160,21 +167,21 @@ function processTriggerSelect(config, effectList) {
     var fxs = [];
     var fxTypes = effectsArrayToTypes(config.effects || exports.availEffects);
     if (fxTypes.fade) {
-        fxs.push.apply(fxs, fade_1.triggers(config));
+        fxs.push.apply(fxs, fade_1.triggers);
     }
     if (fxTypes.bounce) {
-        fxs.push.apply(fxs, bounce_1.triggers(config));
+        fxs.push.apply(fxs, bounce_1.triggers);
     }
     if (fxTypes.rotate) {
-        fxs.push.apply(fxs, rotate_1.triggers(config));
+        fxs.push.apply(fxs, rotate_1.triggers);
     }
     if (fxTypes.slide) {
-        fxs.push.apply(fxs, slide_1.triggers(config));
+        fxs.push.apply(fxs, slide_1.triggers);
     }
     if (fxTypes.zoom) {
-        fxs.push.apply(fxs, zoom_1.triggers(config));
+        fxs.push.apply(fxs, zoom_1.triggers);
     }
-    fxs.push.apply(fxs, absolutes_1.triggers(config));
+    fxs.push.apply(fxs, absolutes_1.triggers);
     return fxs;
 }
 function processSelect(name, config, effectArray) {
@@ -188,6 +195,10 @@ exports.processSelect = processSelect;
   {name:'EaseOut', value:'ease-out'},
   {name:'EaseInOut', value:'ease-in-out'}
 ]*/
+function getAllFx() {
+    return getFxArray();
+}
+exports.getAllFx = getAllFx;
 function getFxArray() {
     var allFx = [
         processSelect("absoluteSwap", exports.menu["absoluteSwap400"]),
@@ -217,12 +228,12 @@ function getFxArray() {
         processSelect("2000", exports.menu["2000"])
     ];
     allFx.push.apply(allFx, childStag_1.childStags);
-    allFx.push.apply(allFx, fade_1.triggers());
-    allFx.push.apply(allFx, bounce_1.triggers());
-    allFx.push.apply(allFx, rotate_1.triggers());
-    allFx.push.apply(allFx, slide_1.triggers());
-    allFx.push.apply(allFx, zoom_1.triggers());
-    allFx.push.apply(allFx, absolutes_1.triggers());
+    allFx.push.apply(allFx, fade_1.triggers);
+    allFx.push.apply(allFx, bounce_1.triggers);
+    allFx.push.apply(allFx, rotate_1.triggers);
+    allFx.push.apply(allFx, slide_1.triggers);
+    allFx.push.apply(allFx, zoom_1.triggers);
+    allFx.push.apply(allFx, absolutes_1.triggers);
     return allFx;
 }
 exports.getFxArray = getFxArray;

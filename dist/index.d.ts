@@ -214,7 +214,6 @@ export declare const menu: {
         duration: number;
     };
 };
-export declare function animateFactory(duration: number, delay: number, easing: string, stagger: number, name: string): AnimationTriggerMetadata;
 export declare function defaultConfig(config: any): any;
 export declare function animateConfig(name: string, config: fxConfig): AnimationTriggerMetadata;
 export declare function getConfigTiming(config: fxConfig): string;
@@ -224,6 +223,7 @@ export declare function stateEffectsByConfig(timing: string, config: fxConfig): 
 export declare function upgradeComponent(component: any, animations?: any): void;
 export declare function selectFx(args: string[], effectList: string[], config?: fxConfig): selectedFxMetaData;
 export declare function processSelect(name: string, config: fxConfig, effectArray?: string[]): AnimationTriggerMetadata;
+export declare function getAllFx(): AnimationTriggerMetadata[];
 export declare function getFxArray(): AnimationTriggerMetadata[];
 export declare let absSwapClone: {
     name: any;

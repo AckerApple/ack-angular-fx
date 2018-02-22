@@ -2,75 +2,68 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var animations_1 = require("@angular/animations");
 var helper_1 = require("./helper");
-var index_1 = require("../index");
-function triggers(config) {
-    if (config === void 0) { config = {}; }
-    var time = index_1.getConfigTiming(config);
-    var params = { time: '200ms 0ms linear' };
-    var fxIn = animations_1.trigger('zoomIn', [
-        helper_1.inOutTransitionByStyles([
-            animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1)', offset: 0 }),
-            animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1)', offset: 1 })
-        ], [
-            animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1)', offset: 0 }),
-            animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1)', offset: 1 })
-        ])
-    ]);
-    var inUpGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, 1000px, 0)', offset: 0 }),
-        animations_1.style({ opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(0, -60px, 0)', offset: 0.6 }),
-        animations_1.style({ transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1 })
-    ], [
-        animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0 }),
-        animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(0, -60px, 0)', offset: 0.4 }),
-        animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, -1000px, 0)', offset: 1 })
-    ]);
-    var inDownGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, -1000px, 0)', offset: 0 }),
-        animations_1.style({ opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(0, 60px, 0)', offset: 0.6 }),
-        animations_1.style({ transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1 })
-    ], [
-        animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0 }),
-        animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(0, 60px, 0)', offset: 0.4 }),
-        animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, 1000px, 0)', offset: 1 })
-    ]);
-    var inUp = animations_1.trigger('zoomInUp', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inUpGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inDownGroup], { params: params })
-    ]);
-    var inDown = animations_1.trigger('zoomInDown', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inDownGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inUpGroup], { params: params })
-    ]);
-    var inLeftGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)', offset: 0 }),
-        animations_1.style({ opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(10px, 0, 0)', offset: 0.6 }),
-        animations_1.style({ transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1 })
-    ], [
-        animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0 }),
-        animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(-10px, 0, 0)', offset: 0.6 }),
-        animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(1000px, 0, 0)', offset: 1 })
-    ]);
-    var inRightGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(1000px, 0, 0)', offset: 0 }),
-        animations_1.style({ opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(-10px, 0, 0)', offset: 0.6 }),
-        animations_1.style({ transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1 })
-    ], [
-        animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0 }),
-        animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(10px, 0, 0)', offset: 0.6 }),
-        animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)', offset: 1 })
-    ]);
-    var inLeft = animations_1.trigger('zoomInLeft', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inLeftGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inRightGroup], { params: params })
-    ]);
-    var inRight = animations_1.trigger('zoomInRight', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inRightGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inLeftGroup], { params: params })
-    ]);
-    return [fxIn, inUp, inDown, inLeft, inRight];
-}
-exports.triggers = triggers;
+var inStyles = [
+    animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1)', offset: 0 }),
+    animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1)', offset: 1 })
+];
+var outStyles = [
+    animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1)', offset: 0 }),
+    animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1)', offset: 1 })
+];
+var inUpStyles = [
+    animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, 1000px, 0)', offset: 0 }),
+    animations_1.style({ opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(0, -60px, 0)', offset: 0.6 }),
+    animations_1.style({ transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1 })
+];
+var outUpStyles = [
+    animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0 }),
+    animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(0, -60px, 0)', offset: 0.4 }),
+    animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, -1000px, 0)', offset: 1 })
+];
+var inDownStyles = [
+    animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, -1000px, 0)', offset: 0 }),
+    animations_1.style({ opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(0, 60px, 0)', offset: 0.6 }),
+    animations_1.style({ transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1 })
+];
+var outDownStyles = [
+    animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0 }),
+    animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(0, 60px, 0)', offset: 0.4 }),
+    animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, 1000px, 0)', offset: 1 })
+];
+var inLeftStyles = [
+    animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)', offset: 0 }),
+    animations_1.style({ opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(10px, 0, 0)', offset: 0.6 }),
+    animations_1.style({ transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1 })
+];
+var outLeftStyles = [
+    animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0 }),
+    animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(-10px, 0, 0)', offset: 0.6 }),
+    animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(1000px, 0, 0)', offset: 1 })
+];
+var inRightStyles = [
+    animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(1000px, 0, 0)', offset: 0 }),
+    animations_1.style({ opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(-10px, 0, 0)', offset: 0.6 }),
+    animations_1.style({ transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1 })
+];
+var outRightStyles = [
+    animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0 }),
+    animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(10px, 0, 0)', offset: 0.6 }),
+    animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)', offset: 1 })
+];
+var fxIn = animations_1.trigger('zoomIn', helper_1.inOutTransitions(inStyles, outStyles));
+var fxInKids = animations_1.trigger('zoomInKids', helper_1.childInOutTransition(inStyles, outStyles));
+var inUp = animations_1.trigger('zoomInUp', helper_1.inOutTransitions(inUpStyles, outUpStyles));
+var inUpKids = animations_1.trigger('zoomInUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
+var inDown = animations_1.trigger('zoomInDown', helper_1.inOutTransitions(inDownStyles, outDownStyles));
+var inDownKids = animations_1.trigger('zoomInDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
+var inLeft = animations_1.trigger('zoomInLeft', helper_1.inOutTransitions(inLeftStyles, outLeftStyles));
+var inLeftKids = animations_1.trigger('zoomInLeftKids', helper_1.childInOutTransitions(inLeftStyles, outLeftStyles, inRightStyles, outRightStyles));
+var inRight = animations_1.trigger('zoomInRight', helper_1.inOutTransitions(inRightStyles, outRightStyles));
+var inRightKids = animations_1.trigger('zoomInRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
+exports.triggers = [
+    fxIn, inUp, inDown, inLeft, inRight,
+    fxInKids, inUpKids, inDownKids, inLeftKids, inRightKids
+];
 function zoom(timing, options) {
     return zoomOptions(helper_1.combo(timing, options));
 }

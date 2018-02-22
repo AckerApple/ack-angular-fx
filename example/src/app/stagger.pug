@@ -1,0 +1,129 @@
+-fxNames = ['fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp']
+-fxNames.push('bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp')
+-fxNames.push('rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight')
+-fxNames.push('slideInUp','slideInDown','slideInLeft','slideInRight')
+-fxNames.push('zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp')
+
+-stagFxAttrs = {};
+-rowStagFxAttrs = {};
+each fx in fxNames
+  -stagFxAttrs["[@"+fx+"]"] = "{value:FxSession.fxForward=='"+fx+"' && stagArray.length, params:{time:fxTime}}"
+  -rowStagFxAttrs["[@"+fx+"]"] = "{value:FxSession.fxForward=='"+fx+"' && rowStagArray.length, params:{time:fxTime}}"
+
+-speeds = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
+
+-stagAttrs = {};
+-stagAttrs["[@childStag]"] = "!fxStaggerSpeed && stagArray.length"
+each speed in speeds
+  -stagAttrs["[@childStag"+speed+"]"] = "fxStaggerSpeed=="+speed+" && stagArray.length"
+
+-rowAttrs = {};
+-rowAttrs["[@childStag]"] = "!fxStaggerSpeed && rowStagArray.length"
+each speed in speeds
+  -rowAttrs["[@childStag"+speed+"]"] = "fxStaggerSpeed=="+speed+" && rowStagArray.length"
+
+mixin fxStaggerSpeedSelect
+  select("[(ngModel)]"="fxStaggerSpeed")
+    option(*ngFor="let item of speeds" "[value]"="item") {{ item }}
+
+h2 Staggering Examples
+p Tap anywhere below
+fieldset("(click)"="stagArray = stagArray.length ? [] : [1,2,3,4,5,6,7,8]")
+  legend &lt;div [@childStag{{fxStaggerSpeed}}]="{{ stagArray.length }}"&gt;
+  .wrap&attributes(stagAttrs)
+    .demo-wrap(
+      *ngFor    = "let x of stagArray;let index=index"
+    )&attributes(stagFxAttrs)
+      .demo-item
+        |*ngFor:{{index}}:{{ x }}
+
+div(style="background-color:#CCC;padding:.5em;")
+  p(style="text-align:center")
+    button("(click)"="stagArray.push(1,2,3,4,5)") add 5
+    button("(click)"="stagArray.splice(0,5)") remove 5
+
+  div(style="text-align:center")
+    |Above stagger speed:&nbsp;
+    +fxStaggerSpeedSelect
+    |&nbsp;&nbsp;&nbsp;
+    |Change above fx Type:&nbsp;
+    select-fx("[(model)]"="FxSession.fxForward")
+    |&nbsp;&nbsp;&nbsp;
+    |Speed:
+    input("[(ngModel)]"="fxTime")
+
+  p DETAILS: The above fx boxes example defines:
+  ul
+    li An outer element with an @childStag fx trigger with a boolean value
+    li An inner element fx definition with same boolean value as @childStag
+    li All fx transistions ignite when boolean value changes and @childStag imposes itself onto the child fxs
+    li NOTE: As of 2/19/18, you must put the stagger speed in the trigger name as angular stagger currently does not accept params
+  h4 Code Sample 1
+  textarea(style="width:100%;height:80px" wrap="off" readonly).
+    &lt;div [@childStag{{fxStaggerSpeed}}]="stagArray.length"&gt;
+      &lt;div *ngFor="let x of stagArray" [@{{FxSession.fxForward}}]="stagArray.length"&gt;
+        item:x
+      &lt;/div&gt;
+    &lt;/div&gt;
+  h4 Code Sample 2
+  textarea(style="width:100%;height:125px" wrap="off" readonly).
+    &lt;div [@childStag{{fxStaggerSpeed}}]="&#123;value:stagArray.length, params:{time:'{{fxTime}}'}&#125;"&gt;
+      &lt;div
+        *ngFor = "let x of stagArray"
+        [@{{FxSession.fxForward}}] = "&#123;value:stagArray.length, params:&#123;time:'{{fxTime}}'&#125;&#125;"
+      &gt;
+        item:x
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+br
+
+h3 Stagger Table Rows Example
+p Tap anywhere below
+fieldset("(click)"="rowStagArray = rowStagArray.length ? [] : [1,2,3,4,5,6,7,8]")
+  legend &lt;div [@childStag{{fxStaggerSpeed}}]="{{ rowStagArray.length }}"&gt;
+  div&attributes(rowAttrs)
+    table(style="width:100%")
+        tr(
+          *ngFor="let x of rowStagArray;let index=index"
+          style     = "background-color:#CCC"
+        )&attributes(rowStagFxAttrs)
+          td {{index}}
+          td Item Row {{ x }}
+
+div(style="background-color:#CCC;padding:.5em;")
+  p(style="text-align:center")
+    button("(click)"="rowStagArray.push(1,2,3,4,5)") add 5
+    button("(click)"="rowStagArray.splice(0,5)") remove 5
+
+  div(style="text-align:center")
+    |Above row stagger speed:&nbsp;
+    +fxStaggerSpeedSelect
+    |&nbsp;&nbsp;&nbsp;
+    |Change above fx Type:&nbsp;
+    select-fx("[(model)]"="FxSession.fxForward") 
+    |&nbsp;&nbsp;&nbsp;
+    |Speed:
+    input("[(ngModel)]"="fxTime")
+
+  p DETAILS: The above fx boxes example defines:
+  ul
+    li An outer element with an @childStag fx trigger with a boolean value
+    li An inner element fx definition with same boolean value as @childStag
+    li All fx transistions ignite when boolean value changes and @childStag imposes itself onto the child fxs
+    li NOTE: As of 2/19/18, you must put the stagger speed in the trigger name as angular stagger currently does not accept params
+
+  h4 Code Sample
+  textarea(style="width:100%;height:125px" wrap="off" readonly).
+    &lt;div [@childStag{{fxStaggerSpeed}}]="stagArray.length"&gt;
+      &lt;table&gt;
+        &lt;tr
+          *ngFor="let x of stagArray"
+          [@{{FxSession.fxForward}}] = "&#123;value:stagArray.length, params:&#123;time:'{{fxTime}}'&#125;&#125;"
+        &gt;
+          &lt;td&gt;
+            item:x
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;

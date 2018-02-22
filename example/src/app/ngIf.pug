@@ -1,0 +1,54 @@
+-fxNames = ['fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp']
+-fxNames.push('bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp')
+-fxNames.push('rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight')
+-fxNames.push('slideInUp','slideInDown','slideInLeft','slideInRight')
+-fxNames.push('zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp')
+
+-ngIfAttrs = {};
+each fx in fxNames
+  -ngIfAttrs["[@"+fx+"]"] = "{value:FxSession.fxForward=='"+fx+"' && !hideToggle, params:{time:fxTime}}"
+
+h2 *ngIf Fx
+p Tap anywhere below
+
+div("(click)"="hideToggle=!hideToggle")
+  fieldset
+    legend *ngIf="{{!hideToggle}}"
+    div(
+      *ngIf     = "!hideToggle"
+      style     = "text-align:center;padding:1em;background-color: #339966;"
+    )&attributes(ngIfAttrs)
+      br
+      |[@{{FxSession.fxForward}}] =&nbsp;
+      |&#123;value:{{!hideToggle}}, params:&#123;time:'{{fxTime}}'&#125;&#125;
+      br
+      br
+div(style="background-color:#CCC;padding:.5em;")
+  div(style="text-align:center")
+    button("(click)"="hideToggle=!hideToggle") {{ hideToggle ? 'SHOW' : 'hide' }}
+    |&nbsp;&nbsp;&nbsp;
+    |Speed:
+    input("[(ngModel)]"="fxTime")
+    |&nbsp;&nbsp;&nbsp;
+    |Change above fx Type:&nbsp;
+    select-fx("[(model)]"="FxSession.fxForward") 
+
+  p DETAILS: The above fx example defines:
+  ul
+    li An fxType as a trigger name
+    li A value to ignite animation
+    li A value to toggle the *ngIf
+    li A time defintion passed through as fx params
+  h4 Code Sample 1
+  textarea(style="width:100%;height:60px" wrap="off" readonly).
+    &lt;div *ngIf="boolean" [@{{FxSession.fxForward}}]="boolean" &gt;
+      hide show div
+    &lt;/div&gt;
+  h4 Code Sample 2
+  textarea(style="width:100%;height:100px" wrap="off" readonly).
+    &lt;div
+      *ngIf="boolean"
+      [@{{FxSession.fxForward}}] = "&#123;value:boolean, params:&#123;time:'{{fxTime}}'&#125;&#125;"
+    &gt;
+      hide show div
+    &lt;/div&gt;

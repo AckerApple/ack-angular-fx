@@ -96,6 +96,7 @@ export const menu = {
   "2000":{duration:2000}
 }
 
+/* Needed sometime in Angular2
 export function animateFactory(
   duration: number,
   delay: number,
@@ -111,6 +112,7 @@ export function animateFactory(
     name     : name
    })
 }
+*/
 
 export function defaultConfig(config){
   return {
@@ -229,26 +231,26 @@ function processTriggerSelect(config:fxConfig, effectList){
   const fxTypes = effectsArrayToTypes( config.effects || availEffects )
   
   if( fxTypes.fade ){
-    fxs.push.apply(fxs, fadeTriggers(config))
+    fxs.push.apply(fxs, fadeTriggers)
   }
   
   if( fxTypes.bounce ){
-    fxs.push.apply(fxs, bounceTriggers(config))
+    fxs.push.apply(fxs, bounceTriggers)
   }
   
   if( fxTypes.rotate ){
-    fxs.push.apply(fxs, rotateTriggers(config))
+    fxs.push.apply(fxs, rotateTriggers)
   }
   
   if( fxTypes.slide ){
-    fxs.push.apply(fxs, slideTriggers(config))
+    fxs.push.apply(fxs, slideTriggers)
   }
   
   if( fxTypes.zoom ){
-    fxs.push.apply(fxs, zoomTriggers(config))
+    fxs.push.apply(fxs, zoomTriggers)
   }
   
-  fxs.push.apply(fxs, absoluteTriggers(config))
+  fxs.push.apply(fxs, absoluteTriggers)
   
   return fxs
 }
@@ -268,6 +270,11 @@ export function processSelect(
   {name:'EaseOut', value:'ease-out'},
   {name:'EaseInOut', value:'ease-in-out'}
 ]*/
+
+export function getAllFx() : AnimationTriggerMetadata[] {
+  return getFxArray()
+}
+
 export function getFxArray() : AnimationTriggerMetadata[] {
   const allFx = [
     processSelect("absoluteSwap", menu["absoluteSwap400"] ),
@@ -298,12 +305,12 @@ export function getFxArray() : AnimationTriggerMetadata[] {
   ]
 
   allFx.push.apply(allFx, childStags)
-  allFx.push.apply(allFx, fadeTriggers())
-  allFx.push.apply(allFx, bounceTriggers())
-  allFx.push.apply(allFx, rotateTriggers())
-  allFx.push.apply(allFx, slideTriggers())
-  allFx.push.apply(allFx, zoomTriggers())
-  allFx.push.apply(allFx, absoluteTriggers())
+  allFx.push.apply(allFx, fadeTriggers)
+  allFx.push.apply(allFx, bounceTriggers)
+  allFx.push.apply(allFx, rotateTriggers)
+  allFx.push.apply(allFx, slideTriggers)
+  allFx.push.apply(allFx, zoomTriggers)
+  allFx.push.apply(allFx, absoluteTriggers)
 
   return allFx
 }

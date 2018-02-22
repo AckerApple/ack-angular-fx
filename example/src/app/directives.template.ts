@@ -1,0 +1,5 @@
+export const string = "<h2>Directives</h2><h2>&lt;fx-tracker&gt;</h2><p>Track animation values to determine if back or forward fx should be used</p><h4>Code Sample</h4><textarea style=\"width:100%;height:80px;\" wrap=\"off\" readonly=\"readonly\">&lt;fx-tracker("+
+"\n  \"[value]\"     = \"...\""+
+"\n  \"[(fxId)]\"    = \"fxId\""+
+"\n)&gt;&lt;/fx-tracker&gt;"+
+"\n</textarea><h3>fx-tracker bindings</h3><li>[value] : any</li><li>[orderArray]:any[]<ul><li>back and foward fx can be determined by matching items in ordinal array instead of history tracking</li></ul></li><li>[(history)]:any[]<ul><li>record of animation value history</li></ul></li><li> </li><li>[(index)]:number<ul><li>current position in history</li></ul></li><li>[(fxId)] : 0|false|1|true<ul><li>ack-angular-fx specific id to indicate fx type</li><li>true == 'progressive animation'</li><li>1 == 'progressive animation'</li><li>false == 'regressive animation'</li><li>0 == 'regressive animation'</li></ul></li>"

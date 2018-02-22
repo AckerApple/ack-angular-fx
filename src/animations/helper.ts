@@ -68,22 +68,24 @@ export function inOutTransitions(
   const params = {time:'200ms 0ms linear'}
   return [
     transition(
-      'void => *',
+      (from,to)=>to && from==='void' && to!=='void' ? true : false,
+      //'void => *',
       [
         animate('{{ time }}',
           keyframes(inStyles)
         )
       ],
-      {params:params}
+      { params:params }
     ),
     transition(
-      '* => void',
+      (from,to)=>from && from!=='void' && to==='void' ? true : false,
+      //'* => void',
       [
         animate('{{ time }}',
           keyframes(outStyles)
         )
       ],
-      {params:params}
+      { params:params }
     )
   ]
 }

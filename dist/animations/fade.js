@@ -3,66 +3,60 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var animations_1 = require("@angular/animations");
 var index_1 = require("../index");
 var helper_1 = require("./helper");
-function triggers(config) {
-    if (config === void 0) { config = {}; }
-    var time = index_1.getConfigTiming(config);
-    var params = { time: '200ms 0ms linear' };
-    var fxIn = animations_1.trigger('fadeIn', [
-        helper_1.inOutTransitionByStyles([
-            animations_1.style({ opacity: 0, offset: 0 }),
-            animations_1.style({ opacity: 1, offset: 1 })
-        ], [
-            animations_1.style({ opacity: 1, offset: 0 }),
-            animations_1.style({ opacity: 0, offset: 1 })
-        ])
-    ]);
-    var inUpGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0 }),
-        animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 })
-    ], [
-        animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
-        animations_1.style({ opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1 })
-    ]);
-    var inDownGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 0 }),
-        animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 })
-    ], [
-        animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
-        animations_1.style({ opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 1 })
-    ]);
-    var inUp = animations_1.trigger('fadeInUp', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inUpGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inDownGroup], { params: params })
-    ]);
-    var inDown = animations_1.trigger('fadeInDown', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inDownGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inUpGroup], { params: params })
-    ]);
-    var inLeftGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 0 }),
-        animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 })
-    ], [
-        animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
-        animations_1.style({ opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 1 })
-    ]);
-    var inRightGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 0 }),
-        animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 })
-    ], [
-        animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
-        animations_1.style({ opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1 })
-    ]);
-    var inLeft = animations_1.trigger('fadeInLeft', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inLeftGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inRightGroup], { params: params })
-    ]);
-    var inRight = animations_1.trigger('fadeInRight', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inRightGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inLeftGroup], { params: params })
-    ]);
-    return [fxIn, inUp, inDown, inLeft, inRight];
-}
-exports.triggers = triggers;
+var inStyles = [
+    animations_1.style({ opacity: 0, offset: 0 }),
+    animations_1.style({ opacity: 1, offset: 1 })
+];
+var outStyles = [
+    animations_1.style({ opacity: 1, offset: 0 }),
+    animations_1.style({ opacity: 0, offset: 1 })
+];
+var inUpStyles = [
+    animations_1.style({ opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0 }),
+    animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 })
+];
+var outUpStyles = [
+    animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
+    animations_1.style({ opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1 })
+];
+var inDownStyles = [
+    animations_1.style({ opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 0 }),
+    animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 })
+];
+var outDownStyles = [
+    animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
+    animations_1.style({ opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 1 })
+];
+var inLeftStyles = [
+    animations_1.style({ opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 0 }),
+    animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 })
+];
+var outLeftStyles = [
+    animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
+    animations_1.style({ opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 1 })
+];
+var inRightStyles = [
+    animations_1.style({ opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 0 }),
+    animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 })
+];
+var outRightStyles = [
+    animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
+    animations_1.style({ opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1 })
+];
+var fxIn = animations_1.trigger('fadeIn', helper_1.inOutTransitions(inStyles, outStyles));
+var inUp = animations_1.trigger('fadeInUp', helper_1.inOutTransitions(inUpStyles, outUpStyles));
+var inDown = animations_1.trigger('fadeInDown', helper_1.inOutTransitions(inDownStyles, outDownStyles));
+var inLeft = animations_1.trigger('fadeInLeft', helper_1.inOutTransitions(inLeftStyles, outLeftStyles));
+var inRight = animations_1.trigger('fadeInRight', helper_1.inOutTransitions(inRightStyles, outRightStyles));
+var fxInKids = animations_1.trigger('fadeInKids', helper_1.childInOutTransition(inStyles, outStyles));
+var inLeftKids = animations_1.trigger('fadeInLeftKids', helper_1.childInOutTransitions(inLeftStyles, outLeftStyles, inRightStyles, outRightStyles));
+var inRightKids = animations_1.trigger('fadeInRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
+var inUpKids = animations_1.trigger('fadeInUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
+var inDownKids = animations_1.trigger('fadeInDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
+exports.triggers = [
+    fxIn, inUp, inDown, inLeft, inRight,
+    fxInKids, inUpKids, inDownKids, inLeftKids, inRightKids
+];
 function states(config) {
     var time = index_1.getConfigTiming(config);
     return [

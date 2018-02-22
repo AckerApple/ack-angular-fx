@@ -22,110 +22,109 @@ import {
   inOutGroupQueryByStyles
 } from "./helper"
 
-export function triggers( config:fxConfig={} ) : AnimationTriggerMetadata[] {
-  const fxInStyles = [
-    style({opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, -200deg)', offset: 0}),
-    style({opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
-  ]
-  
-  const fxOutStyles = [
-    style({opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
-    style({opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 200deg)', offset: 1})
-  ]
 
-  const inUpLeftStyles = [
-    style({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0}),
-    style({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
-  ]
+const fxInStyles = [
+  style({opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, -200deg)', offset: 0}),
+  style({opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
+]
 
-  const outUpLeftStyles = [
-    style({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
-    style({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1})
-  ]
+const fxOutStyles = [
+  style({opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
+  style({opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 200deg)', offset: 1})
+]
 
-  const inUpRightStyles = [
-    style({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0}),
-    style({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
-  ]
+const inUpLeftStyles = [
+  style({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0}),
+  style({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
+]
 
-  const outUpRightStyles = [
-    style({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
-    style({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1})
-  ]
+const outUpLeftStyles = [
+  style({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
+  style({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1})
+]
 
-  const inDownLeftStyles = [
-    style({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0}),
-    style({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
-  ]
+const inUpRightStyles = [
+  style({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0}),
+  style({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
+]
 
-  const outDownLeftStyles = [
-    style({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
-    style({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1})
-  ]
+const outUpRightStyles = [
+  style({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
+  style({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1})
+]
 
-  const inDownRightStyles = [
-    style({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0}),
-    style({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
-  ]
+const inDownLeftStyles = [
+  style({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0}),
+  style({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
+]
 
-  const outDownRightStyles = [
-    style({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
-    style({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1})
-  ]
+const outDownLeftStyles = [
+  style({opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
+  style({opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1})
+]
 
-  const fxIn = trigger('rotateIn',
-    inOutTransitions(fxInStyles,fxOutStyles)
-  )
+const inDownRightStyles = [
+  style({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0}),
+  style({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1})
+]
 
-  const fxInKids = trigger('rotateInKids',
-    childInOutTransition(fxInStyles,fxOutStyles)
-  )
+const outDownRightStyles = [
+  style({opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
+  style({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1})
+]
 
-  const inUpLeft = trigger(
-    'rotateInUpLeft',
-    inOutTransitions(inUpLeftStyles,outUpLeftStyles)
-  )
+const fxIn = trigger('rotateIn',
+  inOutTransitions(fxInStyles,fxOutStyles)
+)
 
-  const inUpLeftKids = trigger(
-    'rotateInUpLeftKids',
-    childInOutTransitions(inUpLeftStyles,outUpLeftStyles,inUpRightStyles,outUpRightStyles)
-  )
+const fxInKids = trigger('rotateInKids',
+  childInOutTransition(fxInStyles,fxOutStyles)
+)
 
-  const inUpRight = trigger(
-    'rotateInUpRight',
-    inOutTransitions(inUpRightStyles,outUpRightStyles)
-  )
+const inUpLeft = trigger(
+  'rotateInUpLeft',
+  inOutTransitions(inUpLeftStyles,outUpLeftStyles)
+)
 
-  const inUpRightKids = trigger(
-    'rotateInUpRightKids',
-    childInOutTransitions(inUpRightStyles,outUpRightStyles,inUpLeftStyles,outUpLeftStyles)
-  )
+const inUpLeftKids = trigger(
+  'rotateInUpLeftKids',
+  childInOutTransitions(inUpLeftStyles,outUpLeftStyles,inUpRightStyles,outUpRightStyles)
+)
 
-  const inDownLeft = trigger(
-    'rotateInDownLeft',
-    inOutTransitions(inDownLeftStyles,outDownLeftStyles)
-  )
+const inUpRight = trigger(
+  'rotateInUpRight',
+  inOutTransitions(inUpRightStyles,outUpRightStyles)
+)
 
-  const inDownLeftKids = trigger(
-    'rotateInDownLeftKids',
-    childInOutTransitions(inDownLeftStyles,outDownLeftStyles,inDownRightStyles,outDownRightStyles)
-  )
+const inUpRightKids = trigger(
+  'rotateInUpRightKids',
+  childInOutTransitions(inUpRightStyles,outUpRightStyles,inUpLeftStyles,outUpLeftStyles)
+)
 
-  const inDownRight = trigger(
-    'rotateInDownRight',
-    inOutTransitions(inDownRightStyles,outDownRightStyles)
-  )
+const inDownLeft = trigger(
+  'rotateInDownLeft',
+  inOutTransitions(inDownLeftStyles,outDownLeftStyles)
+)
 
-  const inDownRightKids = trigger(
-    'rotateInDownRightKids',
-    childInOutTransitions(inDownRightStyles,outDownRightStyles,inDownLeftStyles,outDownLeftStyles)
-  )
- 
-  return [
-    fxIn, inUpLeft, inUpRight, inDownLeft, inDownRight,
-    fxInKids, inUpLeftKids, inUpRightKids, inDownLeftKids, inDownRightKids
-  ]
-}
+const inDownLeftKids = trigger(
+  'rotateInDownLeftKids',
+  childInOutTransitions(inDownLeftStyles,outDownLeftStyles,inDownRightStyles,outDownRightStyles)
+)
+
+const inDownRight = trigger(
+  'rotateInDownRight',
+  inOutTransitions(inDownRightStyles,outDownRightStyles)
+)
+
+const inDownRightKids = trigger(
+  'rotateInDownRightKids',
+  childInOutTransitions(inDownRightStyles,outDownRightStyles,inDownLeftStyles,outDownLeftStyles)
+)
+
+export const triggers : AnimationTriggerMetadata[] = [
+  fxIn, inUpLeft, inUpRight, inDownLeft, inDownRight,
+  fxInKids, inUpLeftKids, inUpRightKids, inDownLeftKids, inDownRightKids
+]
 
 export function rotate(timing: string, options): AnimationMetadata[]{
   return rotateOptions(combo(timing, options))

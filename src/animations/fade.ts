@@ -31,112 +31,110 @@ import {
   inOutGroupQueryByStyles
 } from "./helper"
 
-export function triggers() : AnimationTriggerMetadata[] {  
-  const inStyles = [
-    style({opacity: 0, offset: 0}),
-    style({opacity: 1, offset: 1})
-  ]
+const inStyles = [
+  style({opacity: 0, offset: 0}),
+  style({opacity: 1, offset: 1})
+]
 
-  const outStyles = [
-    style({opacity: 1, offset: 0}),
-    style({opacity: 0, offset: 1})
-  ]
+const outStyles = [
+  style({opacity: 1, offset: 0}),
+  style({opacity: 0, offset: 1})
+]
 
-  const inUpStyles = [
-    style({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0}),
-    style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1})
-  ]
+const inUpStyles = [
+  style({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0}),
+  style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1})
+]
 
-  const outUpStyles = [
-    style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
-    style({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1})
-  ]
-  
-  const inDownStyles = [
-    style({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 0}),
-    style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1})
-  ]
+const outUpStyles = [
+  style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
+  style({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1})
+]
 
-  const outDownStyles = [
-    style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
-    style({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 1})
-  ]
+const inDownStyles = [
+  style({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 0}),
+  style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1})
+]
 
-  const inLeftStyles=[
-    style({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 0}),
-    style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1})
-  ]
+const outDownStyles = [
+  style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
+  style({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 1})
+]
 
-  const outLeftStyles=[
-    style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
-    style({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 1})
-  ]
+const inLeftStyles = [
+  style({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 0}),
+  style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1})
+]
 
-  const fxIn = trigger(
-    'fadeIn',
-    inOutTransitions(inStyles,outStyles)
-  )
+const outLeftStyles = [
+  style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
+  style({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 1})
+]
 
-  const inUp = trigger(
-    'fadeInUp',
-    inOutTransitions(inUpStyles, outUpStyles)
-  )
+const inRightStyles = [
+  style({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 0}),
+  style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1})
+]
 
-  const inDown = trigger(
-    'fadeInDown',
-    inOutTransitions(inDownStyles, outDownStyles)
-  )
+const outRightStyles = [
+  style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
+  style({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1})
+]
+
+const fxIn = trigger(
+  'fadeIn',
+  inOutTransitions(inStyles,outStyles)
+)
+
+const inUp = trigger(
+  'fadeInUp',
+  inOutTransitions(inUpStyles, outUpStyles)
+)
+
+const inDown = trigger(
+  'fadeInDown',
+  inOutTransitions(inDownStyles, outDownStyles)
+)
+
+const inLeft = trigger(
+  'fadeInLeft',
+  inOutTransitions(inLeftStyles, outLeftStyles)
+)
+
+const inRight = trigger(
+  'fadeInRight',
+  inOutTransitions(inRightStyles, outRightStyles)
+)
+
+const fxInKids = trigger(
+  'fadeInKids',
+  childInOutTransition(inStyles,outStyles)
+)
+
+const inLeftKids = trigger(
+  'fadeInLeftKids',
+  childInOutTransitions(inLeftStyles,outLeftStyles,inRightStyles,outRightStyles)
+)
+
+const inRightKids = trigger(
+  'fadeInRightKids',
+  childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
+)
+
+const inUpKids = trigger(
+  'fadeInUpKids',
+  childInOutTransitions(inUpStyles,outUpStyles,inDownStyles,outDownStyles)
+)
+
+const inDownKids = trigger(
+  'fadeInDownKids',
+  childInOutTransitions(inDownStyles,outDownStyles,inUpStyles,outUpStyles)
+)
  
-  const inLeft = trigger(
-    'fadeInLeft',
-    inOutTransitions(inLeftStyles, outLeftStyles)
-  )
-
-  const inRightStyles = [
-    style({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 0}),
-    style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1})
-  ]
-
-  const outRightStyles = [
-    style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
-    style({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1})
-  ]
-
-  const inRight = trigger(
-    'fadeInRight',
-    inOutTransitions(inRightStyles, outRightStyles)
-  )
-
-  const fxInKids = trigger(
-    'fadeInKids',
-    childInOutTransition(inStyles,outStyles)
-  )
-
-  const inLeftKids = trigger(
-    'fadeInLeftKids',
-    childInOutTransitions(inLeftStyles,outLeftStyles,inRightStyles,outRightStyles)
-  )
-
-  const inRightKids = trigger(
-    'fadeInRightKids',
-    childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
-  )
-
-  const inUpKids = trigger(
-    'fadeInUpKids',
-    childInOutTransitions(inUpStyles,outUpStyles,inDownStyles,outDownStyles)
-  )
-
-  const inDownKids = trigger(
-    'fadeInDownKids',
-    childInOutTransitions(inDownStyles,outDownStyles,inUpStyles,outUpStyles)
-  )
- 
-  return [
-    fxIn, inUp, inDown, inLeft, inRight,
-    fxInKids, inUpKids, inDownKids, inLeftKids, inRightKids
-   ]
-}
+export const triggers : AnimationTriggerMetadata[] = [
+  fxIn, inUp, inDown, inLeft, inRight,
+  fxInKids, inUpKids, inDownKids, inLeftKids, inRightKids
+]
 
 export function states(config:fxConfig){
   const time = getConfigTiming( config )

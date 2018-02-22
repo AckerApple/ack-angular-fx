@@ -1,0 +1,1 @@
+export const string = "<select [ngModel]=\"model\" (ngModelChange)=\"modelChange.emit($event)\"><option *ngFor=\"let item of fxNameArray\" [value]=\"item\">{{ item }}</option></select>"

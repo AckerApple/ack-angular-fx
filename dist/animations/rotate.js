@@ -1,68 +1,61 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var animations_1 = require("@angular/animations");
-var index_1 = require("../index");
 var helper_1 = require("./helper");
-function triggers(config) {
-    if (config === void 0) { config = {}; }
-    var time = index_1.getConfigTiming(config);
-    var params = { time: '200ms 0ms linear' };
-    var fxIn = animations_1.trigger('rotateIn', [
-        helper_1.inOutTransitionByStyles([
-            animations_1.style({ opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, -200deg)', offset: 0 }),
-            animations_1.style({ opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
-        ], [
-            animations_1.style({ opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
-            animations_1.style({ opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 200deg)', offset: 1 })
-        ])
-    ]);
-    var inUpLeftGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0 }),
-        animations_1.style({ opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
-    ], [
-        animations_1.style({ opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
-        animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1 })
-    ]);
-    var inUpRightGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0 }),
-        animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
-    ], [
-        animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
-        animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1 })
-    ]);
-    var inDownLeftGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0 }),
-        animations_1.style({ opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
-    ], [
-        animations_1.style({ opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
-        animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1 })
-    ]);
-    var inDownRightGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0 }),
-        animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
-    ], [
-        animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
-        animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1 })
-    ]);
-    var inUpLeft = animations_1.trigger('rotateInUpLeft', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inUpLeftGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inDownLeftGroup], { params: params })
-    ]);
-    var inUpRight = animations_1.trigger('rotateInUpRight', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inUpRightGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inDownRightGroup], { params: params })
-    ]);
-    var inDownLeft = animations_1.trigger('rotateInDownLeft', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inDownLeftGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inUpLeftGroup], { params: params })
-    ]);
-    var inDownRight = animations_1.trigger('rotateInDownRight', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inDownRightGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inUpRightGroup], { params: params })
-    ]);
-    return [fxIn, inUpLeft, inUpRight, inDownLeft, inDownRight];
-}
-exports.triggers = triggers;
+var fxInStyles = [
+    animations_1.style({ opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, -200deg)', offset: 0 }),
+    animations_1.style({ opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
+];
+var fxOutStyles = [
+    animations_1.style({ opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
+    animations_1.style({ opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 200deg)', offset: 1 })
+];
+var inUpLeftStyles = [
+    animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0 }),
+    animations_1.style({ opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
+];
+var outUpLeftStyles = [
+    animations_1.style({ opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
+    animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1 })
+];
+var inUpRightStyles = [
+    animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0 }),
+    animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
+];
+var outUpRightStyles = [
+    animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
+    animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1 })
+];
+var inDownLeftStyles = [
+    animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0 }),
+    animations_1.style({ opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
+];
+var outDownLeftStyles = [
+    animations_1.style({ opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
+    animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1 })
+];
+var inDownRightStyles = [
+    animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0 }),
+    animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
+];
+var outDownRightStyles = [
+    animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
+    animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1 })
+];
+var fxIn = animations_1.trigger('rotateIn', helper_1.inOutTransitions(fxInStyles, fxOutStyles));
+var fxInKids = animations_1.trigger('rotateInKids', helper_1.childInOutTransition(fxInStyles, fxOutStyles));
+var inUpLeft = animations_1.trigger('rotateInUpLeft', helper_1.inOutTransitions(inUpLeftStyles, outUpLeftStyles));
+var inUpLeftKids = animations_1.trigger('rotateInUpLeftKids', helper_1.childInOutTransitions(inUpLeftStyles, outUpLeftStyles, inUpRightStyles, outUpRightStyles));
+var inUpRight = animations_1.trigger('rotateInUpRight', helper_1.inOutTransitions(inUpRightStyles, outUpRightStyles));
+var inUpRightKids = animations_1.trigger('rotateInUpRightKids', helper_1.childInOutTransitions(inUpRightStyles, outUpRightStyles, inUpLeftStyles, outUpLeftStyles));
+var inDownLeft = animations_1.trigger('rotateInDownLeft', helper_1.inOutTransitions(inDownLeftStyles, outDownLeftStyles));
+var inDownLeftKids = animations_1.trigger('rotateInDownLeftKids', helper_1.childInOutTransitions(inDownLeftStyles, outDownLeftStyles, inDownRightStyles, outDownRightStyles));
+var inDownRight = animations_1.trigger('rotateInDownRight', helper_1.inOutTransitions(inDownRightStyles, outDownRightStyles));
+var inDownRightKids = animations_1.trigger('rotateInDownRightKids', helper_1.childInOutTransitions(inDownRightStyles, outDownRightStyles, inDownLeftStyles, outDownLeftStyles));
+exports.triggers = [
+    fxIn, inUpLeft, inUpRight, inDownLeft, inDownRight,
+    fxInKids, inUpLeftKids, inUpRightKids, inDownLeftKids, inDownRightKids
+];
 function rotate(timing, options) {
     return rotateOptions(helper_1.combo(timing, options));
 }

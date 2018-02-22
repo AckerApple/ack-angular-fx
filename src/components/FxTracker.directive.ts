@@ -1,10 +1,12 @@
 import { EventEmitter, Output, Input, Directive } from "@angular/core"
 
 @Directive({
-  selector:"fx-tracker"
+  selector:"fx-tracker",
+  exportAs:"fxTracker"
 }) export class FxTracker{
   @Input() value:any
-  
+  @Input() orderArray:any[]//back and foward determined by matching items in array
+
   @Input() history:any[]
   @Output() historyChange:EventEmitter<any[]> = new EventEmitter()
   
@@ -20,37 +22,65 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
     }
   }
 
-  produceFxId( value:any ){
+  produceFxId( value:any ):0|false|1|true{
     this.history = this.history || []
-    this.index = this.index==null ? 0 : this.index
 
-    const histLen = this.history.length
-    const isBack = histLen && this.history[this.index-1]==value
-    const isForward = histLen && this.history[this.index+1]==value
-
-    //back
-    if( isBack ){
-      this.indexChange.emit( --this.index )
-      this.fxId = this.fxId === 0 ? false : 0
+    if( this.orderArray ){
+      this.fxId = this.produceOrderFxId(value)
       this.fxIdChange.emit(this.fxId)
-      return this.fxId
-    }
+    }else{
+      this.index = this.index==null ? 0 : this.index
 
-    this.fxId = this.fxId === 1 ? true : 1
-    this.fxIdChange.emit(this.fxId)
+      const histLen = this.history.length
+      const isBack = histLen && this.history[this.index-1]==value
+      const isForward = histLen && this.history[this.index+1]==value
 
-    if( isForward ){
-      this.indexChange.emit( ++this.index )
-      return this.fxId
+      if( isBack ){
+        this.indexChange.emit( --this.index )
+        this.fxId = this.fxId === 0 ? false : 0
+        this.fxIdChange.emit(this.fxId)
+        return this.fxId
+      }
+
+      this.fxId = this.fxId === 1 ? true : 1
+      this.fxIdChange.emit(this.fxId)
+
+      if( isForward ){
+        this.indexChange.emit( ++this.index )
+        return this.fxId
+      }
+      
+      this.index = this.history.length//push will occur
     }
 
     this.history.push( value )
-
-    this.index = this.history.length - 1
     this.indexChange.emit( this.index )
-
     this.history.splice(25, this.history.length)//ensure history no greater than 25. If not this command does nothing
-
+    this.historyChange.emit( this.history )
     return this.fxId
+  }
+
+  produceOrderFxId( value:any ):0|false|1|true{
+    let oldIndex:number = 0
+    let newIndex:number = 0
+    const oldValue = this.history[this.history.length-1]
+
+    this.orderArray.forEach((item,index)=>{
+      if(value===item){
+        newIndex = index
+      }
+
+      if(oldValue===item){
+        oldIndex = index
+      }
+    })
+
+    this.index = newIndex
+
+    if( newIndex > oldIndex ){
+      return this.fxId = this.fxId === 0 ? false : 0
+    }
+
+    return this.fxId = this.fxId === 1 ? true : 1
   }
 }

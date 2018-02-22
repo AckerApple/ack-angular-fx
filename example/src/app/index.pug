@@ -1,0 +1,36 @@
+-fxNames = ['fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp']
+-fxNames.push('bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp')
+-fxNames.push('rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight')
+-fxNames.push('slideInUp','slideInDown','slideInLeft','slideInRight')
+-fxNames.push('zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp')
+
+h2 All Supported Animations
+
+div(style="text-align:center;padding:1em;font-size:0.75em;line-height:0;")
+  a(
+    "(click)" = "onToggleInAll()"
+    style     = "cursor:pointer"
+  ) toggle all
+
+.wrap([@childStag]="fxCount")
+  each fxName in fxNames
+    -attrs = {};
+    -attrs["(click)"] = "allFx."+fxName+" = !allFx."+fxName
+    .demo-wrap&attributes(attrs)
+      -bg = Math.floor(Math.random() * 16777215).toString(16)
+      -attrs = {};
+      -attrs["*ngIf"] = "allFx."+fxName+" && fxCount"
+      -attrs["[@"+fxName+"]"] = "{value:allFx."+fxName+" && fxCount, params:{time:fxTime}}"
+      -attrs["[ngStyle]"] = "{'background-color': '#"+bg+"'}"
+      -attrs.style = "text-align:center;"
+      .demo-item&attributes(attrs)
+        =fxName
+        //-
+          |#{fxName}=
+          br
+          |value:{{allFx.#{fxName}}}
+          br
+          |params:&#123;time:'{{ fxTime }}'&#125;
+div(style="background-color:#CCC;padding:.5em;text-align:center")
+  |Change above fx speed:&nbsp;
+  input("[(ngModel)]"="fxTime")

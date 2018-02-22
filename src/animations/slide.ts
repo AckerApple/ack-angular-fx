@@ -22,92 +22,91 @@ import {
   inOutGroupQueryByStyles
 } from "./helper"
 
-export function triggers() : AnimationTriggerMetadata[] {
-  const inUpStyles = [
-    style({visibility: 'hidden', transform: 'translate3d(0, 100%, 0)', offset: 0}),
-    style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1})
-  ]
+const inUpStyles = [
+  style({visibility: 'hidden', transform: 'translate3d(0, 100%, 0)', offset: 0}),
+  style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1})
+]
 
-  const outUpStyles = [
-    style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0}),
-    style({visibility: 'hidden', transform: 'translate3d(0, -100%, 0)', offset: 1})
-  ]
+const outUpStyles = [
+  style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0}),
+  style({visibility: 'hidden', transform: 'translate3d(0, -100%, 0)', offset: 1})
+]
 
-  const inDownStyles = [
-    style({visibility: 'hidden', transform: 'translate3d(0, -100%, 0)', offset: 0}),
-    style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1})
-  ]
+const inDownStyles = [
+  style({visibility: 'hidden', transform: 'translate3d(0, -100%, 0)', offset: 0}),
+  style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1})
+]
 
-  const outDownStyles = [
-    style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0}),
-    style({visibility: 'hidden', transform: 'translate3d(0, 100%, 0)', offset: 1})
-  ]
+const outDownStyles = [
+  style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0}),
+  style({visibility: 'hidden', transform: 'translate3d(0, 100%, 0)', offset: 1})
+]
 
-  const inLeftStyles = [
-    style({visibility: 'hidden', transform: 'translate3d(-100%, 0, 0)', offset: 0}),
-    style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1})
-  ]
+const inLeftStyles = [
+  style({visibility: 'hidden', transform: 'translate3d(-100%, 0, 0)', offset: 0}),
+  style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1})
+]
 
-  const outLeftStyles = [
-    style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0}),
-    style({visibility: 'hidden', transform: 'translate3d(100%, 0, 0)', offset: 1})
-  ]
- 
-  const inRightStyles = [
-    style({visibility: 'hidden', transform: 'translate3d(100%, 0, 0)', offset: 0}),
-    style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1})
-  ]
+const outLeftStyles = [
+  style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0}),
+  style({visibility: 'hidden', transform: 'translate3d(100%, 0, 0)', offset: 1})
+]
 
-  const outRightStyles = [
-    style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0}),
-    style({visibility: 'hidden', transform: 'translate3d(-100%, 0, 0)', offset: 1})
-  ]
+const inRightStyles = [
+  style({visibility: 'hidden', transform: 'translate3d(100%, 0, 0)', offset: 0}),
+  style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1})
+]
 
-  const inUp = trigger(
-    'slideInUp',
-    inOutTransitions(inUpStyles,outUpStyles)
-  )
+const outRightStyles = [
+  style({visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0}),
+  style({visibility: 'hidden', transform: 'translate3d(-100%, 0, 0)', offset: 1})
+]
 
-  const inUpKids = trigger(
-    'slideInUpKids',
-    childInOutTransitions(inUpStyles,outUpStyles,inDownStyles,outDownStyles)
-  )
+const inUp = trigger(
+  'slideInUp',
+  inOutTransitions(inUpStyles,outUpStyles)
+)
 
-  const inDown = trigger(
-    'slideInDown',
-    inOutTransitions(inDownStyles,outDownStyles)
-  )
+const inUpKids = trigger(
+  'slideInUpKids',
+  childInOutTransitions(inUpStyles,outUpStyles,inDownStyles,outDownStyles)
+)
 
-  const inDownKids = trigger(
-    'slideInDownKids',
-    childInOutTransitions(inDownStyles,outDownStyles,inUpStyles,outUpStyles)
-  )
+const inDown = trigger(
+  'slideInDown',
+  inOutTransitions(inDownStyles,outDownStyles)
+)
 
-  const inLeft = trigger(
-    'slideInLeft',
-    inOutTransitions(inLeftStyles,outLeftStyles)
-  )
+const inDownKids = trigger(
+  'slideInDownKids',
+  childInOutTransitions(inDownStyles,outDownStyles,inUpStyles,outUpStyles)
+)
 
-  const inLeftKids = trigger(
-    'slideInLeftKids',
-    childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
-  )
+const inLeft = trigger(
+  'slideInLeft',
+  inOutTransitions(inLeftStyles,outLeftStyles)
+)
 
-  const inRight = trigger(
-    'slideInRight',
-    inOutTransitions(inRightStyles,outRightStyles)
-  )
+const inLeftKids = trigger(
+  'slideInLeftKids',
+  childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
+)
 
-  const inRightKids = trigger(
-    'slideInRightKids',
-    childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
-  )
+const inRight = trigger(
+  'slideInRight',
+  inOutTransitions(inRightStyles,outRightStyles)
+)
 
-  return [
-    inUp, inDown, inLeft, inRight,
-    inUpKids, inDownKids, inLeftKids, inRightKids
-  ]
-}
+const inRightKids = trigger(
+  'slideInRightKids',
+  childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
+)
+
+export const triggers : AnimationTriggerMetadata[] = [
+  inUp, inDown, inLeft, inRight,
+  inUpKids, inDownKids, inLeftKids, inRightKids
+]
+
 export function slide(timing: string, options): AnimationMetadata[]{
   return slideOptions(combo(timing, options))
 }

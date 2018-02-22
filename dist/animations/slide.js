@@ -1,59 +1,51 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var animations_1 = require("@angular/animations");
-var index_1 = require("../index");
 var helper_1 = require("./helper");
-function triggers(config) {
-    if (config === void 0) { config = {}; }
-    var time = index_1.getConfigTiming(config);
-    var params = { time: '200ms 0ms linear' };
-    var inUpGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ visibility: 'hidden', transform: 'translate3d(0, 100%, 0)', offset: 0 }),
-        animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1 })
-    ], [
-        animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
-        animations_1.style({ visibility: 'hidden', transform: 'translate3d(0, -100%, 0)', offset: 1 })
-    ]);
-    var inDownGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ visibility: 'hidden', transform: 'translate3d(0, -100%, 0)', offset: 0 }),
-        animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1 })
-    ], [
-        animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
-        animations_1.style({ visibility: 'hidden', transform: 'translate3d(0, 100%, 0)', offset: 1 })
-    ]);
-    var inUp = animations_1.trigger('slideInUp', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inUpGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inDownGroup], { params: params })
-    ]);
-    var inDown = animations_1.trigger('slideInDown', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inDownGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inUpGroup], { params: params })
-    ]);
-    var inLeftGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ visibility: 'hidden', transform: 'translate3d(-100%, 0, 0)', offset: 0 }),
-        animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1 })
-    ], [
-        animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
-        animations_1.style({ visibility: 'hidden', transform: 'translate3d(100%, 0, 0)', offset: 1 })
-    ]);
-    var inRightGroup = helper_1.inOutGroupQueryByStyles([
-        animations_1.style({ visibility: 'hidden', transform: 'translate3d(100%, 0, 0)', offset: 0 }),
-        animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1 })
-    ], [
-        animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
-        animations_1.style({ visibility: 'hidden', transform: 'translate3d(-100%, 0, 0)', offset: 1 })
-    ]);
-    var inLeft = animations_1.trigger('slideInLeft', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inLeftGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inRightGroup], { params: params })
-    ]);
-    var inRight = animations_1.trigger('slideInRight', [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [inRightGroup], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [inLeftGroup], { params: params })
-    ]);
-    return [inUp, inDown, inLeft, inRight];
-}
-exports.triggers = triggers;
+var inUpStyles = [
+    animations_1.style({ visibility: 'hidden', transform: 'translate3d(0, 100%, 0)', offset: 0 }),
+    animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1 })
+];
+var outUpStyles = [
+    animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
+    animations_1.style({ visibility: 'hidden', transform: 'translate3d(0, -100%, 0)', offset: 1 })
+];
+var inDownStyles = [
+    animations_1.style({ visibility: 'hidden', transform: 'translate3d(0, -100%, 0)', offset: 0 }),
+    animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1 })
+];
+var outDownStyles = [
+    animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
+    animations_1.style({ visibility: 'hidden', transform: 'translate3d(0, 100%, 0)', offset: 1 })
+];
+var inLeftStyles = [
+    animations_1.style({ visibility: 'hidden', transform: 'translate3d(-100%, 0, 0)', offset: 0 }),
+    animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1 })
+];
+var outLeftStyles = [
+    animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
+    animations_1.style({ visibility: 'hidden', transform: 'translate3d(100%, 0, 0)', offset: 1 })
+];
+var inRightStyles = [
+    animations_1.style({ visibility: 'hidden', transform: 'translate3d(100%, 0, 0)', offset: 0 }),
+    animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1 })
+];
+var outRightStyles = [
+    animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
+    animations_1.style({ visibility: 'hidden', transform: 'translate3d(-100%, 0, 0)', offset: 1 })
+];
+var inUp = animations_1.trigger('slideInUp', helper_1.inOutTransitions(inUpStyles, outUpStyles));
+var inUpKids = animations_1.trigger('slideInUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
+var inDown = animations_1.trigger('slideInDown', helper_1.inOutTransitions(inDownStyles, outDownStyles));
+var inDownKids = animations_1.trigger('slideInDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
+var inLeft = animations_1.trigger('slideInLeft', helper_1.inOutTransitions(inLeftStyles, outLeftStyles));
+var inLeftKids = animations_1.trigger('slideInLeftKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
+var inRight = animations_1.trigger('slideInRight', helper_1.inOutTransitions(inRightStyles, outRightStyles));
+var inRightKids = animations_1.trigger('slideInRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
+exports.triggers = [
+    inUp, inDown, inLeft, inRight,
+    inUpKids, inDownKids, inLeftKids, inRightKids
+];
 function slide(timing, options) {
     return slideOptions(helper_1.combo(timing, options));
 }
