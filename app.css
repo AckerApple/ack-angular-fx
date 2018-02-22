@@ -1,21 +1,16 @@
-html,body, {padding:0;margin:0;height:100%;width:100%;}
+* {box-sizing:border-box}/* ease the pain of width management */
+
+html,body {padding:0;margin:0;height:100%;width:100%;}
 
 body {
   font-family:Helvetica;text-align:center;
 }
 
-.colorizer{
+app {
+  display:inline-table;
+  width:100%;height:100%;
   background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
   -webkit-animation: hue 30s infinite linear;
-  height:100%;width:100%;
-  display:inline-table;
-  padding:0;margin:0;
-}
-
-app {
-  display:inline-block;text-align:left;
-  width:100%;max-width:900px;
-  background-color:white;
 }
 
 .container {
