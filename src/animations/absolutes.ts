@@ -22,6 +22,8 @@ import { fxConfigCombo, defaultOptions, combo } from "./helper"
 
 const abDef = {
   position : '{{ position }}',
+  //top : '0',
+  //"z-index" : '20',
   width    : '100%',
   //height   : '100%',
   overflow : 'hidden'
@@ -92,6 +94,14 @@ const absoluteKids = trigger('absoluteKids', [
   ],{params:params})
 ])
 
+const absoluteInOut = trigger('absoluteInOut', [
+  transition('* <=> *',[
+    animate('{{ time }}',
+      keyframes(abKeyFrames)
+    )
+  ],{params:params})
+])
+
 /*const relativeWrap = trigger('relativeWrap', [
   transition('* <=> *',[
     group([
@@ -116,6 +126,7 @@ const absoluteKids = trigger('absoluteKids', [
 ])*/
 
 export const triggers : AnimationTriggerMetadata[] = [
+  absoluteInOut,
   absoluteKids,
   absoluteInKids,
   absoluteOutKids

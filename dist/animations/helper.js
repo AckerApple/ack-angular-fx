@@ -41,12 +41,12 @@ exports.inOutGroupQueryByStyles = inOutGroupQueryByStyles;
 function inOutTransitions(inStyles, outStyles) {
     var params = { time: '200ms 0ms linear' };
     return [
-        animations_1.transition(function (from, to) { return to && from === 'void' && to !== 'void' ? true : false; }, 
+        animations_1.transition(function (from, to) { return to && to !== 'nofx' && from === 'void' && to !== 'void' ? true : false; }, 
         //'void => *',
         [
             animations_1.animate('{{ time }}', animations_1.keyframes(inStyles))
         ], { params: params }),
-        animations_1.transition(function (from, to) { return from && from !== 'void' && to === 'void' ? true : false; }, 
+        animations_1.transition(function (from, to) { return from !== 'nofx' && from !== 'void' && to === 'void' ? true : false; }, 
         //'* => void',
         [
             animations_1.animate('{{ time }}', animations_1.keyframes(outStyles))

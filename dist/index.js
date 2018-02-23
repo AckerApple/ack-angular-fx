@@ -11,8 +11,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var AckFx_module_1 = require("./AckFx.module");
 exports.AckFxModule = AckFx_module_1.AckFxModule;
 var animations_1 = require("@angular/animations");
-var childStag_1 = require("./animations/childStag");
-var absolutes_1 = require("./animations/absolutes");
+var allFx_1 = require("./allFx");
+var allFx_2 = require("./allFx");
+exports.fxArray = allFx_2.fxArray;
 var fade_1 = require("./animations/fade");
 var bounce_1 = require("./animations/bounce");
 var rotate_1 = require("./animations/rotate");
@@ -143,8 +144,8 @@ function upgradeComponent(component, animations) {
     if (!annots)
         return;
     annots[0].animations = annots[0].animations || [];
-    var fxArray = animations || getFxArray();
-    annots[0].animations.push.apply(annots[0].animations, fxArray);
+    var fxArr = animations || allFx_1.fxArray;
+    annots[0].animations.push.apply(annots[0].animations, fxArr);
 }
 exports.upgradeComponent = upgradeComponent;
 function selectFx(args, effectList, config) {
@@ -166,22 +167,7 @@ exports.selectFx = selectFx;
 function processTriggerSelect(config, effectList) {
     var fxs = [];
     var fxTypes = effectsArrayToTypes(config.effects || exports.availEffects);
-    if (fxTypes.fade) {
-        fxs.push.apply(fxs, fade_1.triggers);
-    }
-    if (fxTypes.bounce) {
-        fxs.push.apply(fxs, bounce_1.triggers);
-    }
-    if (fxTypes.rotate) {
-        fxs.push.apply(fxs, rotate_1.triggers);
-    }
-    if (fxTypes.slide) {
-        fxs.push.apply(fxs, slide_1.triggers);
-    }
-    if (fxTypes.zoom) {
-        fxs.push.apply(fxs, zoom_1.triggers);
-    }
-    fxs.push.apply(fxs, absolutes_1.triggers);
+    fxs.push.apply(fxs, allFx_1.fxArray);
     return fxs;
 }
 function processSelect(name, config, effectArray) {
@@ -195,10 +181,7 @@ exports.processSelect = processSelect;
   {name:'EaseOut', value:'ease-out'},
   {name:'EaseInOut', value:'ease-in-out'}
 ]*/
-function getAllFx() {
-    return getFxArray();
-}
-exports.getAllFx = getAllFx;
+//fxArray + deprecated fxs
 function getFxArray() {
     var allFx = [
         processSelect("absoluteSwap", exports.menu["absoluteSwap400"]),
@@ -227,13 +210,7 @@ function getFxArray() {
         processSelect("1500", exports.menu["1500"]),
         processSelect("2000", exports.menu["2000"])
     ];
-    allFx.push.apply(allFx, childStag_1.childStags);
-    allFx.push.apply(allFx, fade_1.triggers);
-    allFx.push.apply(allFx, bounce_1.triggers);
-    allFx.push.apply(allFx, rotate_1.triggers);
-    allFx.push.apply(allFx, slide_1.triggers);
-    allFx.push.apply(allFx, zoom_1.triggers);
-    allFx.push.apply(allFx, absolutes_1.triggers);
+    allFx.push.apply(allFx, allFx_1.fxArray);
     return allFx;
 }
 exports.getFxArray = getFxArray;

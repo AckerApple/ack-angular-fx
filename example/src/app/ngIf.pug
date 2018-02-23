@@ -6,7 +6,7 @@
 
 -ngIfAttrs = {};
 each fx in fxNames
-  -ngIfAttrs["[@"+fx+"]"] = "{value:FxSession.fxForward=='"+fx+"' && !hideToggle, params:{time:fxTime}}"
+  -ngIfAttrs["[@"+fx+"]"] = "{value:FxSession.fxForward=='"+fx+"' ? !hideToggle : 'nofx', params:{time:fxTime}}"
 
 h2 *ngIf Fx
 p Tap anywhere below

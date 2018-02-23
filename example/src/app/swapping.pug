@@ -6,20 +6,17 @@
 
 -absolutes = ['absoluteKids','absoluteInKids','absoluteOutKids']
 -swapFxAttrs = {absoluteKids:[], absoluteInKids:[],absoluteOutKids:[]};
+-fxAttrs = []
 each fx in fxNames
+  -fxAttrs["[@"+fx+"]"] = "{value:FxSession.fxForward=='"+fx+"' ? fxId : 'nofx', params:{time:fxTime}}"
   each ab in absolutes
-    -swapFxAttrs[ab]["[@"+fx+"Kids]"] = "{value:FxSession.fxForward=='"+fx+"' && fxId, params:{time:fxTime}}"
+    -swapFxAttrs[ab]["[@"+fx+"Kids]"] = "{value:FxSession.fxForward=='"+fx+"' ? fxId : 'nofx', params:{time:fxTime}}"
 
 each ab in absolutes
   -swapFxAttrs[ab]["[@"+ab+"]"] = "{value:fxId, params:{time:fxTime, position:fxPosition}}"
 
 h2 Swapping
 p Tap a box below
-
-fx-tracker(
-  "[value]"  = "swapIndex"
-  "[(fxId)]" = "fxId"
-)
 
 each ab in absolutes
   h3 @[#{ab}]
@@ -29,17 +26,17 @@ each ab in absolutes
     .wrap&attributes(swapFxAttrs[ab])
       .demo-wrap
         .demo-item(
-          "(click)" = "swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"
+          "(click)" = "fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"
         ) back
       ng-container(*ngFor="let x of swapArray;let index=index")
         .demo-wrap(*ngIf="swapIndex==index")
           .demo-item(
-            "(click)" = "swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"
-          )
+            "(click)" = "fxId=fxId===true?1:true;swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"
+          )&attributes(fxAttrs)
             |*ngFor:{{ index }}
       .demo-wrap
         .demo-item(
-          "(click)" = "swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"
+          "(click)" = "fxId=fxId===true?1:true;swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"
         ) next
 
   div(style="background-color:#CCC;padding:.5em;")
@@ -62,13 +59,8 @@ each ab in absolutes
 
     h4 Code Sample 1
     textarea(style="width:100%;height:260px" wrap="off" readonly).
-      &lt;fx-tracker(
-        "[value]"     = "swapIndex"
-        "[(fxId)]"    = "fxId"
-      )&gt;&lt;/fx-tracker&gt;
-
       &lt;div [@#{ab}]="&#123;value:fxId, params:&#123;position:'{{fxPosition}}', time:'{{fxTime}}'&#125;&#125;"&gt;
-        &lt;button (click)="swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
+        &lt;button (click)="fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
           back
         &lt;/button&gt;
         &lt;div
@@ -83,13 +75,8 @@ each ab in absolutes
       &lt;/div&gt;
     h4 Code Sample 2
     textarea(style="width:100%;height:280px" wrap="off" readonly).
-      &lt;fx-tracker(
-        "[value]"     = "swapIndex"
-        "[(fxId)]"    = "fxId"
-      )&gt;&lt;/fx-tracker&gt;
-
       &lt;div [@#{ab}]="&#123;value:fxId, params:&#123;time:'{{fxTime}}'&#125;&#125;"&gt;
-        &lt;button (click)="swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
+        &lt;button (click)="fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
           back
         &lt;/button&gt;
         &lt;div
@@ -110,23 +97,23 @@ fieldset
   .wrap
     .demo-wrap
       .demo-item(
-        "(click)" = "swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"
+        "(click)" = "fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"
       ) back
     div(
       style="position:relative;overflow:hidden;display:inline-block;width:130px;height:130px;margin:5px;"
     )
       .demo-wrap(
-        style="margin:0em;"
+        style    = "margin:0em;"
       )&attributes(swapFxAttrs.absoluteKids)
         ng-container(*ngFor="let x of swapArray;let index=index")
           .demo-item(
             *ngIf = "swapIndex==index"
-            "(click)" = "swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"
-          )
+            "(click)" = "fxId=fxId===true?1:true;swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"
+          )&attributes(fxAttrs)
             |*ngFor:{{ index }}
     .demo-wrap
       .demo-item(
-        "(click)" = "swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"
+        "(click)" = "fxId=fxId===true?1:true;swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"
       ) next
 
 div(style="background-color:#CCC;padding:.5em;")
@@ -149,13 +136,8 @@ div(style="background-color:#CCC;padding:.5em;")
 
   h4 Code Sample
   textarea(style="width:100%;height:260px" wrap="off" readonly).
-    &lt;fx-tracker(
-      "[value]"     = "swapIndex"
-      "[(fxId)]"    = "fxId"
-    )&gt;&lt;/fx-tracker&gt;
-
     &lt;div [@absoluteKids]="&#123;value:fxId, params:&#123;position:'{{fxPosition}}', time:'{{fxTime}}'&#125;&#125;"&gt;
-      &lt;button (click)="swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
+      &lt;button (click)="fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
         back
       &lt;/button&gt;
       &lt;div style="position:relative;overflow:hidden;"&gt;

@@ -12,7 +12,7 @@ import { string as directives } from "./directives.template"
 import { string as swapping } from "./swapping.template"
 
 import { delayArray, getFxArray } from '../../../src';
-const fxArray = getFxArray()
+const fxArray = getFxArray()//adds deprecated fx
 
 @Component({
   template   : directives,
@@ -84,8 +84,15 @@ const fxArray = getFxArray()
 }) export class Deprecated{
   panelAnimation: string = 'fadeInLeft'
   swapShow: number = 0
+  delayArray: any[] = delayArray
 
   constructor(public FxSession:FxSession){}
+
+  toggleAllShorts(){
+    this.delayArray.forEach((v,i)=>{
+      this['show'+v]=!this['show'+v]
+    });
+  }
 
   nextPanel(){
     this.panelAnimation=this.FxSession.fxForward

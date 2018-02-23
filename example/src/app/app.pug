@@ -6,7 +6,7 @@
 
 -routeAttrs = {};
 each fx in fxNames
-  -routeAttrs["[@"+fx+"Kids]"] = "{value:FxSession.fxForward=='"+fx+"' && fxId, params:{time:fxTime, position:'fixed'}}"
+  -routeAttrs["[@"+fx+"Kids]"] = "{value:FxSession.fxForward=='"+fx+"' ? fxId : 'nofx', params:{time:fxTime, position:'fixed'}}"
 
 table.container(
   cellPadding = "0"
@@ -43,7 +43,7 @@ table.container(
 
       div(style="position:relative;overflow:hidden;height:100%")
         div(
-          style = "padding:1em;"
-          "[@absoluteKids]"  = "{value:fxId, params:{time:fxTime}}"
+          style = "padding:1em;height:100%;"
+          "[@absoluteKids]"  = "{value:fxId, params:{time:fxTime, position:'absolute'}}"
         )&attributes(routeAttrs)
           router-outlet(#o="outlet")

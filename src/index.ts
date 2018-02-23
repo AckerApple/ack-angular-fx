@@ -8,13 +8,14 @@ import {
   AnimationTransitionMetadata
 } from '@angular/animations';
 
-import { childStags } from './animations/childStag';
-import { triggers as absoluteTriggers } from './animations/absolutes';
-import { states as fadeStates, triggers as fadeTriggers } from './animations/fade';
-import { bounce, triggers as bounceTriggers } from './animations/bounce';
-import { rotate, triggers as rotateTriggers } from './animations/rotate';
-import { slide, triggers as slideTriggers } from './animations/slide';
-import { zoom, triggers as zoomTriggers } from './animations/zoom';
+import { fxArray } from "./allFx"
+export { fxArray } from "./allFx"
+
+import { states as fadeStates } from './animations/fade';
+import { bounce } from './animations/bounce';
+import { rotate } from './animations/rotate';
+import { slide } from './animations/slide';
+import { zoom } from './animations/zoom';
 
 export interface selectedFxMetaData{
   triggers : AnimationTriggerMetadata[]
@@ -199,9 +200,9 @@ export function upgradeComponent(component, animations?){
   
   annots[0].animations = annots[0].animations || []
   
-  const fxArray = animations || getFxArray()
+  const fxArr = animations || fxArray
   
-  annots[0].animations.push.apply(annots[0].animations, fxArray)
+  annots[0].animations.push.apply(annots[0].animations, fxArr)
 }
 
 export function selectFx(
@@ -230,27 +231,7 @@ function processTriggerSelect(config:fxConfig, effectList){
   const fxs = []
   const fxTypes = effectsArrayToTypes( config.effects || availEffects )
   
-  if( fxTypes.fade ){
-    fxs.push.apply(fxs, fadeTriggers)
-  }
-  
-  if( fxTypes.bounce ){
-    fxs.push.apply(fxs, bounceTriggers)
-  }
-  
-  if( fxTypes.rotate ){
-    fxs.push.apply(fxs, rotateTriggers)
-  }
-  
-  if( fxTypes.slide ){
-    fxs.push.apply(fxs, slideTriggers)
-  }
-  
-  if( fxTypes.zoom ){
-    fxs.push.apply(fxs, zoomTriggers)
-  }
-  
-  fxs.push.apply(fxs, absoluteTriggers)
+  fxs.push.apply(fxs, fxArray)
   
   return fxs
 }
@@ -271,10 +252,8 @@ export function processSelect(
   {name:'EaseInOut', value:'ease-in-out'}
 ]*/
 
-export function getAllFx() : AnimationTriggerMetadata[] {
-  return getFxArray()
-}
 
+//fxArray + deprecated fxs
 export function getFxArray() : AnimationTriggerMetadata[] {
   const allFx = [
     processSelect("absoluteSwap", menu["absoluteSwap400"] ),
@@ -304,13 +283,7 @@ export function getFxArray() : AnimationTriggerMetadata[] {
     processSelect("2000", menu["2000"] )
   ]
 
-  allFx.push.apply(allFx, childStags)
-  allFx.push.apply(allFx, fadeTriggers)
-  allFx.push.apply(allFx, bounceTriggers)
-  allFx.push.apply(allFx, rotateTriggers)
-  allFx.push.apply(allFx, slideTriggers)
-  allFx.push.apply(allFx, zoomTriggers)
-  allFx.push.apply(allFx, absoluteTriggers)
+  allFx.push.apply(allFx, fxArray)
 
   return allFx
 }

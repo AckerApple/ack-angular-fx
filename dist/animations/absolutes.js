@@ -11,6 +11,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var animations_1 = require("@angular/animations");
 var abDef = {
     position: '{{ position }}',
+    //top : '0',
+    //"z-index" : '20',
     width: '100%',
     //height   : '100%',
     overflow: 'hidden'
@@ -53,6 +55,11 @@ var absoluteKids = animations_1.trigger('absoluteKids', [
         ])
     ], { params: params })
 ]);
+var absoluteInOut = animations_1.trigger('absoluteInOut', [
+    animations_1.transition('* <=> *', [
+        animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
+    ], { params: params })
+]);
 /*const relativeWrap = trigger('relativeWrap', [
   transition('* <=> *',[
     group([
@@ -76,6 +83,7 @@ var absoluteKids = animations_1.trigger('absoluteKids', [
   ],{params:params})
 ])*/
 exports.triggers = [
+    absoluteInOut,
     absoluteKids,
     absoluteInKids,
     absoluteOutKids

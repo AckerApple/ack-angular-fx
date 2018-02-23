@@ -68,7 +68,7 @@ export function inOutTransitions(
   const params = {time:'200ms 0ms linear'}
   return [
     transition(
-      (from,to)=>to && from==='void' && to!=='void' ? true : false,
+      (from,to)=>to && to!=='nofx' && from==='void' && to!=='void' ? true : false,
       //'void => *',
       [
         animate('{{ time }}',
@@ -78,7 +78,7 @@ export function inOutTransitions(
       { params:params }
     ),
     transition(
-      (from,to)=>from && from!=='void' && to==='void' ? true : false,
+      (from,to)=>from!=='nofx' && from!=='void' && to==='void' ? true : false,
       //'* => void',
       [
         animate('{{ time }}',

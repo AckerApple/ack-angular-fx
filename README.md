@@ -66,11 +66,11 @@ npm install ack-angular-fx --save-dev
 Animations must be injected into your components and this is how to do that
 
 ```typescript
-import { getAllFx } from "ack-angular-fx";
+import { fxArray } from "ack-angular-fx";
 import { Component } from "@angular/core"
 
 @Component({
-  animations:getAllFx(),
+  animations:fxArray,
   template:`
     <div *ngIf="boolean" [@fadeInUp]="boolean">
       ...
@@ -94,13 +94,13 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 
 //ack-angular-fx related imports
-import { AckFxModule, getAllFx } from "ack-angular-fx";
+import { AckFxModule, fxArray } from "ack-angular-fx";
 import { supportDocument } from "ack-angular-fx/web-animations.min"
 
 supportDocument( document )//cross browser fx support
 
 @Component({
-  animations:getAllFx(),
+  animations:fxArray,
   template:`
     <div *ngIf="boolean" [@rotateIn]="boolean">
       ...

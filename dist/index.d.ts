@@ -1,5 +1,6 @@
 export { AckFxModule } from "./AckFx.module";
 import { AnimationTriggerMetadata, AnimationStateMetadata, AnimationTransitionMetadata } from '@angular/animations';
+export { fxArray } from "./allFx";
 export interface selectedFxMetaData {
     triggers: AnimationTriggerMetadata[];
     states: AnimationTriggerMetadata[];
@@ -223,7 +224,6 @@ export declare function stateEffectsByConfig(timing: string, config: fxConfig): 
 export declare function upgradeComponent(component: any, animations?: any): void;
 export declare function selectFx(args: string[], effectList: string[], config?: fxConfig): selectedFxMetaData;
 export declare function processSelect(name: string, config: fxConfig, effectArray?: string[]): AnimationTriggerMetadata;
-export declare function getAllFx(): AnimationTriggerMetadata[];
 export declare function getFxArray(): AnimationTriggerMetadata[];
 export declare let absSwapClone: {
     name: any;
