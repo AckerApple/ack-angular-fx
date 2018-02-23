@@ -1,6 +1,9 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [2.0.4] - 2018-02-23
+- added transistion function interpolation
+
 ## [2.0.0] - 2018-02-22
 - prefx compiling seems no longer required
 ### Breaking Changes

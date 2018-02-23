@@ -33,12 +33,10 @@ table.container(
   tr
     td(style="height:100%;text-align:left")
       fx-tracker(
-        #tracker      = "fxTracker"
-        "[value]"     = "o.activated ? o.activatedRoute.url.value[0].path : null"
-        "[(fxId)]"    = "fxId"
+        #tracker         = "fxTracker"
+        "[(fxId)]"       = "fxId"
         "[(orderArray)]" = "routes"
-        "[(index)]"   = "fxHistoryIndex"
-        "[(history)]" = "fxHistory"
+        "[activatedRoute]" = "routerOutlet.activated ? routerOutlet.activatedRoute : null"
       )
 
       div(style="position:relative;overflow:hidden;height:100%")
@@ -46,4 +44,4 @@ table.container(
           style = "padding:1em;height:100%;"
           "[@absoluteKids]"  = "{value:fxId, params:{time:fxTime, position:'absolute'}}"
         )&attributes(routeAttrs)
-          router-outlet(#o="outlet")
+          router-outlet(#routerOutlet="outlet")

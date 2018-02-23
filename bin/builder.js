@@ -68,7 +68,13 @@ function stateDefsBy(defs, tabs) {
         }
         else {
             steps = animateSteps(def.animation || def.steps._steps, tabs + 1); //Angular v4.0.0+ || v2.4.0+
-            trans = l + ("transition(\"" + expr + "\", " + steps + ")");
+            if (typeof expr === 'string') {
+                expr = "\"" + expr + "\"";
+            }
+            else {
+                expr = expr.toString();
+            }
+            trans = l + ("transition(" + expr + ", " + steps + ")");
         }
         states.push(trans);
     }
@@ -138,7 +144,8 @@ function groupToString(step, tabs) {
 }
 function transitionToString(step, tabs) {
     if (tabs === void 0) { tabs = 0; }
-    return line(tabs) + ("transition(\"" + step.expr + "\", " + animateSteps(step.animation, ++tabs) + ")");
+    console.log('-------- step.expr', step.expr);
+    return line(tabs) + ("transition(\"----" + step.expr + "\", " + animateSteps(step.animation, ++tabs) + ")");
 }
 function staggerToString(step, tabs) {
     if (tabs === void 0) { tabs = 0; }

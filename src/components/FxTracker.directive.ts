@@ -5,6 +5,7 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
   exportAs:"fxTracker"
 }) export class FxTracker{
   @Input() value:any
+  @Input() activatedRoute:any//ActivatedRoute
   @Input() orderArray:any[]//back and foward determined by matching items in array
 
   @Input() history:any[]
@@ -17,9 +18,18 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
   @Output() fxIdChange:EventEmitter<0|false|1|true> = new EventEmitter()
 
   ngOnChanges(changes){
-    if(changes.value){
+    if( changes.value ){
       this.produceFxId(changes.value.currentValue)
     }
+
+    if( changes.activatedRoute && changes.activatedRoute.currentValue ){
+      this.produceByRoute(changes.activatedRoute.currentValue)
+    }
+  }
+
+  produceByRoute( activatedRoute:any ){
+    const path = this.getRoutePath(activatedRoute)
+    this.produceFxId( path )
   }
 
   produceFxId( value:any ):0|false|1|true{
@@ -82,5 +92,11 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
     }
 
     return this.fxId = this.fxId === 1 ? true : 1
+  }
+
+  getRoutePath( activatedRoute ):any{
+    let target = activatedRoute
+    while(target.firstChild)target=target.firstChild
+    return target.routeConfig.path
   }
 }

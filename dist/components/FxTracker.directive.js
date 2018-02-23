@@ -11,6 +11,13 @@ var FxTracker = /** @class */ (function () {
         if (changes.value) {
             this.produceFxId(changes.value.currentValue);
         }
+        if (changes.activatedRoute && changes.activatedRoute.currentValue) {
+            this.produceByRoute(changes.activatedRoute.currentValue);
+        }
+    };
+    FxTracker.prototype.produceByRoute = function (activatedRoute) {
+        var path = this.getRoutePath(activatedRoute);
+        this.produceFxId(path);
     };
     FxTracker.prototype.produceFxId = function (value) {
         this.history = this.history || [];
@@ -61,6 +68,12 @@ var FxTracker = /** @class */ (function () {
         }
         return this.fxId = this.fxId === 1 ? true : 1;
     };
+    FxTracker.prototype.getRoutePath = function (activatedRoute) {
+        var target = activatedRoute;
+        while (target.firstChild)
+            target = target.firstChild;
+        return target.routeConfig.path;
+    };
     FxTracker.decorators = [
         { type: core_1.Directive, args: [{
                     selector: "fx-tracker",
@@ -71,6 +84,7 @@ var FxTracker = /** @class */ (function () {
     FxTracker.ctorParameters = function () { return []; };
     FxTracker.propDecorators = {
         "value": [{ type: core_1.Input },],
+        "activatedRoute": [{ type: core_1.Input },],
         "orderArray": [{ type: core_1.Input },],
         "history": [{ type: core_1.Input },],
         "historyChange": [{ type: core_1.Output },],

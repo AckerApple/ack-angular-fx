@@ -58,7 +58,7 @@ function stateDefsBy(defs:any[], tabs:number=0) : string {
   let trans = ''
   let steps = ''
   let style = ''
-  let expr = ''
+  let expr:any = ''
   const l = line(tabs)
 
   for(let defIndex=defs.length-1; defIndex >= 0; --defIndex){
@@ -78,7 +78,13 @@ function stateDefsBy(defs:any[], tabs:number=0) : string {
       trans = triggerToString(def, tabs)//Angular v4.0.0+ || v2.4.0+
     }else{
       steps = animateSteps(def.animation || def.steps._steps, tabs+1)//Angular v4.0.0+ || v2.4.0+
-      trans = l + `transition("${expr}", ${steps})`
+      
+      if( typeof expr==='string' ){
+        expr = `"${expr}"`
+      }else{
+        expr = expr.toString()
+      }
+      trans = l + `transition(${expr}, ${steps})`
     }
     
     states.push( trans )
@@ -150,7 +156,8 @@ function groupToString(step, tabs:number=0){
 }
 
 function transitionToString(step, tabs:number=0){
-  return line(tabs) + `transition("${step.expr}", ${animateSteps(step.animation, ++tabs)})`
+  console.log('-------- step.expr',step.expr)
+  return line(tabs) + `transition("----${step.expr}", ${animateSteps(step.animation, ++tabs)})`
 }
 
 function staggerToString(step, tabs:number=0){
