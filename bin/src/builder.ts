@@ -84,7 +84,12 @@ function stateDefsBy(defs:any[], tabs:number=0) : string {
       }else{
         expr = expr.toString()
       }
-      trans = l + `transition(${expr}, ${steps})`
+
+      trans = l + `transition(${expr}, ${steps}`
+      if(def.options){
+        trans += ',' + JSON.stringify(def.options,null,2)
+      }
+      trans += ')'
     }
     
     states.push( trans )

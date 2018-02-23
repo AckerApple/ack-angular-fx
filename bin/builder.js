@@ -74,7 +74,11 @@ function stateDefsBy(defs, tabs) {
             else {
                 expr = expr.toString();
             }
-            trans = l + ("transition(" + expr + ", " + steps + ")");
+            trans = l + ("transition(" + expr + ", " + steps);
+            if (def.options) {
+                trans += ',' + JSON.stringify(def.options, null, 2);
+            }
+            trans += ')';
         }
         states.push(trans);
     }
