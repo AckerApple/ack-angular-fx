@@ -8,7 +8,7 @@ var fxInStyles = [
 ];
 var fxOutStyles = [
     animations_1.style({ opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
-    animations_1.style({ opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 200deg)', offset: 1 })
+    animations_1.style({ opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, -200deg)', offset: 1 })
 ];
 var inUpLeftStyles = [
     animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0 }),
@@ -45,13 +45,13 @@ var outDownRightStyles = [
 var fxIn = animations_1.trigger('rotateIn', helper_1.inOutTransitions(fxInStyles, fxOutStyles));
 var fxInKids = animations_1.trigger('rotateInKids', helper_1.childInOutTransition(fxInStyles, fxOutStyles));
 var inUpLeft = animations_1.trigger('rotateInUpLeft', helper_1.inOutTransitions(inUpLeftStyles, outUpLeftStyles));
-var inUpLeftKids = animations_1.trigger('rotateInUpLeftKids', helper_1.childInOutTransitions(inUpLeftStyles, outUpLeftStyles, inUpRightStyles, outUpRightStyles));
+var inUpLeftKids = animations_1.trigger('rotateInUpLeftKids', helper_1.childInOutTransitions(inUpLeftStyles, outUpLeftStyles, inDownLeftStyles, outDownLeftStyles));
 var inUpRight = animations_1.trigger('rotateInUpRight', helper_1.inOutTransitions(inUpRightStyles, outUpRightStyles));
-var inUpRightKids = animations_1.trigger('rotateInUpRightKids', helper_1.childInOutTransitions(inUpRightStyles, outUpRightStyles, inUpLeftStyles, outUpLeftStyles));
+var inUpRightKids = animations_1.trigger('rotateInUpRightKids', helper_1.childInOutTransitions(inUpRightStyles, outUpRightStyles, inDownRightStyles, outDownRightStyles));
 var inDownLeft = animations_1.trigger('rotateInDownLeft', helper_1.inOutTransitions(inDownLeftStyles, outDownLeftStyles));
-var inDownLeftKids = animations_1.trigger('rotateInDownLeftKids', helper_1.childInOutTransitions(inDownLeftStyles, outDownLeftStyles, inDownRightStyles, outDownRightStyles));
+var inDownLeftKids = animations_1.trigger('rotateInDownLeftKids', helper_1.childInOutTransitions(inDownLeftStyles, outDownLeftStyles, inUpLeftStyles, outUpLeftStyles));
 var inDownRight = animations_1.trigger('rotateInDownRight', helper_1.inOutTransitions(inDownRightStyles, outDownRightStyles));
-var inDownRightKids = animations_1.trigger('rotateInDownRightKids', helper_1.childInOutTransitions(inDownRightStyles, outDownRightStyles, inDownLeftStyles, outDownLeftStyles));
+var inDownRightKids = animations_1.trigger('rotateInDownRightKids', helper_1.childInOutTransitions(inDownRightStyles, outDownRightStyles, inUpRightStyles, outUpRightStyles));
 exports.triggers = [
     fxIn, inUpLeft, inUpRight, inDownLeft, inDownRight,
     fxInKids, inUpLeftKids, inUpRightKids, inDownLeftKids, inDownRightKids

@@ -30,7 +30,7 @@ const fxInStyles = [
 
 const fxOutStyles = [
   style({opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0}),
-  style({opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 200deg)', offset: 1})
+  style({opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, -200deg)', offset: 1})
 ]
 
 const inUpLeftStyles = [
@@ -88,7 +88,7 @@ const inUpLeft = trigger(
 
 const inUpLeftKids = trigger(
   'rotateInUpLeftKids',
-  childInOutTransitions(inUpLeftStyles,outUpLeftStyles,inUpRightStyles,outUpRightStyles)
+  childInOutTransitions(inUpLeftStyles,outUpLeftStyles,inDownLeftStyles,outDownLeftStyles)
 )
 
 const inUpRight = trigger(
@@ -98,7 +98,7 @@ const inUpRight = trigger(
 
 const inUpRightKids = trigger(
   'rotateInUpRightKids',
-  childInOutTransitions(inUpRightStyles,outUpRightStyles,inUpLeftStyles,outUpLeftStyles)
+  childInOutTransitions(inUpRightStyles,outUpRightStyles,inDownRightStyles,outDownRightStyles)
 )
 
 const inDownLeft = trigger(
@@ -108,7 +108,7 @@ const inDownLeft = trigger(
 
 const inDownLeftKids = trigger(
   'rotateInDownLeftKids',
-  childInOutTransitions(inDownLeftStyles,outDownLeftStyles,inDownRightStyles,outDownRightStyles)
+  childInOutTransitions(inDownLeftStyles,outDownLeftStyles,inUpLeftStyles,outUpLeftStyles)
 )
 
 const inDownRight = trigger(
@@ -118,7 +118,7 @@ const inDownRight = trigger(
 
 const inDownRightKids = trigger(
   'rotateInDownRightKids',
-  childInOutTransitions(inDownRightStyles,outDownRightStyles,inDownLeftStyles,outDownLeftStyles)
+  childInOutTransitions(inDownRightStyles,outDownRightStyles,inUpRightStyles,outUpRightStyles)
 )
 
 export const triggers : AnimationTriggerMetadata[] = [
