@@ -25,6 +25,7 @@ Angular animations made easy. [Example Page](https://ackerapple.github.io/ack-an
 - [Stagger](#stagger)
 - [Supported Animations](#supported-animations)
 - [web-animations-js](#web-animations-js)
+- [Prebuild Fxs to Single File](#prebuild-fxs-to-single-file)
 - [Work on This Project](#work-on-this-project)
   - [Building Example](#building-example)
 - [Credits](#credits)
@@ -251,6 +252,38 @@ see online demo https://ackerapple.github.io/ack-angular-fx
 If due to browser lack of support for animations, try including the following in your project
 
 [web-animations-js](https://www.npmjs.com/package/web-animations-js) has been included to make life easier in terms of browser compatibility
+
+## Prebuild Fxs to Single File
+Known as the prefx process, ack-angular-fx has cli commands to bundle animations to file
+
+> This often helps with bundling issues and Angular AOT compilation
+
+### Example Compile All Animations to One File
+
+Step 1 : Add the following to your package.json scripts
+```javascript
+"scripts":{
+  "build:prefx": "ack-angular-fx --out ./src/prefx.ts"
+}
+```
+
+Step 2 : Now, run the following in a command prompt terminal
+```bash
+npm run build:prefx
+```
+> After the above command you should now see a prefx.ts file in your src folder
+
+Step 3 : Import your compiled .ts file and apply to component(s)
+```javascript
+import { fxArray } from "./prefx"
+import { Component } from "@angular/core"
+
+@Component({
+  selector: 'app',
+  template: '<div *ngIf="a==1" [@fadeInUp]="true">hello world</div>',
+  animations: fxArray
+})
+```
 
 # Work on This Project
 Everything in this topic is run in an command prompt terminal
