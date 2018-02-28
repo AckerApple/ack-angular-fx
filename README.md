@@ -19,27 +19,10 @@ Angular animations made easy. [Example Page](https://ackerapple.github.io/ack-an
 - [Include](#include)
 - [Browser Compatibility](#browser-compatibility)
 - [Examples](#examples)
+  - [Robust Example Include Fx](#robust-example-include-fx)
+  - [Params Example](#params-example)
   - [Global Usage](#global-usage)
-  - [whileStyle Example](#whilestyle-example)
 - [Stagger](#stagger)
-- [Params](#params)
-  - [duration](#duration)
-  - [delay](#delay)
-  - [easing](#easing)
-  - [name](#name)
-  - [igniter](#igniter)
-  - [whileStyle](#whilestyle)
-- [Customize Defaults](#customize-defaults)
-- [AoT Support](#aot-support)
-  - [Example Compile All Animations to One File](#example-compile-all-animations-to-one-file)
-  - [Example Compile Limited Animations](#example-compile-limited-animations)
-  - [PreFx Example](#prefx-example)
-  - [Dynamic AoT Support](#dynamic-aot-support)
-- [API](#api)
-  - [animateFactory](#animatefactory)
-  - [animateConfig](#animateconfig)
-  - [animateDefaults](#animatedefaults)
-- [Built-in Animations Attributes](#built-in-animations-attributes)
 - [Supported Animations](#supported-animations)
 - [web-animations-js](#web-animations-js)
 - [Work on This Project](#work-on-this-project)
@@ -81,6 +64,10 @@ import { Component } from "@angular/core"
   `
 }) export class AppComponent
 ```
+
+# Examples
+
+[Example Page](https://ackerapple.github.io/ack-angular-fx)
 
 ## Robust Example Include Fx
 This example has pretty much everything needed to boot
@@ -125,28 +112,24 @@ supportDocument( document )//cross browser fx support
 platformBrowserDynamic().bootstrapModule(AppModule)
 ```
 
-# Browser Compatibility
-Out of the box, ack-angular-fx is compatibile with most browsers
+## Params Example
+The configuration options available to define for animations
 
-To enable full support, add just about any animation polyfill.
-
-## Built-in Polyfill Example
-An animation polyfill is already available to you in ack-angular-fx
-
-```javascript
-import { supportDocument } from "ack-angular-fx/web-animations.min";
-
-supportDocument(document)
+```html
+<div [@zoomIn]="{value:boolean, params:{time:'2000ms 0 linear'}}">
+  ...
+</div>
 ```
 
-> `ack-angular-fx/web-animations.min` was built using npm based version of [web-animations-js](https://www.npmjs.com/package/web-animations-js)
+Learn more about [Angular animation timing here](https://angular.io/guide/animations#animation-timing)
 
-# Examples
-
-[Example Page](https://ackerapple.github.io/ack-angular-fx)
 
 ## Global Usage
 Make life simple, if you just want to use the default animation definitions provided by ack-angular-fx
+
+> BETA CODE!
+>> NOT well tested and outdated
+>> NOT recommend at this time to use this example of ackFx.upgradeComponent( ... )
 
 ```javascript
 import * as ackFx from 'ack-angular-fx';
@@ -186,6 +169,22 @@ ackFx.upgradeComponents(declarations)
 ```
 > You can now use animation attributes such as [@fadeInUp]="value" in all your components
 
+# Browser Compatibility
+Out of the box, ack-angular-fx is compatibile with most browsers
+
+To enable full support, add just about any animation polyfill.
+
+## Built-in Polyfill Example
+An animation polyfill is already available to you in ack-angular-fx
+
+```javascript
+import { supportDocument } from "ack-angular-fx/web-animations.min";
+
+supportDocument(document)
+```
+
+> `ack-angular-fx/web-animations.min` was built using npm based version of [web-animations-js](https://www.npmjs.com/package/web-animations-js)
+
 ### Stagger
 Offset multiple animations using Angular 4.2.4 or greater
 
@@ -218,19 +217,6 @@ A table element staggering row animations whenever "rowStaggers" variable change
   </ng-container>
 </table>
 ```
-
-# Params
-The configuration options available to define for animations
-
-## Params Example
-```html
-<div [@zoomIn]="{value:boolean, params:{time:'2000ms 0 linear'}}">
-  ...
-</div>
-```
-
-Learn more about [Angular animation timing here](https://angular.io/guide/animations#animation-timing)
-
 
 # Supported Animations
 

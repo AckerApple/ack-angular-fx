@@ -1,6 +1,9 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [2.0.6] - 2018-02-28
+- Updated README file
+
 ## [2.0.6] - 2018-02-23
 - added transistion function interpolation
   - with options compiled as well
