@@ -1,6 +1,6 @@
 {
   "name": "ack-angular-fx",
-  "version": "2.0.11",
+  "version": "2.1.0",
   "description": "Angular animations made easier",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -8,7 +8,7 @@
     "ack-angular-fx": "./bin/cli.js"
   },
   "scripts": {
-    "test": "npm run test:prefx",
+    "test": "npm run compile:allfx",
     "build:templates": "ack-pug-bundler example/src/app example/src/app --outFileExt template.ts --outType ts --oneToOne",
     "watch:templates": "npm run build:templates -- --watch",
     "watch:ts": "ack-webpack example/index.ts example/dist/bundle.js --watch --browser=example/dist/ --project example/tsconfig.json --html5Mode",
@@ -17,13 +17,10 @@
     "build:example": "npm-run-all build:templates build:example:js",
     "build:example:js": "ack-webpack example/index.ts example/dist/bundle.js --production --project example/tsconfig.json",
     "build:example:aot": "ack-webpack example/index.aot.ts example/dist/bundle.js --production --project example/tsconfig.json",
-    "test:prefx": "node ./bin/real-cli.js --igniter void --select absoluteSwap,100,childStag --effects slide,fade --out test/results/prefx.ts",
-    "compile:prefx": "npm-run-all test:prefx compile:example:prefx compile:allfx",
     "build:dist": "ngc --rootDir src --outDir dist --declaration --project src",
-    "build": "npm-run-all compile:prefx build:dist build:bin compile:example:prefx compile:example:aot build:example",
+    "build": "npm-run-all build:dist build:bin compile:allfx compile:example:aot build:example",
     "build:bin": "tsc bin/src/* --outDir bin --declaration true --lib ES6",
     "ts-node": "ts-node",
-    "compile:example:prefx": "node ./bin/real-cli.js --igniter void --select absoluteSwap,100,200,300,400,500,600,700,800,900,1000,1500,2000,childStag --effects bounce,fade --out example/src/app/prefx.ts",
     "compile:allfx": "node ./bin/real-cli.js --igniter void --select absoluteSwap,100,200,300,400,500,600,700,800,900,1000,1500,2000,childStag --effects bounce,fade --out src/allFx.ts",
     "compile:example:aot": "ngc -p ./example/tsconfig.aot.json",
     "compile:example:aot2": "ngc -p ./example/tsconfig.aot.json",

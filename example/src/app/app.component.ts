@@ -13,7 +13,6 @@ import {
 import * as packJson from "../../../package.json"
 //export const packJson = "0.0.0"
 
-//import { fxArray } from './prefx';
 import { delayArray, fxArray } from '../../../src';
 
 export const fxNameArray = [

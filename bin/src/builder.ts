@@ -1,20 +1,22 @@
 import { AnimationTriggerMetadata } from "@angular/animations"
 import { selectedFxMetaData } from "../../dist/index"
-//import { childStags } from "../../src/animations/childStag"
-const childStags = require('../dist/animations/childStag').childStags;
+
+//const childStags = require('../dist/animations/childStag').childStags;
 
 export function selectedFxToImportSyntax(
   selectedFx:selectedFxMetaData
 ){
-  const fxStateSyntax = fxStatesToSyntaxArray( selectedFx.states ).join()
-  let syntax = fxStateSyntax
+  let syntax = ""
   let functions = {}
-  
+
+  //deprecated functions
+  //const fxStateSyntax = fxStatesToSyntaxArray( selectedFx.states ).join()
+  //syntax += fxStateSyntax
   if( selectedFx.triggers.length ){
     const fxTriggSyntax = fxTriggersToSyntaxArray( selectedFx.triggers )
-    if( selectedFx.states.length ){
+    /*if( selectedFx.states.length ){
       syntax += ','
-    }
+    }*/
     syntax += fxTriggSyntax.string
     fxTriggSyntax.functions.map(f=>functions[f.name]=f)
   }
@@ -60,6 +62,7 @@ function fxStatesToSyntaxArray( fxArray:AnimationTriggerMetadata[] ) : string[] 
     let fx = fxArray[trigIndex]
     let name = fx.name
 
+    /*
     if( name==='childStag' ){
       triggers.push.apply(
         triggers,
@@ -67,6 +70,7 @@ function fxStatesToSyntaxArray( fxArray:AnimationTriggerMetadata[] ) : string[] 
       )
       continue;
     }
+    */
 
     triggers.push( line() + triggerToString(fx).string)
   }

@@ -1,16 +1,17 @@
 "use strict";
 exports.__esModule = true;
-//import { childStags } from "../../src/animations/childStag"
-var childStags = require('../dist/animations/childStag').childStags;
+//const childStags = require('../dist/animations/childStag').childStags;
 function selectedFxToImportSyntax(selectedFx) {
-    var fxStateSyntax = fxStatesToSyntaxArray(selectedFx.states).join();
-    var syntax = fxStateSyntax;
+    var syntax = "";
     var functions = {};
+    //deprecated functions
+    //const fxStateSyntax = fxStatesToSyntaxArray( selectedFx.states ).join()
+    //syntax += fxStateSyntax
     if (selectedFx.triggers.length) {
         var fxTriggSyntax = fxTriggersToSyntaxArray(selectedFx.triggers);
-        if (selectedFx.states.length) {
-            syntax += ',';
-        }
+        /*if( selectedFx.states.length ){
+          syntax += ','
+        }*/
         syntax += fxTriggSyntax.string;
         fxTriggSyntax.functions.map(function (f) { return functions[f.name] = f; });
     }
@@ -45,10 +46,15 @@ function fxStatesToSyntaxArray(fxArray) {
     for (var trigIndex = fxArray.length - 1; trigIndex >= 0; --trigIndex) {
         var fx = fxArray[trigIndex];
         var name = fx.name;
-        if (name === 'childStag') {
-            triggers.push.apply(triggers, childStags.map(function (trig) { return triggerToString(trig).string; }));
-            continue;
+        /*
+        if( name==='childStag' ){
+          triggers.push.apply(
+            triggers,
+            childStags.map(trig=>triggerToString(trig).string)
+          )
+          continue;
         }
+        */
         triggers.push(line() + triggerToString(fx).string);
     }
     return triggers;

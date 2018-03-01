@@ -3,7 +3,7 @@ import { Input, Output, EventEmitter, Component } from '@angular/core';
 import { fxNameArray } from "./app.component"
 import { FxSession } from "./FxSession.injectable"
 
-import { string as deprecated } from "./deprecated.template"
+//import { string as deprecated } from "./deprecated.template"
 import { string as index } from "./index.template"
 import { string as stagger } from "./stagger.template"
 import { string as selectFx } from "./selectFx.template"
@@ -11,8 +11,8 @@ import { string as ngIf } from "./ngIf.template"
 import { string as directives } from "./directives.template"
 import { string as swapping } from "./swapping.template"
 
-import { delayArray, getFxArray } from '../../../src';
-const fxArray = getFxArray()//adds deprecated fx
+import { delayArray, fxArray, getFxArray } from '../../../src';
+//const fxArray = getFxArray()//adds deprecated fx
 
 @Component({
   template   : directives,
@@ -78,6 +78,7 @@ const fxArray = getFxArray()//adds deprecated fx
   @Output() modelChange:EventEmitter<string> = new EventEmitter()
 }
 
+/*
 @Component({
   template   : deprecated,
   animations : fxArray
@@ -104,12 +105,13 @@ const fxArray = getFxArray()//adds deprecated fx
     setTimeout(()=>this.swapShow=this.swapShow==0?3:this.swapShow-1, 100)
   }
 }
+*/
 
 export const declarations = [
   IndexComponent,
   Stagger,
   NgIfComponent,
-  Deprecated,
+  //Deprecated,
   DirectivesComponent,
   SwappingComponent,
   SelectFx
@@ -121,7 +123,7 @@ export const routes = [
   {name: 'ngif', path: 'ngif',  component: NgIfComponent},
   {name: 'swapping', path: 'swapping',  component: SwappingComponent},
   {name: 'directives', path: 'directives',  component: DirectivesComponent},
-  {name: 'deprecated', path: 'deprecated',  component: Deprecated},
+  //{name: 'deprecated', path: 'deprecated',  component: Deprecated},
   {path: '**',   redirectTo: 'overview' }//404
 ]
 

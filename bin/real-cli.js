@@ -33,7 +33,8 @@ if (effectsIndex >= 0) {
 //an array of triggers
 var selectedFxMetaData = index.selectFx(selects, effectArray, { igniter: igniter });
 //array of triggers to one string
-var output = builder.selectedFxToImportSyntax(selectedFxMetaData);
+//const output = builder.selectedFxToImportSyntax(selectedFxMetaData)
+var output = builder.selectedFxToImportSyntax({ triggers: index.fxArray });
 console.log('\x1b[36m[ack-angular-fx]\x1b[0m:', 'wrote file :', outPath.substring(process.cwd().length, outPath.length));
 require('mkdirp').sync(path.join(outPath, '../'));
 fs.writeFileSync(outPath, output);
