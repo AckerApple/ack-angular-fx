@@ -10,8 +10,8 @@ import {
   ActivatedRoute
 } from '@angular/router';
 
-//import * as packJson from "../../../package.json"
-export const packJson = "0.0.0"
+import * as packJson from "../../package.json"
+//export const packJson = "0.0.0"
 
 import { delayArray, fxArray } from '../../src';
 
