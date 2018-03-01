@@ -1,6 +1,6 @@
 import { declarations as routeDecs, routing } from "./routes"
 import { NgModule } from "@angular/core";
-import { AckFxModule } from "../../../src/AckFx.module";
+import { AckFxModule } from "../../src/AckFx.module";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";

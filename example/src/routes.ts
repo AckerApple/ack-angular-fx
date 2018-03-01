@@ -3,7 +3,6 @@ import { Input, Output, EventEmitter, Component } from '@angular/core';
 import { fxNameArray } from "./app.component"
 import { FxSession } from "./FxSession.injectable"
 
-//import { string as deprecated } from "./deprecated.template"
 import { string as index } from "./index.template"
 import { string as stagger } from "./stagger.template"
 import { string as selectFx } from "./selectFx.template"
@@ -11,8 +10,7 @@ import { string as ngIf } from "./ngIf.template"
 import { string as directives } from "./directives.template"
 import { string as swapping } from "./swapping.template"
 
-import { delayArray, fxArray, getFxArray } from '../../../src';
-//const fxArray = getFxArray()//adds deprecated fx
+import { delayArray, fxArray, getFxArray } from '../../src';
 
 @Component({
   template   : directives,
@@ -23,6 +21,8 @@ import { delayArray, fxArray, getFxArray } from '../../../src';
   template   : swapping,
   animations : fxArray
 }) export class SwappingComponent{
+  fxId:boolean|number
+  hideToggle:boolean
   swapIndex:number = 0
   fxTime:string = "1000ms 0ms linear"
   swapArray = [1,2,3,4,5,6,7,8]
@@ -36,6 +36,7 @@ import { delayArray, fxArray, getFxArray } from '../../../src';
   template   : ngIf,
   animations : fxArray
 }) export class NgIfComponent{
+  hideToggle:boolean
   fxTime:string = "200ms 0ms linear"
 
   constructor(public FxSession:FxSession){}
@@ -77,35 +78,6 @@ import { delayArray, fxArray, getFxArray } from '../../../src';
   @Input() model:string
   @Output() modelChange:EventEmitter<string> = new EventEmitter()
 }
-
-/*
-@Component({
-  template   : deprecated,
-  animations : fxArray
-}) export class Deprecated{
-  panelAnimation: string = 'fadeInLeft'
-  swapShow: number = 0
-  delayArray: any[] = delayArray
-
-  constructor(public FxSession:FxSession){}
-
-  toggleAllShorts(){
-    this.delayArray.forEach((v,i)=>{
-      this['show'+v]=!this['show'+v]
-    });
-  }
-
-  nextPanel(){
-    this.panelAnimation=this.FxSession.fxForward
-    setTimeout(()=>this.swapShow=this.swapShow==3?0:this.swapShow+1, 100)
-  }
-
-  priorPanel(){
-    this.panelAnimation=this.FxSession.fxBackward
-    setTimeout(()=>this.swapShow=this.swapShow==0?3:this.swapShow-1, 100)
-  }
-}
-*/
 
 export const declarations = [
   IndexComponent,

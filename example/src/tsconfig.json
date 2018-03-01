@@ -17,7 +17,7 @@
     "outDir": "www"
   },
   "files":[
-    "../package.json",
+    "index.ts",
     "typings.d.ts"
   ],
   "exclude": [

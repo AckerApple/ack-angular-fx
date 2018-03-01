@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var FxTracker = /** @class */ (function () {
+var FxTracker = (function () {
     function FxTracker() {
         this.historyChange = new core_1.EventEmitter();
         this.indexChange = new core_1.EventEmitter();

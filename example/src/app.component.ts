@@ -10,10 +10,10 @@ import {
   ActivatedRoute
 } from '@angular/router';
 
-import * as packJson from "../../../package.json"
-//export const packJson = "0.0.0"
+//import * as packJson from "../../../package.json"
+export const packJson = "0.0.0"
 
-import { delayArray, fxArray } from '../../../src';
+import { delayArray, fxArray } from '../../src';
 
 export const fxNameArray = [
   'fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp',
@@ -28,6 +28,7 @@ export const fxNameArray = [
   template: string
   ,animations:fxArray
 }) export class AppComponent {
+  fxId:boolean|number
   routes:string[] = ['overview','stagger','ngif','swapping','directives','deprecated']
   fxTime:string = "1000ms 0ms linear"
   version = packJson['version'] || '0.0.0'

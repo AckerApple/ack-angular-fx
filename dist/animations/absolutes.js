@@ -16,6 +16,7 @@ var abDef = {
     width: '100%',
     //height   : '100%',
     overflow: 'hidden'
+    //,border:'1px solid black'
 };
 var abKeyFrames = [
     animations_1.style(__assign({ offset: 0 }, abDef)),
@@ -31,6 +32,7 @@ var absoluteOutKids = animations_1.trigger('absoluteOutKids', [
             animations_1.query(':leave', [
                 animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
             ], { optional: true })
+            //,animateChild()
         ])
     ], { params: params })
 ]);
@@ -40,7 +42,10 @@ var absoluteInKids = animations_1.trigger('absoluteInKids', [
             animations_1.query(':enter', [
                 animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
             ], { optional: true })
-        ])
+            //,animateChild()
+        ]
+        //,{params:params}
+        )
     ], { params: params })
 ]);
 var absoluteKids = animations_1.trigger('absoluteKids', [
@@ -52,6 +57,7 @@ var absoluteKids = animations_1.trigger('absoluteKids', [
             animations_1.query(':leave', [
                 animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
             ], { optional: true })
+            //,animateChild()
         ])
     ], { params: params })
 ]);
@@ -87,5 +93,6 @@ exports.triggers = [
     absoluteKids,
     absoluteInKids,
     absoluteOutKids
+    //,relativeWrap
 ];
 //# sourceMappingURL=absolutes.js.map
