@@ -1,6 +1,9 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [2.0.10] - 2018-03-01
+- allFx file is now a prefx file and apart of the ack-angular-fx process
+
 ## [2.0.9] - 2018-03-01
 - all animation transition functions are exported
 

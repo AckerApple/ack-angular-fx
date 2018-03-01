@@ -8,28 +8,50 @@ export function selectedFxToImportSyntax(
 ){
   const fxStateSyntax = fxStatesToSyntaxArray( selectedFx.states ).join()
   let syntax = fxStateSyntax
+  let functions = {}
   
   if( selectedFx.triggers.length ){
-    const fxTriggSyntax = fxTriggersToSyntaxArray( selectedFx.triggers ).join()
+    const fxTriggSyntax = fxTriggersToSyntaxArray( selectedFx.triggers )
     if( selectedFx.states.length ){
       syntax += ','
     }
-    syntax += fxTriggSyntax
+    syntax += fxTriggSyntax.string
+    fxTriggSyntax.functions.map(f=>functions[f.name]=f)
+  }
+
+  let functionsString = ""
+  for(let key in functions){
+    let f = functions[key]
+    functionsString += `\nexport const ${f.name} = ${f.toString()}\n`
   }
   
   return 'import { group, query, stagger, animateChild, AnimationTriggerMetadata,trigger,style,state,transition,animate,keyframes } from "@angular/animations"\n'+
-  'export const fxArray = [' + syntax + ']'
+  functionsString+
+  '\nexport const fxArray = [' + syntax + ']'
 }
 
-function fxTriggersToSyntaxArray( fxArray:AnimationTriggerMetadata[] ) : string[] {
+function fxTriggersToSyntaxArray(
+  fxArray:AnimationTriggerMetadata[]
+) : {
+  string:string,
+  functions:Function[]
+}
+{
   const triggers = []
+  const functions = []
   for(let trigIndex=fxArray.length-1; trigIndex >= 0; --trigIndex){
     let fx = fxArray[trigIndex]
     let name = fx.name
-    triggers.push( line() + triggerToString(fx) )
+    let triggerDef = triggerToString(fx)
+    functions.push.apply(functions,triggerDef.functions)
+    let string = line() + triggerDef.string
+    triggers.push( string )
   }
 
-  return triggers
+  return {
+    string:triggers.join(),
+    functions:functions
+  }
 }
 
 function fxStatesToSyntaxArray( fxArray:AnimationTriggerMetadata[] ) : string[] {
@@ -39,11 +61,14 @@ function fxStatesToSyntaxArray( fxArray:AnimationTriggerMetadata[] ) : string[] 
     let name = fx.name
 
     if( name==='childStag' ){
-      triggers.push.apply(triggers, childStags.map(trig=>triggerToString(trig)))
+      triggers.push.apply(
+        triggers,
+        childStags.map(trig=>triggerToString(trig).string)
+      )
       continue;
     }
 
-    triggers.push( line() + triggerToString(fx))
+    triggers.push( line() + triggerToString(fx).string)
   }
 
   return triggers
@@ -53,7 +78,13 @@ function line(tabs:number=0){
   return '\n' + '  '.repeat(tabs)
 }
 
-function stateDefsBy(defs:any[], tabs:number=0) : string {
+function stateDefsBy(
+  defs:any[], tabs:number=0
+) : {
+  string:string,
+  functions:Function[]
+}{
+  const functions = []
   let states = []
   let trans = ''
   let steps = ''
@@ -75,14 +106,18 @@ function stateDefsBy(defs:any[], tabs:number=0) : string {
       steps = l + `  style(${style})`//style goes inside state
       trans = l + `state("${expr}", ${steps})`
     }else if(def.definitions){
-      trans = triggerToString(def, tabs)//Angular v4.0.0+ || v2.4.0+
+      let triggerDef = triggerToString(def, tabs)
+      trans = triggerDef.string//Angular v4.0.0+ || v2.4.0+
+      functions.push.apply(functions, triggerDef.functions)
     }else{
       steps = animateSteps(def.animation || def.steps._steps, tabs+1)//Angular v4.0.0+ || v2.4.0+
       
       if( typeof expr==='string' ){
         expr = `"${expr}"`
       }else{
-        expr = expr.toString()
+        functions.push(expr)//record functions
+        //expr = expr.toString()
+        expr = expr.name
       }
 
       trans = l + `transition(${expr}, ${steps}`
@@ -94,7 +129,10 @@ function stateDefsBy(defs:any[], tabs:number=0) : string {
     
     states.push( trans )
   }
-  return '['+states.join()+']'
+  return {
+    string:'['+states.join()+']',
+    functions:functions
+  }
 }
 
 /** returns string
@@ -144,8 +182,20 @@ function animateToString(step, tabs?:number){
   return line(tabs) + `animate("${step.timings}", ${stepString})`
 }
 
-function triggerToString(step, tabs:number=0){
-  return line(tabs) + `trigger("${step.name}", ${stateDefsBy(step.definitions,++tabs)})`
+function triggerToString(
+  step,
+  tabs:number=0
+):{
+  string:string,
+  functions:Function[]
+}{
+  const stateDefs = stateDefsBy(step.definitions,++tabs)
+  const functions = stateDefs.functions
+  const string = + stateDefs.string
+  return {
+    string:line(tabs) + `trigger("${step.name}", ${stateDefs.string})`,
+    functions:stateDefs.functions
+  }
 }
 
 function animateChildToString(step, tabs:number=0){
@@ -161,8 +211,7 @@ function groupToString(step, tabs:number=0){
 }
 
 function transitionToString(step, tabs:number=0){
-  console.log('-------- step.expr',step.expr)
-  return line(tabs) + `transition("----${step.expr}", ${animateSteps(step.animation, ++tabs)})`
+  return line(tabs) + `transition("${step.expr}", ${animateSteps(step.animation, ++tabs)})`
 }
 
 function staggerToString(step, tabs:number=0){

@@ -5,25 +5,40 @@ var childStags = require('../dist/animations/childStag').childStags;
 function selectedFxToImportSyntax(selectedFx) {
     var fxStateSyntax = fxStatesToSyntaxArray(selectedFx.states).join();
     var syntax = fxStateSyntax;
+    var functions = {};
     if (selectedFx.triggers.length) {
-        var fxTriggSyntax = fxTriggersToSyntaxArray(selectedFx.triggers).join();
+        var fxTriggSyntax = fxTriggersToSyntaxArray(selectedFx.triggers);
         if (selectedFx.states.length) {
             syntax += ',';
         }
-        syntax += fxTriggSyntax;
+        syntax += fxTriggSyntax.string;
+        fxTriggSyntax.functions.map(function (f) { return functions[f.name] = f; });
+    }
+    var functionsString = "";
+    for (var key in functions) {
+        var f = functions[key];
+        functionsString += "\nexport const " + f.name + " = " + f.toString() + "\n";
     }
     return 'import { group, query, stagger, animateChild, AnimationTriggerMetadata,trigger,style,state,transition,animate,keyframes } from "@angular/animations"\n' +
-        'export const fxArray = [' + syntax + ']';
+        functionsString +
+        '\nexport const fxArray = [' + syntax + ']';
 }
 exports.selectedFxToImportSyntax = selectedFxToImportSyntax;
 function fxTriggersToSyntaxArray(fxArray) {
     var triggers = [];
+    var functions = [];
     for (var trigIndex = fxArray.length - 1; trigIndex >= 0; --trigIndex) {
         var fx = fxArray[trigIndex];
         var name = fx.name;
-        triggers.push(line() + triggerToString(fx));
+        var triggerDef = triggerToString(fx);
+        functions.push.apply(functions, triggerDef.functions);
+        var string = line() + triggerDef.string;
+        triggers.push(string);
     }
-    return triggers;
+    return {
+        string: triggers.join(),
+        functions: functions
+    };
 }
 function fxStatesToSyntaxArray(fxArray) {
     var triggers = [];
@@ -31,10 +46,10 @@ function fxStatesToSyntaxArray(fxArray) {
         var fx = fxArray[trigIndex];
         var name = fx.name;
         if (name === 'childStag') {
-            triggers.push.apply(triggers, childStags.map(function (trig) { return triggerToString(trig); }));
+            triggers.push.apply(triggers, childStags.map(function (trig) { return triggerToString(trig).string; }));
             continue;
         }
-        triggers.push(line() + triggerToString(fx));
+        triggers.push(line() + triggerToString(fx).string);
     }
     return triggers;
 }
@@ -44,6 +59,7 @@ function line(tabs) {
 }
 function stateDefsBy(defs, tabs) {
     if (tabs === void 0) { tabs = 0; }
+    var functions = [];
     var states = [];
     var trans = '';
     var steps = '';
@@ -64,7 +80,9 @@ function stateDefsBy(defs, tabs) {
             trans = l + ("state(\"" + expr + "\", " + steps + ")");
         }
         else if (def.definitions) {
-            trans = triggerToString(def, tabs); //Angular v4.0.0+ || v2.4.0+
+            var triggerDef = triggerToString(def, tabs);
+            trans = triggerDef.string; //Angular v4.0.0+ || v2.4.0+
+            functions.push.apply(functions, triggerDef.functions);
         }
         else {
             steps = animateSteps(def.animation || def.steps._steps, tabs + 1); //Angular v4.0.0+ || v2.4.0+
@@ -72,7 +90,9 @@ function stateDefsBy(defs, tabs) {
                 expr = "\"" + expr + "\"";
             }
             else {
-                expr = expr.toString();
+                functions.push(expr); //record functions
+                //expr = expr.toString()
+                expr = expr.name;
             }
             trans = l + ("transition(" + expr + ", " + steps);
             if (def.options) {
@@ -82,7 +102,10 @@ function stateDefsBy(defs, tabs) {
         }
         states.push(trans);
     }
-    return '[' + states.join() + ']';
+    return {
+        string: '[' + states.join() + ']',
+        functions: functions
+    };
 }
 /** returns string
   Angular v2.4 - steps:[{styles:{steps:[]},}]
@@ -133,7 +156,13 @@ function animateToString(step, tabs) {
 }
 function triggerToString(step, tabs) {
     if (tabs === void 0) { tabs = 0; }
-    return line(tabs) + ("trigger(\"" + step.name + "\", " + stateDefsBy(step.definitions, ++tabs) + ")");
+    var stateDefs = stateDefsBy(step.definitions, ++tabs);
+    var functions = stateDefs.functions;
+    var string = +stateDefs.string;
+    return {
+        string: line(tabs) + ("trigger(\"" + step.name + "\", " + stateDefs.string + ")"),
+        functions: stateDefs.functions
+    };
 }
 function animateChildToString(step, tabs) {
     if (tabs === void 0) { tabs = 0; }
@@ -148,8 +177,7 @@ function groupToString(step, tabs) {
 }
 function transitionToString(step, tabs) {
     if (tabs === void 0) { tabs = 0; }
-    console.log('-------- step.expr', step.expr);
-    return line(tabs) + ("transition(\"----" + step.expr + "\", " + animateSteps(step.animation, ++tabs) + ")");
+    return line(tabs) + ("transition(\"" + step.expr + "\", " + animateSteps(step.animation, ++tabs) + ")");
 }
 function staggerToString(step, tabs) {
     if (tabs === void 0) { tabs = 0; }
