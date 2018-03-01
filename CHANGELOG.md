@@ -1,6 +1,9 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [2.0.9] - 2018-03-01
+- all animation transition functions are exported
+
 ## [2.0.8] - 2018-02-28
 - Updated README file
 

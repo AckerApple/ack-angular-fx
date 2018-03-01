@@ -1,6 +1,6 @@
 {
   "name": "ack-angular-fx",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "Angular animations made easier",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -16,6 +16,7 @@
     "watch": "npm-run-all --parallel watch:templates watch:ts",
     "build:example": "npm-run-all build:templates build:example:js",
     "build:example:js": "ack-webpack example/index.ts example/dist/bundle.js --production --project example/tsconfig.json",
+    "build:example:aot": "ack-webpack example/index.aot.ts example/dist/bundle.js --production --project example/tsconfig.json",
     "test:prefx": "node ./bin/real-cli.js --igniter void --select absoluteSwap,100,childStag --effects slide,fade --out test/results/prefx.ts",
     "compile:prefx": "npm-run-all test:prefx compile:example:prefx",
     "build:dist": "ngc --rootDir src --outDir dist --declaration --project src",

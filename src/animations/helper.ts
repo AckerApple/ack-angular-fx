@@ -61,6 +61,14 @@ export function inOutGroupQueryByStyles(
   ])
 }
 
+export function inFromVoid(from,to){
+  return to && to!=='nofx' && from==='void' && to!=='void' ? true : false
+}
+
+export function voidFromIn(from,to){
+  return from!=='nofx' && from!=='void' && to==='void' ? true : false
+}
+
 export function inOutTransitions(
   inStyles:AnimationStyleMetadata[],
   outStyles:AnimationStyleMetadata[]
@@ -68,7 +76,7 @@ export function inOutTransitions(
   const params = {time:'200ms 0ms linear'}
   return [
     transition(
-      (from,to)=>to && to!=='nofx' && from==='void' && to!=='void' ? true : false,
+      inFromVoid,
       //'void => *',
       [
         animate('{{ time }}',
@@ -78,7 +86,7 @@ export function inOutTransitions(
       { params:params }
     ),
     transition(
-      (from,to)=>from!=='nofx' && from!=='void' && to==='void' ? true : false,
+      voidFromIn,
       //'* => void',
       [
         animate('{{ time }}',
@@ -88,6 +96,14 @@ export function inOutTransitions(
       { params:params }
     )
   ]
+}
+
+export function childIn(from,to){
+  return to ? true : false
+}
+
+export function childOut(from,to){
+  return !to ? true : false
 }
 
 export function childInOutTransitions(
@@ -102,12 +118,12 @@ export function childInOutTransitions(
   
   return [
     transition(
-      (from,to)=>to ? true : false,
+      childIn,
       [ group ]
       , {params:params}
     ),
     transition(
-      (from,to)=>!to ? true : false,
+      childOut,
       [ backGroup ]
       , {params:params}
     )

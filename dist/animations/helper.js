@@ -38,15 +38,23 @@ function inOutGroupQueryByStyles(inStyles, outStyles) {
     ]);
 }
 exports.inOutGroupQueryByStyles = inOutGroupQueryByStyles;
+function inFromVoid(from, to) {
+    return to && to !== 'nofx' && from === 'void' && to !== 'void' ? true : false;
+}
+exports.inFromVoid = inFromVoid;
+function voidFromIn(from, to) {
+    return from !== 'nofx' && from !== 'void' && to === 'void' ? true : false;
+}
+exports.voidFromIn = voidFromIn;
 function inOutTransitions(inStyles, outStyles) {
     var params = { time: '200ms 0ms linear' };
     return [
-        animations_1.transition(function (from, to) { return to && to !== 'nofx' && from === 'void' && to !== 'void' ? true : false; }, 
+        animations_1.transition(inFromVoid, 
         //'void => *',
         [
             animations_1.animate('{{ time }}', animations_1.keyframes(inStyles))
         ], { params: params }),
-        animations_1.transition(function (from, to) { return from !== 'nofx' && from !== 'void' && to === 'void' ? true : false; }, 
+        animations_1.transition(voidFromIn, 
         //'* => void',
         [
             animations_1.animate('{{ time }}', animations_1.keyframes(outStyles))
@@ -54,13 +62,21 @@ function inOutTransitions(inStyles, outStyles) {
     ];
 }
 exports.inOutTransitions = inOutTransitions;
+function childIn(from, to) {
+    return to ? true : false;
+}
+exports.childIn = childIn;
+function childOut(from, to) {
+    return !to ? true : false;
+}
+exports.childOut = childOut;
 function childInOutTransitions(inStyles, outStyles, backInStyles, backOutStyles) {
     var params = { time: '200ms 0ms linear' };
     var group = inOutGroupQueryByStyles(inStyles, outStyles);
     var backGroup = inOutGroupQueryByStyles(backInStyles, backOutStyles);
     return [
-        animations_1.transition(function (from, to) { return to ? true : false; }, [group], { params: params }),
-        animations_1.transition(function (from, to) { return !to ? true : false; }, [backGroup], { params: params })
+        animations_1.transition(childIn, [group], { params: params }),
+        animations_1.transition(childOut, [backGroup], { params: params })
     ];
 }
 exports.childInOutTransitions = childInOutTransitions;
