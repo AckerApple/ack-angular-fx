@@ -17,7 +17,7 @@ function selectedFxToImportSyntax(selectedFx) {
     var functionsString = "";
     for (var key in functions) {
         var f = functions[key];
-        functionsString += "\nexport const " + f.name + " = " + f.toString() + "\n";
+        functionsString += "\nexport " + f.toString() + "\n";
     }
     return 'import { group, query, stagger, animateChild, AnimationTriggerMetadata,trigger,style,state,transition,animate,keyframes } from "@angular/animations"\n' +
         functionsString +
