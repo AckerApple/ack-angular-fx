@@ -1,6 +1,10 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [2.1.1] - 2018-03-03
+- Added router-outlet documentation
+- Fixed FxTracker value tracking when activeRouter monitoring
+
 ## [2.1.0] - 2018-03-01
 - improved file size by deprecating Angular4 animations
 - Breaking Changes

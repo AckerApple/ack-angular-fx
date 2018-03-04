@@ -10,7 +10,8 @@
       "main": "index.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "",
-      "mobile": false
+      "mobile": false,
+      "assets":["fireworks.gif","app.css"]
     }
   ],
   "addons": [],

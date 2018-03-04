@@ -18,6 +18,7 @@ var FxTracker = (function () {
     FxTracker.prototype.produceByRoute = function (activatedRoute) {
         var path = this.getRoutePath(activatedRoute);
         this.produceFxId(path);
+        this.value = path;
     };
     FxTracker.prototype.produceFxId = function (value) {
         this.history = this.history || [];

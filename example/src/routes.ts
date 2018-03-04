@@ -9,6 +9,7 @@ import { string as selectFx } from "./selectFx.template"
 import { string as ngIf } from "./ngIf.template"
 import { string as directives } from "./directives.template"
 import { string as swapping } from "./swapping.template"
+import { string as routeroutlet } from "./routeroutlet.template"
 
 import { delayArray, fxArray, getFxArray } from '../../src';
 
@@ -73,6 +74,11 @@ import { delayArray, fxArray, getFxArray } from '../../src';
   constructor(public FxSession:FxSession){}
 }
 
+@Component({
+  template   : routeroutlet,
+  animations : fxArray
+}) export class RouterOutletComponent{}
+
 @Component({selector:'select-fx', template:selectFx}) export class SelectFx{
   fxNameArray = fxNameArray
   @Input() model:string
@@ -83,10 +89,10 @@ export const declarations = [
   IndexComponent,
   Stagger,
   NgIfComponent,
-  //Deprecated,
   DirectivesComponent,
   SwappingComponent,
-  SelectFx
+  SelectFx,
+  RouterOutletComponent
 ]
 
 export const routes = [
@@ -95,7 +101,7 @@ export const routes = [
   {name: 'ngif', path: 'ngif',  component: NgIfComponent},
   {name: 'swapping', path: 'swapping',  component: SwappingComponent},
   {name: 'directives', path: 'directives',  component: DirectivesComponent},
-  //{name: 'deprecated', path: 'deprecated',  component: Deprecated},
+  {name: 'router-outlet', path: 'router-outlet',  component: RouterOutletComponent},
   {path: '**',   redirectTo: 'overview' }//404
 ]
 

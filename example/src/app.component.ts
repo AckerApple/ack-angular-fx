@@ -29,7 +29,7 @@ export const fxNameArray = [
   ,animations:fxArray
 }) export class AppComponent {
   fxId:boolean|number
-  routes:string[] = ['overview','stagger','ngif','swapping','directives','deprecated']
+  routes:string[] = ['overview','stagger','ngif','swapping','directives','router-outlet']
   fxTime:string = "1000ms 0ms linear"
   version = packJson['version'] || '0.0.0'
   //panelAnimType: string = 'fadeInLeft'

@@ -30,6 +30,7 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
   produceByRoute( activatedRoute:any ){
     const path = this.getRoutePath(activatedRoute)
     this.produceFxId( path )
+    this.value = path
   }
 
   produceFxId( value:any ):0|false|1|true{
@@ -94,7 +95,7 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
     return this.fxId = this.fxId === 1 ? true : 1
   }
 
-  getRoutePath( activatedRoute ):any{
+  getRoutePath( activatedRoute ):string{
     let target = activatedRoute
     while(target.firstChild)target=target.firstChild
     return target.routeConfig.path

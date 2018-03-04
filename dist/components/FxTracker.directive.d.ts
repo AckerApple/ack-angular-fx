@@ -13,5 +13,5 @@ export declare class FxTracker {
     produceByRoute(activatedRoute: any): void;
     produceFxId(value: any): 0 | false | 1 | true;
     produceOrderFxId(value: any): 0 | false | 1 | true;
-    getRoutePath(activatedRoute: any): any;
+    getRoutePath(activatedRoute: any): string;
 }

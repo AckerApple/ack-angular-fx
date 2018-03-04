@@ -58,7 +58,7 @@ each ab in absolutes
           input("[(ngModel)]"="fxTime")
 
     h4 Code Sample 1
-    textarea(style="width:100%;height:260px" wrap="off" readonly).
+    textarea(style="width:100%;" rows="15" wrap="off" readonly).
       &lt;div [@#{ab}]="&#123;value:fxId, params:&#123;position:'{{fxPosition}}', time:'{{fxTime}}'&#125;&#125;"&gt;
         &lt;button (click)="fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
           back
@@ -74,7 +74,7 @@ each ab in absolutes
         &lt;/button&gt;
       &lt;/div&gt;
     h4 Code Sample 2
-    textarea(style="width:100%;height:280px" wrap="off" readonly).
+    textarea(style="width:100%;" rows="15" wrap="off" readonly).
       &lt;div [@#{ab}]="&#123;value:fxId, params:&#123;time:'{{fxTime}}'&#125;&#125;"&gt;
         &lt;button (click)="fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
           back
@@ -135,7 +135,7 @@ div(style="background-color:#CCC;padding:.5em;")
         input("[(ngModel)]"="fxTime")
 
   h4 Code Sample
-  textarea(style="width:100%;height:260px" wrap="off" readonly).
+  textarea(style="width:100%" rows="17" wrap="off" readonly).
     &lt;div [@absoluteKids]="&#123;value:fxId, params:&#123;position:'{{fxPosition}}', time:'{{fxTime}}'&#125;&#125;"&gt;
       &lt;button (click)="fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
         back
