@@ -1,4 +1,4 @@
-export const string = "<h2>Directives</h2><h2>&lt;fx-tracker&gt;</h2><p>Track animation values to determine if back or forward fx should be used</p><h4>Code Sample</h4><textarea style=\"width:100%;height:80px;\" wrap=\"off\" readonly=\"readonly\">&lt;fx-tracker("+
+export const string = "<h2>Directives</h2><h2>&lt;fx-tracker&gt;</h2><p>Track animation values to determine if back or forward fx should be used</p><h4>Code Sample</h4><textarea style=\"width:100%;height:80px\" wrap=\"off\" readonly=\"readonly\">&lt;fx-tracker("+
 "\n  \"[value]\"     = \"...\""+
 "\n  \"[(fxId)]\"    = \"fxId\""+
 "\n)&gt;&lt;/fx-tracker&gt;"+
