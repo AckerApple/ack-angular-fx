@@ -62,7 +62,7 @@ export function inOutGroupQueryByStyles(
 }
 
 export function inFromVoid(from,to){
-  return to && to!=='nofx' && from==='void' && to!=='void' ? true : false
+  return to!==null && to!=='nofx' && from==='void' && to!=='void' ? true : false
 }
 
 export function voidFromIn(from,to){

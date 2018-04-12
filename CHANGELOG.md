@@ -1,6 +1,11 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [2.1.2] - 2018-04-12
+- Made all basic animations animate even when false or 0 are based in
+  - Condition to check to animate was ignoring false or 0
+  - Pass 'nofx' when you dont want animation
+
 ## [2.1.1] - 2018-03-03
 - Added router-outlet documentation
 - Fixed FxTracker value tracking when activeRouter monitoring

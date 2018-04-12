@@ -39,7 +39,7 @@ function inOutGroupQueryByStyles(inStyles, outStyles) {
 }
 exports.inOutGroupQueryByStyles = inOutGroupQueryByStyles;
 function inFromVoid(from, to) {
-    return to && to !== 'nofx' && from === 'void' && to !== 'void' ? true : false;
+    return to !== null && to !== 'nofx' && from === 'void' && to !== 'void' ? true : false;
 }
 exports.inFromVoid = inFromVoid;
 function voidFromIn(from, to) {
