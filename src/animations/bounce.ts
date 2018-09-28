@@ -9,15 +9,10 @@ import {
   animate
 } from '@angular/animations';
 
-
-import { fxConfig, getConfigTiming } from "../index"
-
 import {
   inOutTransitions,
   childInOutTransitions,
-  inOutGroupQueryByStyles,
   childInOutTransition,
-  defaultOptions,
   stylize,
   combo
 } from "./helper"

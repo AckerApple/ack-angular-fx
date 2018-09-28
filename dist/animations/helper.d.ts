@@ -1,5 +1,5 @@
 import { AnimationStyleMetadata, AnimationTransitionMetadata, AnimationGroupMetadata } from '@angular/animations';
-import { fxConfig } from '../index';
+import { fxConfig } from '../fxTypes';
 export declare function stylize(styleDef: any, options: any): AnimationStyleMetadata;
 export declare function defaultOptions(options?: {}): {
     igniter: string;

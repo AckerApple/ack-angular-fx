@@ -157,4 +157,3 @@ function zoomOptions(options) {
 }
 exports.zoomOptions = zoomOptions;
 ;
-//# sourceMappingURL=zoom.js.map

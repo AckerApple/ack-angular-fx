@@ -1,6 +1,5 @@
 //import { style } from '@angular/core';
 import {
-  trigger,
   transition,
   animate,
   keyframes,
@@ -11,7 +10,8 @@ import {
   AnimationTransitionMetadata,
   AnimationGroupMetadata
 } from '@angular/animations';
-import { fxConfig } from '../index';
+
+import { fxConfig } from '../fxTypes';
 
 export function stylize(styleDef, options){
   return style( {...styleDef, ...options.whileStyle} )

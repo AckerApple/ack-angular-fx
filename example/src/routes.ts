@@ -11,7 +11,7 @@ import { string as directives } from "./directives.template"
 import { string as swapping } from "./swapping.template"
 import { string as routeroutlet } from "./routeroutlet.template"
 
-import { delayArray, fxArray, getFxArray } from '../../src';
+import { delayArray, fxArray, getFxArray } from '../../src/helpers';
 
 @Component({
   template   : directives,

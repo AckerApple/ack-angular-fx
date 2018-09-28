@@ -12,15 +12,10 @@ import {
 import {
   inOutTransitions,
   childInOutTransitions,
-  fxConfigCombo,
-  defaultOptions,
   stylize,
   combo,
-  childInOutTransition,
-  inOutGroupQueryByStyles
+  childInOutTransition
 } from "./helper"
-
-import { getConfigTiming, fxConfig } from "../index"
 
 const inStyles = [
   style({opacity: 0, transform: 'scale3d(.1, .1, .1)', offset: 0}),

@@ -1,14 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var FxTracker = /** @class */ (function () {
+var FxTracker = (function () {
     function FxTracker() {
         this.historyChange = new core_1.EventEmitter();
         this.indexChange = new core_1.EventEmitter();
     }
     FxTracker.prototype.ngAfterViewInit = function () {
         var _this = this;
-        //a much needed pause to properly routerOutlet.activated
         setTimeout(function () {
             return _this.loaded = true;
         }, 0);
@@ -46,11 +45,11 @@ var FxTracker = /** @class */ (function () {
                 this.indexChange.emit(++this.index);
                 return this.id;
             }
-            this.index = this.history.length; //push will occur
+            this.index = this.history.length;
         }
         this.history.push(value);
         this.indexChange.emit(this.index);
-        this.history.splice(25, this.history.length); //ensure history no greater than 25. If not this command does nothing
+        this.history.splice(25, this.history.length);
         this.historyChange.emit(this.history);
         return this.id;
     };
@@ -97,4 +96,3 @@ var FxTracker = /** @class */ (function () {
     return FxTracker;
 }());
 exports.FxTracker = FxTracker;
-//# sourceMappingURL=FxTracker.directive.js.map

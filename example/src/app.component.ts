@@ -13,7 +13,7 @@ import {
 import * as packJson from "../../package.json"
 //export const packJson = "0.0.0"
 
-import { delayArray, fxArray } from '../../src';
+import { delayArray, fxArray } from '../../src/helpers';
 
 export const fxNameArray = [
   'fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp',

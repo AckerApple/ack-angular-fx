@@ -28,7 +28,6 @@ var absoluteOutKids = animations_1.trigger('absoluteOutKids', [
             animations_1.query(':leave', [
                 animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
             ], { optional: true })
-            //,animateChild()
         ])
     ], { params: params })
 ]);
@@ -38,10 +37,7 @@ var absoluteInKids = animations_1.trigger('absoluteInKids', [
             animations_1.query(':enter', [
                 animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
             ], { optional: true })
-            //,animateChild()
-        ]
-        //,{params:params}
-        )
+        ])
     ], { params: params })
 ]);
 var absoluteKids = animations_1.trigger('absoluteKids', [
@@ -53,7 +49,6 @@ var absoluteKids = animations_1.trigger('absoluteKids', [
             animations_1.query(':leave', [
                 animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
             ], { optional: true })
-            //,animateChild()
         ])
     ], { params: params })
 ]);
@@ -62,33 +57,9 @@ var absoluteInOut = animations_1.trigger('absoluteInOut', [
         animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
     ], { params: params })
 ]);
-/*const relativeWrap = trigger('relativeWrap', [
-  transition('* <=> *',[
-    group([
-      query(':self',[
-        animate('{{ time }}',
-          keyframes([
-            style({border:'1px solid red', position:'relative', overflow:'hidden', offset:0}),
-            style({border:'1px solid red', position:'relative', overflow:'hidden', offset:1})
-          ])
-        )
-      ]),
-      query('@absoluteKids, @absoluteInKids, @absoluteOutKids',[
-        animate('{{ time }}',
-          keyframes([
-            style({width:'100%', height:'100%', offset:0}),
-            style({width:'100%', height:'100%', offset:1})
-          ])
-        )
-      ],{ optional: true })
-    ])
-  ],{params:params})
-])*/
 exports.triggers = [
     absoluteInOut,
     absoluteKids,
     absoluteInKids,
     absoluteOutKids
-    //,relativeWrap
 ];
-//# sourceMappingURL=absolutes.js.map

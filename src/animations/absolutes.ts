@@ -1,24 +1,14 @@
 import {
-  animation,
   keyframes,
-  AnimationTransitionMetadata,
   AnimationTriggerMetadata,
-  AnimationStyleMetadata,
-  AnimationStateMetadata,
-  AnimationMetadata,
-  state,
   style,
   transition,
   animate,
 
   query,
   trigger,
-  group,
-  animateChild
+  group
 } from '@angular/animations';
-
-import { getConfigTiming, fxConfig } from "../index"
-import { fxConfigCombo, defaultOptions, combo } from "./helper"
 
 const abDef = {
   position : '{{ position }}',

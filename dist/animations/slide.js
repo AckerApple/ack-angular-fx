@@ -140,4 +140,3 @@ function slideOptions(options) {
 }
 exports.slideOptions = slideOptions;
 ;
-//# sourceMappingURL=slide.js.map

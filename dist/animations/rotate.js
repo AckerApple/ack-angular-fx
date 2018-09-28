@@ -141,4 +141,3 @@ function rotateOptions(options) {
 }
 exports.rotateOptions = rotateOptions;
 ;
-//# sourceMappingURL=rotate.js.map

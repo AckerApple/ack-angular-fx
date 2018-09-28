@@ -1,5 +1,3 @@
-import { AnimationTriggerMetadata } from '@angular/animations';
-
 import { childStags } from './animations/childStag';
 import { triggers as absoluteTriggers } from './animations/absolutes';
 import { triggers as fadeTriggers } from './animations/fade';

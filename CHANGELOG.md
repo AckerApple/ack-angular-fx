@@ -1,6 +1,9 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [2.2.1] - 2018-09-28
+- fix file refs
+
 ## [2.2.0] - 2018-09-28
 - Upgraded to Angular6
 - deprecated fxId and fxIdChange

@@ -138,4 +138,3 @@ function states(config) {
     ];
 }
 exports.states = states;
-//# sourceMappingURL=fade.js.map

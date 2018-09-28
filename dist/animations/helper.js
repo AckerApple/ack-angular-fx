@@ -49,14 +49,10 @@ exports.voidFromIn = voidFromIn;
 function inOutTransitions(inStyles, outStyles) {
     var params = { time: '200ms 0ms linear' };
     return [
-        animations_1.transition(inFromVoid, 
-        //'void => *',
-        [
+        animations_1.transition(inFromVoid, [
             animations_1.animate('{{ time }}', animations_1.keyframes(inStyles))
         ], { params: params }),
-        animations_1.transition(voidFromIn, 
-        //'* => void',
-        [
+        animations_1.transition(voidFromIn, [
             animations_1.animate('{{ time }}', animations_1.keyframes(outStyles))
         ], { params: params })
     ];
@@ -80,4 +76,3 @@ function childInOutTransitions(inStyles, outStyles, backInStyles, backOutStyles)
     ];
 }
 exports.childInOutTransitions = childInOutTransitions;
-//# sourceMappingURL=helper.js.map

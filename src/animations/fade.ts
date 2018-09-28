@@ -1,36 +1,22 @@
 import {
-  animation,
   keyframes,
-  AnimationTransitionMetadata,
   AnimationTriggerMetadata,
-  AnimationGroupMetadata,
-  AnimationStyleMetadata,
-  AnimationStateMetadata,
-  AnimationMetadata,
   state,
   style,
   transition,
   animate,
-
-  query,
-  trigger,
-  group,
-  animateChild
+  trigger
 } from '@angular/animations';
 
 import { getConfigTiming } from "../helpers"
-import { fxConfig } from "../types"
+import { fxConfig } from "../fxTypes"
 
 
 import {
   inOutTransitions,
   childInOutTransitions,
-  fxConfigCombo,
-  defaultOptions,
   stylize,
-  combo,
-  childInOutTransition,
-  inOutGroupQueryByStyles
+  childInOutTransition
 } from "./helper"
 
 const inStyles = [

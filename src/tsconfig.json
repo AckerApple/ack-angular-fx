@@ -1,34 +1,38 @@
 {
   "compilerOptions": {
+    "strict": false,
+    "strictPropertyInitialization": false,
+    "noUnusedLocals": true,
+    "rootDir": ".",
+    "removeComments": true,
+    "outDir": "../dist",
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": true,
-    "inlineSources": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "sourceMap": false,
     "noEmitHelpers": false,
-    "lib": [
-      "es6",
-      "dom"
-    ],
-    "types": [
-      "jasmine",
-      "node"
-    ],
+    "noImplicitAny": false,
     "declaration": true,
-    "rootDir": ".",
-    "outDir": "../dist"
+    "skipLibCheck": true,
+    "stripInternal": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "lib": ["es2015", "dom"],
+    "typeRoots": [ "./node_modules/@types" ]
   },
+  "files": [
+    "./index.ts"
+  ],
+  "include": ["**/*"],
   "exclude": [
-    "node_modules",
-    "example",
-    "src/specs"
+    "**/node_modules",
+    "../node_modules",
+    "**/*.spec.ts"
   ],
   "angularCompilerOptions": {
-    "genDir": "../aot",
     "skipMetadataEmit" : false,
-    "skipTemplateCodegen" : true,
-    "entryModule": "app.module#AppModule"
+    "skipTemplateCodegen" : true
   }
 }

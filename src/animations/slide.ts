@@ -10,16 +10,11 @@ import {
   animate
 } from '@angular/animations'
 
-import { getConfigTiming, fxConfig } from "../index"
-
 import {
   inOutTransitions,
   childInOutTransitions,
-  fxConfigCombo,
-  defaultOptions,
   stylize,
-  combo,
-  inOutGroupQueryByStyles
+  combo
 } from "./helper"
 
 const inUpStyles = [

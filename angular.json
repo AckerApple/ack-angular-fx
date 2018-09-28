@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ack-angular-fx": {
+    "example": {
       "root": "example",
       "sourceRoot": "example/src",
       "projectType": "application",
@@ -16,8 +16,11 @@
             "main": "example/src/index.ts",
             "tsConfig": "example/src/tsconfig.json",
             "assets": [
-              "example/src/fireworks.gif",
-              "example/src/app.css"
+              {
+                "glob": "**/*",
+                "input": "example/src/assets",
+                "output": "/"
+              }
             ],
             "styles": [],
             "scripts": []
@@ -39,14 +42,30 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ack-angular-fx:build"
+            "browserTarget": "example:build"
           },
           "configurations": {}
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ack-angular-fx:build"
+            "browserTarget": "example:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "example/src",
+            "karmaConfig": "karma.conf.js",
+            "scripts": [],
+            "styles": [],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "example/src/assets",
+                "output": "/"
+              }
+            ]
           }
         },
         "lint": {
@@ -58,13 +77,80 @@
         }
       }
     },
-    "ack-angular-fx-e2e": {
+    "example-e2e": {
       "root": "example/e2e",
       "sourceRoot": "example/e2e",
       "projectType": "application"
+    },
+    "test": {
+      "root": "",
+      "sourceRoot": "test",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "test",
+            "index": "test/index.html",
+            "main": "test/main.ts",
+            "tsConfig": "test/tsconfig.json",
+            "assets": [],
+            "styles": [],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "test:build"
+          },
+          "configurations": {}
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "test:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "test/test.ts",
+            "karmaConfig": "karma.conf.js",
+            "scripts": [],
+            "styles": [],
+            "assets": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [],
+            "exclude": []
+          }
+        }
+      }
+    },
+    "test-e2e": {
+      "root": "e2e",
+      "sourceRoot": "e2e",
+      "projectType": "application"
     }
   },
-  "defaultProject": "ack-angular-fx",
+  "defaultProject": "example",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "",

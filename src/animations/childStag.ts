@@ -1,8 +1,5 @@
 import {
-  group,
   trigger,
-  AnimationTriggerMetadata,
-  AnimationMetadata,
   transition,
   query,
   stagger,

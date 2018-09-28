@@ -1,2 +1,1 @@
-import { AnimationTriggerMetadata } from '@angular/animations';
-export declare const fxArray: AnimationTriggerMetadata[];
+export declare const fxArray: import("@angular/animations/src/animation_metadata").AnimationTriggerMetadata[];
