@@ -1,32 +1,9 @@
-export { AckFxModule } from "./AckFx.module";
+export * from "./types";
+export * from "./helpers";
+export * from "./AckFx.module";
 import { AnimationTriggerMetadata, AnimationStateMetadata, AnimationTransitionMetadata } from '@angular/animations';
 export { fxArray } from "./allFx";
-export interface selectedFxMetaData {
-    triggers: AnimationTriggerMetadata[];
-    states: AnimationTriggerMetadata[];
-}
-export interface whileStyle {
-    position: string;
-    width: string;
-    overflow: string;
-}
-export interface fxConfig {
-    name?: string;
-    stagger?: number;
-    igniter?: '*' | string;
-    duration?: number;
-    effects?: string[];
-    delay?: number;
-    easing?: 'linear' | string;
-    whileStyle?: whileStyle;
-}
-export interface effectsTypeObject {
-    fade?: boolean;
-    bounce?: boolean;
-    rotate?: boolean;
-    slide?: boolean;
-    zoom?: boolean;
-}
+import { selectedFxMetaData, fxConfig, effectsTypeObject } from "./types";
 export declare const availEffects: string[];
 export declare const delayArray: number[];
 export declare const animateDefaults: {
@@ -46,7 +23,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap100: {
         name?: string;
@@ -56,7 +33,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap200: {
         name?: string;
@@ -66,7 +43,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap300: {
         name?: string;
@@ -76,7 +53,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap400: {
         name?: string;
@@ -86,7 +63,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap500: {
         name?: string;
@@ -96,7 +73,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap600: {
         name?: string;
@@ -106,7 +83,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap700: {
         name?: string;
@@ -116,7 +93,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap800: {
         name?: string;
@@ -126,7 +103,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap900: {
         name?: string;
@@ -136,7 +113,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap1000: {
         name?: string;
@@ -146,7 +123,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap1500: {
         name?: string;
@@ -156,7 +133,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap2000: {
         name?: string;
@@ -166,7 +143,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     absoluteSwap2500: {
         name?: string;
@@ -176,7 +153,7 @@ export declare const menu: {
         effects?: string[];
         delay?: number;
         easing?: string;
-        whileStyle?: whileStyle;
+        whileStyle?: import("../../../../../../../../../Users/adminapple/projects/Ack/browser/ Angular/ack-angular-fx/master/src/types").whileStyle;
     };
     "100": {
         duration: number;
@@ -217,7 +194,6 @@ export declare const menu: {
 };
 export declare function defaultConfig(config: any): any;
 export declare function animateConfig(name: string, config: fxConfig): AnimationTriggerMetadata;
-export declare function getConfigTiming(config: fxConfig): string;
 export declare function createTriggerBy(name: string, config: fxConfig, timing: string): AnimationTriggerMetadata;
 export declare function effectsArrayToTypes(eArray: string[]): effectsTypeObject;
 export declare function stateEffectsByConfig(timing: string, config: fxConfig): (AnimationStateMetadata | AnimationTransitionMetadata)[];

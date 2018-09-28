@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var animations_1 = require("@angular/animations");
-var index_1 = require("../index");
+var helpers_1 = require("../helpers");
 var helper_1 = require("./helper");
 var inStyles = [
     animations_1.style({ opacity: 0, offset: 0 }),
@@ -58,7 +58,7 @@ exports.triggers = [
     fxInKids, inUpKids, inDownKids, inLeftKids, inRightKids
 ];
 function states(config) {
-    var time = index_1.getConfigTiming(config);
+    var time = helpers_1.getConfigTiming(config);
     return [
         animations_1.state('fadeOut', animations_1.style({
             display: 'none'

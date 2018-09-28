@@ -9,16 +9,14 @@ function childIn(from, to) {
     return to ? true : false;
 }
 exports.childIn = childIn;
-var helper_1 = require("./animations/helper");
-/*
-export function voidFromIn(from, to) {
-  return from !== 'nofx' && from !== 'void' && to === 'void' ? true : false;
+function voidFromIn(from, to) {
+    return from !== 'nofx' && from !== 'void' && to === 'void' ? true : false;
 }
-
-export function inFromVoid(from, to) {
-  return to!==null && to !== 'nofx' && from === 'void' && to !== 'void' ? true : false;
+exports.voidFromIn = voidFromIn;
+function inFromVoid(from, to) {
+    return to !== null && to !== 'nofx' && from === 'void' && to !== 'void' ? true : false;
 }
-*/
+exports.inFromVoid = inFromVoid;
 exports.fxArray = [
     animations_1.trigger("zoomInRightKids", [
         animations_1.transition(childOut, [
@@ -263,7 +261,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("zoomInRight", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
                 animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
@@ -274,7 +272,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
@@ -287,7 +285,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("zoomInLeft", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
                 animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
@@ -298,7 +296,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
@@ -311,7 +309,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("zoomInDown", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
                 animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.4 }),
@@ -322,7 +320,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.6 }),
@@ -335,7 +333,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("zoomInUp", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
                 animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.4 }),
@@ -346,7 +344,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.6 }),
@@ -359,7 +357,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("zoomIn", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 0 }),
                 animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 1 })
@@ -369,7 +367,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
@@ -581,7 +579,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("slideInRight", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
                 animations_1.style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
@@ -591,7 +589,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
                 animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
@@ -603,7 +601,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("slideInLeft", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
                 animations_1.style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 1 })
@@ -613,7 +611,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
                 animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
@@ -625,7 +623,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("slideInDown", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
                 animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 1 })
@@ -635,7 +633,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
                 animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
@@ -647,7 +645,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("slideInUp", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
                 animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 1 })
@@ -657,7 +655,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
                 animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
@@ -895,7 +893,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("rotateInDownRight", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
                 animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
@@ -905,7 +903,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
@@ -917,7 +915,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("rotateInDownLeft", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
                 animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
@@ -927,7 +925,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
@@ -939,7 +937,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("rotateInUpRight", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
                 animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
@@ -949,7 +947,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
@@ -961,7 +959,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("rotateInUpLeft", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
                 animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
@@ -971,7 +969,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
@@ -983,7 +981,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("rotateIn", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
                 animations_1.style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 1 })
@@ -993,7 +991,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
@@ -1264,7 +1262,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("bounceInRight", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.2 }),
                 animations_1.style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 1 })
@@ -1274,7 +1272,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.6 }),
@@ -1289,7 +1287,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("bounceInLeft", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.2 }),
                 animations_1.style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 1 })
@@ -1299,7 +1297,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.6 }),
@@ -1314,7 +1312,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("bounceInDown", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.2 }),
                 animations_1.style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.5 }),
@@ -1325,7 +1323,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.6 }),
@@ -1340,7 +1338,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("bounceInUp", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.2 }),
                 animations_1.style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.5 }),
@@ -1351,7 +1349,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.6 }),
@@ -1366,7 +1364,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("bounceIn", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.2 }),
                 animations_1.style({ "opacity": 1, "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.5 }),
@@ -1377,7 +1375,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 0 }),
                 animations_1.style({ "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.2 }),
@@ -1619,7 +1617,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("fadeInRight", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
@@ -1629,7 +1627,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
@@ -1641,7 +1639,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("fadeInLeft", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 1 })
@@ -1651,7 +1649,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
@@ -1663,7 +1661,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("fadeInDown", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 1 })
@@ -1673,7 +1671,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
@@ -1685,7 +1683,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("fadeInUp", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 1 })
@@ -1695,7 +1693,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
                 animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
@@ -1707,7 +1705,7 @@ exports.fxArray = [
         })
     ]),
     animations_1.trigger("fadeIn", [
-        animations_1.transition(helper_1.voidFromIn, [
+        animations_1.transition(voidFromIn, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 1, "offset": 0 }),
                 animations_1.style({ "opacity": 0, "offset": 1 })
@@ -1717,7 +1715,7 @@ exports.fxArray = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(helper_1.inFromVoid, [
+        animations_1.transition(inFromVoid, [
             animations_1.animate("{{ time }}", animations_1.keyframes([
                 animations_1.style({ "opacity": 0, "offset": 0 }),
                 animations_1.style({ "opacity": 1, "offset": 1 })

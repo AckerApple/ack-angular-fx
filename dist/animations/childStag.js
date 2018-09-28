@@ -20,7 +20,6 @@ exports.childStags = [
         animations_1.transition('* => *', [
             animations_1.query(':enter, :leave', [
                 //default must be same as all time defaults in individual fx files
-                //default must be same as all time defaults in individual fx files
                 animations_1.stagger(200, [animations_1.animateChild()])
             ], { optional: true, limit: 300 })
         ])

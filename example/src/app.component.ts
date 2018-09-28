@@ -28,9 +28,9 @@ export const fxNameArray = [
   template: string
   ,animations:fxArray
 }) export class AppComponent {
-  fxId:boolean|number
+  inFx:boolean
   routes:string[] = ['overview','stagger','ngif','swapping','directives','router-outlet']
-  fxTime:string = "1000ms 0ms linear"
+  fxTime:string = "400ms 0ms linear"
   version = packJson['version'] || '0.0.0'
   //panelAnimType: string = 'fadeInLeft'
   show: boolean = true

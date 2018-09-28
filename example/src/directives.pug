@@ -5,10 +5,16 @@ p Track animation values to determine if back or forward fx should be used
 
 h4 Code Sample
 textarea(style="width:100%;height:80px" wrap="off" readonly).
-  &lt;fx-tracker(
-    "[value]"     = "..."
-    "[(fxId)]"    = "fxId"
-  )&gt;&lt;/fx-tracker&gt;
+  &lt;fx-tracker #fx="FxTracker"&gt;&lt;/fx-tracker&gt;
+
+h3 FxTracker properties
+li FxTracker.id : 0|false|1|true
+  ul
+    li ack-angular-fx specific id to indicate fx transistion type
+    li true == 'progressive animation'
+    li 1 == 'progressive animation'
+    li false == 'regressive animation'
+    li 0 == 'regressive animation'
 
 h3 fx-tracker bindings
 li [value] : any
@@ -23,11 +29,3 @@ li
 li [(index)]:number
   ul
     li current position in history
-
-li [(fxId)] : 0|false|1|true
-  ul
-    li ack-angular-fx specific id to indicate fx type
-    li true == 'progressive animation'
-    li 1 == 'progressive animation'
-    li false == 'regressive animation'
-    li 0 == 'regressive animation'

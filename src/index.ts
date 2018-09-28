@@ -1,5 +1,8 @@
-import { AckFxModule } from "./AckFx.module"
-export { AckFxModule } from "./AckFx.module"
+export * from "./types"
+export * from "./helpers"
+export * from "./AckFx.module"
+
+import { getConfigTiming } from "./helpers"
 
 import {
   trigger,
@@ -16,37 +19,9 @@ import { bounce } from './animations/bounce';
 import { rotate } from './animations/rotate';
 import { slide } from './animations/slide';
 import { zoom } from './animations/zoom';
-
-export interface selectedFxMetaData{
-  triggers : AnimationTriggerMetadata[]
-  states   : AnimationTriggerMetadata[]
-}
-
-export interface whileStyle{
-  position : string
-  width    : string
-  overflow : string
-}
-
-export interface fxConfig{
-  name?       : string
-  stagger?    : number
-  igniter?    : '*'|string,
-  duration?   : number,
-  effects?    : string[]
-  delay?      : number
-  easing?     : 'linear'|string
-  whileStyle? : whileStyle
-}
-
-export interface effectsTypeObject{
-  fade?   : boolean
-  bounce? : boolean
-  rotate? : boolean
-  slide?  : boolean
-  zoom?   : boolean
-}
-
+import {
+  selectedFxMetaData, fxConfig, effectsTypeObject
+} from "./types"
 export const availEffects:string[] = ['fade','bounce','rotate','slide','zoom']
 export const delayArray:number[] = [100,200,300,400,500,600,700,800,900,1000,1500,2000]
 export const animateDefaults = {
@@ -97,24 +72,6 @@ export const menu = {
   "2000":{duration:2000}
 }
 
-/* Needed sometime in Angular2
-export function animateFactory(
-  duration: number,
-  delay: number,
-  easing: string,
-  stagger: number,
-  name: string
-){
-   return animateConfig(name,{
-    duration : duration, 
-    delay    : delay, 
-    easing   : easing, 
-    stagger  : stagger, 
-    name     : name
-   })
-}
-*/
-
 export function defaultConfig(config){
   return {
     ...animateDefaults,
@@ -133,14 +90,6 @@ export function animateConfig(
   const dConfig = defaultConfig(config)
   const timing = getConfigTiming(dConfig)
   return createTriggerBy(name, config, timing)
-}
-
-export function getConfigTiming(config:fxConfig):string{
-  return [
-    (config.duration || 500) +'ms',
-    (config.delay || 0) + 'ms',
-    (config.easing  || 'linear')
-  ].join(' ')
 }
 
 export function createTriggerBy(

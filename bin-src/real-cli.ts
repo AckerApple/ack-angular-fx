@@ -1,4 +1,4 @@
-import { selectedFxMetaData } from "../../dist/index"
+import { selectedFxMetaData } from "../dist/index"
 
 const builder = require('./builder')
 const fs = require("fs")

@@ -7,9 +7,13 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var AckFx_module_1 = require("./AckFx.module");
-exports.AckFxModule = AckFx_module_1.AckFxModule;
+__export(require("./helpers"));
+__export(require("./AckFx.module"));
+var helpers_1 = require("./helpers");
 var animations_1 = require("@angular/animations");
 var allFx_1 = require("./allFx");
 var allFx_2 = require("./allFx");
@@ -65,23 +69,6 @@ exports.menu = {
     "1500": { duration: 1500 },
     "2000": { duration: 2000 }
 };
-/* Needed sometime in Angular2
-export function animateFactory(
-  duration: number,
-  delay: number,
-  easing: string,
-  stagger: number,
-  name: string
-){
-   return animateConfig(name,{
-    duration : duration,
-    delay    : delay,
-    easing   : easing,
-    stagger  : stagger,
-    name     : name
-   })
-}
-*/
 function defaultConfig(config) {
     return __assign({}, exports.animateDefaults, config);
 }
@@ -91,18 +78,10 @@ exports.defaultConfig = defaultConfig;
 }*/
 function animateConfig(name, config) {
     var dConfig = defaultConfig(config);
-    var timing = getConfigTiming(dConfig);
+    var timing = helpers_1.getConfigTiming(dConfig);
     return createTriggerBy(name, config, timing);
 }
 exports.animateConfig = animateConfig;
-function getConfigTiming(config) {
-    return [
-        (config.duration || 500) + 'ms',
-        (config.delay || 0) + 'ms',
-        (config.easing || 'linear')
-    ].join(' ');
-}
-exports.getConfigTiming = getConfigTiming;
 function createTriggerBy(name, config, timing) {
     return animations_1.trigger(name, stateEffectsByConfig(timing, config));
 }

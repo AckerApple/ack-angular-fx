@@ -11,12 +11,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var animations_1 = require("@angular/animations");
 var abDef = {
     position: '{{ position }}',
-    //top : '0',
-    //"z-index" : '20',
     width: '100%',
-    //height   : '100%',
     overflow: 'hidden'
-    //,border:'1px solid black'
 };
 var abKeyFrames = [
     animations_1.style(__assign({ offset: 0 }, abDef)),

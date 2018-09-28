@@ -22,7 +22,7 @@ import { delayArray, fxArray, getFxArray } from '../../src';
   template   : swapping,
   animations : fxArray
 }) export class SwappingComponent{
-  fxId:boolean|number
+  fxId:any
   hideToggle:boolean
   swapIndex:number = 0
   fxTime:string = "1000ms 0ms linear"

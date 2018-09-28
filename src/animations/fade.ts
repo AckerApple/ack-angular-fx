@@ -18,7 +18,9 @@ import {
   animateChild
 } from '@angular/animations';
 
-import { getConfigTiming, fxConfig } from "../index"
+import { getConfigTiming } from "../helpers"
+import { fxConfig } from "../types"
+
 
 import {
   inOutTransitions,

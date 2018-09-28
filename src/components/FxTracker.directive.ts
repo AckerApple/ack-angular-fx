@@ -2,7 +2,7 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
 
 @Directive({
   selector:"fx-tracker",
-  exportAs:"fxTracker"
+  exportAs:"FxTracker"
 }) export class FxTracker{
   @Input() value:any
   @Input() activatedRoute:any//ActivatedRoute
@@ -14,16 +14,22 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
   @Input() index:number
   @Output() indexChange:EventEmitter<number> = new EventEmitter()
 
-  @Input() fxId:0|false|1|true
-  @Output() fxIdChange:EventEmitter<0|false|1|true> = new EventEmitter()
+  @Input() id:0|false|1|true
+
+  loaded:boolean
+
+  ngAfterViewInit(){
+    //a much needed pause to properly routerOutlet.activated
+    setTimeout(()=>
+      this.loaded=true
+    , 0)
+  }
 
   ngOnChanges(changes){
-    if( changes.value ){
-      this.produceFxId(changes.value.currentValue)
-    }
-
     if( changes.activatedRoute && changes.activatedRoute.currentValue ){
       this.produceByRoute(changes.activatedRoute.currentValue)
+    }else if( changes.value ){
+      this.produceFxId(changes.value.currentValue)
     }
   }
 
@@ -37,8 +43,7 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
     this.history = this.history || []
 
     if( this.orderArray ){
-      this.fxId = this.produceOrderFxId(value)
-      this.fxIdChange.emit(this.fxId)
+      this.id = this.produceOrderFxId(value)
     }else{
       this.index = this.index==null ? 0 : this.index
 
@@ -48,17 +53,15 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
 
       if( isBack ){
         this.indexChange.emit( --this.index )
-        this.fxId = this.fxId === 0 ? false : 0
-        this.fxIdChange.emit(this.fxId)
-        return this.fxId
+        this.id = this.id === 0 ? false : 0
+        return this.id
       }
 
-      this.fxId = this.fxId === 1 ? true : 1
-      this.fxIdChange.emit(this.fxId)
+      this.id = this.id === 1 ? true : 1
 
       if( isForward ){
         this.indexChange.emit( ++this.index )
-        return this.fxId
+        return this.id
       }
       
       this.index = this.history.length//push will occur
@@ -68,7 +71,7 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
     this.indexChange.emit( this.index )
     this.history.splice(25, this.history.length)//ensure history no greater than 25. If not this command does nothing
     this.historyChange.emit( this.history )
-    return this.fxId
+    return this.id
   }
 
   produceOrderFxId( value:any ):0|false|1|true{
@@ -89,10 +92,10 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
     this.index = newIndex
 
     if( newIndex > oldIndex ){
-      return this.fxId = this.fxId === 0 ? false : 0
+      return this.id = this.id === 0 ? false : 0
     }
 
-    return this.fxId = this.fxId === 1 ? true : 1
+    return this.id = this.id === 1 ? true : 1
   }
 
   getRoutePath( activatedRoute ):string{

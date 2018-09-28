@@ -1,12 +1,12 @@
--fxNames = ['fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp']
--fxNames.push('bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp')
--fxNames.push('rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight')
--fxNames.push('slideInUp','slideInDown','slideInLeft','slideInRight')
--fxNames.push('zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp')
+-fxNames = ['fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp'];
+-fxNames.push('bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp');
+-fxNames.push('rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight');
+-fxNames.push('slideInUp','slideInDown','slideInLeft','slideInRight');
+-fxNames.push('zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp');
 
 -routeAttrs = {};
 each fx in fxNames
-  -routeAttrs["[@"+fx+"Kids]"] = "{value:FxSession.fxForward=='"+fx+"' ? fxId : 'nofx', params:{time:fxTime, position:'fixed'}}"
+  -routeAttrs["[@"+fx+"Kids]"] = "{value:FxSession.fxForward=='"+fx+"' ? fx.id : 'nofx', params:{time:fxTime}}";
 
 table.container(
   cellPadding = "0"
@@ -25,7 +25,7 @@ table.container(
             div(style="display:inline-block;padding:.4em;")
               a(
                 [routerLink] = "'/'+item"
-                "[ngStyle]" = "tracker.value==item ? {color:'#88aaff','font-weight':'900'} : {color:'#999'}"
+                "[ngStyle]" = "fx.value==item ? {color:'#88aaff','font-weight':'900'} : {color:'#999'}"
               ) {{ item }}
           div(style="display:inline-block;padding:.4em;")
             select-fx("[(model)]"="FxSession.fxForward")
@@ -33,15 +33,19 @@ table.container(
   tr
     td(style="height:100%;text-align:left")
       fx-tracker(
-        #tracker         = "fxTracker"
-        "[(fxId)]"       = "fxId"
+        #fx = "FxTracker"
         "[(orderArray)]" = "routes"
-        "[activatedRoute]" = "routerOutlet.activated ? routerOutlet.activatedRoute : null"
+        "[activatedRoute]" = "fx.loaded && routerOutlet.activated ? routerOutlet.activatedRoute : null"
       )
 
-      div(style="position:relative;overflow:hidden;height:100%")
+      div(
+        style="height:100%"
+        "[ngClass]" = "{'pos-rel overflow-hidden':inFx}"
+      )
         div(
           style = "padding:1em;height:100%;"
-          "[@absoluteKids]"  = "{value:fxId, params:{time:fxTime, position:'absolute'}}"
+          "[@absoluteKids]"  = "{value:fx.id, params:{time:fxTime, position:'absolute'}}"
+          "(@absoluteKids.start)" = "inFx=true"
+          "(@absoluteKids.done)"  = "inFx=false"
         )&attributes(routeAttrs)
           router-outlet(#routerOutlet="outlet")

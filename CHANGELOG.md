@@ -1,6 +1,13 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [2.2.0] - 2018-09-28
+- Upgraded to Angular6
+- deprecated fxId and fxIdChange
+  - use `<fx-tracker #fx="FxTracker"></fx-tracker>`
+  - fx.id
+- removed web-animations-js
+
 ## [2.1.2] - 2018-04-12
 - Made all basic animations animate even when false or 0 are based in
   - Condition to check to animate was ignoring false or 0

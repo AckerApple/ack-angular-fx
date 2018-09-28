@@ -22,12 +22,8 @@ import { fxConfigCombo, defaultOptions, combo } from "./helper"
 
 const abDef = {
   position : '{{ position }}',
-  //top : '0',
-  //"z-index" : '20',
   width    : '100%',
-  //height   : '100%',
   overflow : 'hidden'
-  //,border:'1px solid black'
 }
 
 const abKeyFrames = [

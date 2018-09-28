@@ -1,0 +1,77 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ack-angular-fx": {
+      "root": "example",
+      "sourceRoot": "example/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "example/www",
+            "index": "example/src/index.html",
+            "main": "example/src/index.ts",
+            "tsConfig": "example/src/tsconfig.json",
+            "assets": [
+              "example/src/fireworks.gif",
+              "example/src/app.css"
+            ],
+            "styles": [],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ack-angular-fx:build"
+          },
+          "configurations": {}
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ack-angular-fx:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [],
+            "exclude": []
+          }
+        }
+      }
+    },
+    "ack-angular-fx-e2e": {
+      "root": "example/e2e",
+      "sourceRoot": "example/e2e",
+      "projectType": "application"
+    }
+  },
+  "defaultProject": "ack-angular-fx",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "",
+      "styleext": "css"
+    },
+    "@schematics/angular:directive": {
+      "prefix": ""
+    }
+  }
+}

@@ -1,7 +1,7 @@
 h3 Simplest Example
 |Learn the basics below
 textarea(style="width:100%" rows="3" wrap="off" readonly).
-  &lt;div [@fadeInUpKids]="routerOutlet.activated ? routerOutlet.activatedRoute.toString() : null"&gt;
+  &lt;div [@fadeInUpKids]="routerOutlet.activated ? routerOutlet.activatedRoute : null"&gt;
     &lt;router-outlet #routerOutlet="outlet"&gt;&lt;/router-outlet&gt;
   &lt;/div&gt;
 
@@ -9,7 +9,7 @@ h3 Perfect Swap Example
 |A few more settings yields a more stylish display
 textarea(style="width:100%" rows="9" wrap="off" readonly).
   &lt;div
-    [@fadeInUpKids]   = "routerOutlet.activated ? routerOutlet.activatedRoute.toString() : null"
+    [@fadeInUpKids]   = "routerOutlet.activated ? routerOutlet.activatedRoute : null"
     (@fadeInUpKids.start) = "inFx=true"
     (@fadeInUpKids.done) = "inFx=false"
     [@absoluteKids] = "inFx"
@@ -19,16 +19,16 @@ textarea(style="width:100%" rows="9" wrap="off" readonly).
   &lt;/div&gt;
 
 h3 Advanced Swap Back/Forth
-|More code will yield a sophisticated back and forth swap as route history is recorded and converted into an fxId representing user back and forth navigation
+|More code will yield a sophisticated back and forth swap as route history is recorded and converted into an animation id representing user back and forth navigation
 textarea(style="width:100%" rows="15" wrap="off" readonly).
   &lt;fx-tracker
-    [(fxId)]       = "fxId"
-    [activatedRoute] = "routerOutlet.activated ? routerOutlet.activatedRoute : null"
+    #fx = "FxTracker"
+    [activatedRoute] = "fx.loaded && routerOutlet.activated ? routerOutlet.activatedRoute : null"
   &gt;&lt;fx-tracker&gt;
 
   &lt;div
-    [@fadeInUpKids]   = "{value:fxId, params:{time:'500ms'}}"
-    [@absoluteKids] = "{value:fxId, params:{time:'500ms', position:'fixed'}}"
+    [@fadeInUpKids]   = "{value:fx.id, params:{time:'500ms'}}"
+    [@absoluteKids] = "{value:fx.id, params:{time:'500ms', position:'fixed'}}"
     (@absoluteKids.start) = "inFx=true"
     (@absoluteKids.done) = "inFx=false"
     [ngStyle] = "inFx ? 'position:relative;overflow:hidden;height:100%' : null"

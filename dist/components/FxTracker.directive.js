@@ -1,18 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var FxTracker = (function () {
+var FxTracker = /** @class */ (function () {
     function FxTracker() {
         this.historyChange = new core_1.EventEmitter();
         this.indexChange = new core_1.EventEmitter();
-        this.fxIdChange = new core_1.EventEmitter();
     }
+    FxTracker.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        //a much needed pause to properly routerOutlet.activated
+        setTimeout(function () {
+            return _this.loaded = true;
+        }, 0);
+    };
     FxTracker.prototype.ngOnChanges = function (changes) {
-        if (changes.value) {
-            this.produceFxId(changes.value.currentValue);
-        }
         if (changes.activatedRoute && changes.activatedRoute.currentValue) {
             this.produceByRoute(changes.activatedRoute.currentValue);
+        }
+        else if (changes.value) {
+            this.produceFxId(changes.value.currentValue);
         }
     };
     FxTracker.prototype.produceByRoute = function (activatedRoute) {
@@ -23,8 +29,7 @@ var FxTracker = (function () {
     FxTracker.prototype.produceFxId = function (value) {
         this.history = this.history || [];
         if (this.orderArray) {
-            this.fxId = this.produceOrderFxId(value);
-            this.fxIdChange.emit(this.fxId);
+            this.id = this.produceOrderFxId(value);
         }
         else {
             this.index = this.index == null ? 0 : this.index;
@@ -33,15 +38,13 @@ var FxTracker = (function () {
             var isForward = histLen && this.history[this.index + 1] == value;
             if (isBack) {
                 this.indexChange.emit(--this.index);
-                this.fxId = this.fxId === 0 ? false : 0;
-                this.fxIdChange.emit(this.fxId);
-                return this.fxId;
+                this.id = this.id === 0 ? false : 0;
+                return this.id;
             }
-            this.fxId = this.fxId === 1 ? true : 1;
-            this.fxIdChange.emit(this.fxId);
+            this.id = this.id === 1 ? true : 1;
             if (isForward) {
                 this.indexChange.emit(++this.index);
-                return this.fxId;
+                return this.id;
             }
             this.index = this.history.length; //push will occur
         }
@@ -49,7 +52,7 @@ var FxTracker = (function () {
         this.indexChange.emit(this.index);
         this.history.splice(25, this.history.length); //ensure history no greater than 25. If not this command does nothing
         this.historyChange.emit(this.history);
-        return this.fxId;
+        return this.id;
     };
     FxTracker.prototype.produceOrderFxId = function (value) {
         var oldIndex = 0;
@@ -65,9 +68,9 @@ var FxTracker = (function () {
         });
         this.index = newIndex;
         if (newIndex > oldIndex) {
-            return this.fxId = this.fxId === 0 ? false : 0;
+            return this.id = this.id === 0 ? false : 0;
         }
-        return this.fxId = this.fxId === 1 ? true : 1;
+        return this.id = this.id === 1 ? true : 1;
     };
     FxTracker.prototype.getRoutePath = function (activatedRoute) {
         var target = activatedRoute;
@@ -78,21 +81,18 @@ var FxTracker = (function () {
     FxTracker.decorators = [
         { type: core_1.Directive, args: [{
                     selector: "fx-tracker",
-                    exportAs: "fxTracker"
+                    exportAs: "FxTracker"
                 },] },
     ];
-    /** @nocollapse */
-    FxTracker.ctorParameters = function () { return []; };
     FxTracker.propDecorators = {
-        "value": [{ type: core_1.Input },],
-        "activatedRoute": [{ type: core_1.Input },],
-        "orderArray": [{ type: core_1.Input },],
-        "history": [{ type: core_1.Input },],
-        "historyChange": [{ type: core_1.Output },],
-        "index": [{ type: core_1.Input },],
-        "indexChange": [{ type: core_1.Output },],
-        "fxId": [{ type: core_1.Input },],
-        "fxIdChange": [{ type: core_1.Output },],
+        value: [{ type: core_1.Input }],
+        activatedRoute: [{ type: core_1.Input }],
+        orderArray: [{ type: core_1.Input }],
+        history: [{ type: core_1.Input }],
+        historyChange: [{ type: core_1.Output }],
+        index: [{ type: core_1.Input }],
+        indexChange: [{ type: core_1.Output }],
+        id: [{ type: core_1.Input }]
     };
     return FxTracker;
 }());

@@ -24,7 +24,6 @@ Angular animations made easy. [Example Page](https://ackerapple.github.io/ack-an
   - [Global Usage](#global-usage)
 - [Stagger](#stagger)
 - [Supported Animations](#supported-animations)
-- [web-animations-js](#web-animations-js)
 - [Prebuild Fxs to Single File](#prebuild-fxs-to-single-file)
 - [Work on This Project](#work-on-this-project)
   - [Building Example](#building-example)
@@ -184,8 +183,6 @@ import { supportDocument } from "ack-angular-fx/web-animations.min";
 supportDocument(document)
 ```
 
-> `ack-angular-fx/web-animations.min` was built using npm based version of [web-animations-js](https://www.npmjs.com/package/web-animations-js)
-
 ### Stagger
 Offset multiple animations using Angular 4.2.4 or greater
 
@@ -247,11 +244,6 @@ A table element staggering row animations whenever "rowStaggers" variable change
   - zoomInUp
 
 see online demo https://ackerapple.github.io/ack-angular-fx
-
-# web-animations-js
-If due to browser lack of support for animations, try including the following in your project
-
-[web-animations-js](https://www.npmjs.com/package/web-animations-js) has been included to make life easier in terms of browser compatibility
 
 ## Prebuild Fxs to Single File
 Known as the prefx process, ack-angular-fx has cli commands to bundle animations to file
