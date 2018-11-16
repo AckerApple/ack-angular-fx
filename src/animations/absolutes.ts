@@ -12,8 +12,16 @@ import {
 
 const abDef = {
   position : '{{ position }}',
+  //top      : '0',
   width    : '100%',
   overflow : 'hidden'
+  //,border:'1px solid blue'
+}
+
+const relDef = {
+  position : 'relative',
+  overflow : 'hidden'
+  //,border:'1px solid red'
 }
 
 const abKeyFrames = [
@@ -22,8 +30,25 @@ const abKeyFrames = [
     ...abDef
   }),
   style({
-    offset   : 1,
+    offset   : .999,
     ...abDef
+  }),
+  style({
+    offset   : 1
+  })
+]
+
+const relKeyFrames = [
+  style({
+    offset   : 0,
+    ...relDef
+  }),
+  style({
+    offset   : .999,
+    ...relDef
+  }),    
+  style({
+    offset   : 1
   })    
 ]
 
@@ -65,7 +90,22 @@ const absoluteInKids = trigger('absoluteInKids', [
 const absoluteKids = trigger('absoluteKids', [
   transition('* <=> *',[
     group([
-      query(':enter',[
+      /*
+      query(':self',[
+        animate('{{ time }}',
+          keyframes(relKeyFrames)
+        )
+      ],{ optional: true }),
+      */
+/*
+      query('@*:animating, @*:leave, @*:enter',[
+        animate('{{ time }}',
+          keyframes(abKeyFrames)
+        )
+      ],{ optional: true }),
+*/
+
+      query(':animating',[
         animate('{{ time }}',
           keyframes(abKeyFrames)
         )
@@ -74,8 +114,12 @@ const absoluteKids = trigger('absoluteKids', [
         animate('{{ time }}',
           keyframes(abKeyFrames)
         )
+      ],{ optional: true }),
+      query(':enter',[
+        animate('{{ time }}',
+          keyframes(abKeyFrames)
+        )
       ],{ optional: true })
-      //,animateChild()
     ])
   ],{params:params})
 ])

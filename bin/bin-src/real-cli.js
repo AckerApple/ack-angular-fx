@@ -1,12 +1,12 @@
 "use strict";
 exports.__esModule = true;
+var allFxDynamic_1 = require("../src/allFxDynamic");
 var builder = require('./builder');
 var fs = require("fs");
 var path = require("path");
 //being TypeScript
 require('ts-node').register({ /* options */});
-var index = require("../dist/index");
-//const index = require("../src/index")
+var helpers = require("../src/helpers");
 var outPath = process.cwd();
 var outIndex = process.argv.indexOf('--out');
 if (outIndex) {
@@ -25,16 +25,16 @@ var igniterIndex = process.argv.indexOf('--igniter');
 if (igniterIndex >= 0) {
     igniter = process.argv[igniterIndex + 1];
 }
-var effectArray = index.availEffects;
+var effectArray = helpers.availEffects;
 var effectsIndex = process.argv.indexOf('--effects');
 if (effectsIndex >= 0) {
     effectArray = process.argv[effectsIndex + 1].split(',');
 }
 //an array of triggers
-var selectedFxMetaData = index.selectFx(selects, effectArray, { igniter: igniter });
+var selectedFxMetaData = helpers.selectFx(selects, effectArray, { igniter: igniter });
 //array of triggers to one string
 //const output = builder.selectedFxToImportSyntax(selectedFxMetaData)
-var output = builder.selectedFxToImportSyntax({ triggers: index.fxArray });
+var output = builder.selectedFxToImportSyntax({ triggers: allFxDynamic_1.fxArray });
 console.log('\x1b[36m[ack-angular-fx]\x1b[0m:', 'wrote file :', outPath.substring(process.cwd().length, outPath.length));
 require('mkdirp').sync(path.join(outPath, '../'));
 fs.writeFileSync(outPath, output);

@@ -1,6 +1,9 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [2.3.0] - 2018-11-16
+- Updated Angular
+
 ## [2.2.1] - 2018-09-28
 - fix file refs
 

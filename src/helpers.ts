@@ -1,4 +1,4 @@
-import { fxArray } from "./allFx"
+import { fxArray } from "./allFxDynamic"
 
 import {
   selectedFxMetaData, fxConfig, effectsTypeObject

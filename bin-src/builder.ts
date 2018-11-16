@@ -1,5 +1,5 @@
 import { AnimationTriggerMetadata } from "@angular/animations"
-import { selectedFxMetaData } from "../dist/fxTypes"
+import { selectedFxMetaData } from "../src/fxTypes"
 
 //const childStags = require('../dist/animations/childStag').childStags;
 

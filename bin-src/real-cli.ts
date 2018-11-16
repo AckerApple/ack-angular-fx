@@ -1,5 +1,5 @@
-import { fxArray } from "../dist/allFx"
-import { selectedFxMetaData } from "../dist/fxTypes"
+import { fxArray } from "../src/allFxDynamic"
+import { selectedFxMetaData } from "../src/fxTypes"
 
 const builder = require('./builder')
 const fs = require("fs")
@@ -7,7 +7,7 @@ const path = require("path")
 
 //being TypeScript
 require('ts-node').register({ /* options */ })
-const helpers = require("../dist/helpers")
+const helpers = require("../src/helpers")
 
 let outPath = process.cwd()
 

@@ -10,7 +10,8 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
+//import { style } from '@angular/core';
 var animations_1 = require("@angular/animations");
 function stylize(styleDef, options) {
     return animations_1.style(__assign({}, styleDef, options.whileStyle));
@@ -52,10 +53,14 @@ exports.voidFromIn = voidFromIn;
 function inOutTransitions(inStyles, outStyles) {
     var params = { time: '200ms 0ms linear' };
     return [
-        animations_1.transition(inFromVoid, [
+        animations_1.transition(inFromVoid, 
+        //'void => *',
+        [
             animations_1.animate('{{ time }}', animations_1.keyframes(inStyles))
         ], { params: params }),
-        animations_1.transition(voidFromIn, [
+        animations_1.transition(voidFromIn, 
+        //'* => void',
+        [
             animations_1.animate('{{ time }}', animations_1.keyframes(outStyles))
         ], { params: params })
     ];

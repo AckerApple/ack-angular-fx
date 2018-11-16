@@ -4,16 +4,20 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
   selector:"fx-tracker",
   exportAs:"FxTracker"
 }) export class FxTracker{
-  @Input() value:any
+  @Input() value:any//do not mix with ActivatedRoute
   @Input() activatedRoute:any//ActivatedRoute
+  
+  //TODO:need a number based way to track order
   @Input() orderArray:any[]//back and foward determined by matching items in array
 
   @Input() history:any[]
   @Output() historyChange:EventEmitter<any[]> = new EventEmitter()
-  
-  @Input() index:number
+
+  //current position in history table
+  @Input() index:number//need not be an input
   @Output() indexChange:EventEmitter<number> = new EventEmitter()
 
+  //animations forward versus back indicator
   @Input() id:0|false|1|true
 
   loaded:boolean

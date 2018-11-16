@@ -10,7 +10,7 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var allFxDynamic_1 = require("./allFxDynamic");
 var fade_1 = require("./animations/fade");
 var bounce_1 = require("./animations/bounce");
@@ -21,6 +21,9 @@ var animations_1 = require("@angular/animations");
 exports.availEffects = ['fade', 'bounce', 'rotate', 'slide', 'zoom'];
 exports.delayArray = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1500, 2000];
 exports.animateDefaults = {
+    //duration   : 500,
+    //delay      : 0,
+    //easing     : 'linear',
     stagger: 0,
     name: 'animate',
     igniter: '*',
@@ -73,6 +76,9 @@ function defaultConfig(config) {
     return __assign({}, exports.animateDefaults, config);
 }
 exports.defaultConfig = defaultConfig;
+/*export function checkStagger(config){
+  return (!config.stagger || console.log('ack-angular-fx does not support stagger as of this release')) && config
+}*/
 function animateConfig(name, config) {
     var dConfig = defaultConfig(config);
     var timing = getConfigTiming(dConfig);
@@ -115,9 +121,20 @@ function stateEffectsByConfig(timing, config) {
     return array;
 }
 exports.stateEffectsByConfig = stateEffectsByConfig;
+/*export function upgradeComponent(component, animations?){
+  const annots = window['Reflect'].getMetadata("annotations", component)
+  if(!annots)return
+  
+  annots[0].animations = annots[0].animations || []
+  
+  const fxArr = animations || fxArray
+  
+  annots[0].animations.push.apply(annots[0].animations, fxArr)
+}*/
 function selectFx(args, effectList, config) {
     if (config === void 0) { config = { igniter: 'start' }; }
     var selectedFx = { states: [], triggers: [] };
+    //loop an array like [100,200,"childStag"]
     args.forEach(function (fxType) {
         var cloneConfig = __assign({}, exports.menu[fxType]);
         var newConfig = __assign({}, cloneConfig, config);
@@ -128,8 +145,11 @@ function selectFx(args, effectList, config) {
     return selectedFx;
 }
 exports.selectFx = selectFx;
+/** Goes into specialized fx files and plucks out the stand alone triggers */
+// ---- NOT DONE ----
 function processTriggerSelect(config, effectList) {
     var fxs = [];
+    //const fxTypes = effectsArrayToTypes( config.effects || availEffects )
     fxs.push.apply(fxs, allFxDynamic_1.fxArray);
     return fxs;
 }
@@ -138,6 +158,13 @@ function processSelect(name, config, effectArray) {
     return animateConfig(name, config);
 }
 exports.processSelect = processSelect;
+/*export const easeArray = [
+  {name:'Ease', value:'ease'},
+  {name:'EaseIn', value:'ease-in'},
+  {name:'EaseOut', value:'ease-out'},
+  {name:'EaseInOut', value:'ease-in-out'}
+]*/
+//fxArray + deprecated fxs
 function getFxArray() {
     var allFx = [
         processSelect("absoluteSwap", exports.menu["absoluteSwap400"]),
@@ -173,3 +200,10 @@ exports.getFxArray = getFxArray;
 exports.absSwapClone = {
     name: null, duration: null, whileStyle: null
 };
+/*
+export function upgradeComponents(array, animations?){
+  for(let x=array.length-1; x >= 0; --x){
+    upgradeComponent(array[x], animations)
+  }
+}
+*/ 
