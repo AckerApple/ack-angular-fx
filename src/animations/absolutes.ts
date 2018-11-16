@@ -38,7 +38,7 @@ const abKeyFrames = [
   })
 ]
 
-const relKeyFrames = [
+/*const relKeyFrames = [
   style({
     offset   : 0,
     ...relDef
@@ -50,7 +50,7 @@ const relKeyFrames = [
   style({
     offset   : 1
   })    
-]
+]*/
 
 const params = {
   time:'200ms 0ms linear',

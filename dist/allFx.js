@@ -1731,8 +1731,8 @@ exports.fxArray = [
             animations_1.group([
                 animations_1.query(":leave", [
                     animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "offset": 0, "position": "{{ position }}", "top": "0", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "top": "0", "width": "100%", "overflow": "hidden" }),
+                        animations_1.style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
                         animations_1.style({ "offset": 1 })
                     ]))
                 ], {
@@ -1751,8 +1751,8 @@ exports.fxArray = [
             animations_1.group([
                 animations_1.query(":enter", [
                     animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "offset": 0, "position": "{{ position }}", "top": "0", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "top": "0", "width": "100%", "overflow": "hidden" }),
+                        animations_1.style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
                         animations_1.style({ "offset": 1 })
                     ]))
                 ], {
@@ -1771,8 +1771,8 @@ exports.fxArray = [
             animations_1.group([
                 animations_1.query(":animating", [
                     animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "offset": 0, "position": "{{ position }}", "top": "0", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "top": "0", "width": "100%", "overflow": "hidden" }),
+                        animations_1.style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
                         animations_1.style({ "offset": 1 })
                     ]))
                 ], {
@@ -1780,8 +1780,8 @@ exports.fxArray = [
                 }),
                 animations_1.query(":leave", [
                     animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "offset": 0, "position": "{{ position }}", "top": "0", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "top": "0", "width": "100%", "overflow": "hidden" }),
+                        animations_1.style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
                         animations_1.style({ "offset": 1 })
                     ]))
                 ], {
@@ -1789,8 +1789,8 @@ exports.fxArray = [
                 }),
                 animations_1.query(":enter", [
                     animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "offset": 0, "position": "{{ position }}", "top": "0", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "top": "0", "width": "100%", "overflow": "hidden" }),
+                        animations_1.style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
                         animations_1.style({ "offset": 1 })
                     ]))
                 ], {
@@ -1807,8 +1807,8 @@ exports.fxArray = [
     animations_1.trigger("absoluteInOut", [
         animations_1.transition("* <=> *", [
             animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "offset": 0, "position": "{{ position }}", "top": "0", "width": "100%", "overflow": "hidden" }),
-                animations_1.style({ "offset": 0.999, "position": "{{ position }}", "top": "0", "width": "100%", "overflow": "hidden" }),
+                animations_1.style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                animations_1.style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
                 animations_1.style({ "offset": 1 })
             ]))
         ], {

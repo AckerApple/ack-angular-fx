@@ -28,13 +28,6 @@ var abKeyFrames = [
         offset: 1
     })
 ];
-var relKeyFrames = [
-    animations_1.style(__assign({ offset: 0 }, relDef)),
-    animations_1.style(__assign({ offset: .999 }, relDef)),
-    animations_1.style({
-        offset: 1
-    })
-];
 var params = {
     time: '200ms 0ms linear',
     position: 'absolute'

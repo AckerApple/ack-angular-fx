@@ -1,11 +1,11 @@
 {
   "name": "ack-angular-fx",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Angular animations made easier",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "bin": {
-    "ack-angular-fx": "./bin/cli.js"
+    "ack-angular-fx": "./bin/bin-src/cli.js"
   },
   "scripts": {
     "test": "npm run compile:allfx",
@@ -20,7 +20,7 @@
     "build:dist:replace": "node ./replacements",
     "build:dist": "npm-run-all build:dist:build build:dist:replace",
     "build": "npm-run-all build:dist build:bin compile:allfx build:example",
-    "build:bin": "tsc bin-src/* --outDir bin --declaration true --lib ES6",
+    "build:bin": "tsc bin-src/* --outDir ./bin --declaration true --lib ES6",
     "ts-node": "ts-node",
     "compile:allfx": "node ./bin/bin-src/real-cli.js --igniter void --select absoluteSwap,100,200,300,400,500,600,700,800,900,1000,1500,2000,childStag --effects bounce,fade --out src/allFx.ts"
   },
