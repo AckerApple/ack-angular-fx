@@ -20,16 +20,17 @@ function selectedFxToImportSyntax(selectedFx) {
         var f = functions[key];
         functionsString += "\nexport " + f.toString() + "\n";
     }
-    return 'import { group, query, stagger, animateChild, AnimationTriggerMetadata,trigger,style,state,transition,animate,keyframes } from "@angular/animations"\n' +
+    //AnimationTriggerMetadata, state
+    return 'import { group, query, stagger, animateChild, trigger,style,transition,animate,keyframes } from "@angular/animations"\n' +
         functionsString +
-        '\nexport const fxArray = [' + syntax + ']';
+        '\nexport const animations = [' + syntax + ']';
 }
 exports.selectedFxToImportSyntax = selectedFxToImportSyntax;
-function fxTriggersToSyntaxArray(fxArray) {
+function fxTriggersToSyntaxArray(animations) {
     var triggers = [];
     var functions = [];
-    for (var trigIndex = fxArray.length - 1; trigIndex >= 0; --trigIndex) {
-        var fx = fxArray[trigIndex];
+    for (var trigIndex = animations.length - 1; trigIndex >= 0; --trigIndex) {
+        var fx = animations[trigIndex];
         var name = fx.name;
         var triggerDef = triggerToString(fx);
         functions.push.apply(functions, triggerDef.functions);
@@ -41,10 +42,10 @@ function fxTriggersToSyntaxArray(fxArray) {
         functions: functions
     };
 }
-function fxStatesToSyntaxArray(fxArray) {
+function fxStatesToSyntaxArray(animations) {
     var triggers = [];
-    for (var trigIndex = fxArray.length - 1; trigIndex >= 0; --trigIndex) {
-        var fx = fxArray[trigIndex];
+    for (var trigIndex = animations.length - 1; trigIndex >= 0; --trigIndex) {
+        var fx = animations[trigIndex];
         var name = fx.name;
         /*
         if( name==='childStag' ){

@@ -18,12 +18,6 @@ const abDef = {
   //,border:'1px solid blue'
 }
 
-const relDef = {
-  position : 'relative',
-  overflow : 'hidden'
-  //,border:'1px solid red'
-}
-
 const abKeyFrames = [
   style({
     offset   : 0,
@@ -33,24 +27,12 @@ const abKeyFrames = [
     offset   : .999,
     ...abDef
   }),
+  //ensure absolute not left on
   style({
     offset   : 1
   })
 ]
 
-/*const relKeyFrames = [
-  style({
-    offset   : 0,
-    ...relDef
-  }),
-  style({
-    offset   : .999,
-    ...relDef
-  }),    
-  style({
-    offset   : 1
-  })    
-]*/
 
 const params = {
   time:'200ms 0ms linear',
@@ -78,33 +60,13 @@ const absoluteInKids = trigger('absoluteInKids', [
           keyframes(abKeyFrames)
         )
       ],{ optional: true })
-      //,animateChild()
-    ]
-    //,{params:params}
-    )
-  ]
-  , {params:params}
-  )
+    ])
+  ], {params:params})
 ])
 
 const absoluteKids = trigger('absoluteKids', [
   transition('* <=> *',[
     group([
-      /*
-      query(':self',[
-        animate('{{ time }}',
-          keyframes(relKeyFrames)
-        )
-      ],{ optional: true }),
-      */
-/*
-      query('@*:animating, @*:leave, @*:enter',[
-        animate('{{ time }}',
-          keyframes(abKeyFrames)
-        )
-      ],{ optional: true }),
-*/
-
       query(':animating',[
         animate('{{ time }}',
           keyframes(abKeyFrames)
@@ -132,33 +94,9 @@ const absoluteInOut = trigger('absoluteInOut', [
   ],{params:params})
 ])
 
-/*const relativeWrap = trigger('relativeWrap', [
-  transition('* <=> *',[
-    group([
-      query(':self',[
-        animate('{{ time }}',
-          keyframes([
-            style({border:'1px solid red', position:'relative', overflow:'hidden', offset:0}),
-            style({border:'1px solid red', position:'relative', overflow:'hidden', offset:1})
-          ])
-        )
-      ]),
-      query('@absoluteKids, @absoluteInKids, @absoluteOutKids',[
-        animate('{{ time }}',
-          keyframes([
-            style({width:'100%', height:'100%', offset:0}),
-            style({width:'100%', height:'100%', offset:1})
-          ])
-        )
-      ],{ optional: true })
-    ])
-  ],{params:params})
-])*/
-
 export const triggers : AnimationTriggerMetadata[] = [
   absoluteInOut,
   absoluteKids,
   absoluteInKids,
   absoluteOutKids
-  //,relativeWrap
 ]

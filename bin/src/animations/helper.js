@@ -28,7 +28,7 @@ function combo(timing, options) {
 exports.combo = combo;
 function childInOutTransition(inStyles, outStyles) {
     var params = { time: '200ms 0ms linear' };
-    return [animations_1.transition('* <=> *', [inOutGroupQueryByStyles(inStyles, outStyles)], { params: params })];
+    return animations_1.transition('* <=> *', [inOutGroupQueryByStyles(inStyles, outStyles)], { params: params });
 }
 exports.childInOutTransition = childInOutTransition;
 function inOutGroupQueryByStyles(inStyles, outStyles) {
@@ -42,27 +42,38 @@ function inOutGroupQueryByStyles(inStyles, outStyles) {
     ]);
 }
 exports.inOutGroupQueryByStyles = inOutGroupQueryByStyles;
+//used for showing
 function inFromVoid(from, to) {
     return to !== null && to !== 'nofx' && from === 'void' && to !== 'void' ? true : false;
 }
 exports.inFromVoid = inFromVoid;
+//used for hidding
 function voidFromIn(from, to) {
     return from !== 'nofx' && from !== 'void' && to === 'void' ? true : false;
 }
 exports.voidFromIn = voidFromIn;
-function inOutTransitions(inStyles, outStyles) {
+function inTransition(inStyles) {
     var params = { time: '200ms 0ms linear' };
+    return animations_1.transition(inFromVoid, 
+    //'void => *',
+    [
+        animations_1.animate('{{ time }}', animations_1.keyframes(inStyles))
+    ], { params: params });
+}
+exports.inTransition = inTransition;
+function outTransition(outStyles) {
+    var params = { time: '200ms 0ms linear' };
+    return animations_1.transition(voidFromIn, 
+    //'* => void',
+    [
+        animations_1.animate('{{ time }}', animations_1.keyframes(outStyles))
+    ], { params: params });
+}
+exports.outTransition = outTransition;
+function inOutTransitions(inStyles, outStyles) {
     return [
-        animations_1.transition(inFromVoid, 
-        //'void => *',
-        [
-            animations_1.animate('{{ time }}', animations_1.keyframes(inStyles))
-        ], { params: params }),
-        animations_1.transition(voidFromIn, 
-        //'* => void',
-        [
-            animations_1.animate('{{ time }}', animations_1.keyframes(outStyles))
-        ], { params: params })
+        inTransition(inStyles),
+        outTransition(outStyles)
     ];
 }
 exports.inOutTransitions = inOutTransitions;

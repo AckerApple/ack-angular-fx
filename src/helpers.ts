@@ -1,10 +1,11 @@
-import { fxArray } from "./allFxDynamic"
+import { animations } from "./allFxDynamic"
+export { animations } from "./allFxDynamic"
 
 import {
   selectedFxMetaData, fxConfig, effectsTypeObject
 } from "./fxTypes"
 
-import { states as fadeStates } from './animations/fade';
+//import { states as fadeStates } from './animations/fade';
 import { bounce } from './animations/bounce';
 import { rotate } from './animations/rotate';
 import { slide } from './animations/slide';
@@ -126,9 +127,9 @@ export function stateEffectsByConfig(
   const array = []
   const fxTypes = effectsArrayToTypes( config.effects || availEffects )
 
-  if( fxTypes.fade ){
+  /*if( fxTypes.fade ){
     array.push(...fadeStates(config))
-  }
+  }*/
 
   if( fxTypes.bounce ){
     array.push(...bounce(timing, config))
@@ -148,17 +149,6 @@ export function stateEffectsByConfig(
 
   return array
 }
-
-/*export function upgradeComponent(component, animations?){
-  const annots = window['Reflect'].getMetadata("annotations", component)
-  if(!annots)return
-  
-  annots[0].animations = annots[0].animations || []
-  
-  const fxArr = animations || fxArray
-  
-  annots[0].animations.push.apply(annots[0].animations, fxArr)
-}*/
 
 export function selectFx(
   args:string[],
@@ -186,7 +176,7 @@ function processTriggerSelect(config:fxConfig, effectList){
   const fxs = []
   //const fxTypes = effectsArrayToTypes( config.effects || availEffects )
   
-  fxs.push.apply(fxs, fxArray)
+  fxs.push.apply(fxs, animations)
   
   return fxs
 }
@@ -208,8 +198,8 @@ export function processSelect(
 ]*/
 
 
-//fxArray + deprecated fxs
-export function getFxArray() : AnimationTriggerMetadata[] {
+//animations + deprecated fxs
+export function getAnimations() : AnimationTriggerMetadata[] {
   const allFx = [
     processSelect("absoluteSwap", menu["absoluteSwap400"] ),
     processSelect("absoluteSwap100", menu["absoluteSwap100"] ),
@@ -238,7 +228,7 @@ export function getFxArray() : AnimationTriggerMetadata[] {
     processSelect("2000", menu["2000"] )
   ]
 
-  allFx.push.apply(allFx, fxArray)
+  allFx.push.apply(allFx, animations)
 
   return allFx
 }
@@ -246,11 +236,3 @@ export function getFxArray() : AnimationTriggerMetadata[] {
 export let absSwapClone = {
   name:null, duration:null, whileStyle:null
 }
-
-/*
-export function upgradeComponents(array, animations?){
-  for(let x=array.length-1; x >= 0; --x){
-    upgradeComponent(array[x], animations)
-  }
-}
-*/

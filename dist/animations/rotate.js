@@ -42,18 +42,27 @@ var outDownRightStyles = [
     animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
     animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1 })
 ];
-var fxIn = animations_1.trigger('rotateIn', helper_1.inOutTransitions(fxInStyles, fxOutStyles));
-var fxInKids = animations_1.trigger('rotateInKids', helper_1.childInOutTransition(fxInStyles, fxOutStyles));
-var inUpLeft = animations_1.trigger('rotateInUpLeft', helper_1.inOutTransitions(inUpLeftStyles, outUpLeftStyles));
-var inUpLeftKids = animations_1.trigger('rotateInUpLeftKids', helper_1.childInOutTransitions(inUpLeftStyles, outUpLeftStyles, inDownLeftStyles, outDownLeftStyles));
-var inUpRight = animations_1.trigger('rotateInUpRight', helper_1.inOutTransitions(inUpRightStyles, outUpRightStyles));
-var inUpRightKids = animations_1.trigger('rotateInUpRightKids', helper_1.childInOutTransitions(inUpRightStyles, outUpRightStyles, inDownRightStyles, outDownRightStyles));
-var inDownLeft = animations_1.trigger('rotateInDownLeft', helper_1.inOutTransitions(inDownLeftStyles, outDownLeftStyles));
-var inDownLeftKids = animations_1.trigger('rotateInDownLeftKids', helper_1.childInOutTransitions(inDownLeftStyles, outDownLeftStyles, inUpLeftStyles, outUpLeftStyles));
-var inDownRight = animations_1.trigger('rotateInDownRight', helper_1.inOutTransitions(inDownRightStyles, outDownRightStyles));
-var inDownRightKids = animations_1.trigger('rotateInDownRightKids', helper_1.childInOutTransitions(inDownRightStyles, outDownRightStyles, inUpRightStyles, outUpRightStyles));
+var fxInKids = animations_1.trigger('rotateInOutKids', [helper_1.childInOutTransition(fxInStyles, fxOutStyles)]);
+var inUpLeftKids = animations_1.trigger('rotateInOutUpLeftKids', helper_1.childInOutTransitions(inUpLeftStyles, outUpLeftStyles, inDownLeftStyles, outDownLeftStyles));
+var inUpRightKids = animations_1.trigger('rotateInOutUpRightKids', helper_1.childInOutTransitions(inUpRightStyles, outUpRightStyles, inDownRightStyles, outDownRightStyles));
+var inDownLeftKids = animations_1.trigger('rotateInOutDownLeftKids', helper_1.childInOutTransitions(inDownLeftStyles, outDownLeftStyles, inUpLeftStyles, outUpLeftStyles));
+var inDownRightKids = animations_1.trigger('rotateInOutDownRightKids', helper_1.childInOutTransitions(inDownRightStyles, outDownRightStyles, inUpRightStyles, outUpRightStyles));
 exports.triggers = [
-    fxIn, inUpLeft, inUpRight, inDownLeft, inDownRight,
+    animations_1.trigger('rotateIn', [helper_1.inTransition(fxInStyles)]),
+    animations_1.trigger('rotateOut', [helper_1.outTransition(fxOutStyles)]),
+    animations_1.trigger('rotateInOut', helper_1.inOutTransitions(fxInStyles, fxOutStyles)),
+    animations_1.trigger('rotateInUpLeft', [helper_1.inTransition(inUpLeftStyles)]),
+    animations_1.trigger('rotateOutUpLeft', [helper_1.outTransition(outUpLeftStyles)]),
+    animations_1.trigger('rotateInOutUpLeft', helper_1.inOutTransitions(inUpLeftStyles, outUpLeftStyles)),
+    animations_1.trigger('rotateInUpRight', [helper_1.inTransition(inUpRightStyles)]),
+    animations_1.trigger('rotateOutUpRight', [helper_1.outTransition(outUpRightStyles)]),
+    animations_1.trigger('rotateInOutUpRight', helper_1.inOutTransitions(inUpRightStyles, outUpRightStyles)),
+    animations_1.trigger('rotateInDownLeft', [helper_1.inTransition(inDownLeftStyles)]),
+    animations_1.trigger('rotateOutDownLeft', [helper_1.outTransition(outDownLeftStyles)]),
+    animations_1.trigger('rotateInOutDownLeft', helper_1.inOutTransitions(inDownLeftStyles, outDownLeftStyles)),
+    animations_1.trigger('rotateInDownRight', [helper_1.inTransition(inDownRightStyles)]),
+    animations_1.trigger('rotateOutDownRight', [helper_1.outTransition(outDownRightStyles)]),
+    animations_1.trigger('rotateInOutDownRight', helper_1.inOutTransitions(inDownRightStyles, outDownRightStyles)),
     fxInKids, inUpLeftKids, inUpRightKids, inDownLeftKids, inDownRightKids
 ];
 function rotate(timing, options) {

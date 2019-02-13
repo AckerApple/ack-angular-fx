@@ -17,10 +17,6 @@ var abDef = {
     width: '100%',
     overflow: 'hidden'
 };
-var relDef = {
-    position: 'relative',
-    overflow: 'hidden'
-};
 var abKeyFrames = [
     animations_1.style(__assign({ offset: 0 }, abDef)),
     animations_1.style(__assign({ offset: .999 }, abDef)),

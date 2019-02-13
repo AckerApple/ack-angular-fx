@@ -1,23 +1,26 @@
--fxNames = ['fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp'];
--fxNames.push('bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp');
--fxNames.push('rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight');
--fxNames.push('slideInUp','slideInDown','slideInLeft','slideInRight');
--fxNames.push('zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp');
+-fxWithKids = ["fadeInOut","fadeInOutDown","fadeInOutLeft","fadeInOutRight","fadeInOutUp"];
+-fxWithKids.push("bounceInOut","bounceInOutLeft","bounceInOutRight","bounceInOutUp");
+-fxWithKids.push("rotateInOut","rotateInOutDownLeft","rotateInOutDownRight","rotateInOutUpLeft","rotateInOutUpRight");
+-fxWithKids.push("slideInOutUp","slideInOutDown","slideInOutLeft","slideInOutRight");
+-fxWithKids.push("zoomInOut","zoomInOutDown","zoomInOutLeft","zoomInOutRight","zoomInOutUp");
 
 -absolutes = ['absoluteKids','absoluteInKids','absoluteOutKids'];
 -swapFxAttrs = {absoluteKids:[], absoluteInKids:[],absoluteOutKids:[]};
 -fxAttrs = [];
 
-each fx in fxNames
+each fx in fxWithKids
   -fxAttrs["[@"+fx+"]"] = "{value:FxSession.fxForward=='"+fx+"' ? fxId : 'nofx', params:{time:fxTime}}";
   each ab in absolutes
     -swapFxAttrs[ab]["[@"+fx+"Kids]"] = "{value:FxSession.fxForward=='"+fx+"' ? fxId : 'nofx', params:{time:fxTime}}";
 
 each ab in absolutes
   -swapFxAttrs[ab]["[@"+ab+"]"] = "{value:fxId, params:{time:fxTime, position:fxPosition}}";
+  -swapFxAttrs[ab]["(@"+ab+".start)"] = "inFx=true";
+  -swapFxAttrs[ab]["(@"+ab+".done)"] = "inFx=false";
 
-h3 Relative Wrapping
-p Perfect swap animation for router-outlet. Uses css position:relative to contain animations
+//-
+  h3 Relative Wrapping
+  p Perfect swap animation for router-outlet. Uses css position:relative to contain animations
 fieldset
   legend &lt;div [@absoluteKids]="{{ fxId }}"&gt;
   .wrap
@@ -26,7 +29,8 @@ fieldset
         "(click)" = "fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"
       ) back
     div(
-      style="position:relative;overflow:hidden;display:inline-block;width:130px;height:130px;margin:5px;"
+      style="display:inline-block;width:130px;height:130px;margin:5px;"
+      "[ngStyle]" = "inFx && {position:'relative',overflow:'hidden'}"
     )
       .demo-wrap(
         style    = "margin:0em;"
@@ -66,10 +70,14 @@ div(style="background-color:#CCC;padding:.5em;")
       &lt;button (click)="fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
         back
       &lt;/button&gt;
-      &lt;div style="position:relative;overflow:hidden;"&gt;
+      &lt;div
+        [ngStyle] = "inFx && {position:'relative',overflow:'hidden'}"
+      &gt;
         &lt;div
           *ngFor = "let x of swapArray"
           [@{{FxSession.fxForward}}] = "fxId"
+          (@{{FxSession.fxForward}}.start) = "inFx=true"
+          (@{{FxSession.fxForward}}.done) = "inFx=false"
         &gt;
           item:x
         &lt;/div&gt;
@@ -78,78 +86,78 @@ div(style="background-color:#CCC;padding:.5em;")
         next
       &lt;/button&gt;
     &lt;/div&gt;
+//-
+  h2 Simple Swapping
+  p Tap a box below
 
-h2 Simple Swapping
-p Tap a box below
-
-each ab in absolutes
-  h3 @[#{ab}]
-  p Change children position during animation
-  fieldset
-    legend &lt;div [@#{ab}]="{{ fxId }}"&gt;
-    .wrap&attributes(swapFxAttrs[ab])
-      .demo-wrap
-        .demo-item(
-          "(click)" = "fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"
-        ) back
-      ng-container(*ngFor="let x of swapArray;let index=index")
-        .demo-wrap(*ngIf="swapIndex==index")
+  each ab in absolutes
+    h3 @[#{ab}]
+    p Change children position during animation
+    fieldset
+      legend &lt;div [@#{ab}]="{{ fxId }}"&gt;
+      .wrap&attributes(swapFxAttrs[ab])
+        .demo-wrap
+          .demo-item(
+            "(click)" = "fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"
+          ) back
+        ng-container(*ngFor="let x of swapArray;let index=index")
+          .demo-wrap(*ngIf="swapIndex==index")
+            .demo-item(
+              "(click)" = "fxId=fxId===true?1:true;swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"
+            )&attributes(fxAttrs)
+              |*ngFor:{{ index }}
+        .demo-wrap
           .demo-item(
             "(click)" = "fxId=fxId===true?1:true;swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"
-          )&attributes(fxAttrs)
-            |*ngFor:{{ index }}
-      .demo-wrap
-        .demo-item(
-          "(click)" = "fxId=fxId===true?1:true;swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"
-        ) next
+          ) next
 
-  div(style="background-color:#CCC;padding:.5em;")
-    div(style="text-align:center")
-      div(style="display:inline-block;")
-        sub position
-        div
-          select("[(ngModel)]"="fxPosition")
-            option(*ngFor="let item of positions" "[value]"="item") {{item}}
-      |&nbsp;&nbsp;&nbsp;
-      div(style="display:inline-block;")
-        sub fx
-        div
-          select-fx("[(model)]"="FxSession.fxForward")
-      |&nbsp;&nbsp;&nbsp;
-      div(style="display:inline-block;")
-        sub speed
-        div
-          input("[(ngModel)]"="fxTime")
+    div(style="background-color:#CCC;padding:.5em;")
+      div(style="text-align:center")
+        div(style="display:inline-block;")
+          sub position
+          div
+            select("[(ngModel)]"="fxPosition")
+              option(*ngFor="let item of positions" "[value]"="item") {{item}}
+        |&nbsp;&nbsp;&nbsp;
+        div(style="display:inline-block;")
+          sub fx
+          div
+            select-fx("[(model)]"="FxSession.fxForward")
+        |&nbsp;&nbsp;&nbsp;
+        div(style="display:inline-block;")
+          sub speed
+          div
+            input("[(ngModel)]"="fxTime")
 
-    h4 Code Sample 1
-    textarea(style="width:100%;" rows="15" wrap="off" readonly).
-      &lt;div [@#{ab}]="&#123;value:fxId, params:&#123;position:'{{fxPosition}}', time:'{{fxTime}}'&#125;&#125;"&gt;
-        &lt;button (click)="fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
-          back
-        &lt;/button&gt;
-        &lt;div
-          *ngFor = "let x of swapArray"
-          [@{{FxSession.fxForward}}] = "fxId"
-        &gt;
-          item:x
+      h4 Code Sample 1
+      textarea(style="width:100%;" rows="15" wrap="off" readonly).
+        &lt;div [@#{ab}]="&#123;value:fxId, params:&#123;position:'{{fxPosition}}', time:'{{fxTime}}'&#125;&#125;"&gt;
+          &lt;button (click)="fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
+            back
+          &lt;/button&gt;
+          &lt;div
+            *ngFor = "let x of swapArray"
+            [@{{FxSession.fxForward}}] = "fxId"
+          &gt;
+            item:x
+          &lt;/div&gt;
+          &lt;button (click)="swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"&gt;
+            next
+          &lt;/button&gt;
         &lt;/div&gt;
-        &lt;button (click)="swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"&gt;
-          next
-        &lt;/button&gt;
-      &lt;/div&gt;
-    h4 Code Sample 2
-    textarea(style="width:100%;" rows="15" wrap="off" readonly).
-      &lt;div [@#{ab}]="&#123;value:fxId, params:&#123;time:'{{fxTime}}'&#125;&#125;"&gt;
-        &lt;button (click)="fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
-          back
-        &lt;/button&gt;
-        &lt;div
-          *ngFor = "let x of swapArray"
-          [@{{FxSession.fxForward}}] = "&#123;value:fxId, params:&#123;time:'{{fxTime}}'&#125;&#125;"
-        &gt;
-          item:x
+      h4 Code Sample 2
+      textarea(style="width:100%;" rows="15" wrap="off" readonly).
+        &lt;div [@#{ab}]="&#123;value:fxId, params:&#123;time:'{{fxTime}}'&#125;&#125;"&gt;
+          &lt;button (click)="fxId=fxId===false?0:false;swapIndex = !swapIndex ? swapArray.length-1 : swapIndex-1"&gt;
+            back
+          &lt;/button&gt;
+          &lt;div
+            *ngFor = "let x of swapArray"
+            [@{{FxSession.fxForward}}] = "&#123;value:fxId, params:&#123;time:'{{fxTime}}'&#125;&#125;"
+          &gt;
+            item:x
+          &lt;/div&gt;
+          &lt;button (click)="swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"&gt;
+            next
+          &lt;/button&gt;
         &lt;/div&gt;
-        &lt;button (click)="swapIndex = swapIndex==swapArray.length-1 ? 0 : swapIndex+1"&gt;
-          next
-        &lt;/button&gt;
-      &lt;/div&gt;

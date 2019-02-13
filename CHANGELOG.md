@@ -1,6 +1,19 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [3.0.0] - 2019-02-13
+- Added Out
+  - fadeOut
+- Updated dependencies
+- Breaking Changes
+  - Removed "Global Usage" injection that came via 
+  - all in Kids animations like fadeInKids is renamed to fadeInOutKids
+  - In is now InOut
+    - fadeIn is now fadeInOut
+    - fadeIn only transistions in but not out anymore
+  - "fxArray" is renamed to "animations"
+    - `import { animations } from "ack-angular-fx"`
+
 ## [2.3.0] - 2018-11-16
 - Updated Angular
 

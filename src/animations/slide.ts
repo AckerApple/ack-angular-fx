@@ -11,6 +11,8 @@ import {
 } from '@angular/animations'
 
 import {
+  inTransition,
+  outTransition,
   inOutTransitions,
   childInOutTransitions,
   stylize,
@@ -57,48 +59,80 @@ const outRightStyles = [
   style({visibility: 'hidden', transform: 'translate3d(-100%, 0, 0)', offset: 1})
 ]
 
-const inUp = trigger(
-  'slideInUp',
-  inOutTransitions(inUpStyles,outUpStyles)
-)
-
 const inUpKids = trigger(
-  'slideInUpKids',
+  'slideInOutUpKids',
   childInOutTransitions(inUpStyles,outUpStyles,inDownStyles,outDownStyles)
 )
 
-const inDown = trigger(
-  'slideInDown',
-  inOutTransitions(inDownStyles,outDownStyles)
-)
-
 const inDownKids = trigger(
-  'slideInDownKids',
+  'slideInOutDownKids',
   childInOutTransitions(inDownStyles,outDownStyles,inUpStyles,outUpStyles)
 )
 
-const inLeft = trigger(
-  'slideInLeft',
-  inOutTransitions(inLeftStyles,outLeftStyles)
-)
 
 const inLeftKids = trigger(
-  'slideInLeftKids',
+  'slideInOutLeftKids',
   childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
 )
 
-const inRight = trigger(
-  'slideInRight',
-  inOutTransitions(inRightStyles,outRightStyles)
-)
-
 const inRightKids = trigger(
-  'slideInRightKids',
+  'slideInOutRightKids',
   childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
 )
 
 export const triggers : AnimationTriggerMetadata[] = [
-  inUp, inDown, inLeft, inRight,
+  trigger(
+    'slideInUp',
+    [inTransition(inUpStyles)]
+  ),
+  trigger(
+    'slideOutUp',
+    [outTransition(outUpStyles)]
+  ),
+  trigger(
+    'slideInOutUp',
+    inOutTransitions(inUpStyles,outUpStyles)
+  ),
+
+  trigger(
+    'slideInDown',
+    [inTransition(inDownStyles)]
+  ),
+  trigger(
+    'slideOutDown',
+    [outTransition(outDownStyles)]
+  ),
+  trigger(
+    'slideInOutDown',
+    inOutTransitions(inDownStyles,outDownStyles)
+  ),
+  
+  trigger(
+    'slideInLeft',
+    [inTransition(inLeftStyles)]
+  ),
+  trigger(
+    'slideOutLeft',
+    [outTransition(outLeftStyles)]
+  ),
+  trigger(
+    'slideInOutLeft',
+    inOutTransitions(inLeftStyles,outLeftStyles)
+  ),
+  
+  trigger(
+    'slideInRight',
+    [inTransition(inRightStyles)]
+  ),
+  trigger(
+    'slideOutRight',
+    [outTransition(outRightStyles)]
+  ),
+  trigger(
+    'slideInOutRight',
+    inOutTransitions(inRightStyles,outRightStyles)
+  ),
+  
   inUpKids, inDownKids, inLeftKids, inRightKids
 ]
 

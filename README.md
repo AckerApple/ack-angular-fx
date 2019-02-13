@@ -7,7 +7,7 @@ Angular animations made easy. [Example Page](https://ackerapple.github.io/ack-an
 [![npm downloads](https://img.shields.io/npm/dm/ack-angular-fx.svg)](https://npmjs.org/ack-angular-fx)
 [![Dependency Status](https://david-dm.org/ackerapple/ack-angular-fx.svg)](https://david-dm.org/ackerapple/ack-angular-fx)
 
-![animated gif](https://ackerapple.github.io/ack-angular-fx/fireworks.gif "gumball fireworks")
+![animated gif](https://ackerapple.github.io/ack-angular-fx/assets/fireworks.gif "gumball fireworks")
 
 > Angular 5.2.0+ required
 
@@ -19,9 +19,8 @@ Angular animations made easy. [Example Page](https://ackerapple.github.io/ack-an
 - [Include](#include)
 - [Browser Compatibility](#browser-compatibility)
 - [Examples](#examples)
-  - [Robust Example Include Fx](#robust-example-include-fx)
+  - [Robust Example](#robust-example)
   - [Params Example](#params-example)
-  - [Global Usage](#global-usage)
 - [Stagger](#stagger)
 - [Supported Animations](#supported-animations)
 - [Prebuild Fxs to Single File](#prebuild-fxs-to-single-file)
@@ -41,6 +40,7 @@ Since you're using Angular, the following are expected to already be installed:
 - @angular/core
 - @angular/animations
 
+install command:
 ```bash
 npm install ack-angular-fx --save-dev
 ```
@@ -49,13 +49,13 @@ npm install ack-angular-fx --save-dev
 Animations must be injected into your components and this is how to do that
 
 ```typescript
-import { fxArray } from "ack-angular-fx";
+import { animations } from "ack-angular-fx";
 import { Component } from "@angular/core"
 
 @Component({
-  animations:fxArray,
+  animations:animations,
   template:`
-    <div *ngIf="boolean" [@fadeInUp]="boolean">
+    <div *ngIf="boolean" [@fadeInOutUp]="boolean">
       ...
     </div>
     <button (click)="boolean=!boolean">
@@ -65,12 +65,22 @@ import { Component } from "@angular/core"
 }) export class AppComponent
 ```
 
+
+# Browser Compatibility
+
+All good!
+
+Angular animations have come a long way. In the past, they didn't work in Safari without including additional libraries. Now, all animations appear to be working anywhere that Angular could be run.
+
+
 # Examples
 
-[Example Page](https://ackerapple.github.io/ack-angular-fx)
+[View interactive example page here.](https://ackerapple.github.io/ack-angular-fx)
 
-## Robust Example Include Fx
+## Robust Example
 This example has pretty much everything needed to boot
+
+> NOTE: AckFxModule, in code below, is only needed IF directive fx-tracker being used for back-n-forth swap animation tracking
 
 ```typescript
 import "zone.js"
@@ -80,16 +90,19 @@ import { NgModule, Component } from "@angular/core"
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 
-//ack-angular-fx related imports
-import { AckFxModule, fxArray } from "ack-angular-fx";
+import { animations } from "ack-angular-fx";
+
+//NOTE: This line only needed IF directive fx-tracker used (back-n-forth swap animations)
+import { AckFxModule } from "ack-angular-fx";
+  
 import { supportDocument } from "ack-angular-fx/web-animations.min"
 
 supportDocument( document )//cross browser fx support
 
 @Component({
-  animations:fxArray,
+  animations:animations,
   template:`
-    <div *ngIf="boolean" [@rotateIn]="boolean">
+    <div *ngIf="boolean" [@rotateInOut]="boolean">
       ...
     </div>
     <button (click)="boolean=!boolean">
@@ -102,7 +115,7 @@ supportDocument( document )//cross browser fx support
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AckFxModule//Needed only for swap animations
+    AckFxModule//NOTE: This line only needed IF directive fx-tracker used (back-n-forth swap animations)
   ],
   declarations: [ AppComponent ],
   bootstrap: [ AppComponent ]
@@ -116,74 +129,14 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 The configuration options available to define for animations
 
 ```html
-<div [@zoomIn]="{value:boolean, params:{time:'2000ms 0 linear'}}">
+<div [@zoomInOut]="{value:boolean, params:{time:'2000ms 0 linear'}}">
   ...
 </div>
 ```
 
 Learn more about [Angular animation timing here](https://angular.io/guide/animations#animation-timing)
 
-
-## Global Usage
-Make life simple, if you just want to use the default animation definitions provided by ack-angular-fx
-
-> BETA CODE!
->> NOT well tested and outdated
->> NOT recommend at this time to use this example of ackFx.upgradeComponent( ... )
-
-```javascript
-import * as ackFx from 'ack-angular-fx';
-import { Component, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-const template = `
-<p
-  *ngIf       = "show"
-  [@fadeInUp] = "{value:show, {params:{time:'100ms'}}}"
->
-  fadeInUp 100ms
-</p>
-<button (click)="show = !show">toggle all above</button>
-`
-
-//component with NO animation attribute
-@Component({
-  selector: 'app',
-  template: template
-}) export class AppComponent {}
-
-const declarations = [ AppComponent, SomeOtherComponent ]
-
-//add or push ack-angular-fx triggers onto all components
-ackFx.upgradeComponents(declarations)
-
-@NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule
-  ],
-  declarations: declarations,
-  bootstrap: [AppComponent]
-}) export class AppModule {}
-```
-> You can now use animation attributes such as [@fadeInUp]="value" in all your components
-
-# Browser Compatibility
-Out of the box, ack-angular-fx is compatibile with most browsers
-
-To enable full support, add just about any animation polyfill.
-
-## Built-in Polyfill Example
-An animation polyfill is already available to you in ack-angular-fx
-
-```javascript
-import { supportDocument } from "ack-angular-fx/web-animations.min";
-
-supportDocument(document)
-```
-
-### Stagger
+# Stagger
 Offset multiple animations using Angular 4.2.4 or greater
 
 Currently, staggering animations using ack-angular-fx, is controlled by a parent stagger definition and child animations subscribing to that via the css class "childFx"
@@ -193,8 +146,8 @@ A parent container staggering child animations whenever the array adds or remove
 ```html
 <div [@childStag]="array.length">
   <div
-    *ngFor      = "let x of array"
-    [@rotateIn] = "'fadeInLeft'"
+    *ngFor = "let x of array"
+    [@rotateInOut] = "1"
   >
     <div>
       ngFor loop with animations for each
@@ -208,7 +161,7 @@ A table element staggering row animations whenever "rowStaggers" variable change
 ```html
 <table style="width:100%" [@childStag]="array.length">
   <ng-container *ngFor="let x of array">
-    <tr [@bounceIn]="array.length" style="background-color:#CCC">
+    <tr [@bounceInOut]="array.length" style="background-color:#CCC">
       <td>{{ x }}</td>
       <td>Item Row {{ x }}</td>
     </tr>
@@ -219,29 +172,32 @@ A table element staggering row animations whenever "rowStaggers" variable change
 # Supported Animations
 
 - fadeIn
-  - fadeInDown
-  - fadeInLeft
-  - fadeInRight
-  - fadeInUp
+  - fadeInDown, fadeInLeft, fadeInRight, fadeInUp
+- fadeOut
+  - fadeOutDown, fadeOutLeft, fadeOutRight, fadeOutUp
+- fadeInOut
+  - fadeInOutDown, fadeInOutLeft, fadeInOutRight, fadeInOutUp
 - bounceIn
-  - bounceInDown
-  - bounceInLeft
-  - bounceInRight
-  - bounceInUp
+  - bounceInDown, bounceInLeft, bounceInRight, bounceInUp
+- bounceOut
+  - bounceOutDown, bounceOutLeft, bounceOutRight, bounceOutUp
+- bounceIn
+  - bounceInOutDown, bounceInOutLeft, bounceInOutRight, bounceInOutUp
 - rotateIn
-  - rotateInDownLeft
-  - rotateInDownRight
-  - rotateInUpLeft
-  - rotateInUpRight
-- slideInDown
-- slideInLeft
-- slideInRight
-- slideInUp
+  - rotateInDownLeft, rotateInDownRight, rotateInUpLeft, rotateInUpRight
+- rotateOut
+  - rotateOutDownLeft, rotateOutDownRight, rotateOutUpLeft, rotateOutUpRight
+- rotateInOut
+  - rotateInOutDownLeft, rotateInOutDownRight, rotateInOutUpLeft, rotateInOutUpRight
 - zoomIn
-  - zoomInDown
-  - zoomInLeft
-  - zoomInRight
-  - zoomInUp
+  - zoomInDown, zoomInLeft, zoomInRight, zoomInUp
+- zoomOut
+  - zoomOutDown, zoomOutLeft, zoomOutRight, zoomOutUp
+- zoomInOut
+  - zoomInOutDown, zoomInOutLeft, zoomInOutRight, zoomInOutUp
+- slideInDown, slideInLeft, slideInRight, slideInUp
+- slideOutDown, slideOutLeft, slideOutRight, slideOutUp
+- slideInOutDown, slideInOutLeft, slideInOutRight, slideInOutUp
 
 see online demo https://ackerapple.github.io/ack-angular-fx
 
@@ -267,15 +223,16 @@ npm run build:prefx
 
 Step 3 : Import your compiled .ts file and apply to component(s)
 ```javascript
-import { fxArray } from "./prefx"
+import { animations } from "./prefx"
 import { Component } from "@angular/core"
 
 @Component({
   selector: 'app',
   template: '<div *ngIf="a==1" [@fadeInUp]="true">hello world</div>',
-  animations: fxArray
+  animations: animations
 })
 ```
+
 
 # Work on This Project
 Everything in this topic is run in an command prompt terminal

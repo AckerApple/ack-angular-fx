@@ -33,14 +33,14 @@ export function combo(timing, options:fxConfig) : fxConfigCombo{
 export function childInOutTransition(
   inStyles:AnimationStyleMetadata[],
   outStyles:AnimationStyleMetadata[]
-) : AnimationTransitionMetadata[] {
+) : AnimationTransitionMetadata {
   const params = {time:'200ms 0ms linear'}
 
-  return [transition(
+  return transition(
     '* <=> *',
     [inOutGroupQueryByStyles(inStyles, outStyles)],
     {params:params}
-  )]
+  )
 }
 
 export function inOutGroupQueryByStyles(
@@ -61,40 +61,56 @@ export function inOutGroupQueryByStyles(
   ])
 }
 
+
+//used for showing
 export function inFromVoid(from,to){
   return to!==null && to!=='nofx' && from==='void' && to!=='void' ? true : false
 }
 
+//used for hidding
 export function voidFromIn(from,to){
   return from!=='nofx' && from!=='void' && to==='void' ? true : false
+}
+
+export function inTransition(
+  inStyles:AnimationStyleMetadata[]
+) : AnimationTransitionMetadata {
+  const params = {time:'200ms 0ms linear'}
+  return transition(
+    inFromVoid,
+    //'void => *',
+    [
+      animate('{{ time }}',
+        keyframes(inStyles)
+      )
+    ],
+    { params:params }
+  )
+}
+
+export function outTransition(
+  outStyles:AnimationStyleMetadata[]
+) : AnimationTransitionMetadata {
+  const params = {time:'200ms 0ms linear'}
+  return transition(
+    voidFromIn,
+    //'* => void',
+    [
+      animate('{{ time }}',
+        keyframes(outStyles)
+      )
+    ],
+    { params:params }
+  )
 }
 
 export function inOutTransitions(
   inStyles:AnimationStyleMetadata[],
   outStyles:AnimationStyleMetadata[]
 ) : AnimationTransitionMetadata[] {
-  const params = {time:'200ms 0ms linear'}
   return [
-    transition(
-      inFromVoid,
-      //'void => *',
-      [
-        animate('{{ time }}',
-          keyframes(inStyles)
-        )
-      ],
-      { params:params }
-    ),
-    transition(
-      voidFromIn,
-      //'* => void',
-      [
-        animate('{{ time }}',
-          keyframes(outStyles)
-        )
-      ],
-      { params:params }
-    )
+    inTransition(inStyles),
+    outTransition(outStyles)
   ]
 }
 

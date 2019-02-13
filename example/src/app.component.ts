@@ -1,42 +1,70 @@
-import { transition, query, stagger, state, animateChild, trigger, style, animate } from '@angular/animations';
 import { Component } from '@angular/core';
 import { FxSession } from './FxSession.injectable';
 import { string } from './app.template'
 
-import {
-  Router,
-  NavigationStart,
-  NavigationEnd,
-  ActivatedRoute
-} from '@angular/router';
-
 import * as packJson from "../../package.json"
 //export const packJson = "0.0.0"
 
-import { delayArray, fxArray } from '../../src/helpers';
+import { animations } from '../../src/allFx';
 
 export const fxNameArray = [
-  'fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp',
-  'bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp',
-  'rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight',
-  'slideInUp','slideInDown','slideInLeft','slideInRight',
-  'zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp'
+  'fadeIn','fadeOut','fadeInOut',
+  'fadeInDown','fadeOutDown','fadeInOutDown',
+  'fadeInLeft','fadeOutLeft','fadeInOutLeft',
+  'fadeInRight','fadeOutRight','fadeInOutRight',
+  'fadeInUp','fadeOutUp','fadeInOutUp',
+  
+  'bounceIn','bounceOut','bounceInOut',
+  'bounceInDown','bounceOutDown','bounceInOutDown',
+  'bounceInLeft','bounceOutLeft','bounceInOutLeft',
+  'bounceInRight','bounceOutRight','bounceInOutRight',
+  'bounceInUp','bounceOutUp','bounceInOutUp',
+  
+  'rotateIn','rotateOut','rotateInOut',
+  'rotateInDownLeft','rotateOutDownLeft','rotateInOutDownLeft',
+  'rotateInDownRight','rotateOutDownRight','rotateInOutDownRight',
+  'rotateInUpLeft','rotateOutUpLeft','rotateInOutUpLeft',
+  'rotateInUpRight','rotateOutUpRight','rotateInOutUpRight',
+  
+  'slideInUp','slideOutUp','slideInOutUp',
+  'slideInDown','slideOutDown','slideInOutDown',
+  'slideInLeft','slideOutLeft','slideInOutLeft',
+  'slideInRight','slideOutRight','slideInOutRight',
+
+  'zoomIn','zoomOut','zoomInOut',
+  'zoomInDown','zoomOutDown','zoomInOutDown',
+  'zoomInLeft','zoomOutLeft','zoomInOutLeft',
+  'zoomInRight','zoomOutRight','zoomInOutRight',
+  'zoomInUp','zoomOutUp','zoomInOutUp'
+]
+
+export const fxWithKids = [
+  "fadeInOut","fadeInOutDown","fadeInOutLeft","fadeInOutRight","fadeInOutUp",
+  "bounceInOut","bounceInOutLeft","bounceInOutRight","bounceInOutUp",
+  "rotateInOut","rotateInOutDownLeft","rotateInOutDownRight","rotateInOutUpLeft","rotateInOutUpRight",
+  "slideInOutUp","slideInOutDown","slideInOutLeft","slideInOutRight",
+  "zoomInOut","zoomInOutDown","zoomInOutLeft","zoomInOutRight","zoomInOutUp"
 ]
 
 @Component({
   selector: 'app',
   template: string
-  ,animations:fxArray
+  ,animations:animations
 }) export class AppComponent {
   inFx:boolean
-  routes:string[] = ['overview','stagger','ngif','swapping','directives','router-outlet']
+  routes:string[] = [
+    'overview','stagger','ngif',
+    'swapping','directives','router-outlet'
+  ]
   fxTime:string = "400ms 0ms linear"
   version = packJson['version'] || '0.0.0'
   //panelAnimType: string = 'fadeInLeft'
   show: boolean = true
   state: string = ''
   inAnimations: any[]
-  fxNameArray: any[] = fxNameArray
+  
+  fxNameArray: string[] = fxNameArray
+  //fxWithKids: string[] = fxWithKids
 
   show100:boolean
   show200:boolean

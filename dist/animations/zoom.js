@@ -50,18 +50,27 @@ var outRightStyles = [
     animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(10px, 0, 0)', offset: 0.6 }),
     animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)', offset: 1 })
 ];
-var fxIn = animations_1.trigger('zoomIn', helper_1.inOutTransitions(inStyles, outStyles));
-var fxInKids = animations_1.trigger('zoomInKids', helper_1.childInOutTransition(inStyles, outStyles));
-var inUp = animations_1.trigger('zoomInUp', helper_1.inOutTransitions(inUpStyles, outUpStyles));
-var inUpKids = animations_1.trigger('zoomInUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
-var inDown = animations_1.trigger('zoomInDown', helper_1.inOutTransitions(inDownStyles, outDownStyles));
-var inDownKids = animations_1.trigger('zoomInDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
-var inLeft = animations_1.trigger('zoomInLeft', helper_1.inOutTransitions(inLeftStyles, outLeftStyles));
-var inLeftKids = animations_1.trigger('zoomInLeftKids', helper_1.childInOutTransitions(inLeftStyles, outLeftStyles, inRightStyles, outRightStyles));
-var inRight = animations_1.trigger('zoomInRight', helper_1.inOutTransitions(inRightStyles, outRightStyles));
-var inRightKids = animations_1.trigger('zoomInRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
+var fxInKids = animations_1.trigger('zoomInOutKids', [helper_1.childInOutTransition(inStyles, outStyles)]);
+var inUpKids = animations_1.trigger('zoomInOutUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
+var inDownKids = animations_1.trigger('zoomInOutDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
+var inLeftKids = animations_1.trigger('zoomInOutLeftKids', helper_1.childInOutTransitions(inLeftStyles, outLeftStyles, inRightStyles, outRightStyles));
+var inRightKids = animations_1.trigger('zoomInOutRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
 exports.triggers = [
-    fxIn, inUp, inDown, inLeft, inRight,
+    animations_1.trigger('zoomIn', [helper_1.inTransition(inStyles)]),
+    animations_1.trigger('zoomOut', [helper_1.outTransition(outStyles)]),
+    animations_1.trigger('zoomInOut', helper_1.inOutTransitions(inStyles, outStyles)),
+    animations_1.trigger('zoomInUp', [helper_1.inTransition(inUpStyles)]),
+    animations_1.trigger('zoomOutUp', [helper_1.outTransition(outUpStyles)]),
+    animations_1.trigger('zoomInOutUp', helper_1.inOutTransitions(inUpStyles, outUpStyles)),
+    animations_1.trigger('zoomInDown', [helper_1.inTransition(inDownStyles)]),
+    animations_1.trigger('zoomOutDown', [helper_1.outTransition(outDownStyles)]),
+    animations_1.trigger('zoomInOutDown', helper_1.inOutTransitions(inDownStyles, outDownStyles)),
+    animations_1.trigger('zoomInLeft', [helper_1.inTransition(inLeftStyles)]),
+    animations_1.trigger('zoomOutLeft', [helper_1.outTransition(outLeftStyles)]),
+    animations_1.trigger('zoomInOutLeft', helper_1.inOutTransitions(inLeftStyles, outLeftStyles)),
+    animations_1.trigger('zoomInRight', [helper_1.inTransition(inRightStyles)]),
+    animations_1.trigger('zoomOutRight', [helper_1.outTransition(outRightStyles)]),
+    animations_1.trigger('zoomInOutRight', helper_1.inOutTransitions(inRightStyles, outRightStyles)),
     fxInKids, inUpKids, inDownKids, inLeftKids, inRightKids
 ];
 function zoom(timing, options) {

@@ -1,1 +1,1 @@
-export declare const childStags: import("@angular/animations/src/animation_metadata").AnimationTriggerMetadata[];
+export declare const childStags: import("@angular/animations").AnimationTriggerMetadata[];

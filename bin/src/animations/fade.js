@@ -1,7 +1,6 @@
 "use strict";
 exports.__esModule = true;
 var animations_1 = require("@angular/animations");
-var helpers_1 = require("../helpers");
 var helper_1 = require("./helper");
 var inStyles = [
     animations_1.style({ opacity: 0, offset: 0 }),
@@ -43,98 +42,25 @@ var outRightStyles = [
     animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1 })
 ];
-var fxIn = animations_1.trigger('fadeIn', helper_1.inOutTransitions(inStyles, outStyles));
-var inUp = animations_1.trigger('fadeInUp', helper_1.inOutTransitions(inUpStyles, outUpStyles));
-var inDown = animations_1.trigger('fadeInDown', helper_1.inOutTransitions(inDownStyles, outDownStyles));
-var inLeft = animations_1.trigger('fadeInLeft', helper_1.inOutTransitions(inLeftStyles, outLeftStyles));
-var inRight = animations_1.trigger('fadeInRight', helper_1.inOutTransitions(inRightStyles, outRightStyles));
-var fxInKids = animations_1.trigger('fadeInKids', helper_1.childInOutTransition(inStyles, outStyles));
-var inLeftKids = animations_1.trigger('fadeInLeftKids', helper_1.childInOutTransitions(inLeftStyles, outLeftStyles, inRightStyles, outRightStyles));
-var inRightKids = animations_1.trigger('fadeInRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
-var inUpKids = animations_1.trigger('fadeInUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
-var inDownKids = animations_1.trigger('fadeInDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
 exports.triggers = [
-    fxIn, inUp, inDown, inLeft, inRight,
-    fxInKids, inUpKids, inDownKids, inLeftKids, inRightKids
+    animations_1.trigger('fadeIn', [helper_1.inTransition(inStyles)]),
+    animations_1.trigger('fadeOut', [helper_1.outTransition(outStyles)]),
+    animations_1.trigger('fadeInOut', helper_1.inOutTransitions(inStyles, outStyles)),
+    animations_1.trigger('fadeInUp', [helper_1.inTransition(inUpStyles)]),
+    animations_1.trigger('fadeOutUp', [helper_1.outTransition(outUpStyles)]),
+    animations_1.trigger('fadeInOutUp', helper_1.inOutTransitions(inUpStyles, outUpStyles)),
+    animations_1.trigger('fadeInDown', [helper_1.inTransition(inDownStyles)]),
+    animations_1.trigger('fadeOutDown', [helper_1.outTransition(outDownStyles)]),
+    animations_1.trigger('fadeInOutDown', helper_1.inOutTransitions(inDownStyles, outDownStyles)),
+    animations_1.trigger('fadeInLeft', [helper_1.inTransition(inLeftStyles)]),
+    animations_1.trigger('fadeOutLeft', [helper_1.outTransition(outLeftStyles)]),
+    animations_1.trigger('fadeInOutLeft', helper_1.inOutTransitions(inLeftStyles, outLeftStyles)),
+    animations_1.trigger('fadeInRight', [helper_1.inTransition(inRightStyles)]),
+    animations_1.trigger('fadeOutRight', [helper_1.outTransition(outRightStyles)]),
+    animations_1.trigger('fadeInOutRight', helper_1.inOutTransitions(inRightStyles, outRightStyles)),
+    animations_1.trigger('fadeInOutKids', [helper_1.childInOutTransition(inStyles, outStyles)]),
+    animations_1.trigger('fadeInOutUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles)),
+    animations_1.trigger('fadeInOutDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles)),
+    animations_1.trigger('fadeInOutLeftKids', helper_1.childInOutTransitions(inLeftStyles, outLeftStyles, inRightStyles, outRightStyles)),
+    animations_1.trigger('fadeInOutRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles))
 ];
-function states(config) {
-    var time = helpers_1.getConfigTiming(config);
-    return [
-        animations_1.state('fadeOut', animations_1.style({
-            display: 'none'
-        })),
-        animations_1.state('fadeOutDown', animations_1.style({
-            display: 'none'
-        })),
-        animations_1.state('fadeOutLeft', animations_1.style({
-            display: 'none'
-        })),
-        animations_1.state('fadeOutRight', animations_1.style({
-            display: 'none'
-        })),
-        animations_1.state('fadeOutUp', animations_1.style({
-            display: 'none'
-        })),
-        animations_1.transition(config.igniter + ' => fadeIn', [
-            animations_1.animate(time, animations_1.keyframes([
-                helper_1.stylize({ opacity: 0, offset: 0 }, config),
-                helper_1.stylize({ opacity: 1, offset: 1 }, config)
-            ]))
-        ]),
-        animations_1.transition(('fadeIn => void, ' + config.igniter + ' => fadeOut'), [
-            animations_1.animate(time, animations_1.keyframes([
-                helper_1.stylize({ opacity: 1, offset: 0 }, config),
-                helper_1.stylize({ opacity: 0, offset: 1 }, config)
-            ]))
-        ]),
-        animations_1.transition(config.igniter + ' => fadeInDown', [
-            animations_1.animate(time, animations_1.keyframes([
-                helper_1.stylize({ opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 0 }, config),
-                helper_1.stylize({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 }, config)
-            ]))
-        ]),
-        animations_1.transition('fadeInDown => void, ' + config.igniter + ' => fadeOutDown', [
-            animations_1.animate(time, animations_1.keyframes([
-                helper_1.stylize({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }, config),
-                helper_1.stylize({ opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 1 }, config)
-            ]))
-        ]),
-        animations_1.transition(config.igniter + ' => fadeInLeft', [
-            animations_1.animate(time, animations_1.keyframes([
-                helper_1.stylize({ opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 0 }, config),
-                helper_1.stylize({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 }, config)
-            ]))
-        ]),
-        animations_1.transition('fadeInLeft => void, ' + config.igniter + ' => fadeOutRight', [
-            animations_1.animate(time, animations_1.keyframes([
-                helper_1.stylize({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }, config),
-                helper_1.stylize({ opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 1 }, config)
-            ]))
-        ]),
-        animations_1.transition(config.igniter + ' => fadeInRight', [
-            animations_1.animate(time, animations_1.keyframes([
-                helper_1.stylize({ opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 0 }, config),
-                helper_1.stylize({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 }, config)
-            ]))
-        ]),
-        animations_1.transition('fadeInRight => void, ' + config.igniter + ' => fadeOutLeft', [
-            animations_1.animate(time, animations_1.keyframes([
-                helper_1.stylize({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }, config),
-                helper_1.stylize({ opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1 }, config)
-            ]))
-        ]),
-        animations_1.transition(config.igniter + ' => fadeInUp', [
-            animations_1.animate(time, animations_1.keyframes([
-                helper_1.stylize({ opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0 }, config),
-                helper_1.stylize({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 }, config)
-            ]))
-        ]),
-        animations_1.transition('fadeInUp => void, ' + config.igniter + ' => fadeOutUp', [
-            animations_1.animate(time, animations_1.keyframes([
-                helper_1.stylize({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }, config),
-                helper_1.stylize({ opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1 }, config)
-            ]))
-        ])
-    ];
-}
-exports.states = states;

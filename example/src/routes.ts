@@ -1,41 +1,29 @@
-import { RouterModule } from '@angular/router';
-import { Input, Output, EventEmitter, Component } from '@angular/core';
-import { fxNameArray } from "./app.component"
+import { RouterModule } from "@angular/router";
+import {
+  Input, Output, EventEmitter, Component
+} from "@angular/core";
+import { fxWithKids, fxNameArray } from "./app.component"
 import { FxSession } from "./FxSession.injectable"
 
-import { string as index } from "./index.template"
+import { string as overview } from "./overview.template"
 import { string as stagger } from "./stagger.template"
 import { string as selectFx } from "./selectFx.template"
 import { string as ngIf } from "./ngIf.template"
 import { string as directives } from "./directives.template"
-import { string as swapping } from "./swapping.template"
 import { string as routeroutlet } from "./routeroutlet.template"
 
-import { delayArray, fxArray, getFxArray } from '../../src/helpers';
+import { animations } from "../../src/allFx";
 
 @Component({
   template   : directives,
-  animations : fxArray
+  animations : animations
 }) export class DirectivesComponent{}
 
-@Component({
-  template   : swapping,
-  animations : fxArray
-}) export class SwappingComponent{
-  fxId:any
-  hideToggle:boolean
-  swapIndex:number = 0
-  fxTime:string = "1000ms 0ms linear"
-  swapArray = [1,2,3,4,5,6,7,8]
-  fxPosition:string = 'absolute'
-  positions:string[] = ['static','relative','absolute','fixed']
-
-  constructor(public FxSession:FxSession){}
-}
+import { Swapping as SwappingComponent } from "./Swapping.component"
 
 @Component({
   template   : ngIf,
-  animations : fxArray
+  animations : animations
 }) export class NgIfComponent{
   hideToggle:boolean
   fxTime:string = "200ms 0ms linear"
@@ -44,9 +32,9 @@ import { delayArray, fxArray, getFxArray } from '../../src/helpers';
 }
 
 @Component({
-  template   : index,
-  animations : fxArray
-}) export class IndexComponent{
+  template   : overview,
+  animations : animations
+}) export class OverviewComponent{
   fxTime:string = "200ms 0ms linear"
   allFx:any = {}
   fxCount:number = 1//arbitrary fx value change to ignite stagger animations
@@ -63,7 +51,7 @@ import { delayArray, fxArray, getFxArray } from '../../src/helpers';
 
 @Component({
   template   : stagger,
-  animations : fxArray
+  animations : animations
 }) export class Stagger{
   fxTime:string = "200ms 0ms linear"
   fxStaggerSpeed:number
@@ -76,17 +64,20 @@ import { delayArray, fxArray, getFxArray } from '../../src/helpers';
 
 @Component({
   template   : routeroutlet,
-  animations : fxArray
+  animations : animations
 }) export class RouterOutletComponent{}
 
-@Component({selector:'select-fx', template:selectFx}) export class SelectFx{
-  fxNameArray = fxNameArray
+@Component({
+  selector:"select-fx",
+  template:selectFx
+}) export class SelectFx{
+  fxNameArray = fxWithKids
   @Input() model:string
   @Output() modelChange:EventEmitter<string> = new EventEmitter()
 }
 
 export const declarations = [
-  IndexComponent,
+  OverviewComponent,
   Stagger,
   NgIfComponent,
   DirectivesComponent,
@@ -96,14 +87,18 @@ export const declarations = [
 ]
 
 export const routes = [
-  {name: 'overview', path: 'overview',  component: IndexComponent},
-  {name: 'stagger', path: 'stagger',  component: Stagger},
-  {name: 'ngif', path: 'ngif',  component: NgIfComponent},
-  {name: 'swapping', path: 'swapping',  component: SwappingComponent},
-  {name: 'directives', path: 'directives',  component: DirectivesComponent},
-  {name: 'router-outlet', path: 'router-outlet',  component: RouterOutletComponent},
-  {path: '**',   redirectTo: 'overview' }//404
+  {name: "overview", path: "overview",  component: OverviewComponent},
+  {name: "stagger", path: "stagger",  component: Stagger},
+  {name: "ngif", path: "ngif",  component: NgIfComponent},
+  {name: "swapping", path: "swapping",  component: SwappingComponent},
+  {name: "directives", path: "directives",  component: DirectivesComponent},
+  {name: "router-outlet", path: "router-outlet",  component: RouterOutletComponent},
+  {path: "**",   redirectTo: "overview" }//404
 ]
 
-export const routeConfig = {useHash:true, initialNavigation:true, enableTracing:false}
+export const routeConfig = {
+  useHash:true,
+  initialNavigation:true,
+  enableTracing:false
+}
 export const routing = RouterModule.forRoot(routes, routeConfig)

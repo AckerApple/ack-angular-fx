@@ -12,7 +12,8 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var allFxDynamic_1 = require("./allFxDynamic");
-var fade_1 = require("./animations/fade");
+var allFxDynamic_2 = require("./allFxDynamic");
+exports.animations = allFxDynamic_2.animations;
 var bounce_1 = require("./animations/bounce");
 var rotate_1 = require("./animations/rotate");
 var slide_1 = require("./animations/slide");
@@ -97,9 +98,6 @@ exports.effectsArrayToTypes = effectsArrayToTypes;
 function stateEffectsByConfig(timing, config) {
     var array = [];
     var fxTypes = effectsArrayToTypes(config.effects || exports.availEffects);
-    if (fxTypes.fade) {
-        array.push.apply(array, fade_1.states(config));
-    }
     if (fxTypes.bounce) {
         array.push.apply(array, bounce_1.bounce(timing, config));
     }
@@ -130,7 +128,7 @@ function selectFx(args, effectList, config) {
 exports.selectFx = selectFx;
 function processTriggerSelect(config, effectList) {
     var fxs = [];
-    fxs.push.apply(fxs, allFxDynamic_1.fxArray);
+    fxs.push.apply(fxs, allFxDynamic_1.animations);
     return fxs;
 }
 function processSelect(name, config, effectArray) {
@@ -138,7 +136,7 @@ function processSelect(name, config, effectArray) {
     return animateConfig(name, config);
 }
 exports.processSelect = processSelect;
-function getFxArray() {
+function getAnimations() {
     var allFx = [
         processSelect("absoluteSwap", exports.menu["absoluteSwap400"]),
         processSelect("absoluteSwap100", exports.menu["absoluteSwap100"]),
@@ -166,10 +164,10 @@ function getFxArray() {
         processSelect("1500", exports.menu["1500"]),
         processSelect("2000", exports.menu["2000"])
     ];
-    allFx.push.apply(allFx, allFxDynamic_1.fxArray);
+    allFx.push.apply(allFx, allFxDynamic_1.animations);
     return allFx;
 }
-exports.getFxArray = getFxArray;
+exports.getAnimations = getAnimations;
 exports.absSwapClone = {
     name: null, duration: null, whileStyle: null
 };

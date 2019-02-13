@@ -1,4 +1,4 @@
-import { fxArray } from "../src/allFxDynamic"
+import { animations } from "../src/allFxDynamic"
 import { selectedFxMetaData } from "../src/fxTypes"
 
 const builder = require('./builder')
@@ -41,7 +41,7 @@ let selectedFxMetaData:selectedFxMetaData = helpers.selectFx(selects, effectArra
 
 //array of triggers to one string
 //const output = builder.selectedFxToImportSyntax(selectedFxMetaData)
-const output = builder.selectedFxToImportSyntax( {triggers:fxArray} )
+const output = builder.selectedFxToImportSyntax( {triggers:animations} )
 
 console.log('\x1b[36m[ack-angular-fx]\x1b[0m:', 'wrote file :', outPath.substring(process.cwd().length, outPath.length))
 require('mkdirp').sync(path.join(outPath,'../'))

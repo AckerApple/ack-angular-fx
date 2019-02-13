@@ -1,0 +1,52 @@
+-inNames = ['fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp','bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp','rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight','slideInUp','slideInDown','slideInLeft','slideInRight','zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp'];
+-outNames = ['fadeOut','fadeOutDown','fadeOutLeft','fadeOutRight','fadeOutUp','bounceOut','bounceOutDown','bounceOutLeft','bounceOutRight','bounceOutUp','rotateOut','rotateOutDownLeft','rotateOutDownRight','rotateOutUpLeft','rotateOutUpRight','slideOutUp','slideOutDown','slideOutLeft','slideOutRight','zoomOut','zoomOutDown','zoomOutLeft','zoomOutRight','zoomOutUp'];
+-inOutNames = ['fadeInOut','fadeInOutDown','fadeInOutLeft','fadeInOutRight','fadeInOutUp','bounceInOut','bounceInOutDown','bounceInOutLeft','bounceInOutRight','bounceInOutUp','rotateInOut','rotateInOutDownLeft','rotateInOutDownRight','rotateInOutUpLeft','rotateInOutUpRight','slideInOutUp','slideInOutDown','slideInOutLeft','slideInOutRight','zoomInOut','zoomInOutDown','zoomInOutLeft','zoomInOutRight','zoomInOutUp'];
+
+
+mixin panels(fxNames)
+  each fxName in fxNames
+    -attrs = {};
+    -attrs["(click)"] = "allFx."+fxName+" = !allFx."+fxName;
+    .demo-wrap&attributes(attrs)
+      -bg = Math.floor(Math.random() * 16777215).toString(16);
+      -attrs = {};
+      -attrs["*ngIf"] = "allFx."+fxName;
+      -attrs["[@"+fxName+"]"] = "{value:allFx."+fxName+" && fxCount, params:{time:fxTime}}";
+      -attrs["[ngStyle]"] = "{'background-color': '#"+bg+"'}";
+      -attrs.style = "text-align:center;";
+      .demo-item&attributes(attrs)
+        =fxName
+        //-
+          |#{fxName}=
+          br
+          |value:{{allFx.#{fxName}}}
+          br
+          |params:&#123;time:'{{ fxTime }}'&#125;
+
+mixin toggleBtn()
+  div(style="text-align:center;padding:1em;font-size:0.75em;line-height:0;")
+    a(
+      "(click)" = "onToggleInAll()"
+      style     = "cursor:pointer"
+    ) toggle all
+
+h2 All Supported Animations
++toggleBtn()
+.wrap([@childStag]="fxCount")
+  +panels(inOutNames)
+
+br
+h4 In Only Animations
++toggleBtn()
+.wrap([@childStag]="fxCount")
+  +panels(inNames)
+
+br
+h4 Out Only Animations
++toggleBtn()
+.wrap([@childStag]="fxCount")
+  +panels(outNames)
+
+div(style="background-color:#CCC;padding:.5em;text-align:center")
+  |Change above fx speed:&nbsp;
+  input("[(ngModel)]"="fxTime")

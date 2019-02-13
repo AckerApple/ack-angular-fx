@@ -1,4 +1,4 @@
-import { group, query, stagger, animateChild, AnimationTriggerMetadata,trigger,style,state,transition,animate,keyframes } from "@angular/animations"
+import { group, query, stagger, animateChild, trigger,style,transition,animate,keyframes } from "@angular/animations"
 
 export function childOut(from, to) {
     return !to ? true : false;
@@ -16,9 +16,9 @@ export function inFromVoid(from, to) {
     return to !== null && to !== 'nofx' && from === 'void' && to !== 'void' ? true : false;
 }
 
-export const fxArray = [
+export const animations = [
 
-  trigger("zoomInRightKids", [
+  trigger("zoomInOutRightKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -64,7 +64,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("zoomInLeftKids", [
+  trigger("zoomInOutLeftKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -110,7 +110,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("zoomInDownKids", [
+  trigger("zoomInOutDownKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -156,7 +156,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("zoomInUpKids", [
+  trigger("zoomInOutUpKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -202,7 +202,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("zoomInKids", [
+  trigger("zoomInOutKids", [
   transition("* <=> *", [
     group([
       query(":enter", [
@@ -224,7 +224,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("zoomInRight", [
+  trigger("zoomInOutRight", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -246,7 +246,31 @@ export const fxArray = [
   }
 })]),
 
-  trigger("zoomInLeft", [
+  trigger("zoomOutRight", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transform":"scale3d(1, 1, 1) translate3d(0, 0, 0)","offset":0}),
+        style({"transform":"scale3d(.475, .475, .475) translate3d(10px, 0, 0)","offset":0.6}),
+        style({"opacity":0,"transform":"scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("zoomInRight", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"scale3d(.1, .1, .1) translate3d(1000px, 0, 0)","offset":0}),
+        style({"opacity":1,"transform":"scale3d(.475, .475, .475) translate3d(-10px, 0, 0)","offset":0.6}),
+        style({"transform":"scale3d(1, 1, 1) translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("zoomInOutLeft", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -268,7 +292,31 @@ export const fxArray = [
   }
 })]),
 
-  trigger("zoomInDown", [
+  trigger("zoomOutLeft", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transform":"scale3d(1, 1, 1) translate3d(0, 0, 0)","offset":0}),
+        style({"transform":"scale3d(.475, .475, .475) translate3d(-10px, 0, 0)","offset":0.6}),
+        style({"opacity":0,"transform":"scale3d(.1, .1, .1) translate3d(1000px, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("zoomInLeft", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)","offset":0}),
+        style({"opacity":1,"transform":"scale3d(.475, .475, .475) translate3d(10px, 0, 0)","offset":0.6}),
+        style({"transform":"scale3d(1, 1, 1) translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("zoomInOutDown", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -290,7 +338,31 @@ export const fxArray = [
   }
 })]),
 
-  trigger("zoomInUp", [
+  trigger("zoomOutDown", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transform":"scale3d(1, 1, 1) translate3d(0, 0, 0)","offset":0}),
+        style({"transform":"scale3d(.475, .475, .475) translate3d(0, 60px, 0)","offset":0.4}),
+        style({"opacity":0,"transform":"scale3d(.1, .1, .1) translate3d(0, 1000px, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("zoomInDown", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"scale3d(.1, .1, .1) translate3d(0, -1000px, 0)","offset":0}),
+        style({"opacity":1,"transform":"scale3d(.475, .475, .475) translate3d(0, 60px, 0)","offset":0.6}),
+        style({"transform":"scale3d(1, 1, 1) translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("zoomInOutUp", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -312,7 +384,31 @@ export const fxArray = [
   }
 })]),
 
-  trigger("zoomIn", [
+  trigger("zoomOutUp", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transform":"scale3d(1, 1, 1) translate3d(0, 0, 0)","offset":0}),
+        style({"transform":"scale3d(.475, .475, .475) translate3d(0, -60px, 0)","offset":0.4}),
+        style({"opacity":0,"transform":"scale3d(.1, .1, .1) translate3d(0, -1000px, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("zoomInUp", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"scale3d(.1, .1, .1) translate3d(0, 1000px, 0)","offset":0}),
+        style({"opacity":1,"transform":"scale3d(.475, .475, .475) translate3d(0, -60px, 0)","offset":0.6}),
+        style({"transform":"scale3d(1, 1, 1) translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("zoomInOut", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -332,7 +428,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("slideInRightKids", [
+  trigger("zoomOut", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transform":"scale3d(1, 1, 1)","offset":0}),
+        style({"opacity":0,"transform":"scale3d(.1, .1, .1)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("zoomIn", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"scale3d(.1, .1, .1)","offset":0}),
+        style({"opacity":1,"transform":"scale3d(1, 1, 1)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("slideInOutRightKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -374,7 +492,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("slideInLeftKids", [
+  trigger("slideInOutLeftKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -416,7 +534,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("slideInDownKids", [
+  trigger("slideInOutDownKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -458,7 +576,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("slideInUpKids", [
+  trigger("slideInOutUpKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -500,7 +618,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("slideInRight", [
+  trigger("slideInOutRight", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -520,7 +638,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("slideInLeft", [
+  trigger("slideOutRight", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"visibility":"visible","transform":"translate3d(0, 0, 0)","offset":0}),
+        style({"visibility":"hidden","transform":"translate3d(-100%, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("slideInRight", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"visibility":"hidden","transform":"translate3d(100%, 0, 0)","offset":0}),
+        style({"visibility":"visible","transform":"translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("slideInOutLeft", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -540,7 +680,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("slideInDown", [
+  trigger("slideOutLeft", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"visibility":"visible","transform":"translate3d(0, 0, 0)","offset":0}),
+        style({"visibility":"hidden","transform":"translate3d(100%, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("slideInLeft", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"visibility":"hidden","transform":"translate3d(-100%, 0, 0)","offset":0}),
+        style({"visibility":"visible","transform":"translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("slideInOutDown", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -560,7 +722,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("slideInUp", [
+  trigger("slideOutDown", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"visibility":"visible","transform":"translate3d(0, 0, 0)","offset":0}),
+        style({"visibility":"hidden","transform":"translate3d(0, 100%, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("slideInDown", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"visibility":"hidden","transform":"translate3d(0, -100%, 0)","offset":0}),
+        style({"visibility":"visible","transform":"translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("slideInOutUp", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -580,7 +764,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("rotateInDownRightKids", [
+  trigger("slideOutUp", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"visibility":"visible","transform":"translate3d(0, 0, 0)","offset":0}),
+        style({"visibility":"hidden","transform":"translate3d(0, -100%, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("slideInUp", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"visibility":"hidden","transform":"translate3d(0, 100%, 0)","offset":0}),
+        style({"visibility":"visible","transform":"translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("rotateInOutDownRightKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -622,7 +828,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("rotateInDownLeftKids", [
+  trigger("rotateInOutDownLeftKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -664,7 +870,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("rotateInUpRightKids", [
+  trigger("rotateInOutUpRightKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -706,7 +912,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("rotateInUpLeftKids", [
+  trigger("rotateInOutUpLeftKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -748,7 +954,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("rotateInKids", [
+  trigger("rotateInOutKids", [
   transition("* <=> *", [
     group([
       query(":enter", [
@@ -770,7 +976,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("rotateInDownRight", [
+  trigger("rotateInOutDownRight", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -790,7 +996,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("rotateInDownLeft", [
+  trigger("rotateOutDownRight", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transformOrigin":"right bottom","transform":"rotate3d(0, 0, 1, 0deg)","offset":0}),
+        style({"opacity":0,"transformOrigin":"right bottom","transform":"rotate3d(0, 0, 1, -45deg)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("rotateInDownRight", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transformOrigin":"right bottom","transform":"rotate3d(0, 0, 1, 45deg)","offset":0}),
+        style({"opacity":1,"transformOrigin":"right bottom","transform":"rotate3d(0, 0, 1, 0deg)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("rotateInOutDownLeft", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -810,7 +1038,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("rotateInUpRight", [
+  trigger("rotateOutDownLeft", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transformOrigin":"left bottom","transform":"rotate3d(0, 0, 1, 0deg)","offset":0}),
+        style({"opacity":0,"transformOrigin":"left bottom","transform":"rotate3d(0, 0, 1, 45deg)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("rotateInDownLeft", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transformOrigin":"left bottom","transform":"rotate3d(0, 0, 1, -45deg)","offset":0}),
+        style({"opacity":1,"transformOrigin":"left bottom","transform":"rotate3d(0, 0, 1, 0deg)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("rotateInOutUpRight", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -830,7 +1080,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("rotateInUpLeft", [
+  trigger("rotateOutUpRight", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transformOrigin":"right bottom","transform":"rotate3d(0, 0, 1, 0deg)","offset":0}),
+        style({"opacity":0,"transformOrigin":"right bottom","transform":"rotate3d(0, 0, 1, 45deg)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("rotateInUpRight", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transformOrigin":"right bottom","transform":"rotate3d(0, 0, 1, -45deg)","offset":0}),
+        style({"opacity":1,"transformOrigin":"right bottom","transform":"rotate3d(0, 0, 1, 0deg)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("rotateInOutUpLeft", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -850,7 +1122,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("rotateIn", [
+  trigger("rotateOutUpLeft", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transformOrigin":"left bottom","transform":"rotate3d(0, 0, 1, 0deg)","offset":0}),
+        style({"opacity":0,"transformOrigin":"left bottom","transform":"rotate3d(0, 0, 1, -45deg)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("rotateInUpLeft", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transformOrigin":"left bottom","transform":"rotate3d(0, 0, 1, 45deg)","offset":0}),
+        style({"opacity":1,"transformOrigin":"left bottom","transform":"rotate3d(0, 0, 1, 0deg)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("rotateInOut", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -870,7 +1164,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("bounceInRightKids", [
+  trigger("rotateOut", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transformOrigin":"center","transform":"rotate3d(0, 0, 1, 0deg)","offset":0}),
+        style({"opacity":0,"transformOrigin":"center","transform":"rotate3d(0, 0, 1, -200deg)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("rotateIn", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transformOrigin":"center","transform":"rotate3d(0, 0, 1, -200deg)","offset":0}),
+        style({"opacity":1,"transformOrigin":"center","transform":"rotate3d(0, 0, 1, 0deg)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("bounceInOutRightKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -918,7 +1234,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("bounceInLeftKids", [
+  trigger("bounceInOutLeftKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -966,7 +1282,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("bounceInDownKids", [
+  trigger("bounceInOutDownKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -1016,7 +1332,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("bounceInUpKids", [
+  trigger("bounceInOutUpKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -1066,7 +1382,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("bounceInKids", [
+  trigger("bounceInOutKids", [
   transition("* <=> *", [
     group([
       query(":enter", [
@@ -1093,7 +1409,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("bounceInRight", [
+  trigger("bounceInOutRight", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -1116,7 +1432,32 @@ export const fxArray = [
   }
 })]),
 
-  trigger("bounceInLeft", [
+  trigger("bounceOutRight", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transform":"translate3d(20px, 0, 0)","offset":0.2}),
+        style({"opacity":0,"transform":"translate3d(-1000px, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("bounceInRight", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"translate3d(1000px, 0, 0)","offset":0}),
+        style({"opacity":1,"transform":"translate3d(-20px, 0, 0)","offset":0.6}),
+        style({"transform":"translate3d(10px, 0, 0)","offset":0.75}),
+        style({"transform":"translate3d(-5px, 0, 0)","offset":0.9}),
+        style({"transform":"translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("bounceInOutLeft", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -1139,7 +1480,32 @@ export const fxArray = [
   }
 })]),
 
-  trigger("bounceInDown", [
+  trigger("bounceOutLeft", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transform":"translate3d(-20px, 0, 0)","offset":0.2}),
+        style({"opacity":0,"transform":"translate3d(1000px, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("bounceInLeft", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"translate3d(-1000px, 0, 0)","offset":0}),
+        style({"opacity":1,"transform":"translate3d(20px, 0, 0)","offset":0.6}),
+        style({"transform":"translate3d(-10px, 0, 0)","offset":0.75}),
+        style({"transform":"translate3d(5px, 0, 0)","offset":0.9}),
+        style({"transform":"translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("bounceInOutDown", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -1163,7 +1529,33 @@ export const fxArray = [
   }
 })]),
 
-  trigger("bounceInUp", [
+  trigger("bounceOutDown", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"transform":"translate3d(0, 10px, 0)","offset":0.2}),
+        style({"opacity":1,"transform":"translate3d(0, -20px, 0)","offset":0.5}),
+        style({"opacity":0,"transform":"translate3d(0, 1000px, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("bounceInDown", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"translate3d(0, -1000px, 0)","offset":0}),
+        style({"opacity":1,"transform":"translate3d(0, 20px, 0)","offset":0.6}),
+        style({"transform":"translate3d(0, -10px, 0)","offset":0.75}),
+        style({"transform":"translate3d(0, 5px, 0)","offset":0.9}),
+        style({"transform":"translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("bounceInOutUp", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -1187,7 +1579,33 @@ export const fxArray = [
   }
 })]),
 
-  trigger("bounceIn", [
+  trigger("bounceOutUp", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"transform":"translate3d(0, -10px, 0)","offset":0.2}),
+        style({"opacity":1,"transform":"translate3d(0, 20px, 0)","offset":0.5}),
+        style({"opacity":0,"transform":"translate3d(0, -1000px, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("bounceInUp", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"translate3d(0, 1000px, 0)","offset":0}),
+        style({"opacity":1,"transform":"translate3d(0, -20px, 0)","offset":0.6}),
+        style({"transform":"translate3d(0, 10px, 0)","offset":0.75}),
+        style({"transform":"translate3d(0, -5px, 0)","offset":0.9}),
+        style({"transform":"translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("bounceInOut", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -1212,7 +1630,34 @@ export const fxArray = [
   }
 })]),
 
-  trigger("fadeInRightKids", [
+  trigger("bounceOut", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"transform":"scale3d(.9, .9, .9)","offset":0.2}),
+        style({"opacity":1,"transform":"scale3d(1.1, 1.1, 1.1)","offset":0.5}),
+        style({"opacity":0,"transform":"scale3d(.3, .3, .3)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("bounceIn", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"scale3d(.3, .3, .3)","offset":0}),
+        style({"transform":"scale3d(1.1, 1.1, 1.1)","offset":0.2}),
+        style({"transform":"scale3d(.9, .9, .9)","offset":0.4}),
+        style({"transform":"scale3d(1.03, 1.03, 1.03)","offset":0.6}),
+        style({"transform":"scale3d(.97, .97, .97)","offset":0.8}),
+        style({"opacity":1,"transform":"scale3d(1, 1, 1)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("fadeInOutRightKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -1254,7 +1699,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("fadeInLeftKids", [
+  trigger("fadeInOutLeftKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -1296,7 +1741,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("fadeInDownKids", [
+  trigger("fadeInOutDownKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -1338,7 +1783,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("fadeInUpKids", [
+  trigger("fadeInOutUpKids", [
   transition(childOut, [
     group([
       query(":enter", [
@@ -1380,7 +1825,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("fadeInKids", [
+  trigger("fadeInOutKids", [
   transition("* <=> *", [
     group([
       query(":enter", [
@@ -1402,7 +1847,7 @@ export const fxArray = [
   }
 })]),
 
-  trigger("fadeInRight", [
+  trigger("fadeInOutRight", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -1422,7 +1867,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("fadeInLeft", [
+  trigger("fadeOutRight", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transform":"translate3d(0, 0, 0)","offset":0}),
+        style({"opacity":0,"transform":"translate3d(-100%, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("fadeInRight", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"translate3d(100%, 0, 0)","offset":0}),
+        style({"opacity":1,"transform":"translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("fadeInOutLeft", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -1442,7 +1909,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("fadeInDown", [
+  trigger("fadeOutLeft", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transform":"translate3d(0, 0, 0)","offset":0}),
+        style({"opacity":0,"transform":"translate3d(100%, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("fadeInLeft", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"translate3d(-100%, 0, 0)","offset":0}),
+        style({"opacity":1,"transform":"translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("fadeInOutDown", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -1462,7 +1951,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("fadeInUp", [
+  trigger("fadeOutDown", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transform":"translate3d(0, 0, 0)","offset":0}),
+        style({"opacity":0,"transform":"translate3d(0, 100%, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("fadeInDown", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"translate3d(0, -100%, 0)","offset":0}),
+        style({"opacity":1,"transform":"translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("fadeInOutUp", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -1482,7 +1993,29 @@ export const fxArray = [
   }
 })]),
 
-  trigger("fadeIn", [
+  trigger("fadeOutUp", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"transform":"translate3d(0, 0, 0)","offset":0}),
+        style({"opacity":0,"transform":"translate3d(0, -100%, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("fadeInUp", [
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"transform":"translate3d(0, 100%, 0)","offset":0}),
+        style({"opacity":1,"transform":"translate3d(0, 0, 0)","offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("fadeInOut", [
   transition(voidFromIn, [
       animate("{{ time }}", 
       keyframes([
@@ -1492,6 +2025,28 @@ export const fxArray = [
     "time": "200ms 0ms linear"
   }
 }),
+  transition(inFromVoid, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":0,"offset":0}),
+        style({"opacity":1,"offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("fadeOut", [
+  transition(voidFromIn, [
+      animate("{{ time }}", 
+      keyframes([
+        style({"opacity":1,"offset":0}),
+        style({"opacity":0,"offset":1})]))],{
+  "params": {
+    "time": "200ms 0ms linear"
+  }
+})]),
+
+  trigger("fadeIn", [
   transition(inFromVoid, [
       animate("{{ time }}", 
       keyframes([

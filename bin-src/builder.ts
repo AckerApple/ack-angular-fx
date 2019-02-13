@@ -27,13 +27,14 @@ export function selectedFxToImportSyntax(
     functionsString += `\nexport ${f.toString()}\n`
   }
   
-  return 'import { group, query, stagger, animateChild, AnimationTriggerMetadata,trigger,style,state,transition,animate,keyframes } from "@angular/animations"\n'+
+  //AnimationTriggerMetadata, state
+  return 'import { group, query, stagger, animateChild, trigger,style,transition,animate,keyframes } from "@angular/animations"\n'+
   functionsString+
-  '\nexport const fxArray = [' + syntax + ']'
+  '\nexport const animations = [' + syntax + ']'
 }
 
 function fxTriggersToSyntaxArray(
-  fxArray:AnimationTriggerMetadata[]
+  animations:AnimationTriggerMetadata[]
 ) : {
   string:string,
   functions:Function[]
@@ -41,8 +42,8 @@ function fxTriggersToSyntaxArray(
 {
   const triggers = []
   const functions = []
-  for(let trigIndex=fxArray.length-1; trigIndex >= 0; --trigIndex){
-    let fx = fxArray[trigIndex]
+  for(let trigIndex=animations.length-1; trigIndex >= 0; --trigIndex){
+    let fx = animations[trigIndex]
     let name = fx.name
     let triggerDef = triggerToString(fx)
     functions.push.apply(functions,triggerDef.functions)
@@ -56,10 +57,10 @@ function fxTriggersToSyntaxArray(
   }
 }
 
-function fxStatesToSyntaxArray( fxArray:AnimationTriggerMetadata[] ) : string[] {
+function fxStatesToSyntaxArray( animations:AnimationTriggerMetadata[] ) : string[] {
   const triggers = []
-  for(let trigIndex=fxArray.length-1; trigIndex >= 0; --trigIndex){
-    let fx = fxArray[trigIndex]
+  for(let trigIndex=animations.length-1; trigIndex >= 0; --trigIndex){
+    let fx = animations[trigIndex]
     let name = fx.name
 
     /*

@@ -9,10 +9,12 @@ export interface fxConfigCombo {
     options: fxConfig;
 }
 export declare function combo(timing: any, options: fxConfig): fxConfigCombo;
-export declare function childInOutTransition(inStyles: AnimationStyleMetadata[], outStyles: AnimationStyleMetadata[]): AnimationTransitionMetadata[];
+export declare function childInOutTransition(inStyles: AnimationStyleMetadata[], outStyles: AnimationStyleMetadata[]): AnimationTransitionMetadata;
 export declare function inOutGroupQueryByStyles(inStyles: AnimationStyleMetadata[], outStyles: AnimationStyleMetadata[]): AnimationGroupMetadata;
 export declare function inFromVoid(from: any, to: any): boolean;
 export declare function voidFromIn(from: any, to: any): boolean;
+export declare function inTransition(inStyles: AnimationStyleMetadata[]): AnimationTransitionMetadata;
+export declare function outTransition(outStyles: AnimationStyleMetadata[]): AnimationTransitionMetadata;
 export declare function inOutTransitions(inStyles: AnimationStyleMetadata[], outStyles: AnimationStyleMetadata[]): AnimationTransitionMetadata[];
 export declare function childIn(from: any, to: any): boolean;
 export declare function childOut(from: any, to: any): boolean;

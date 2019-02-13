@@ -10,6 +10,8 @@ import {
 } from '@angular/animations';
 
 import {
+  inTransition,
+  outTransition,
   inOutTransitions,
   childInOutTransitions,
   childInOutTransition,
@@ -86,58 +88,97 @@ const outRightStyles = [
   style({opacity: 0, transform: 'translate3d(-1000px, 0, 0)', offset: 1})
 ]
 
-const inFx = trigger(
-  'bounceIn',
-  inOutTransitions(fxInStyles,fxOutStyles)
-)
-
 const inFxKids = trigger(
-  'bounceInKids', 
-  childInOutTransition(fxInStyles,fxOutStyles)
-)
-
-const inUp = trigger(
-  'bounceInUp',
-  inOutTransitions(inUpStyles,outUpStyles)
+  'bounceInOutKids', 
+  [childInOutTransition(fxInStyles,fxOutStyles)]
 )
 
 const inUpKids = trigger(
-  'bounceInUpKids',
+  'bounceInOutUpKids',
   childInOutTransitions(inUpStyles,outUpStyles,inDownStyles,outDownStyles)
 )
 
-const inDown = trigger(
-  'bounceInDown',
-  inOutTransitions(inDownStyles,outDownStyles)
-)
-
 const inDownKids = trigger(
-  'bounceInDownKids',
+  'bounceInOutDownKids',
   childInOutTransitions(inDownStyles,outDownStyles,inUpStyles,outUpStyles)
 )
 
-const inLeft = trigger(
-  'bounceInLeft',
-  inOutTransitions(inLeftStyles,outLeftStyles)
-)
-
 const inLeftKids = trigger(
-  'bounceInLeftKids',
+  'bounceInOutLeftKids',
   childInOutTransitions(inLeftStyles,outLeftStyles,inRightStyles,outRightStyles)
 )
 
-const inRight = trigger(
-  'bounceInRight', 
-  inOutTransitions(inRightStyles,outRightStyles)
-)
-
 const inRightKids = trigger(
-  'bounceInRightKids', 
+  'bounceInOutRightKids', 
   childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
 )
 
 export const triggers : AnimationTriggerMetadata[] = [
-  inFx, inUp, inDown, inLeft, inRight,
+  trigger(
+    'bounceIn',
+    [inTransition(fxInStyles)]
+  ),
+  trigger(
+    'bounceOut',
+    [outTransition(fxOutStyles)]
+  ),
+  trigger(
+    'bounceInOut',
+    inOutTransitions(fxInStyles,fxOutStyles)
+  ),
+
+  trigger(
+    'bounceInUp',
+    [inTransition(inUpStyles)]
+  ),
+  trigger(
+    'bounceOutUp',
+    [outTransition(outUpStyles)]
+  ),
+  trigger(
+    'bounceInOutUp',
+    inOutTransitions(inUpStyles,outUpStyles)
+  ),
+
+  trigger(
+    'bounceInDown',
+    [inTransition(inDownStyles)]
+  ),
+  trigger(
+    'bounceOutDown',
+    [outTransition(outDownStyles)]
+  ),
+  trigger(
+    'bounceInOutDown',
+    inOutTransitions(inDownStyles,outDownStyles)
+  ),
+
+  trigger(
+    'bounceInLeft',
+    [inTransition(inLeftStyles)]
+  ),
+  trigger(
+    'bounceOutLeft',
+    [outTransition(outLeftStyles)]
+  ),
+  trigger(
+    'bounceInOutLeft',
+    inOutTransitions(inLeftStyles,outLeftStyles)
+  ),
+  
+  trigger(
+    'bounceInRight', 
+    [inTransition(inRightStyles)]
+  ),
+  trigger(
+    'bounceOutRight', 
+    [outTransition(outRightStyles)]
+  ),
+  trigger(
+    'bounceInOutRight', 
+    inOutTransitions(inRightStyles,outRightStyles)
+  ),
+
   inFxKids, inUpKids, inDownKids, inLeftKids, inRightKids
 ]
 

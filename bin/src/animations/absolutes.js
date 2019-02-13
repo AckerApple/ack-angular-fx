@@ -19,31 +19,14 @@ var abDef = {
     overflow: 'hidden'
     //,border:'1px solid blue'
 };
-var relDef = {
-    position: 'relative',
-    overflow: 'hidden'
-    //,border:'1px solid red'
-};
 var abKeyFrames = [
     animations_1.style(__assign({ offset: 0 }, abDef)),
     animations_1.style(__assign({ offset: .999 }, abDef)),
+    //ensure absolute not left on
     animations_1.style({
         offset: 1
     })
 ];
-/*const relKeyFrames = [
-  style({
-    offset   : 0,
-    ...relDef
-  }),
-  style({
-    offset   : .999,
-    ...relDef
-  }),
-  style({
-    offset   : 1
-  })
-]*/
 var params = {
     time: '200ms 0ms linear',
     position: 'absolute'
@@ -64,29 +47,12 @@ var absoluteInKids = animations_1.trigger('absoluteInKids', [
             animations_1.query(':enter', [
                 animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
             ], { optional: true })
-            //,animateChild()
-        ]
-        //,{params:params}
-        )
+        ])
     ], { params: params })
 ]);
 var absoluteKids = animations_1.trigger('absoluteKids', [
     animations_1.transition('* <=> *', [
         animations_1.group([
-            /*
-            query(':self',[
-              animate('{{ time }}',
-                keyframes(relKeyFrames)
-              )
-            ],{ optional: true }),
-            */
-            /*
-                  query('@*:animating, @*:leave, @*:enter',[
-                    animate('{{ time }}',
-                      keyframes(abKeyFrames)
-                    )
-                  ],{ optional: true }),
-            */
             animations_1.query(':animating', [
                 animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
             ], { optional: true }),
@@ -104,32 +70,9 @@ var absoluteInOut = animations_1.trigger('absoluteInOut', [
         animations_1.animate('{{ time }}', animations_1.keyframes(abKeyFrames))
     ], { params: params })
 ]);
-/*const relativeWrap = trigger('relativeWrap', [
-  transition('* <=> *',[
-    group([
-      query(':self',[
-        animate('{{ time }}',
-          keyframes([
-            style({border:'1px solid red', position:'relative', overflow:'hidden', offset:0}),
-            style({border:'1px solid red', position:'relative', overflow:'hidden', offset:1})
-          ])
-        )
-      ]),
-      query('@absoluteKids, @absoluteInKids, @absoluteOutKids',[
-        animate('{{ time }}',
-          keyframes([
-            style({width:'100%', height:'100%', offset:0}),
-            style({width:'100%', height:'100%', offset:1})
-          ])
-        )
-      ],{ optional: true })
-    ])
-  ],{params:params})
-])*/
 exports.triggers = [
     absoluteInOut,
     absoluteKids,
     absoluteInKids,
     absoluteOutKids
-    //,relativeWrap
 ];

@@ -10,6 +10,8 @@ import {
  } from '@angular/animations'
 
 import {
+  inTransition,
+  outTransition,
   inOutTransitions,
   childInOutTransitions,
   stylize,
@@ -68,56 +70,93 @@ const outDownRightStyles = [
   style({opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1})
 ]
 
-const fxIn = trigger('rotateIn',
-  inOutTransitions(fxInStyles,fxOutStyles)
-)
-
-const fxInKids = trigger('rotateInKids',
-  childInOutTransition(fxInStyles,fxOutStyles)
-)
-
-const inUpLeft = trigger(
-  'rotateInUpLeft',
-  inOutTransitions(inUpLeftStyles,outUpLeftStyles)
+const fxInKids = trigger('rotateInOutKids',
+  [childInOutTransition(fxInStyles,fxOutStyles)]
 )
 
 const inUpLeftKids = trigger(
-  'rotateInUpLeftKids',
+  'rotateInOutUpLeftKids',
   childInOutTransitions(inUpLeftStyles,outUpLeftStyles,inDownLeftStyles,outDownLeftStyles)
 )
 
-const inUpRight = trigger(
-  'rotateInUpRight',
-  inOutTransitions(inUpRightStyles,outUpRightStyles)
-)
-
 const inUpRightKids = trigger(
-  'rotateInUpRightKids',
+  'rotateInOutUpRightKids',
   childInOutTransitions(inUpRightStyles,outUpRightStyles,inDownRightStyles,outDownRightStyles)
 )
 
-const inDownLeft = trigger(
-  'rotateInDownLeft',
-  inOutTransitions(inDownLeftStyles,outDownLeftStyles)
-)
-
 const inDownLeftKids = trigger(
-  'rotateInDownLeftKids',
+  'rotateInOutDownLeftKids',
   childInOutTransitions(inDownLeftStyles,outDownLeftStyles,inUpLeftStyles,outUpLeftStyles)
 )
 
-const inDownRight = trigger(
-  'rotateInDownRight',
-  inOutTransitions(inDownRightStyles,outDownRightStyles)
-)
-
 const inDownRightKids = trigger(
-  'rotateInDownRightKids',
+  'rotateInOutDownRightKids',
   childInOutTransitions(inDownRightStyles,outDownRightStyles,inUpRightStyles,outUpRightStyles)
 )
 
 export const triggers : AnimationTriggerMetadata[] = [
-  fxIn, inUpLeft, inUpRight, inDownLeft, inDownRight,
+  trigger('rotateIn',
+    [inTransition(fxInStyles)]
+  ),
+  trigger('rotateOut',
+    [outTransition(fxOutStyles)]
+  ),
+  trigger('rotateInOut',
+    inOutTransitions(fxInStyles,fxOutStyles)
+  ),
+  
+  trigger(
+    'rotateInUpLeft',
+    [inTransition(inUpLeftStyles)]
+  ),
+  trigger(
+    'rotateOutUpLeft',
+    [outTransition(outUpLeftStyles)]
+  ),
+  trigger(
+    'rotateInOutUpLeft',
+    inOutTransitions(inUpLeftStyles,outUpLeftStyles)
+  ),
+  
+  trigger(
+    'rotateInUpRight',
+    [inTransition(inUpRightStyles)]
+  ),
+  trigger(
+    'rotateOutUpRight',
+    [outTransition(outUpRightStyles)]
+  ),
+  trigger(
+    'rotateInOutUpRight',
+    inOutTransitions(inUpRightStyles,outUpRightStyles)
+  ),
+  
+  trigger(
+    'rotateInDownLeft',
+    [inTransition(inDownLeftStyles)]
+  ),
+  trigger(
+    'rotateOutDownLeft',
+    [outTransition(outDownLeftStyles)]
+  ),
+  trigger(
+    'rotateInOutDownLeft',
+    inOutTransitions(inDownLeftStyles,outDownLeftStyles)
+  ),
+  
+  trigger(
+    'rotateInDownRight',
+    [inTransition(inDownRightStyles)]
+  ),
+  trigger(
+    'rotateOutDownRight',
+    [outTransition(outDownRightStyles)]
+  ),
+  trigger(
+    'rotateInOutDownRight',
+    inOutTransitions(inDownRightStyles,outDownRightStyles)
+  ),
+
   fxInKids, inUpLeftKids, inUpRightKids, inDownLeftKids, inDownRightKids
 ]
 

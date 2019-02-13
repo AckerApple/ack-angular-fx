@@ -6,7 +6,7 @@ import { triggers as rotateTriggers } from './animations/rotate';
 import { triggers as slideTriggers } from './animations/slide';
 import { triggers as zoomTriggers } from './animations/zoom';
 
-export const fxArray = [
+export const animations = [
   ...childStags,
   ...absoluteTriggers,
   ...fadeTriggers,

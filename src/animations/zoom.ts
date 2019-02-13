@@ -10,6 +10,8 @@ import {
 } from '@angular/animations'
 
 import {
+  inTransition,
+  outTransition,
   inOutTransitions,
   childInOutTransitions,
   stylize,
@@ -75,56 +77,94 @@ const outRightStyles = [
   style({opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)', offset: 1})
 ]
 
-const fxIn = trigger('zoomIn',
-  inOutTransitions(inStyles,outStyles)
-)
-
-const fxInKids = trigger('zoomInKids',
-  childInOutTransition(inStyles,outStyles)
-)
-
-const inUp = trigger(
-  'zoomInUp',
-  inOutTransitions(inUpStyles,outUpStyles)
+const fxInKids = trigger('zoomInOutKids',
+  [childInOutTransition(inStyles,outStyles)]
 )
 
 const inUpKids = trigger(
-  'zoomInUpKids',
+  'zoomInOutUpKids',
   childInOutTransitions(inUpStyles,outUpStyles,inDownStyles,outDownStyles)
 )
 
-const inDown = trigger(
-  'zoomInDown',
-  inOutTransitions(inDownStyles,outDownStyles)
-)
-
 const inDownKids = trigger(
-  'zoomInDownKids',
+  'zoomInOutDownKids',
   childInOutTransitions(inDownStyles,outDownStyles,inUpStyles,outUpStyles)
 )
 
-const inLeft = trigger(
-  'zoomInLeft',
-  inOutTransitions(inLeftStyles,outLeftStyles)
-)
-
 const inLeftKids = trigger(
-  'zoomInLeftKids',
+  'zoomInOutLeftKids',
   childInOutTransitions(inLeftStyles,outLeftStyles,inRightStyles,outRightStyles)
 )
 
-const inRight = trigger(
-  'zoomInRight',
-  inOutTransitions(inRightStyles,outRightStyles)
-)
 
 const inRightKids = trigger(
-  'zoomInRightKids',
+  'zoomInOutRightKids',
   childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
 )
 
 export const triggers : AnimationTriggerMetadata[] = [
-  fxIn, inUp, inDown, inLeft, inRight,
+  trigger('zoomIn',
+    [inTransition(inStyles)]
+  ), 
+  trigger('zoomOut',
+    [outTransition(outStyles)]
+  ), 
+  trigger('zoomInOut',
+    inOutTransitions(inStyles,outStyles)
+  ), 
+  
+  trigger(
+    'zoomInUp',
+    [inTransition(inUpStyles)]
+  ),
+  trigger(
+    'zoomOutUp',
+    [outTransition(outUpStyles)]
+  ),
+  trigger(
+    'zoomInOutUp',
+    inOutTransitions(inUpStyles,outUpStyles)
+  ),
+  
+  trigger(
+    'zoomInDown',
+    [inTransition(inDownStyles)]
+  ),
+  trigger(
+    'zoomOutDown',
+    [outTransition(outDownStyles)]
+  ),
+  trigger(
+    'zoomInOutDown',
+    inOutTransitions(inDownStyles,outDownStyles)
+  ),
+
+  trigger(
+    'zoomInLeft',
+    [inTransition(inLeftStyles)]
+  ),
+  trigger(
+    'zoomOutLeft',
+    [outTransition(outLeftStyles)]
+  ),
+  trigger(
+    'zoomInOutLeft',
+    inOutTransitions(inLeftStyles,outLeftStyles)
+  ),
+
+  trigger(
+    'zoomInRight',
+    [inTransition(inRightStyles)]
+  ),
+  trigger(
+    'zoomOutRight',
+    [outTransition(outRightStyles)]
+  ),
+  trigger(
+    'zoomInOutRight',
+    inOutTransitions(inRightStyles,outRightStyles)
+  ),
+  
   fxInKids, inUpKids, inDownKids, inLeftKids, inRightKids
 ]
 

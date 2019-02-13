@@ -1,11 +1,11 @@
--fxNames = ['fadeIn','fadeInDown','fadeInLeft','fadeInRight','fadeInUp'];
--fxNames.push('bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp');
--fxNames.push('rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight');
--fxNames.push('slideInUp','slideInDown','slideInLeft','slideInRight');
--fxNames.push('zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp');
+-fxWithKids = ["fadeInOut","fadeInOutDown","fadeInOutLeft","fadeInOutRight","fadeInOutUp"];
+-fxWithKids.push("bounceInOut","bounceInOutLeft","bounceInOutRight","bounceInOutUp");
+-fxWithKids.push("rotateInOut","rotateInOutDownLeft","rotateInOutDownRight","rotateInOutUpLeft","rotateInOutUpRight");
+-fxWithKids.push("slideInOutUp","slideInOutDown","slideInOutLeft","slideInOutRight");
+-fxWithKids.push("zoomInOut","zoomInOutDown","zoomInOutLeft","zoomInOutRight","zoomInOutUp");
 
 -routeAttrs = {};
-each fx in fxNames
+each fx in fxWithKids
   -routeAttrs["[@"+fx+"Kids]"] = "{value:FxSession.fxForward=='"+fx+"' ? fx.id : 'nofx', params:{time:fxTime}}";
 
 table.container(
@@ -37,10 +37,9 @@ table.container(
         "[(orderArray)]" = "routes"
         "[activatedRoute]" = "fx.loaded && routerOutlet.activated ? routerOutlet.activatedRoute : null"
       )
-
       div(
-        style="height:100%"
-        "[ngClass]" = "{'pos-rel overflow-hidden':inFx}"
+        style="height:100%;width:100%;"
+        "[ngStyle]" = "inFx && {position:'relative',overflow:'hidden'}"
       )
         div(
           style = "padding:1em;height:100%;"

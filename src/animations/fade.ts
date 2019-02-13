@@ -13,6 +13,8 @@ import { fxConfig } from "../fxTypes"
 
 
 import {
+  inTransition,
+  outTransition,
   inOutTransitions,
   childInOutTransitions,
   stylize,
@@ -68,139 +70,95 @@ const outRightStyles = [
   style({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}),
   style({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1})
 ]
-
-const fxIn = trigger(
-  'fadeIn',
-  inOutTransitions(inStyles,outStyles)
-)
-
-const inUp = trigger(
-  'fadeInUp',
-  inOutTransitions(inUpStyles, outUpStyles)
-)
-
-const inDown = trigger(
-  'fadeInDown',
-  inOutTransitions(inDownStyles, outDownStyles)
-)
-
-const inLeft = trigger(
-  'fadeInLeft',
-  inOutTransitions(inLeftStyles, outLeftStyles)
-)
-
-const inRight = trigger(
-  'fadeInRight',
-  inOutTransitions(inRightStyles, outRightStyles)
-)
-
-const fxInKids = trigger(
-  'fadeInKids',
-  childInOutTransition(inStyles,outStyles)
-)
-
-const inLeftKids = trigger(
-  'fadeInLeftKids',
-  childInOutTransitions(inLeftStyles,outLeftStyles,inRightStyles,outRightStyles)
-)
-
-const inRightKids = trigger(
-  'fadeInRightKids',
-  childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
-)
-
-const inUpKids = trigger(
-  'fadeInUpKids',
-  childInOutTransitions(inUpStyles,outUpStyles,inDownStyles,outDownStyles)
-)
-
-const inDownKids = trigger(
-  'fadeInDownKids',
-  childInOutTransitions(inDownStyles,outDownStyles,inUpStyles,outUpStyles)
-)
  
 export const triggers : AnimationTriggerMetadata[] = [
-  fxIn, inUp, inDown, inLeft, inRight,
-  fxInKids, inUpKids, inDownKids, inLeftKids, inRightKids
-]
+  trigger(
+    'fadeIn',
+    [inTransition(inStyles)]
+  ),
+  trigger(
+    'fadeOut',
+    [outTransition(outStyles)]
+  ),
+  trigger(
+    'fadeInOut',
+    inOutTransitions(inStyles,outStyles)
+  ),
 
-export function states(config:fxConfig){
-  const time = getConfigTiming( config )
-  return [
-    state('fadeOut', style({
-      display: 'none'
-    })),
-    state('fadeOutDown', style({
-      display: 'none'
-    })),
-    state('fadeOutLeft', style({
-      display: 'none'
-    })),
-    state('fadeOutRight', style({
-      display: 'none'
-    })),
-    state('fadeOutUp', style({
-      display: 'none'
-    })),
-    transition(config.igniter+' => fadeIn', [
-      animate(time, keyframes([
-        stylize({opacity: 0, offset: 0}, config),
-        stylize({opacity: 1, offset: 1}, config)
-      ]))
-    ]),
-    transition(('fadeIn => void, '+config.igniter+' => fadeOut'), [
-      animate(time, keyframes([
-        stylize({opacity: 1, offset: 0}, config),
-        stylize({opacity: 0, offset: 1}, config)
-      ]))
-    ]),
-    transition(config.igniter+' => fadeInDown', [
-      animate(time, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 0}, config),
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, config)
-      ]))
-    ]),
-    transition('fadeInDown => void, '+config.igniter+' => fadeOutDown', [
-      animate(time, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, config),
-        stylize({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 1}, config)
-      ]))
-    ]),
-    transition(config.igniter+' => fadeInLeft', [
-      animate(time, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 0}, config),
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, config)
-      ]))
-    ]),
-    transition('fadeInLeft => void, '+config.igniter+' => fadeOutRight', [
-      animate(time, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, config),
-        stylize({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 1}, config)
-      ]))
-    ]),
-    transition(config.igniter+' => fadeInRight', [
-      animate(time, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 0}, config),
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, config)
-      ]))
-    ]),
-    transition('fadeInRight => void, '+config.igniter+' => fadeOutLeft', [
-      animate(time, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, config),
-        stylize({opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1}, config)
-      ]))
-    ]),
-    transition(config.igniter+' => fadeInUp', [
-      animate(time, keyframes([
-        stylize({opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0}, config),
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1}, config)
-      ]))
-    ]),
-    transition('fadeInUp => void, '+config.igniter+' => fadeOutUp', [
-      animate(time, keyframes([
-        stylize({opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0}, config),
-        stylize({opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1}, config)
-      ]))
-    ])
-  ]
-}
+  trigger(
+    'fadeInUp',
+    [inTransition(inUpStyles)]
+  ),
+  trigger(
+    'fadeOutUp',
+    [outTransition(outUpStyles)]
+  ),
+  trigger(
+    'fadeInOutUp',
+    inOutTransitions(inUpStyles, outUpStyles)
+  ),
+
+  trigger(
+    'fadeInDown',
+    [inTransition(inDownStyles)]
+  ),
+  trigger(
+    'fadeOutDown',
+    [outTransition(outDownStyles)]
+  ),
+  trigger(
+    'fadeInOutDown',
+    inOutTransitions(inDownStyles, outDownStyles)
+  ),
+
+  trigger(
+    'fadeInLeft',
+    [inTransition(inLeftStyles)]
+  ),
+  trigger(
+    'fadeOutLeft',
+    [outTransition(outLeftStyles)]
+  ),
+  trigger(
+    'fadeInOutLeft',
+    inOutTransitions(inLeftStyles, outLeftStyles)
+  ),
+
+  trigger(
+    'fadeInRight',
+    [inTransition(inRightStyles)]
+  ),
+  trigger(
+    'fadeOutRight',
+    [outTransition(outRightStyles)]
+  ),
+  trigger(
+    'fadeInOutRight',
+    inOutTransitions(inRightStyles, outRightStyles)
+  ),
+  
+  trigger(
+    'fadeInOutKids',
+    [childInOutTransition(inStyles,outStyles)]
+  ),
+
+  trigger(
+    'fadeInOutUpKids',
+    childInOutTransitions(inUpStyles,outUpStyles,inDownStyles,outDownStyles)
+  ),
+
+  trigger(
+    'fadeInOutDownKids',
+    childInOutTransitions(inDownStyles,outDownStyles,inUpStyles,outUpStyles)
+  ),
+
+  trigger(
+    'fadeInOutLeftKids',
+    childInOutTransitions(inLeftStyles,outLeftStyles,inRightStyles,outRightStyles)
+  ),
+
+  trigger(
+    'fadeInOutRightKids',
+    childInOutTransitions(inRightStyles,outRightStyles,inLeftStyles,outLeftStyles)
+  )
+]

@@ -35,16 +35,23 @@ var outRightStyles = [
     animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ visibility: 'hidden', transform: 'translate3d(-100%, 0, 0)', offset: 1 })
 ];
-var inUp = animations_1.trigger('slideInUp', helper_1.inOutTransitions(inUpStyles, outUpStyles));
-var inUpKids = animations_1.trigger('slideInUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
-var inDown = animations_1.trigger('slideInDown', helper_1.inOutTransitions(inDownStyles, outDownStyles));
-var inDownKids = animations_1.trigger('slideInDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
-var inLeft = animations_1.trigger('slideInLeft', helper_1.inOutTransitions(inLeftStyles, outLeftStyles));
-var inLeftKids = animations_1.trigger('slideInLeftKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
-var inRight = animations_1.trigger('slideInRight', helper_1.inOutTransitions(inRightStyles, outRightStyles));
-var inRightKids = animations_1.trigger('slideInRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
+var inUpKids = animations_1.trigger('slideInOutUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
+var inDownKids = animations_1.trigger('slideInOutDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
+var inLeftKids = animations_1.trigger('slideInOutLeftKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
+var inRightKids = animations_1.trigger('slideInOutRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
 exports.triggers = [
-    inUp, inDown, inLeft, inRight,
+    animations_1.trigger('slideInUp', [helper_1.inTransition(inUpStyles)]),
+    animations_1.trigger('slideOutUp', [helper_1.outTransition(outUpStyles)]),
+    animations_1.trigger('slideInOutUp', helper_1.inOutTransitions(inUpStyles, outUpStyles)),
+    animations_1.trigger('slideInDown', [helper_1.inTransition(inDownStyles)]),
+    animations_1.trigger('slideOutDown', [helper_1.outTransition(outDownStyles)]),
+    animations_1.trigger('slideInOutDown', helper_1.inOutTransitions(inDownStyles, outDownStyles)),
+    animations_1.trigger('slideInLeft', [helper_1.inTransition(inLeftStyles)]),
+    animations_1.trigger('slideOutLeft', [helper_1.outTransition(outLeftStyles)]),
+    animations_1.trigger('slideInOutLeft', helper_1.inOutTransitions(inLeftStyles, outLeftStyles)),
+    animations_1.trigger('slideInRight', [helper_1.inTransition(inRightStyles)]),
+    animations_1.trigger('slideOutRight', [helper_1.outTransition(outRightStyles)]),
+    animations_1.trigger('slideInOutRight', helper_1.inOutTransitions(inRightStyles, outRightStyles)),
     inUpKids, inDownKids, inLeftKids, inRightKids
 ];
 function slide(timing, options) {

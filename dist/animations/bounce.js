@@ -61,18 +61,27 @@ var outRightStyles = [
     animations_1.style({ opacity: 1, transform: 'translate3d(20px, 0, 0)', offset: 0.2 }),
     animations_1.style({ opacity: 0, transform: 'translate3d(-1000px, 0, 0)', offset: 1 })
 ];
-var inFx = animations_1.trigger('bounceIn', helper_1.inOutTransitions(fxInStyles, fxOutStyles));
-var inFxKids = animations_1.trigger('bounceInKids', helper_1.childInOutTransition(fxInStyles, fxOutStyles));
-var inUp = animations_1.trigger('bounceInUp', helper_1.inOutTransitions(inUpStyles, outUpStyles));
-var inUpKids = animations_1.trigger('bounceInUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
-var inDown = animations_1.trigger('bounceInDown', helper_1.inOutTransitions(inDownStyles, outDownStyles));
-var inDownKids = animations_1.trigger('bounceInDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
-var inLeft = animations_1.trigger('bounceInLeft', helper_1.inOutTransitions(inLeftStyles, outLeftStyles));
-var inLeftKids = animations_1.trigger('bounceInLeftKids', helper_1.childInOutTransitions(inLeftStyles, outLeftStyles, inRightStyles, outRightStyles));
-var inRight = animations_1.trigger('bounceInRight', helper_1.inOutTransitions(inRightStyles, outRightStyles));
-var inRightKids = animations_1.trigger('bounceInRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
+var inFxKids = animations_1.trigger('bounceInOutKids', [helper_1.childInOutTransition(fxInStyles, fxOutStyles)]);
+var inUpKids = animations_1.trigger('bounceInOutUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
+var inDownKids = animations_1.trigger('bounceInOutDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
+var inLeftKids = animations_1.trigger('bounceInOutLeftKids', helper_1.childInOutTransitions(inLeftStyles, outLeftStyles, inRightStyles, outRightStyles));
+var inRightKids = animations_1.trigger('bounceInOutRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
 exports.triggers = [
-    inFx, inUp, inDown, inLeft, inRight,
+    animations_1.trigger('bounceIn', [helper_1.inTransition(fxInStyles)]),
+    animations_1.trigger('bounceOut', [helper_1.outTransition(fxOutStyles)]),
+    animations_1.trigger('bounceInOut', helper_1.inOutTransitions(fxInStyles, fxOutStyles)),
+    animations_1.trigger('bounceInUp', [helper_1.inTransition(inUpStyles)]),
+    animations_1.trigger('bounceOutUp', [helper_1.outTransition(outUpStyles)]),
+    animations_1.trigger('bounceInOutUp', helper_1.inOutTransitions(inUpStyles, outUpStyles)),
+    animations_1.trigger('bounceInDown', [helper_1.inTransition(inDownStyles)]),
+    animations_1.trigger('bounceOutDown', [helper_1.outTransition(outDownStyles)]),
+    animations_1.trigger('bounceInOutDown', helper_1.inOutTransitions(inDownStyles, outDownStyles)),
+    animations_1.trigger('bounceInLeft', [helper_1.inTransition(inLeftStyles)]),
+    animations_1.trigger('bounceOutLeft', [helper_1.outTransition(outLeftStyles)]),
+    animations_1.trigger('bounceInOutLeft', helper_1.inOutTransitions(inLeftStyles, outLeftStyles)),
+    animations_1.trigger('bounceInRight', [helper_1.inTransition(inRightStyles)]),
+    animations_1.trigger('bounceOutRight', [helper_1.outTransition(outRightStyles)]),
+    animations_1.trigger('bounceInOutRight', helper_1.inOutTransitions(inRightStyles, outRightStyles)),
     inFxKids, inUpKids, inDownKids, inLeftKids, inRightKids
 ];
 function bounce(timing, options) {

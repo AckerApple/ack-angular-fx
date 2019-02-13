@@ -12,7 +12,9 @@ var __assign = (this && this.__assign) || function () {
 };
 exports.__esModule = true;
 var allFxDynamic_1 = require("./allFxDynamic");
-var fade_1 = require("./animations/fade");
+var allFxDynamic_2 = require("./allFxDynamic");
+exports.animations = allFxDynamic_2.animations;
+//import { states as fadeStates } from './animations/fade';
 var bounce_1 = require("./animations/bounce");
 var rotate_1 = require("./animations/rotate");
 var slide_1 = require("./animations/slide");
@@ -103,9 +105,9 @@ exports.effectsArrayToTypes = effectsArrayToTypes;
 function stateEffectsByConfig(timing, config) {
     var array = [];
     var fxTypes = effectsArrayToTypes(config.effects || exports.availEffects);
-    if (fxTypes.fade) {
-        array.push.apply(array, fade_1.states(config));
-    }
+    /*if( fxTypes.fade ){
+      array.push(...fadeStates(config))
+    }*/
     if (fxTypes.bounce) {
         array.push.apply(array, bounce_1.bounce(timing, config));
     }
@@ -121,16 +123,6 @@ function stateEffectsByConfig(timing, config) {
     return array;
 }
 exports.stateEffectsByConfig = stateEffectsByConfig;
-/*export function upgradeComponent(component, animations?){
-  const annots = window['Reflect'].getMetadata("annotations", component)
-  if(!annots)return
-  
-  annots[0].animations = annots[0].animations || []
-  
-  const fxArr = animations || fxArray
-  
-  annots[0].animations.push.apply(annots[0].animations, fxArr)
-}*/
 function selectFx(args, effectList, config) {
     if (config === void 0) { config = { igniter: 'start' }; }
     var selectedFx = { states: [], triggers: [] };
@@ -150,7 +142,7 @@ exports.selectFx = selectFx;
 function processTriggerSelect(config, effectList) {
     var fxs = [];
     //const fxTypes = effectsArrayToTypes( config.effects || availEffects )
-    fxs.push.apply(fxs, allFxDynamic_1.fxArray);
+    fxs.push.apply(fxs, allFxDynamic_1.animations);
     return fxs;
 }
 function processSelect(name, config, effectArray) {
@@ -164,8 +156,8 @@ exports.processSelect = processSelect;
   {name:'EaseOut', value:'ease-out'},
   {name:'EaseInOut', value:'ease-in-out'}
 ]*/
-//fxArray + deprecated fxs
-function getFxArray() {
+//animations + deprecated fxs
+function getAnimations() {
     var allFx = [
         processSelect("absoluteSwap", exports.menu["absoluteSwap400"]),
         processSelect("absoluteSwap100", exports.menu["absoluteSwap100"]),
@@ -193,17 +185,10 @@ function getFxArray() {
         processSelect("1500", exports.menu["1500"]),
         processSelect("2000", exports.menu["2000"])
     ];
-    allFx.push.apply(allFx, allFxDynamic_1.fxArray);
+    allFx.push.apply(allFx, allFxDynamic_1.animations);
     return allFx;
 }
-exports.getFxArray = getFxArray;
+exports.getAnimations = getAnimations;
 exports.absSwapClone = {
     name: null, duration: null, whileStyle: null
 };
-/*
-export function upgradeComponents(array, animations?){
-  for(let x=array.length-1; x >= 0; --x){
-    upgradeComponent(array[x], animations)
-  }
-}
-*/ 
