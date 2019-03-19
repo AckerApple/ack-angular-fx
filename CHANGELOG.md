@@ -1,6 +1,9 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [3.0.1] - 2019-03-19
+- fx-tracker uses Promise.resolve().then(()=>) instead of setTimeout
+
 ## [3.0.0] - 2019-02-13
 - Added Out
   - fadeOut

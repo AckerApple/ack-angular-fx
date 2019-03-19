@@ -24,9 +24,9 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
 
   ngAfterViewInit(){
     //a much needed pause to properly routerOutlet.activated
-    setTimeout(()=>
+    Promise.resolve().then(()=>
       this.loaded=true
-    , 0)
+    )
   }
 
   ngOnChanges(changes){

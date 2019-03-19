@@ -17,9 +17,9 @@ var FxTracker = (function () {
     }
     FxTracker.prototype.ngAfterViewInit = function () {
         var _this = this;
-        setTimeout(function () {
+        Promise.resolve().then(function () {
             return _this.loaded = true;
-        }, 0);
+        });
     };
     FxTracker.prototype.ngOnChanges = function (changes) {
         if (changes.activatedRoute && changes.activatedRoute.currentValue) {
