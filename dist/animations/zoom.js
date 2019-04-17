@@ -1,60 +1,60 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var animations_1 = require("@angular/animations");
-var helper_1 = require("./helper");
-var inStyles = [
+const animations_1 = require("@angular/animations");
+const helper_1 = require("./helper");
+const inStyles = [
     animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1)', offset: 0 }),
     animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1)', offset: 1 })
 ];
-var outStyles = [
+const outStyles = [
     animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1)', offset: 0 }),
     animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1)', offset: 1 })
 ];
-var inUpStyles = [
+const inUpStyles = [
     animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, 1000px, 0)', offset: 0 }),
     animations_1.style({ opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(0, -60px, 0)', offset: 0.6 }),
     animations_1.style({ transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1 })
 ];
-var outUpStyles = [
+const outUpStyles = [
     animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(0, -60px, 0)', offset: 0.4 }),
     animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, -1000px, 0)', offset: 1 })
 ];
-var inDownStyles = [
+const inDownStyles = [
     animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, -1000px, 0)', offset: 0 }),
     animations_1.style({ opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(0, 60px, 0)', offset: 0.6 }),
     animations_1.style({ transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1 })
 ];
-var outDownStyles = [
+const outDownStyles = [
     animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(0, 60px, 0)', offset: 0.4 }),
     animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(0, 1000px, 0)', offset: 1 })
 ];
-var inLeftStyles = [
+const inLeftStyles = [
     animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)', offset: 0 }),
     animations_1.style({ opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(10px, 0, 0)', offset: 0.6 }),
     animations_1.style({ transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1 })
 ];
-var outLeftStyles = [
+const outLeftStyles = [
     animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(-10px, 0, 0)', offset: 0.6 }),
     animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(1000px, 0, 0)', offset: 1 })
 ];
-var inRightStyles = [
+const inRightStyles = [
     animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(1000px, 0, 0)', offset: 0 }),
     animations_1.style({ opacity: 1, transform: 'scale3d(.475, .475, .475) translate3d(-10px, 0, 0)', offset: 0.6 }),
     animations_1.style({ transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 1 })
 ];
-var outRightStyles = [
+const outRightStyles = [
     animations_1.style({ opacity: 1, transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ transform: 'scale3d(.475, .475, .475) translate3d(10px, 0, 0)', offset: 0.6 }),
     animations_1.style({ opacity: 0, transform: 'scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)', offset: 1 })
 ];
-var fxInKids = animations_1.trigger('zoomInOutKids', [helper_1.childInOutTransition(inStyles, outStyles)]);
-var inUpKids = animations_1.trigger('zoomInOutUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
-var inDownKids = animations_1.trigger('zoomInOutDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
-var inLeftKids = animations_1.trigger('zoomInOutLeftKids', helper_1.childInOutTransitions(inLeftStyles, outLeftStyles, inRightStyles, outRightStyles));
-var inRightKids = animations_1.trigger('zoomInOutRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
+const fxInKids = animations_1.trigger('zoomInOutKids', [helper_1.childInOutTransition(inStyles, outStyles)]);
+const inUpKids = animations_1.trigger('zoomInOutUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
+const inDownKids = animations_1.trigger('zoomInOutDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
+const inLeftKids = animations_1.trigger('zoomInOutLeftKids', helper_1.childInOutTransitions(inLeftStyles, outLeftStyles, inRightStyles, outRightStyles));
+const inRightKids = animations_1.trigger('zoomInOutRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
 exports.triggers = [
     animations_1.trigger('zoomIn', [helper_1.inTransition(inStyles)]),
     animations_1.trigger('zoomOut', [helper_1.outTransition(outStyles)]),

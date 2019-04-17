@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
+    "strict": false,
     "noUnusedLocals": true,
-    "target": "es5",
+    "noUnusedParameters": true,
+    "removeComments": true,
+    "target": "ES6",
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
@@ -9,7 +12,6 @@
     "experimentalDecorators": true,
     "noEmitHelpers": false,
     "noImplicitAny": false,
-    "lib": ["es2015", "dom"],
     "typeRoots": [ "./node_modules/@types" ],
     "outDir": "../www"
   },

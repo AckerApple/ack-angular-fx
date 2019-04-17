@@ -219,7 +219,7 @@ export declare function createTriggerBy(name: string, config: fxConfig, timing: 
 export declare function effectsArrayToTypes(eArray: string[]): effectsTypeObject;
 export declare function stateEffectsByConfig(timing: string, config: fxConfig): (AnimationStateMetadata | AnimationTransitionMetadata)[];
 export declare function selectFx(args: string[], effectList: string[], config?: fxConfig): selectedFxMetaData;
-export declare function processSelect(name: string, config: fxConfig, effectArray?: string[]): AnimationTriggerMetadata;
+export declare function processSelect(name: string, config: fxConfig): AnimationTriggerMetadata;
 export declare function getAnimations(): AnimationTriggerMetadata[];
 export declare let absSwapClone: {
     name: any;

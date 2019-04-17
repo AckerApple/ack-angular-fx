@@ -6,21 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var common_1 = require("@angular/common");
-var FxTracker_directive_1 = require("./components/FxTracker.directive");
-var AckFxModule = (function () {
-    function AckFxModule() {
-    }
-    AckFxModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                common_1.CommonModule,
-            ],
-            declarations: [FxTracker_directive_1.FxTracker],
-            exports: [FxTracker_directive_1.FxTracker]
-        })
-    ], AckFxModule);
-    return AckFxModule;
-}());
+const core_1 = require("@angular/core");
+const common_1 = require("@angular/common");
+const FxTracker_directive_1 = require("./components/FxTracker.directive");
+let AckFxModule = class AckFxModule {
+};
+AckFxModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            common_1.CommonModule,
+        ],
+        declarations: [FxTracker_directive_1.FxTracker],
+        exports: [FxTracker_directive_1.FxTracker]
+    })
+], AckFxModule);
 exports.AckFxModule = AckFxModule;

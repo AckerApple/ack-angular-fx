@@ -16,6 +16,6 @@ export declare function voidFromIn(from: any, to: any): boolean;
 export declare function inTransition(inStyles: AnimationStyleMetadata[]): AnimationTransitionMetadata;
 export declare function outTransition(outStyles: AnimationStyleMetadata[]): AnimationTransitionMetadata;
 export declare function inOutTransitions(inStyles: AnimationStyleMetadata[], outStyles: AnimationStyleMetadata[]): AnimationTransitionMetadata[];
-export declare function childIn(from: any, to: any): boolean;
-export declare function childOut(from: any, to: any): boolean;
+export declare function childIn(_from: any, to: any): boolean;
+export declare function childOut(_from: any, to: any): boolean;
 export declare function childInOutTransitions(inStyles: AnimationStyleMetadata[], outStyles: AnimationStyleMetadata[], backInStyles: AnimationStyleMetadata[], backOutStyles: AnimationStyleMetadata[]): AnimationTransitionMetadata[];

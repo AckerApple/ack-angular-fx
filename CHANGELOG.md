@@ -1,6 +1,9 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [3.0.2] - 2019-04-17
+- Added fx-tracker inFx helper
+
 ## [3.0.1] - 2019-03-19
 - fx-tracker uses Promise.resolve().then(()=>) instead of setTimeout
 

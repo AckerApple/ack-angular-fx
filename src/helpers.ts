@@ -161,7 +161,11 @@ export function selectFx(
   args.forEach(fxType=>{
     const cloneConfig:fxConfig = {...menu[fxType]}
     const newConfig = {...cloneConfig, ...config}
-    const newSelect = processSelect(fxType, newConfig, effectList)
+    const newSelect = processSelect(
+      fxType,
+      newConfig
+      //,effectList
+    )
     selectedFx.states.push( newSelect )
   })
 
@@ -172,7 +176,10 @@ export function selectFx(
 
 /** Goes into specialized fx files and plucks out the stand alone triggers */
 // ---- NOT DONE ----
-function processTriggerSelect(config:fxConfig, effectList){
+function processTriggerSelect(
+  _config:fxConfig,
+  _effectList
+){
   const fxs = []
   //const fxTypes = effectsArrayToTypes( config.effects || availEffects )
   
@@ -183,8 +190,8 @@ function processTriggerSelect(config:fxConfig, effectList){
 
 export function processSelect(
   name:string,
-  config:fxConfig,
-  effectArray?:string[]
+  config:fxConfig
+  //,effectArray?:string[]
 ) : AnimationTriggerMetadata{
   config.igniter = config.igniter || 'void'
   return animateConfig(name, config)

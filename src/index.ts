@@ -1,5 +1,2 @@
-export * from "./AckFx.module"
-
-import { getConfigTiming } from "./helpers"
-
+export { AckFxModule } from "./AckFx.module"
 export { animations } from "./allFx"

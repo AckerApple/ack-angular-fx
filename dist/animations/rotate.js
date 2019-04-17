@@ -1,52 +1,52 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var animations_1 = require("@angular/animations");
-var helper_1 = require("./helper");
-var fxInStyles = [
+const animations_1 = require("@angular/animations");
+const helper_1 = require("./helper");
+const fxInStyles = [
     animations_1.style({ opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, -200deg)', offset: 0 }),
     animations_1.style({ opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
 ];
-var fxOutStyles = [
+const fxOutStyles = [
     animations_1.style({ opacity: 1, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
     animations_1.style({ opacity: 0, transformOrigin: 'center', transform: 'rotate3d(0, 0, 1, -200deg)', offset: 1 })
 ];
-var inUpLeftStyles = [
+const inUpLeftStyles = [
     animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0 }),
     animations_1.style({ opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
 ];
-var outUpLeftStyles = [
+const outUpLeftStyles = [
     animations_1.style({ opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
     animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1 })
 ];
-var inUpRightStyles = [
+const inUpRightStyles = [
     animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0 }),
     animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
 ];
-var outUpRightStyles = [
+const outUpRightStyles = [
     animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
     animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1 })
 ];
-var inDownLeftStyles = [
+const inDownLeftStyles = [
     animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 0 }),
     animations_1.style({ opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
 ];
-var outDownLeftStyles = [
+const outDownLeftStyles = [
     animations_1.style({ opacity: 1, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
     animations_1.style({ opacity: 0, transformOrigin: 'left bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 1 })
 ];
-var inDownRightStyles = [
+const inDownRightStyles = [
     animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 45deg)', offset: 0 }),
     animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 1 })
 ];
-var outDownRightStyles = [
+const outDownRightStyles = [
     animations_1.style({ opacity: 1, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, 0deg)', offset: 0 }),
     animations_1.style({ opacity: 0, transformOrigin: 'right bottom', transform: 'rotate3d(0, 0, 1, -45deg)', offset: 1 })
 ];
-var fxInKids = animations_1.trigger('rotateInOutKids', [helper_1.childInOutTransition(fxInStyles, fxOutStyles)]);
-var inUpLeftKids = animations_1.trigger('rotateInOutUpLeftKids', helper_1.childInOutTransitions(inUpLeftStyles, outUpLeftStyles, inDownLeftStyles, outDownLeftStyles));
-var inUpRightKids = animations_1.trigger('rotateInOutUpRightKids', helper_1.childInOutTransitions(inUpRightStyles, outUpRightStyles, inDownRightStyles, outDownRightStyles));
-var inDownLeftKids = animations_1.trigger('rotateInOutDownLeftKids', helper_1.childInOutTransitions(inDownLeftStyles, outDownLeftStyles, inUpLeftStyles, outUpLeftStyles));
-var inDownRightKids = animations_1.trigger('rotateInOutDownRightKids', helper_1.childInOutTransitions(inDownRightStyles, outDownRightStyles, inUpRightStyles, outUpRightStyles));
+const fxInKids = animations_1.trigger('rotateInOutKids', [helper_1.childInOutTransition(fxInStyles, fxOutStyles)]);
+const inUpLeftKids = animations_1.trigger('rotateInOutUpLeftKids', helper_1.childInOutTransitions(inUpLeftStyles, outUpLeftStyles, inDownLeftStyles, outDownLeftStyles));
+const inUpRightKids = animations_1.trigger('rotateInOutUpRightKids', helper_1.childInOutTransitions(inUpRightStyles, outUpRightStyles, inDownRightStyles, outDownRightStyles));
+const inDownLeftKids = animations_1.trigger('rotateInOutDownLeftKids', helper_1.childInOutTransitions(inDownLeftStyles, outDownLeftStyles, inUpLeftStyles, outUpLeftStyles));
+const inDownRightKids = animations_1.trigger('rotateInOutDownRightKids', helper_1.childInOutTransitions(inDownRightStyles, outDownRightStyles, inUpRightStyles, outUpRightStyles));
 exports.triggers = [
     animations_1.trigger('rotateIn', [helper_1.inTransition(fxInStyles)]),
     animations_1.trigger('rotateOut', [helper_1.outTransition(fxOutStyles)]),

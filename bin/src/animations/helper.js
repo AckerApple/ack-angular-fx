@@ -77,11 +77,11 @@ function inOutTransitions(inStyles, outStyles) {
     ];
 }
 exports.inOutTransitions = inOutTransitions;
-function childIn(from, to) {
+function childIn(_from, to) {
     return to ? true : false;
 }
 exports.childIn = childIn;
-function childOut(from, to) {
+function childOut(_from, to) {
     return !to ? true : false;
 }
 exports.childOut = childOut;

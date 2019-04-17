@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var animations_1 = require("@angular/animations");
-function childOut(from, to) {
+const animations_1 = require("@angular/animations");
+function childOut(_from, to) {
     return !to ? true : false;
 }
 exports.childOut = childOut;
-function childIn(from, to) {
+function childIn(_from, to) {
     return to ? true : false;
 }
 exports.childIn = childIn;

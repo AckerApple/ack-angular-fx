@@ -21,6 +21,7 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
   @Input() id:0|false|1|true
 
   loaded:boolean
+  inFx:boolean
 
   ngAfterViewInit(){
     //a much needed pause to properly routerOutlet.activated
@@ -106,5 +107,9 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
     let target = activatedRoute
     while(target.firstChild)target=target.firstChild
     return target.routeConfig.path
+  }
+
+  delayOutFx(){
+    Promise.resolve().then(()=>this.inFx=false)
   }
 }

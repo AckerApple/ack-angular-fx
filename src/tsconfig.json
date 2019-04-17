@@ -2,10 +2,11 @@
   "compilerOptions": {
     "strict": false,
     "noUnusedLocals": true,
-    "rootDir": ".",
+    "noUnusedParameters": true,
     "removeComments": true,
+    "rootDir": ".",
     "outDir": "../dist",
-    "target": "es5",
+    "target": "ES6",
     "module": "commonjs",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
@@ -16,9 +17,6 @@
     "declaration": true,
     "skipLibCheck": true,
     "stripInternal": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "lib": ["es2015", "dom"],
     "typeRoots": [ "./node_modules/@types" ]
   },
   "files": [

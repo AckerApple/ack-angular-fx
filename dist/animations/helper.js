@@ -1,24 +1,12 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var animations_1 = require("@angular/animations");
+const animations_1 = require("@angular/animations");
 function stylize(styleDef, options) {
-    return animations_1.style(__assign({}, styleDef, options.whileStyle));
+    return animations_1.style(Object.assign({}, styleDef, options.whileStyle));
 }
 exports.stylize = stylize;
-function defaultOptions(options) {
-    if (options === void 0) { options = {}; }
-    return __assign({ igniter: '*' }, options);
+function defaultOptions(options = {}) {
+    return Object.assign({ igniter: '*' }, options);
 }
 exports.defaultOptions = defaultOptions;
 function combo(timing, options) {
@@ -26,7 +14,7 @@ function combo(timing, options) {
 }
 exports.combo = combo;
 function childInOutTransition(inStyles, outStyles) {
-    var params = { time: '200ms 0ms linear' };
+    const params = { time: '200ms 0ms linear' };
     return animations_1.transition('* <=> *', [inOutGroupQueryByStyles(inStyles, outStyles)], { params: params });
 }
 exports.childInOutTransition = childInOutTransition;
@@ -50,14 +38,14 @@ function voidFromIn(from, to) {
 }
 exports.voidFromIn = voidFromIn;
 function inTransition(inStyles) {
-    var params = { time: '200ms 0ms linear' };
+    const params = { time: '200ms 0ms linear' };
     return animations_1.transition(inFromVoid, [
         animations_1.animate('{{ time }}', animations_1.keyframes(inStyles))
     ], { params: params });
 }
 exports.inTransition = inTransition;
 function outTransition(outStyles) {
-    var params = { time: '200ms 0ms linear' };
+    const params = { time: '200ms 0ms linear' };
     return animations_1.transition(voidFromIn, [
         animations_1.animate('{{ time }}', animations_1.keyframes(outStyles))
     ], { params: params });
@@ -70,18 +58,18 @@ function inOutTransitions(inStyles, outStyles) {
     ];
 }
 exports.inOutTransitions = inOutTransitions;
-function childIn(from, to) {
+function childIn(_from, to) {
     return to ? true : false;
 }
 exports.childIn = childIn;
-function childOut(from, to) {
+function childOut(_from, to) {
     return !to ? true : false;
 }
 exports.childOut = childOut;
 function childInOutTransitions(inStyles, outStyles, backInStyles, backOutStyles) {
-    var params = { time: '200ms 0ms linear' };
-    var group = inOutGroupQueryByStyles(inStyles, outStyles);
-    var backGroup = inOutGroupQueryByStyles(backInStyles, backOutStyles);
+    const params = { time: '200ms 0ms linear' };
+    const group = inOutGroupQueryByStyles(inStyles, outStyles);
+    const backGroup = inOutGroupQueryByStyles(backInStyles, backOutStyles);
     return [
         animations_1.transition(childIn, [group], { params: params }),
         animations_1.transition(childOut, [backGroup], { params: params })

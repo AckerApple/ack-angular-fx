@@ -1,23 +1,22 @@
 import {
-  keyframes,
+  //keyframes,
   AnimationTriggerMetadata,
-  state,
+  //state,
   style,
-  transition,
-  animate,
+  //transition,
+  //animate,
   trigger
 } from '@angular/animations';
 
-import { getConfigTiming } from "../helpers"
-import { fxConfig } from "../fxTypes"
-
+//import { getConfigTiming } from "../helpers"
+//import { fxConfig } from "../fxTypes"
 
 import {
   inTransition,
   outTransition,
   inOutTransitions,
   childInOutTransitions,
-  stylize,
+  //stylize,
   childInOutTransition
 } from "./helper"
 

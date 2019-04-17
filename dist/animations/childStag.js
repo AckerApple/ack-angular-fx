@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var animations_1 = require("@angular/animations");
+const animations_1 = require("@angular/animations");
 exports.childStags = [
     animations_1.trigger("childStag50", [
         animations_1.transition("* => *", [

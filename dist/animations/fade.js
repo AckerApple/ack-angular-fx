@@ -1,44 +1,44 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var animations_1 = require("@angular/animations");
-var helper_1 = require("./helper");
-var inStyles = [
+const animations_1 = require("@angular/animations");
+const helper_1 = require("./helper");
+const inStyles = [
     animations_1.style({ opacity: 0, offset: 0 }),
     animations_1.style({ opacity: 1, offset: 1 })
 ];
-var outStyles = [
+const outStyles = [
     animations_1.style({ opacity: 1, offset: 0 }),
     animations_1.style({ opacity: 0, offset: 1 })
 ];
-var inUpStyles = [
+const inUpStyles = [
     animations_1.style({ opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 0 }),
     animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 })
 ];
-var outUpStyles = [
+const outUpStyles = [
     animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 1 })
 ];
-var inDownStyles = [
+const inDownStyles = [
     animations_1.style({ opacity: 0, transform: 'translate3d(0, -100%, 0)', offset: 0 }),
     animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 })
 ];
-var outDownStyles = [
+const outDownStyles = [
     animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ opacity: 0, transform: 'translate3d(0, 100%, 0)', offset: 1 })
 ];
-var inLeftStyles = [
+const inLeftStyles = [
     animations_1.style({ opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 0 }),
     animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 })
 ];
-var outLeftStyles = [
+const outLeftStyles = [
     animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 1 })
 ];
-var inRightStyles = [
+const inRightStyles = [
     animations_1.style({ opacity: 0, transform: 'translate3d(100%, 0, 0)', offset: 0 }),
     animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 1 })
 ];
-var outRightStyles = [
+const outRightStyles = [
     animations_1.style({ opacity: 1, transform: 'translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ opacity: 0, transform: 'translate3d(-100%, 0, 0)', offset: 1 })
 ];

@@ -1,43 +1,43 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var animations_1 = require("@angular/animations");
-var helper_1 = require("./helper");
-var inUpStyles = [
+const animations_1 = require("@angular/animations");
+const helper_1 = require("./helper");
+const inUpStyles = [
     animations_1.style({ visibility: 'hidden', transform: 'translate3d(0, 100%, 0)', offset: 0 }),
     animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1 })
 ];
-var outUpStyles = [
+const outUpStyles = [
     animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ visibility: 'hidden', transform: 'translate3d(0, -100%, 0)', offset: 1 })
 ];
-var inDownStyles = [
+const inDownStyles = [
     animations_1.style({ visibility: 'hidden', transform: 'translate3d(0, -100%, 0)', offset: 0 }),
     animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1 })
 ];
-var outDownStyles = [
+const outDownStyles = [
     animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ visibility: 'hidden', transform: 'translate3d(0, 100%, 0)', offset: 1 })
 ];
-var inLeftStyles = [
+const inLeftStyles = [
     animations_1.style({ visibility: 'hidden', transform: 'translate3d(-100%, 0, 0)', offset: 0 }),
     animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1 })
 ];
-var outLeftStyles = [
+const outLeftStyles = [
     animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ visibility: 'hidden', transform: 'translate3d(100%, 0, 0)', offset: 1 })
 ];
-var inRightStyles = [
+const inRightStyles = [
     animations_1.style({ visibility: 'hidden', transform: 'translate3d(100%, 0, 0)', offset: 0 }),
     animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 1 })
 ];
-var outRightStyles = [
+const outRightStyles = [
     animations_1.style({ visibility: 'visible', transform: 'translate3d(0, 0, 0)', offset: 0 }),
     animations_1.style({ visibility: 'hidden', transform: 'translate3d(-100%, 0, 0)', offset: 1 })
 ];
-var inUpKids = animations_1.trigger('slideInOutUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
-var inDownKids = animations_1.trigger('slideInOutDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
-var inLeftKids = animations_1.trigger('slideInOutLeftKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
-var inRightKids = animations_1.trigger('slideInOutRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
+const inUpKids = animations_1.trigger('slideInOutUpKids', helper_1.childInOutTransitions(inUpStyles, outUpStyles, inDownStyles, outDownStyles));
+const inDownKids = animations_1.trigger('slideInOutDownKids', helper_1.childInOutTransitions(inDownStyles, outDownStyles, inUpStyles, outUpStyles));
+const inLeftKids = animations_1.trigger('slideInOutLeftKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
+const inRightKids = animations_1.trigger('slideInOutRightKids', helper_1.childInOutTransitions(inRightStyles, outRightStyles, inLeftStyles, outLeftStyles));
 exports.triggers = [
     animations_1.trigger('slideInUp', [helper_1.inTransition(inUpStyles)]),
     animations_1.trigger('slideOutUp', [helper_1.outTransition(outUpStyles)]),

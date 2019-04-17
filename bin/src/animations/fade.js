@@ -1,6 +1,8 @@
 "use strict";
 exports.__esModule = true;
 var animations_1 = require("@angular/animations");
+//import { getConfigTiming } from "../helpers"
+//import { fxConfig } from "../fxTypes"
 var helper_1 = require("./helper");
 var inStyles = [
     animations_1.style({ opacity: 0, offset: 0 }),
