@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
+const router_1 = require("@angular/router");
 let FxTracker = class FxTracker {
     constructor() {
         this.historyChange = new core_1.EventEmitter();
@@ -20,10 +21,10 @@ let FxTracker = class FxTracker {
     }
     ngOnChanges(changes) {
         if (changes.activatedRoute && changes.activatedRoute.currentValue) {
-            this.produceByRoute(changes.activatedRoute.currentValue);
+            this.produceByRoute(this.activatedRoute);
         }
         else if (changes.value) {
-            this.produceFxId(changes.value.currentValue);
+            this.produceFxId(this.value);
         }
     }
     produceByRoute(activatedRoute) {
@@ -39,21 +40,20 @@ let FxTracker = class FxTracker {
         else {
             this.index = this.index == null ? 0 : this.index;
             const histLen = this.history.length;
-            const isBack = histLen && this.history[this.index - 1] == value;
-            const isForward = histLen && this.history[this.index + 1] == value;
+            const isBack = histLen && this.history[this.index + 1] == value;
+            const isForward = histLen && this.history[this.index - 1] == value;
             if (isBack) {
-                this.indexChange.emit(--this.index);
+                this.indexChange.emit(++this.index);
                 this.id = this.id === 0 ? false : 0;
                 return this.id;
             }
             this.id = this.id === 1 ? true : 1;
             if (isForward) {
-                this.indexChange.emit(++this.index);
+                this.indexChange.emit(--this.index);
                 return this.id;
             }
-            this.index = this.history.length;
         }
-        this.history.push(value);
+        this.history.splice(this.index, 0, value);
         this.indexChange.emit(this.index);
         this.history.splice(25, this.history.length);
         this.historyChange.emit(this.history);
@@ -93,7 +93,7 @@ __decorate([
 ], FxTracker.prototype, "value", void 0);
 __decorate([
     core_1.Input(),
-    __metadata("design:type", Object)
+    __metadata("design:type", router_1.ActivatedRoute)
 ], FxTracker.prototype, "activatedRoute", void 0);
 __decorate([
     core_1.Input(),

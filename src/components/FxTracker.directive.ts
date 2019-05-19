@@ -1,11 +1,15 @@
-import { EventEmitter, Output, Input, Directive } from "@angular/core"
+import {
+  EventEmitter, Output, Input, Directive
+} from "@angular/core"
+
+import { ActivatedRoute } from "@angular/router"
 
 @Directive({
   selector:"fx-tracker",
   exportAs:"FxTracker"
 }) export class FxTracker{
   @Input() value:any//do not mix with ActivatedRoute
-  @Input() activatedRoute:any//ActivatedRoute
+  @Input() activatedRoute:ActivatedRoute
   
   //TODO:need a number based way to track order
   @Input() orderArray:any[]//back and foward determined by matching items in array
@@ -32,9 +36,9 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
 
   ngOnChanges(changes){
     if( changes.activatedRoute && changes.activatedRoute.currentValue ){
-      this.produceByRoute(changes.activatedRoute.currentValue)
+      this.produceByRoute( this.activatedRoute )
     }else if( changes.value ){
-      this.produceFxId(changes.value.currentValue)
+      this.produceFxId( this.value )
     }
   }
 
@@ -45,38 +49,33 @@ import { EventEmitter, Output, Input, Directive } from "@angular/core"
   }
 
   produceFxId( value:any ):0|false|1|true{
-    this.history = this.history || []
-
-    if( this.orderArray ){
-      this.id = this.produceOrderFxId(value)
-    }else{
-      this.index = this.index==null ? 0 : this.index
-
-      const histLen = this.history.length
-      const isBack = histLen && this.history[this.index-1]==value
-      const isForward = histLen && this.history[this.index+1]==value
-
-      if( isBack ){
-        this.indexChange.emit( --this.index )
-        this.id = this.id === 0 ? false : 0
-        return this.id
-      }
-
-      this.id = this.id === 1 ? true : 1
-
-      if( isForward ){
-        this.indexChange.emit( ++this.index )
-        return this.id
-      }
-      
-      this.index = this.history.length//push will occur
+    this.history = this.history || [];
+    if (this.orderArray) {
+        this.id = this.produceOrderFxId(value);
     }
+    else {
+        this.index = this.index == null ? 0 : this.index;
+        const histLen = this.history.length;
+        const isBack = histLen && this.history[this.index + 1] == value;
+        const isForward = histLen && this.history[this.index - 1] == value;
+        if (isBack) {
+            this.indexChange.emit(++this.index);
+            this.id = this.id === 0 ? false : 0;
+            return this.id;
+        }
+        this.id = this.id === 1 ? true : 1;
+        if (isForward) {
+            this.indexChange.emit(--this.index);
+            return this.id;
+        }
+        //this.index = this.history.length;
+    }
+    this.history.splice(this.index,0,value);
+    this.indexChange.emit(this.index);
+    this.history.splice(25, this.history.length);
+    this.historyChange.emit(this.history);
 
-    this.history.push( value )
-    this.indexChange.emit( this.index )
-    this.history.splice(25, this.history.length)//ensure history no greater than 25. If not this command does nothing
-    this.historyChange.emit( this.history )
-    return this.id
+    return this.id;
   }
 
   produceOrderFxId( value:any ):0|false|1|true{

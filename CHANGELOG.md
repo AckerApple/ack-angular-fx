@@ -1,6 +1,9 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [3.0.3] - 2019-05-18
+- better fx-tracker history
+
 ## [3.0.2] - 2019-04-17
 - Added fx-tracker inFx helper
 

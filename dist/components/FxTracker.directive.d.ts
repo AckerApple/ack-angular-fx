@@ -1,7 +1,8 @@
 import { EventEmitter } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 export declare class FxTracker {
     value: any;
-    activatedRoute: any;
+    activatedRoute: ActivatedRoute;
     orderArray: any[];
     history: any[];
     historyChange: EventEmitter<any[]>;
