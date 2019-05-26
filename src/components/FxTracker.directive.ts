@@ -26,6 +26,7 @@ import { ActivatedRoute } from "@angular/router"
 
   loaded:boolean
   inFx:boolean
+  orderIndex:number
 
   ngAfterViewInit(){
     //a much needed pause to properly routerOutlet.activated
@@ -70,6 +71,7 @@ import { ActivatedRoute } from "@angular/router"
       }
       //this.index = this.history.length;
     }
+
     this.history.splice(this.index,0,value);
     this.indexChange.emit(this.index);
     this.history.splice(25, this.history.length);
@@ -81,7 +83,7 @@ import { ActivatedRoute } from "@angular/router"
   produceOrderFxId( value:any ):0|false|1|true{
     let oldIndex:number = 0
     let newIndex:number = 0
-    const oldValue = this.history[0]
+    const oldValue = this.orderArray[ this.orderIndex ]
 
     for(let index=this.orderArray.length-1; index >= 0; --index){
       let item = this.orderArray[index]
@@ -94,7 +96,7 @@ import { ActivatedRoute } from "@angular/router"
       }
     }
 
-    this.index = newIndex
+    this.orderIndex = newIndex
 
     if( newIndex <= oldIndex ){
       return this.id = this.id === 0 ? false : 0

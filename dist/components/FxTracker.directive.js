@@ -63,7 +63,7 @@ let FxTracker = class FxTracker {
     produceOrderFxId(value) {
         let oldIndex = 0;
         let newIndex = 0;
-        const oldValue = this.history[0];
+        const oldValue = this.orderArray[this.orderIndex];
         for (let index = this.orderArray.length - 1; index >= 0; --index) {
             let item = this.orderArray[index];
             if (value === item) {
@@ -73,7 +73,7 @@ let FxTracker = class FxTracker {
                 oldIndex = index;
             }
         }
-        this.index = newIndex;
+        this.orderIndex = newIndex;
         if (newIndex <= oldIndex) {
             return this.id = this.id === 0 ? false : 0;
         }
