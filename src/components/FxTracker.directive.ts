@@ -12,9 +12,9 @@ import { ActivatedRoute } from "@angular/router"
   @Input() activatedRoute:ActivatedRoute
   
   //TODO:need a number based way to track order
-  @Input() orderArray:any[]//back and foward determined by matching items in array
+  @Input() orderArray:(string|boolean|number)[]//back and foward determined by matching items in array. Typically ActivatedRoute.routeConfig.path 
 
-  @Input() history:any[]
+  @Input() history:any[] = []
   @Output() historyChange:EventEmitter<any[]> = new EventEmitter()
 
   //current position in history table
@@ -54,21 +54,21 @@ import { ActivatedRoute } from "@angular/router"
         this.id = this.produceOrderFxId(value);
     }
     else {
-        this.index = this.index == null ? 0 : this.index;
-        const histLen = this.history.length;
-        const isBack = histLen && this.history[this.index + 1] == value;
-        const isForward = histLen && this.history[this.index - 1] == value;
-        if (isBack) {
-            this.indexChange.emit(++this.index);
-            this.id = this.id === 0 ? false : 0;
-            return this.id;
-        }
-        this.id = this.id === 1 ? true : 1;
-        if (isForward) {
-            this.indexChange.emit(--this.index);
-            return this.id;
-        }
-        //this.index = this.history.length;
+      this.index = this.index == null ? 0 : this.index;
+      const histLen = this.history.length;
+      const isBack = histLen && this.history[this.index + 1] == value;
+      const isForward = histLen && this.history[this.index - 1] == value;
+      if (isBack) {
+          this.indexChange.emit(++this.index);
+          this.id = this.id === 0 ? false : 0;
+          return this.id;
+      }
+      this.id = this.id === 1 ? true : 1;
+      if (isForward) {
+          this.indexChange.emit(--this.index);
+          return this.id;
+      }
+      //this.index = this.history.length;
     }
     this.history.splice(this.index,0,value);
     this.indexChange.emit(this.index);
@@ -81,9 +81,10 @@ import { ActivatedRoute } from "@angular/router"
   produceOrderFxId( value:any ):0|false|1|true{
     let oldIndex:number = 0
     let newIndex:number = 0
-    const oldValue = this.history[this.history.length-1]
+    const oldValue = this.history[0]
 
-    this.orderArray.forEach((item,index)=>{
+    for(let index=this.orderArray.length-1; index >= 0; --index){
+      let item = this.orderArray[index]
       if(value===item){
         newIndex = index
       }
@@ -91,11 +92,11 @@ import { ActivatedRoute } from "@angular/router"
       if(oldValue===item){
         oldIndex = index
       }
-    })
+    }
 
     this.index = newIndex
 
-    if( newIndex > oldIndex ){
+    if( newIndex <= oldIndex ){
       return this.id = this.id === 0 ? false : 0
     }
 

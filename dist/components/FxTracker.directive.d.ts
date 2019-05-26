@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 export declare class FxTracker {
     value: any;
     activatedRoute: ActivatedRoute;
-    orderArray: any[];
+    orderArray: (string | boolean | number)[];
     history: any[];
     historyChange: EventEmitter<any[]>;
     index: number;

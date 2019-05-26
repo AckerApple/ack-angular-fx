@@ -13,6 +13,7 @@ const core_1 = require("@angular/core");
 const router_1 = require("@angular/router");
 let FxTracker = class FxTracker {
     constructor() {
+        this.history = [];
         this.historyChange = new core_1.EventEmitter();
         this.indexChange = new core_1.EventEmitter();
     }
@@ -62,17 +63,18 @@ let FxTracker = class FxTracker {
     produceOrderFxId(value) {
         let oldIndex = 0;
         let newIndex = 0;
-        const oldValue = this.history[this.history.length - 1];
-        this.orderArray.forEach((item, index) => {
+        const oldValue = this.history[0];
+        for (let index = this.orderArray.length - 1; index >= 0; --index) {
+            let item = this.orderArray[index];
             if (value === item) {
                 newIndex = index;
             }
             if (oldValue === item) {
                 oldIndex = index;
             }
-        });
+        }
         this.index = newIndex;
-        if (newIndex > oldIndex) {
+        if (newIndex <= oldIndex) {
             return this.id = this.id === 0 ? false : 0;
         }
         return this.id = this.id === 1 ? true : 1;

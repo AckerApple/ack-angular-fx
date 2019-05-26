@@ -1,6 +1,9 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [3.0.4] - 2019-05-26
+- Fix tracking history by orderArray
+
 ## [3.0.3] - 2019-05-18
 - better fx-tracker history
 
