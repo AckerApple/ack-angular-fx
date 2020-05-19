@@ -1,40 +1,34 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const animations_1 = require("@angular/animations");
-function childOut(_from, to) {
+import { group, query, stagger, animateChild, trigger, style, transition, animate, keyframes } from "@angular/animations";
+export function childOut(_from, to) {
     return !to ? true : false;
 }
-exports.childOut = childOut;
-function childIn(_from, to) {
+export function childIn(_from, to) {
     return to ? true : false;
 }
-exports.childIn = childIn;
-function voidFromIn(from, to) {
+export function voidFromIn(from, to) {
     return from !== 'nofx' && from !== 'void' && to === 'void' ? true : false;
 }
-exports.voidFromIn = voidFromIn;
-function inFromVoid(from, to) {
+export function inFromVoid(from, to) {
     return to !== null && to !== 'nofx' && from === 'void' && to !== 'void' ? true : false;
 }
-exports.inFromVoid = inFromVoid;
-exports.animations = [
-    animations_1.trigger("zoomInOutRightKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+export var animations = [
+    trigger("zoomInOutRightKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
+                        style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -45,76 +39,22 @@ exports.animations = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
+                        style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomInOutLeftKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -126,23 +66,23 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("zoomInOutDownKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+    trigger("zoomInOutLeftKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
+                        style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.4 }),
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -153,76 +93,22 @@ exports.animations = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
+                        style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.4 }),
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomInOutUpKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.4 }),
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.4 }),
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -234,21 +120,49 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("zoomInOutKids", [
-        animations_1.transition("* <=> *", [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
+    trigger("zoomInOutDownKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.6 }),
+                        style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.4 }),
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.6 }),
+                        style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.4 }),
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -260,267 +174,23 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("zoomInOutRight", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomOutRight", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomInRight", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomInOutLeft", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomOutLeft", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomInLeft", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomInOutDown", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.4 }),
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomOutDown", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.4 }),
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomInDown", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomInOutUp", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.4 }),
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomOutUp", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.4 }),
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomInUp", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomInOut", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomOut", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("zoomIn", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideInOutRightKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+    trigger("zoomInOutUpKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.6 }),
+                        style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.4 }),
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -531,20 +201,22 @@ exports.animations = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.6 }),
+                        style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.4 }),
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -556,45 +228,21 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("slideInOutLeftKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+    trigger("zoomInOutKids", [
+        transition("* <=> *", [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 0 }),
+                        style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -606,21 +254,267 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("slideInOutDownKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+    trigger("zoomInOutRight", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
+                style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomOutRight", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomInRight", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
+                style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomInOutLeft", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
+                style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomOutLeft", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "transform": "scale3d(.475, .475, .475) translate3d(-10px, 0, 0)", "offset": 0.6 }),
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(1000px, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomInLeft", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(-1000px, 0, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(10px, 0, 0)", "offset": 0.6 }),
+                style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomInOutDown", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.4 }),
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.6 }),
+                style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomOutDown", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.4 }),
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomInDown", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, 60px, 0)", "offset": 0.6 }),
+                style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomInOutUp", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.4 }),
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.6 }),
+                style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomOutUp", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.4 }),
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, -1000px, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomInUp", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1) translate3d(0, 1000px, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "scale3d(.475, .475, .475) translate3d(0, -60px, 0)", "offset": 0.6 }),
+                style({ "transform": "scale3d(1, 1, 1) translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomInOut", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 0 }),
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomOut", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 0 }),
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("zoomIn", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "scale3d(.1, .1, .1)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("slideInOutRightKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -631,304 +525,20 @@ exports.animations = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideInOutUpKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideInOutRight", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideOutRight", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideInRight", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideInOutLeft", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideOutLeft", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideInLeft", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideInOutDown", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideOutDown", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideInDown", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideInOutUp", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideOutUp", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("slideInUp", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
-                animations_1.style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateInOutDownRightKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -940,21 +550,21 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("rotateInOutDownLeftKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
+    trigger("slideInOutLeftKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -965,70 +575,20 @@ exports.animations = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateInOutUpRightKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -1040,21 +600,21 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("rotateInOutUpLeftKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
+    trigger("slideInOutDownKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -1065,46 +625,20 @@ exports.animations = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateInOutKids", [
-        animations_1.transition("* <=> *", [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -1116,254 +650,21 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("rotateInOutDownRight", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateOutDownRight", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateInDownRight", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateInOutDownLeft", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateOutDownLeft", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateInDownLeft", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateInOutUpRight", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateOutUpRight", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateInUpRight", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateInOutUpLeft", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateOutUpLeft", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateInUpLeft", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateInOut", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateOut", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("rotateIn", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInOutRightKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "translate3d(-10px, 0, 0)", "offset": 0.75 }),
-                        animations_1.style({ "transform": "translate3d(5px, 0, 0)", "offset": 0.9 }),
-                        animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+    trigger("slideInOutUpKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.2 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -1374,23 +675,20 @@ exports.animations = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "translate3d(10px, 0, 0)", "offset": 0.75 }),
-                        animations_1.style({ "transform": "translate3d(-5px, 0, 0)", "offset": 0.9 }),
-                        animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.2 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -1402,24 +700,205 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("bounceInOutLeftKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "translate3d(10px, 0, 0)", "offset": 0.75 }),
-                        animations_1.style({ "transform": "translate3d(-5px, 0, 0)", "offset": 0.9 }),
-                        animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+    trigger("slideInOutRight", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("slideOutRight", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("slideInRight", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("slideInOutLeft", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("slideOutLeft", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "visibility": "hidden", "transform": "translate3d(100%, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("slideInLeft", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "hidden", "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("slideInOutDown", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("slideOutDown", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("slideInDown", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("slideInOutUp", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("slideOutUp", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "visibility": "hidden", "transform": "translate3d(0, -100%, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("slideInUp", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "visibility": "hidden", "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
+                style({ "visibility": "visible", "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("rotateInOutDownRightKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
+                        style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.2 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                        style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -1430,488 +909,20 @@ exports.animations = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "translate3d(-10px, 0, 0)", "offset": 0.75 }),
-                        animations_1.style({ "transform": "translate3d(5px, 0, 0)", "offset": 0.9 }),
-                        animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
+                        style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.2 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInOutDownKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.75 }),
-                        animations_1.style({ "transform": "translate3d(0, -5px, 0)", "offset": 0.9 }),
-                        animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.2 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.5 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.75 }),
-                        animations_1.style({ "transform": "translate3d(0, 5px, 0)", "offset": 0.9 }),
-                        animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.2 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.5 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInOutUpKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.75 }),
-                        animations_1.style({ "transform": "translate3d(0, 5px, 0)", "offset": 0.9 }),
-                        animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.2 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.5 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.75 }),
-                        animations_1.style({ "transform": "translate3d(0, -5px, 0)", "offset": 0.9 }),
-                        animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.2 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.5 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInOutKids", [
-        animations_1.transition("* <=> *", [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 0 }),
-                        animations_1.style({ "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.2 }),
-                        animations_1.style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.4 }),
-                        animations_1.style({ "transform": "scale3d(1.03, 1.03, 1.03)", "offset": 0.6 }),
-                        animations_1.style({ "transform": "scale3d(.97, .97, .97)", "offset": 0.8 }),
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.2 }),
-                        animations_1.style({ "opacity": 1, "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.5 }),
-                        animations_1.style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInOutRight", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.2 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "translate3d(10px, 0, 0)", "offset": 0.75 }),
-                animations_1.style({ "transform": "translate3d(-5px, 0, 0)", "offset": 0.9 }),
-                animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceOutRight", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.2 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInRight", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "translate3d(10px, 0, 0)", "offset": 0.75 }),
-                animations_1.style({ "transform": "translate3d(-5px, 0, 0)", "offset": 0.9 }),
-                animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInOutLeft", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.2 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "translate3d(-10px, 0, 0)", "offset": 0.75 }),
-                animations_1.style({ "transform": "translate3d(5px, 0, 0)", "offset": 0.9 }),
-                animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceOutLeft", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.2 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInLeft", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "translate3d(-10px, 0, 0)", "offset": 0.75 }),
-                animations_1.style({ "transform": "translate3d(5px, 0, 0)", "offset": 0.9 }),
-                animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInOutDown", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.2 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.5 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.75 }),
-                animations_1.style({ "transform": "translate3d(0, 5px, 0)", "offset": 0.9 }),
-                animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceOutDown", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.2 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.5 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInDown", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.75 }),
-                animations_1.style({ "transform": "translate3d(0, 5px, 0)", "offset": 0.9 }),
-                animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInOutUp", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.2 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.5 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.75 }),
-                animations_1.style({ "transform": "translate3d(0, -5px, 0)", "offset": 0.9 }),
-                animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceOutUp", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.2 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.5 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInUp", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.6 }),
-                animations_1.style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.75 }),
-                animations_1.style({ "transform": "translate3d(0, -5px, 0)", "offset": 0.9 }),
-                animations_1.style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceInOut", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.2 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.5 }),
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 0 }),
-                animations_1.style({ "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.2 }),
-                animations_1.style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.4 }),
-                animations_1.style({ "transform": "scale3d(1.03, 1.03, 1.03)", "offset": 0.6 }),
-                animations_1.style({ "transform": "scale3d(.97, .97, .97)", "offset": 0.8 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceOut", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.2 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.5 }),
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("bounceIn", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 0 }),
-                animations_1.style({ "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.2 }),
-                animations_1.style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.4 }),
-                animations_1.style({ "transform": "scale3d(1.03, 1.03, 1.03)", "offset": 0.6 }),
-                animations_1.style({ "transform": "scale3d(.97, .97, .97)", "offset": 0.8 }),
-                animations_1.style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
-            ]))
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("fadeInOutRightKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                        style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -1923,21 +934,21 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeInOutLeftKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+    trigger("rotateInOutDownLeftKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
+                        style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                        style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -1948,70 +959,20 @@ exports.animations = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
+                        style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("fadeInOutDownKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                        style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -2023,21 +984,21 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeInOutUpKids", [
-        animations_1.transition(childOut, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+    trigger("rotateInOutUpRightKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
+                        style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                        style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -2048,46 +1009,20 @@ exports.animations = [
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(childIn, [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
+                        style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                })
-            ])
-        ], {
-            "params": {
-                "time": "200ms 0ms linear"
-            }
-        })
-    ]),
-    animations_1.trigger("fadeInOutKids", [
-        animations_1.transition("* <=> *", [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 0, "offset": 0 }),
-                        animations_1.style({ "opacity": 1, "offset": 1 })
-                    ]))
-                ], {
-                    "optional": true
-                }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "opacity": 1, "offset": 0 }),
-                        animations_1.style({ "opacity": 0, "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                        style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -2099,21 +1034,97 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeInOutRight", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
+    trigger("rotateInOutUpLeftKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
+                        style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                        style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
+                        style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                        style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("rotateInOutKids", [
+        transition("* <=> *", [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 0 }),
+                        style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                        style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("rotateInOutDownRight", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
             ]))
         ], {
             "params": {
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
+                style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2121,11 +1132,11 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeOutRight", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
+    trigger("rotateOutDownRight", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2133,11 +1144,11 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeInRight", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+    trigger("rotateInDownRight", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
+                style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2145,21 +1156,21 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeInOutLeft", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 1 })
+    trigger("rotateInOutDownLeft", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
             ]))
         ], {
             "params": {
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
+                style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2167,11 +1178,11 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeOutLeft", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 1 })
+    trigger("rotateOutDownLeft", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2179,11 +1190,11 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeInLeft", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+    trigger("rotateInDownLeft", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
+                style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2191,21 +1202,21 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeInOutDown", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 1 })
+    trigger("rotateInOutUpRight", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
             ]))
         ], {
             "params": {
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
+                style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2213,11 +1224,11 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeOutDown", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 1 })
+    trigger("rotateOutUpRight", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2225,11 +1236,11 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeInDown", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+    trigger("rotateInUpRight", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 0 }),
+                style({ "opacity": 1, "transformOrigin": "right bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2237,21 +1248,21 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeInOutUp", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 1 })
+    trigger("rotateInOutUpLeft", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
             ]))
         ], {
             "params": {
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
+                style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2259,11 +1270,11 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeOutUp", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 1 })
+    trigger("rotateOutUpLeft", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, -45deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2271,11 +1282,11 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeInUp", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
-                animations_1.style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+    trigger("rotateInUpLeft", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 45deg)", "offset": 0 }),
+                style({ "opacity": 1, "transformOrigin": "left bottom", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2283,21 +1294,21 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeInOut", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "offset": 0 }),
-                animations_1.style({ "opacity": 0, "offset": 1 })
+    trigger("rotateInOut", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 1 })
             ]))
         ], {
             "params": {
                 "time": "200ms 0ms linear"
             }
         }),
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "offset": 0 }),
-                animations_1.style({ "opacity": 1, "offset": 1 })
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 0 }),
+                style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2305,11 +1316,11 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeOut", [
-        animations_1.transition(voidFromIn, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 1, "offset": 0 }),
-                animations_1.style({ "opacity": 0, "offset": 1 })
+    trigger("rotateOut", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 0 }),
+                style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2317,11 +1328,11 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("fadeIn", [
-        animations_1.transition(inFromVoid, [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "opacity": 0, "offset": 0 }),
-                animations_1.style({ "opacity": 1, "offset": 1 })
+    trigger("rotateIn", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, -200deg)", "offset": 0 }),
+                style({ "opacity": 1, "transformOrigin": "center", "transform": "rotate3d(0, 0, 1, 0deg)", "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2329,14 +1340,997 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("absoluteOutKids", [
-        animations_1.transition("* <=> *", [
-            animations_1.group([
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 1 })
+    trigger("bounceInOutRightKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.6 }),
+                        style({ "transform": "translate3d(-10px, 0, 0)", "offset": 0.75 }),
+                        style({ "transform": "translate3d(5px, 0, 0)", "offset": 0.9 }),
+                        style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.2 }),
+                        style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.6 }),
+                        style({ "transform": "translate3d(10px, 0, 0)", "offset": 0.75 }),
+                        style({ "transform": "translate3d(-5px, 0, 0)", "offset": 0.9 }),
+                        style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.2 }),
+                        style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInOutLeftKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.6 }),
+                        style({ "transform": "translate3d(10px, 0, 0)", "offset": 0.75 }),
+                        style({ "transform": "translate3d(-5px, 0, 0)", "offset": 0.9 }),
+                        style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.2 }),
+                        style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.6 }),
+                        style({ "transform": "translate3d(-10px, 0, 0)", "offset": 0.75 }),
+                        style({ "transform": "translate3d(5px, 0, 0)", "offset": 0.9 }),
+                        style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.2 }),
+                        style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInOutDownKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.6 }),
+                        style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.75 }),
+                        style({ "transform": "translate3d(0, -5px, 0)", "offset": 0.9 }),
+                        style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.2 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.5 }),
+                        style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.6 }),
+                        style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.75 }),
+                        style({ "transform": "translate3d(0, 5px, 0)", "offset": 0.9 }),
+                        style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.2 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.5 }),
+                        style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInOutUpKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.6 }),
+                        style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.75 }),
+                        style({ "transform": "translate3d(0, 5px, 0)", "offset": 0.9 }),
+                        style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.2 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.5 }),
+                        style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.6 }),
+                        style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.75 }),
+                        style({ "transform": "translate3d(0, -5px, 0)", "offset": 0.9 }),
+                        style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.2 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.5 }),
+                        style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInOutKids", [
+        transition("* <=> *", [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 0 }),
+                        style({ "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.2 }),
+                        style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.4 }),
+                        style({ "transform": "scale3d(1.03, 1.03, 1.03)", "offset": 0.6 }),
+                        style({ "transform": "scale3d(.97, .97, .97)", "offset": 0.8 }),
+                        style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.2 }),
+                        style({ "opacity": 1, "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.5 }),
+                        style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInOutRight", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.2 }),
+                style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.6 }),
+                style({ "transform": "translate3d(10px, 0, 0)", "offset": 0.75 }),
+                style({ "transform": "translate3d(-5px, 0, 0)", "offset": 0.9 }),
+                style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceOutRight", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.2 }),
+                style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInRight", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.6 }),
+                style({ "transform": "translate3d(10px, 0, 0)", "offset": 0.75 }),
+                style({ "transform": "translate3d(-5px, 0, 0)", "offset": 0.9 }),
+                style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInOutLeft", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.2 }),
+                style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.6 }),
+                style({ "transform": "translate3d(-10px, 0, 0)", "offset": 0.75 }),
+                style({ "transform": "translate3d(5px, 0, 0)", "offset": 0.9 }),
+                style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceOutLeft", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "translate3d(-20px, 0, 0)", "offset": 0.2 }),
+                style({ "opacity": 0, "transform": "translate3d(1000px, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInLeft", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(-1000px, 0, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(20px, 0, 0)", "offset": 0.6 }),
+                style({ "transform": "translate3d(-10px, 0, 0)", "offset": 0.75 }),
+                style({ "transform": "translate3d(5px, 0, 0)", "offset": 0.9 }),
+                style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInOutDown", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.2 }),
+                style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.5 }),
+                style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.6 }),
+                style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.75 }),
+                style({ "transform": "translate3d(0, 5px, 0)", "offset": 0.9 }),
+                style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceOutDown", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.2 }),
+                style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.5 }),
+                style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInDown", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.6 }),
+                style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.75 }),
+                style({ "transform": "translate3d(0, 5px, 0)", "offset": 0.9 }),
+                style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInOutUp", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.2 }),
+                style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.5 }),
+                style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.6 }),
+                style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.75 }),
+                style({ "transform": "translate3d(0, -5px, 0)", "offset": 0.9 }),
+                style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceOutUp", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "transform": "translate3d(0, -10px, 0)", "offset": 0.2 }),
+                style({ "opacity": 1, "transform": "translate3d(0, 20px, 0)", "offset": 0.5 }),
+                style({ "opacity": 0, "transform": "translate3d(0, -1000px, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInUp", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(0, 1000px, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(0, -20px, 0)", "offset": 0.6 }),
+                style({ "transform": "translate3d(0, 10px, 0)", "offset": 0.75 }),
+                style({ "transform": "translate3d(0, -5px, 0)", "offset": 0.9 }),
+                style({ "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceInOut", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.2 }),
+                style({ "opacity": 1, "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.5 }),
+                style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 0 }),
+                style({ "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.2 }),
+                style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.4 }),
+                style({ "transform": "scale3d(1.03, 1.03, 1.03)", "offset": 0.6 }),
+                style({ "transform": "scale3d(.97, .97, .97)", "offset": 0.8 }),
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceOut", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.2 }),
+                style({ "opacity": 1, "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.5 }),
+                style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("bounceIn", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "scale3d(.3, .3, .3)", "offset": 0 }),
+                style({ "transform": "scale3d(1.1, 1.1, 1.1)", "offset": 0.2 }),
+                style({ "transform": "scale3d(.9, .9, .9)", "offset": 0.4 }),
+                style({ "transform": "scale3d(1.03, 1.03, 1.03)", "offset": 0.6 }),
+                style({ "transform": "scale3d(.97, .97, .97)", "offset": 0.8 }),
+                style({ "opacity": 1, "transform": "scale3d(1, 1, 1)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInOutRightKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInOutLeftKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInOutDownKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInOutUpKids", [
+        transition(childOut, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(childIn, [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                        style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInOutKids", [
+        transition("* <=> *", [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 0, "offset": 0 }),
+                        style({ "opacity": 1, "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                }),
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "opacity": 1, "offset": 0 }),
+                        style({ "opacity": 0, "offset": 1 })
+                    ]))
+                ], {
+                    "optional": true
+                })
+            ])
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInOutRight", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeOutRight", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInRight", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInOutLeft", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeOutLeft", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "opacity": 0, "transform": "translate3d(100%, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInLeft", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(-100%, 0, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInOutDown", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeOutDown", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInDown", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInOutUp", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeOutUp", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 0 }),
+                style({ "opacity": 0, "transform": "translate3d(0, -100%, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInUp", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "transform": "translate3d(0, 100%, 0)", "offset": 0 }),
+                style({ "opacity": 1, "transform": "translate3d(0, 0, 0)", "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeInOut", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "offset": 0 }),
+                style({ "opacity": 0, "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        }),
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "offset": 0 }),
+                style({ "opacity": 1, "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeOut", [
+        transition(voidFromIn, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 1, "offset": 0 }),
+                style({ "opacity": 0, "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("fadeIn", [
+        transition(inFromVoid, [
+            animate("{{ time }}", keyframes([
+                style({ "opacity": 0, "offset": 0 }),
+                style({ "opacity": 1, "offset": 1 })
+            ]))
+        ], {
+            "params": {
+                "time": "200ms 0ms linear"
+            }
+        })
+    ]),
+    trigger("absoluteOutKids", [
+        transition("* <=> *", [
+            group([
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        style({ "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -2349,14 +2343,14 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("absoluteInKids", [
-        animations_1.transition("* <=> *", [
-            animations_1.group([
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 1 })
+    trigger("absoluteInKids", [
+        transition("* <=> *", [
+            group([
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        style({ "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -2369,32 +2363,32 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("absoluteKids", [
-        animations_1.transition("* <=> *", [
-            animations_1.group([
-                animations_1.query(":animating", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 1 })
+    trigger("absoluteKids", [
+        transition("* <=> *", [
+            group([
+                query(":animating", [
+                    animate("{{ time }}", keyframes([
+                        style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        style({ "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":leave", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 1 })
+                query(":leave", [
+                    animate("{{ time }}", keyframes([
+                        style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        style({ "offset": 1 })
                     ]))
                 ], {
                     "optional": true
                 }),
-                animations_1.query(":enter", [
-                    animations_1.animate("{{ time }}", animations_1.keyframes([
-                        animations_1.style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
-                        animations_1.style({ "offset": 1 })
+                query(":enter", [
+                    animate("{{ time }}", keyframes([
+                        style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                        style({ "offset": 1 })
                     ]))
                 ], {
                     "optional": true
@@ -2407,12 +2401,12 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("absoluteInOut", [
-        animations_1.transition("* <=> *", [
-            animations_1.animate("{{ time }}", animations_1.keyframes([
-                animations_1.style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
-                animations_1.style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
-                animations_1.style({ "offset": 1 })
+    trigger("absoluteInOut", [
+        transition("* <=> *", [
+            animate("{{ time }}", keyframes([
+                style({ "offset": 0, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                style({ "offset": 0.999, "position": "{{ position }}", "width": "100%", "overflow": "hidden" }),
+                style({ "offset": 1 })
             ]))
         ], {
             "params": {
@@ -2421,11 +2415,11 @@ exports.animations = [
             }
         })
     ]),
-    animations_1.trigger("childStag2000", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(2000, [
-                    animations_1.animateChild()
+    trigger("childStag2000", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(2000, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2433,11 +2427,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag1500", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(1500, [
-                    animations_1.animateChild()
+    trigger("childStag1500", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(1500, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2445,11 +2439,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag1000", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(1000, [
-                    animations_1.animateChild()
+    trigger("childStag1000", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(1000, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2457,11 +2451,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag900", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(900, [
-                    animations_1.animateChild()
+    trigger("childStag900", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(900, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2469,11 +2463,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag800", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(800, [
-                    animations_1.animateChild()
+    trigger("childStag800", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(800, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2481,11 +2475,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag700", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(700, [
-                    animations_1.animateChild()
+    trigger("childStag700", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(700, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2493,11 +2487,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag600", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(600, [
-                    animations_1.animateChild()
+    trigger("childStag600", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(600, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2505,11 +2499,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag500", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(500, [
-                    animations_1.animateChild()
+    trigger("childStag500", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(500, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2517,11 +2511,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag400", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(400, [
-                    animations_1.animateChild()
+    trigger("childStag400", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(400, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2529,11 +2523,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag300", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(300, [
-                    animations_1.animateChild()
+    trigger("childStag300", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(300, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2541,11 +2535,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag200", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(200, [
-                    animations_1.animateChild()
+    trigger("childStag200", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(200, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2553,11 +2547,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(200, [
-                    animations_1.animateChild()
+    trigger("childStag", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(200, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2565,11 +2559,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag100", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(100, [
-                    animations_1.animateChild()
+    trigger("childStag100", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(100, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,
@@ -2577,11 +2571,11 @@ exports.animations = [
             })
         ])
     ]),
-    animations_1.trigger("childStag50", [
-        animations_1.transition("* => *", [
-            animations_1.query(":enter, :leave", [
-                animations_1.stagger(50, [
-                    animations_1.animateChild()
+    trigger("childStag50", [
+        transition("* => *", [
+            query(":enter, :leave", [
+                stagger(50, [
+                    animateChild()
                 ])
             ], {
                 "optional": true,

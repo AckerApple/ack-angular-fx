@@ -28,6 +28,7 @@
     "node_modules"
   ],
   "angularCompilerOptions": {
+    "enableIvy": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   }

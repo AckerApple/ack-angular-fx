@@ -1,48 +1,41 @@
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
-const router_1 = require("@angular/router");
-let FxTracker = class FxTracker {
-    constructor() {
+import { EventEmitter, Output, Input, Directive } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import * as i0 from "@angular/core";
+var FxTracker = (function () {
+    function FxTracker() {
         this.history = [];
-        this.historyChange = new core_1.EventEmitter();
-        this.indexChange = new core_1.EventEmitter();
+        this.historyChange = new EventEmitter();
+        this.indexChange = new EventEmitter();
     }
-    ngAfterViewInit() {
-        Promise.resolve().then(() => this.loaded = true);
-    }
-    ngOnChanges(changes) {
+    FxTracker.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        Promise.resolve().then(function () {
+            return _this.loaded = true;
+        });
+    };
+    FxTracker.prototype.ngOnChanges = function (changes) {
         if (changes.activatedRoute && changes.activatedRoute.currentValue) {
             this.produceByRoute(this.activatedRoute);
         }
         else if (changes.value) {
             this.produceFxId(this.value);
         }
-    }
-    produceByRoute(activatedRoute) {
-        const path = this.getRoutePath(activatedRoute);
+    };
+    FxTracker.prototype.produceByRoute = function (activatedRoute) {
+        var path = this.getRoutePath(activatedRoute);
         this.produceFxId(path);
         this.value = path;
-    }
-    produceFxId(value) {
+    };
+    FxTracker.prototype.produceFxId = function (value) {
         this.history = this.history || [];
         if (this.orderArray) {
             this.id = this.produceOrderFxId(value);
         }
         else {
             this.index = this.index == null ? 0 : this.index;
-            const histLen = this.history.length;
-            const isBack = histLen && this.history[this.index + 1] == value;
-            const isForward = histLen && this.history[this.index - 1] == value;
+            var histLen = this.history.length;
+            var isBack = histLen && this.history[this.index + 1] == value;
+            var isForward = histLen && this.history[this.index - 1] == value;
             if (isBack) {
                 this.indexChange.emit(++this.index);
                 this.id = this.id === 0 ? false : 0;
@@ -59,13 +52,13 @@ let FxTracker = class FxTracker {
         this.history.splice(25, this.history.length);
         this.historyChange.emit(this.history);
         return this.id;
-    }
-    produceOrderFxId(value) {
-        let oldIndex = 0;
-        let newIndex = 0;
-        const oldValue = this.orderArray[this.orderIndex];
-        for (let index = this.orderArray.length - 1; index >= 0; --index) {
-            let item = this.orderArray[index];
+    };
+    FxTracker.prototype.produceOrderFxId = function (value) {
+        var oldIndex = 0;
+        var newIndex = 0;
+        var oldValue = this.orderArray[this.orderIndex];
+        for (var index = this.orderArray.length - 1; index >= 0; --index) {
+            var item = this.orderArray[index];
             if (value === item) {
                 newIndex = index;
             }
@@ -78,53 +71,41 @@ let FxTracker = class FxTracker {
             return this.id = this.id === 0 ? false : 0;
         }
         return this.id = this.id === 1 ? true : 1;
-    }
-    getRoutePath(activatedRoute) {
-        let target = activatedRoute;
+    };
+    FxTracker.prototype.getRoutePath = function (activatedRoute) {
+        var target = activatedRoute;
         while (target.firstChild)
             target = target.firstChild;
         return target.routeConfig.path;
-    }
-    delayOutFx() {
-        Promise.resolve().then(() => this.inFx = false);
-    }
-};
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], FxTracker.prototype, "value", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", router_1.ActivatedRoute)
-], FxTracker.prototype, "activatedRoute", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Array)
-], FxTracker.prototype, "orderArray", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Array)
-], FxTracker.prototype, "history", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], FxTracker.prototype, "historyChange", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], FxTracker.prototype, "index", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], FxTracker.prototype, "indexChange", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], FxTracker.prototype, "id", void 0);
-FxTracker = __decorate([
-    core_1.Directive({
-        selector: "fx-tracker",
-        exportAs: "FxTracker"
-    })
-], FxTracker);
-exports.FxTracker = FxTracker;
+    };
+    FxTracker.prototype.delayOutFx = function () {
+        var _this = this;
+        Promise.resolve().then(function () { return _this.inFx = false; });
+    };
+    FxTracker.ɵfac = function FxTracker_Factory(t) { return new (t || FxTracker)(); };
+    FxTracker.ɵdir = i0.ɵɵdefineDirective({ type: FxTracker, selectors: [["fx-tracker"]], inputs: { value: "value", activatedRoute: "activatedRoute", orderArray: "orderArray", history: "history", index: "index", id: "id" }, outputs: { historyChange: "historyChange", indexChange: "indexChange" }, features: [i0.ɵɵNgOnChangesFeature] });
+    return FxTracker;
+}());
+export { FxTracker };
+(function () { i0.ɵsetClassMetadata(FxTracker, [{
+        type: Directive,
+        args: [{
+                selector: "fx-tracker"
+            }]
+    }], null, { value: [{
+            type: Input
+        }], activatedRoute: [{
+            type: Input
+        }], orderArray: [{
+            type: Input
+        }], history: [{
+            type: Input
+        }], historyChange: [{
+            type: Output
+        }], index: [{
+            type: Input
+        }], indexChange: [{
+            type: Output
+        }], id: [{
+            type: Input
+        }] }); })();

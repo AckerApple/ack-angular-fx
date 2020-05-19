@@ -9,31 +9,24 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": false,
-    "noEmitHelpers": false,
-    "noImplicitAny": false,
     "declaration": true,
-    "skipLibCheck": true,
-    "stripInternal": true,
     "typeRoots": [ "./node_modules/@types" ],
-
-    "target": "es2015",
+    "target": "ES5",
     "module": "esnext",
     "importHelpers": true,
-
     "lib": ["es2018", "dom"]
 
   },
   "files": [
     "./index.ts"
   ],
-  "include": ["**/*"],
   "exclude": [
     "**/node_modules",
     "../node_modules",
     "**/*.spec.ts"
   ],
   "angularCompilerOptions": {
+    "enableIvy": true,
     "skipMetadataEmit" : false,
     "skipTemplateCodegen" : true,
     "fullTemplateTypeCheck": true,

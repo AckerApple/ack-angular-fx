@@ -1,5 +1,6 @@
 import { EventEmitter } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import * as i0 from "@angular/core";
 export declare class FxTracker {
     value: any;
     activatedRoute: ActivatedRoute;
@@ -19,4 +20,6 @@ export declare class FxTracker {
     produceOrderFxId(value: any): 0 | false | 1 | true;
     getRoutePath(activatedRoute: any): string;
     delayOutFx(): void;
+    static ɵfac: i0.ɵɵFactoryDef<FxTracker, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<FxTracker, "fx-tracker", never, { "value": "value"; "activatedRoute": "activatedRoute"; "orderArray": "orderArray"; "history": "history"; "index": "index"; "id": "id"; }, { "historyChange": "historyChange"; "indexChange": "indexChange"; }, never>;
 }

@@ -1,6 +1,6 @@
 {
   "name": "ack-angular-fx",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Angular animations made easier",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -16,7 +16,7 @@
     "watch": "npm-run-all --parallel build:templates watch:templates watch:ts",
     "build:example": "npm-run-all build:templates build:example:js",
     "build:example:js": "ng build example --prod --output-hashing none",
-    "build:dist:build": "ngcc --tsconfig src/tsconfig.json",
+    "build:dist:build": "ngc --project src/tsconfig.json",
     "build:dist:replace": "node ./replacements",
     "build:dist": "npm-run-all build:dist:build",
     "build": "npm-run-all build:bin compile:allfx build:dist build:example",
