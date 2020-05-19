@@ -5,8 +5,7 @@ import {
 import { ActivatedRoute } from "@angular/router"
 
 @Directive({
-  selector:"fx-tracker",
-  exportAs:"FxTracker"
+  selector:"fx-tracker"
 }) export class FxTracker{
   @Input() value:any//do not mix with ActivatedRoute
   @Input() activatedRoute:ActivatedRoute
