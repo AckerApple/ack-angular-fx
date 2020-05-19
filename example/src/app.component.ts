@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FxSession } from './FxSession.injectable';
 import { string } from './app.template'
+import { ActivatedRoute } from "@angular/router";
 
 import * as packJson from "../../package.json"
 //export const packJson = "0.0.0"
@@ -79,7 +80,7 @@ export const fxWithKids = [
   show1500:boolean
   show2000:boolean
 
-  constructor( public FxSession:FxSession ){}
+  constructor( public FxSession:FxSession, public ActivatedRoute: ActivatedRoute ){}
 
   ngAfterViewInit(){
     if( window['scriptLoadTime'] ){

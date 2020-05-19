@@ -6,8 +6,6 @@
     "removeComments": true,
     "rootDir": ".",
     "outDir": "../dist",
-    "target": "ES6",
-    "module": "commonjs",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -17,7 +15,14 @@
     "declaration": true,
     "skipLibCheck": true,
     "stripInternal": true,
-    "typeRoots": [ "./node_modules/@types" ]
+    "typeRoots": [ "./node_modules/@types" ],
+
+    "target": "es2015",
+    "module": "esnext",
+    "importHelpers": true,
+
+    "lib": ["es2018", "dom"]
+
   },
   "files": [
     "./index.ts"
@@ -30,6 +35,8 @@
   ],
   "angularCompilerOptions": {
     "skipMetadataEmit" : false,
-    "skipTemplateCodegen" : true
+    "skipTemplateCodegen" : true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }
