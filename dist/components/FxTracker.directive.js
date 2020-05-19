@@ -1,6 +1,6 @@
+import { __decorate, __metadata } from "tslib";
 import { EventEmitter, Output, Input, Directive } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import * as i0 from "@angular/core";
 var FxTracker = (function () {
     function FxTracker() {
         this.history = [];
@@ -82,30 +82,43 @@ var FxTracker = (function () {
         var _this = this;
         Promise.resolve().then(function () { return _this.inFx = false; });
     };
-    FxTracker.ɵfac = function FxTracker_Factory(t) { return new (t || FxTracker)(); };
-    FxTracker.ɵdir = i0.ɵɵdefineDirective({ type: FxTracker, selectors: [["fx-tracker"]], inputs: { value: "value", activatedRoute: "activatedRoute", orderArray: "orderArray", history: "history", index: "index", id: "id" }, outputs: { historyChange: "historyChange", indexChange: "indexChange" }, features: [i0.ɵɵNgOnChangesFeature] });
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], FxTracker.prototype, "value", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", ActivatedRoute)
+    ], FxTracker.prototype, "activatedRoute", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], FxTracker.prototype, "orderArray", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], FxTracker.prototype, "history", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], FxTracker.prototype, "historyChange", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], FxTracker.prototype, "index", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], FxTracker.prototype, "indexChange", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], FxTracker.prototype, "id", void 0);
+    FxTracker = __decorate([
+        Directive({
+            selector: "fx-tracker"
+        })
+    ], FxTracker);
     return FxTracker;
 }());
 export { FxTracker };
-(function () { i0.ɵsetClassMetadata(FxTracker, [{
-        type: Directive,
-        args: [{
-                selector: "fx-tracker"
-            }]
-    }], null, { value: [{
-            type: Input
-        }], activatedRoute: [{
-            type: Input
-        }], orderArray: [{
-            type: Input
-        }], history: [{
-            type: Input
-        }], historyChange: [{
-            type: Output
-        }], index: [{
-            type: Input
-        }], indexChange: [{
-            type: Output
-        }], id: [{
-            type: Input
-        }] }); })();

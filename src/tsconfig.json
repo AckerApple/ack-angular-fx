@@ -26,7 +26,7 @@
     "**/*.spec.ts"
   ],
   "angularCompilerOptions": {
-    "enableIvy": true,
+    "enableIvy": false,
     "skipMetadataEmit" : false,
     "skipTemplateCodegen" : true,
     "fullTemplateTypeCheck": true,
