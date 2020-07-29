@@ -5,13 +5,14 @@ import {
 import { ActivatedRoute } from "@angular/router"
 
 @Directive({
-  selector:"fx-tracker"
+  selector: 'fx-tracker',
+  exportAs: 'FxTracker'
 }) export class FxTracker{
   @Input() value:any//do not mix with ActivatedRoute
   @Input() activatedRoute:ActivatedRoute
-  
+
   //TODO:need a number based way to track order
-  @Input() orderArray:(string|boolean|number)[]//back and foward determined by matching items in array. Typically ActivatedRoute.routeConfig.path 
+  @Input() orderArray:(string|boolean|number)[]//back and foward determined by matching items in array. Typically ActivatedRoute.routeConfig.path
 
   @Input() history:any[] = []
   @Output() historyChange:EventEmitter<any[]> = new EventEmitter()
@@ -110,7 +111,7 @@ import { ActivatedRoute } from "@angular/router"
     return target.routeConfig.path
   }
 
-  delayOutFx(){
+  public delayOutFx(){
     Promise.resolve().then(()=>this.inFx=false)
   }
 }

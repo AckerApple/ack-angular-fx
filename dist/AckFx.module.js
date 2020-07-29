@@ -1,11 +1,11 @@
-import { __decorate } from "tslib";
+import * as tslib_1 from "tslib";
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FxTracker } from './components/FxTracker.directive';
 var AckFxModule = (function () {
     function AckFxModule() {
     }
-    AckFxModule = __decorate([
+    AckFxModule = tslib_1.__decorate([
         NgModule({
             imports: [
                 CommonModule,

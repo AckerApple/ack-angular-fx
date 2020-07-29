@@ -14,7 +14,7 @@ exports.__esModule = true;
 //import { style } from '@angular/core';
 var animations_1 = require("@angular/animations");
 function stylize(styleDef, options) {
-    return animations_1.style(__assign(__assign({}, styleDef), options.whileStyle));
+    return animations_1.style(__assign({}, styleDef, options.whileStyle));
 }
 exports.stylize = stylize;
 function defaultOptions(options) {

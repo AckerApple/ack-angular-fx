@@ -1,3 +1,5 @@
+.history
+
 *.js.map
 *.css.map
 aot/
