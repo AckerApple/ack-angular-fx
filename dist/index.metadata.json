@@ -1,1 +1,1 @@
-[{"__symbolic":"module","version":4,"metadata":{},"exports":[{"from":"./AckFx.module","export":["AckFxModule"]},{"from":"./allFx","export":["animations"]}]}]
+[{"__symbolic":"module","version":4,"metadata":{},"exports":[{"from":"./components/FxTracker.directive","export":["FxTracker"]},{"from":"./AckFx.module","export":["AckFxModule"]},{"from":"./allFx","export":["animations"]}]}]
