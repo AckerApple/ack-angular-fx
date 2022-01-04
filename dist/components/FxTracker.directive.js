@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { EventEmitter, Output, Input, Directive } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 var FxTracker = (function () {
@@ -82,39 +82,39 @@ var FxTracker = (function () {
         var _this = this;
         Promise.resolve().then(function () { return _this.inFx = false; });
     };
-    tslib_1.__decorate([
+    __decorate([
         Input(),
-        tslib_1.__metadata("design:type", Object)
+        __metadata("design:type", Object)
     ], FxTracker.prototype, "value", void 0);
-    tslib_1.__decorate([
+    __decorate([
         Input(),
-        tslib_1.__metadata("design:type", ActivatedRoute)
+        __metadata("design:type", ActivatedRoute)
     ], FxTracker.prototype, "activatedRoute", void 0);
-    tslib_1.__decorate([
+    __decorate([
         Input(),
-        tslib_1.__metadata("design:type", Array)
+        __metadata("design:type", Array)
     ], FxTracker.prototype, "orderArray", void 0);
-    tslib_1.__decorate([
+    __decorate([
         Input(),
-        tslib_1.__metadata("design:type", Array)
+        __metadata("design:type", Array)
     ], FxTracker.prototype, "history", void 0);
-    tslib_1.__decorate([
+    __decorate([
         Output(),
-        tslib_1.__metadata("design:type", EventEmitter)
+        __metadata("design:type", EventEmitter)
     ], FxTracker.prototype, "historyChange", void 0);
-    tslib_1.__decorate([
+    __decorate([
         Input(),
-        tslib_1.__metadata("design:type", Number)
+        __metadata("design:type", Number)
     ], FxTracker.prototype, "index", void 0);
-    tslib_1.__decorate([
+    __decorate([
         Output(),
-        tslib_1.__metadata("design:type", EventEmitter)
+        __metadata("design:type", EventEmitter)
     ], FxTracker.prototype, "indexChange", void 0);
-    tslib_1.__decorate([
+    __decorate([
         Input(),
-        tslib_1.__metadata("design:type", Object)
+        __metadata("design:type", Object)
     ], FxTracker.prototype, "id", void 0);
-    FxTracker = tslib_1.__decorate([
+    FxTracker = __decorate([
         Directive({
             selector: 'fx-tracker',
             exportAs: 'FxTracker'

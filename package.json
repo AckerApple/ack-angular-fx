@@ -1,6 +1,6 @@
 {
   "name": "ack-angular-fx",
-  "version": "4.1.0",
+  "version": "4.2.1",
   "description": "Angular animations made easier",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -22,7 +22,13 @@
     "build": "npm-run-all build:bin compile:allfx build:dist build:example",
     "build:bin": "tsc bin-src/* --outDir ./bin --declaration true --lib ES6",
     "ts-node": "ts-node",
-    "compile:allfx": "node ./bin/bin-src/real-cli.js --igniter void --select absoluteSwap,100,200,300,400,500,600,700,800,900,1000,1500,2000,childStag --effects bounce,fade --out src/allFx.ts"
+    "compile:allfx": "node ./bin/bin-src/real-cli.js --igniter void --select absoluteSwap,100,200,300,400,500,600,700,800,900,1000,1500,2000,childStag --effects bounce,fade --out src/allFx.ts",
+    "save": "npm-run-all build patch:version save:git",
+    "save:git": "git add . && git commit -m \"update\" && git push",
+    "patch:version": "npm --no-git-tag-version version patch",
+    "deploy": "npm-run-all save deploy:gh-pages deploy:npm",
+    "deploy:npm": "npm publish",
+    "deploy:gh-pages": "cp -R ./example/www/. ../gh-pages && cd ../gh-pages && git add . && git commit -m \"update\" && git push"
   },
   "repository": {
     "type": "git",
@@ -37,6 +43,12 @@
   ],
   "author": "Acker Dawn Apple",
   "license": "MIT",
+  "peerDependencies": {
+    "@angular/core": ">=9.1.7",
+    "@angular/common": ">=9.1.7",
+    "@angular/animations": ">=9.1.7",
+    "@angular/router": ">=9.1.7"
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.901.6",
     "@angular/animations": "^9.1.7",

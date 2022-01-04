@@ -1,6 +1,9 @@
 # ack-angular-fx - Change Log
 All notable changes to this project will be documented here.
 
+## [4.2.0] - 2022-01-04
+- Add peerDependencies
+
 ## [3.0.4] - 2019-05-26
 - Fix tracking history by orderArray
 
