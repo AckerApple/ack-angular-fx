@@ -3,8 +3,8 @@ import { FxSession } from './FxSession.injectable';
 import { string } from './app.template'
 import { ActivatedRoute } from "@angular/router";
 
-import * as packJson from "../../package.json"
-//export const packJson = "0.0.0"
+// import packageJson from "../../package.json"
+// import { version } from "../../package.json"
 
 import { animations } from '../../src/allFx';
 
@@ -58,7 +58,10 @@ export const fxWithKids = [
     'swapping','directives','router-outlet'
   ]
   fxTime:string = "400ms 0ms linear"
-  version = packJson['version'] || '0.0.0'
+  
+  version = '0.0.0'
+  // version = packageJson['version'] || '0.0.0'
+  
   //panelAnimType: string = 'fadeInLeft'
   show: boolean = true
   state: string = ''

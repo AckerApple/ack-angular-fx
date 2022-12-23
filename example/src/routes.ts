@@ -1,4 +1,4 @@
-import { RouterModule } from "@angular/router";
+import { ExtraOptions, RouterModule } from "@angular/router";
 import {
   Input, Output, EventEmitter, Component
 } from "@angular/core";
@@ -96,9 +96,9 @@ export const routes = [
   {path: "**",   redirectTo: "overview" }//404
 ]
 
-export const routeConfig = {
+export const routeConfig: ExtraOptions = {
   useHash:true,
-  initialNavigation:true,
+  initialNavigation: 'enabledNonBlocking', // 'disabled' | 'enabledBlocking' | 'enabledNonBlocking',
   enableTracing:false
 }
 export const routing = RouterModule.forRoot(routes, routeConfig)

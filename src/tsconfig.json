@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "resolveJsonModule": true,
     "strict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -12,10 +13,12 @@
     "declaration": true,
     "typeRoots": [ "./node_modules/@types" ],
     "target": "ES5",
-    "module": "esnext",
+    "module": "es2020",
     "importHelpers": true,
-    "lib": ["es2018", "dom"]
-
+    "lib": ["es2018", "dom"],
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
   },
   "files": [
     "./index.ts"
@@ -24,12 +27,5 @@
     "**/node_modules",
     "../node_modules",
     "**/*.spec.ts"
-  ],
-  "angularCompilerOptions": {
-    "enableIvy": false,
-    "skipMetadataEmit" : false,
-    "skipTemplateCodegen" : true,
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
-  }
+  ]
 }

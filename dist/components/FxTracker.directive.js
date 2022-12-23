@@ -1,25 +1,25 @@
-import { __decorate, __metadata } from "tslib";
 import { EventEmitter, Output, Input, Directive } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, NavigationStart, Router } from "@angular/router";
+import * as i0 from "@angular/core";
+import * as i1 from "@angular/router";
 var FxTracker = (function () {
-    function FxTracker() {
+    function FxTracker(router) {
+        var _this = this;
+        this.router = router;
         this.history = [];
         this.historyChange = new EventEmitter();
         this.indexChange = new EventEmitter();
+        router.events.subscribe(function (event) {
+            if (event.constructor == NavigationStart) {
+                _this.produceByRoute(_this.activatedRoute);
+            }
+        });
     }
     FxTracker.prototype.ngAfterViewInit = function () {
         var _this = this;
         Promise.resolve().then(function () {
             return _this.loaded = true;
         });
-    };
-    FxTracker.prototype.ngOnChanges = function (changes) {
-        if (changes.activatedRoute && changes.activatedRoute.currentValue) {
-            this.produceByRoute(this.activatedRoute);
-        }
-        else if (changes.value) {
-            this.produceFxId(this.value);
-        }
     };
     FxTracker.prototype.produceByRoute = function (activatedRoute) {
         var path = this.getRoutePath(activatedRoute);
@@ -73,53 +73,44 @@ var FxTracker = (function () {
         return this.id = this.id === 1 ? true : 1;
     };
     FxTracker.prototype.getRoutePath = function (activatedRoute) {
+        var _a;
         var target = activatedRoute;
         while (target.firstChild)
             target = target.firstChild;
-        return target.routeConfig.path;
+        var snap = target._routerState.snapshot;
+        var ngOldPath = (_a = target.routeConfig) === null || _a === void 0 ? void 0 : _a.path;
+        var path = ngOldPath || snap.url;
+        return path;
     };
     FxTracker.prototype.delayOutFx = function () {
         var _this = this;
         Promise.resolve().then(function () { return _this.inFx = false; });
     };
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], FxTracker.prototype, "value", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", ActivatedRoute)
-    ], FxTracker.prototype, "activatedRoute", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Array)
-    ], FxTracker.prototype, "orderArray", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Array)
-    ], FxTracker.prototype, "history", void 0);
-    __decorate([
-        Output(),
-        __metadata("design:type", EventEmitter)
-    ], FxTracker.prototype, "historyChange", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Number)
-    ], FxTracker.prototype, "index", void 0);
-    __decorate([
-        Output(),
-        __metadata("design:type", EventEmitter)
-    ], FxTracker.prototype, "indexChange", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], FxTracker.prototype, "id", void 0);
-    FxTracker = __decorate([
-        Directive({
-            selector: 'fx-tracker',
-            exportAs: 'FxTracker'
-        })
-    ], FxTracker);
+    FxTracker.ɵfac = function FxTracker_Factory(t) { return new (t || FxTracker)(i0.ɵɵdirectiveInject(i1.Router)); };
+    FxTracker.ɵdir = i0.ɵɵdefineDirective({ type: FxTracker, selectors: [["fx-tracker"]], inputs: { value: "value", activatedRoute: "activatedRoute", orderArray: "orderArray", history: "history", index: "index", id: "id" }, outputs: { historyChange: "historyChange", indexChange: "indexChange" }, exportAs: ["FxTracker"] });
     return FxTracker;
 }());
 export { FxTracker };
+(function () { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(FxTracker, [{
+        type: Directive,
+        args: [{
+                selector: 'fx-tracker',
+                exportAs: 'FxTracker'
+            }]
+    }], function () { return [{ type: i1.Router }]; }, { value: [{
+            type: Input
+        }], activatedRoute: [{
+            type: Input
+        }], orderArray: [{
+            type: Input
+        }], history: [{
+            type: Input
+        }], historyChange: [{
+            type: Output
+        }], index: [{
+            type: Input
+        }], indexChange: [{
+            type: Output
+        }], id: [{
+            type: Input
+        }] }); })();

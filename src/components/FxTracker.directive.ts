@@ -2,7 +2,7 @@ import {
   EventEmitter, Output, Input, Directive
 } from "@angular/core"
 
-import { ActivatedRoute } from "@angular/router"
+import { ActivatedRoute, NavigationStart, Router } from "@angular/router"
 
 @Directive({
   selector: 'fx-tracker',
@@ -28,13 +28,21 @@ import { ActivatedRoute } from "@angular/router"
   inFx:boolean
   orderIndex:number
 
+  constructor( public router: Router ){
+    router.events.subscribe(event=>{
+      if(event.constructor==NavigationStart){
+        this.produceByRoute( this.activatedRoute )
+      }
+    }) 
+  }
+
   ngAfterViewInit(){
     //a much needed pause to properly routerOutlet.activated
     Promise.resolve().then(()=>
       this.loaded=true
     )
   }
-
+/*
   ngOnChanges(changes){
     if( changes.activatedRoute && changes.activatedRoute.currentValue ){
       this.produceByRoute( this.activatedRoute )
@@ -42,7 +50,7 @@ import { ActivatedRoute } from "@angular/router"
       this.produceFxId( this.value )
     }
   }
-
+*/
   produceByRoute( activatedRoute:any ){
     const path = this.getRoutePath(activatedRoute)
     this.produceFxId( path )
@@ -107,8 +115,14 @@ import { ActivatedRoute } from "@angular/router"
 
   getRoutePath( activatedRoute ):string{
     let target = activatedRoute
-    while(target.firstChild)target=target.firstChild
-    return target.routeConfig.path
+    while (target.firstChild)
+        target = target.firstChild
+    
+    const snap = target._routerState.snapshot
+    const ngOldPath = target.routeConfig?.path
+    const path = ngOldPath || snap.url
+
+    return path;
   }
 
   public delayOutFx(){

@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+exports.selectedFxToImportSyntax = void 0;
 //const childStags = require('../dist/animations/childStag').childStags;
 function selectedFxToImportSyntax(selectedFx) {
     var syntax = "";
@@ -18,7 +19,7 @@ function selectedFxToImportSyntax(selectedFx) {
     var functionsString = "";
     for (var key in functions) {
         var f = functions[key];
-        functionsString += "\nexport " + f.toString() + "\n";
+        functionsString += "\nexport ".concat(f.toString(), "\n");
     }
     //AnimationTriggerMetadata, state
     return 'import { group, query, stagger, animateChild, trigger,style,transition,animate,keyframes } from "@angular/animations"\n' +
@@ -83,8 +84,8 @@ function stateDefsBy(defs, tabs) {
         }
         if (def.styles) {
             style = JSON.stringify(def.styles.styles || def.styles.styles[0]); //Angular v4.0.0+ || v2.4.0+
-            steps = l + ("  style(" + style + ")"); //style goes inside state
-            trans = l + ("state(\"" + expr + "\", " + steps + ")");
+            steps = l + "  style(".concat(style, ")"); //style goes inside state
+            trans = l + "state(\"".concat(expr, "\", ").concat(steps, ")");
         }
         else if (def.definitions) {
             var triggerDef = triggerToString(def, tabs);
@@ -94,14 +95,14 @@ function stateDefsBy(defs, tabs) {
         else {
             steps = animateSteps(def.animation || def.steps._steps, tabs + 1); //Angular v4.0.0+ || v2.4.0+
             if (typeof expr === 'string') {
-                expr = "\"" + expr + "\"";
+                expr = "\"".concat(expr, "\"");
             }
             else {
                 functions.push(expr); //record functions
                 //expr = expr.toString()
                 expr = expr.name;
             }
-            trans = l + ("transition(" + expr + ", " + steps);
+            trans = l + "transition(".concat(expr, ", ").concat(steps);
             if (def.options) {
                 trans += ',' + JSON.stringify(def.options, null, 2);
             }
@@ -159,7 +160,7 @@ function animateToString(step, tabs) {
     else { //step.styles.styles
         stepString = styleToString(step.styles.styles, ++tabs);
     }
-    return line(tabs) + ("animate(\"" + step.timings + "\", " + stepString + ")");
+    return line(tabs) + "animate(\"".concat(step.timings, "\", ").concat(stepString, ")");
 }
 function triggerToString(step, tabs) {
     if (tabs === void 0) { tabs = 0; }
@@ -167,7 +168,7 @@ function triggerToString(step, tabs) {
     var functions = stateDefs.functions;
     var string = +stateDefs.string;
     return {
-        string: line(tabs) + ("trigger(\"" + step.name + "\", " + stateDefs.string + ")"),
+        string: line(tabs) + "trigger(\"".concat(step.name, "\", ").concat(stateDefs.string, ")"),
         functions: stateDefs.functions
     };
 }
@@ -180,24 +181,24 @@ function intQuoter(v) {
 }
 function groupToString(step, tabs) {
     if (tabs === void 0) { tabs = 0; }
-    return line(tabs) + ("group(" + animateSteps(step.steps, ++tabs) + ")");
+    return line(tabs) + "group(".concat(animateSteps(step.steps, ++tabs), ")");
 }
 function transitionToString(step, tabs) {
     if (tabs === void 0) { tabs = 0; }
-    return line(tabs) + ("transition(\"" + step.expr + "\", " + animateSteps(step.animation, ++tabs) + ")");
+    return line(tabs) + "transition(\"".concat(step.expr, "\", ").concat(animateSteps(step.animation, ++tabs), ")");
 }
 function staggerToString(step, tabs) {
     if (tabs === void 0) { tabs = 0; }
-    return line(tabs) + ("stagger(" + intQuoter(step.timings) + ", " + animateSteps(step.animation, ++tabs) + ")");
+    return line(tabs) + "stagger(".concat(intQuoter(step.timings), ", ").concat(animateSteps(step.animation, ++tabs), ")");
 }
 function queryToString(step, tabs) {
     if (tabs === void 0) { tabs = 0; }
-    return line(tabs) + ("query(\"" + step.selector + "\", " + animateSteps(step.animation, ++tabs) + ", " + JSON.stringify(step.options, null, 2) + ")");
+    return line(tabs) + "query(\"".concat(step.selector, "\", ").concat(animateSteps(step.animation, ++tabs), ", ").concat(JSON.stringify(step.options, null, 2), ")");
 }
 function styleToString(style, tabs) {
     if (tabs === void 0) { tabs = 0; }
     var styleJson = JSON.stringify(style);
-    return line(tabs) + ("style(" + styleJson + ")");
+    return line(tabs) + "style(".concat(styleJson, ")");
 }
 function keyframeSteps(steps, tabs) {
     if (tabs === void 0) { tabs = 0; }
@@ -209,7 +210,7 @@ function keyframeSteps(steps, tabs) {
         var styling = styleToString(style, tabs + 1);
         stylings.push(styling);
     }
-    return l + ("keyframes([" + stylings.join() + "])");
+    return l + "keyframes([".concat(stylings.join(), "])");
 }
 function isGroupStep(step) {
     return step.type == 3;
